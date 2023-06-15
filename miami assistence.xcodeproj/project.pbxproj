@@ -1,0 +1,593 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2372652C2A3BC8EE004F4B3D /* miami_assistenceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2372652B2A3BC8EE004F4B3D /* miami_assistenceApp.swift */; };
+		2372652E2A3BC8EE004F4B3D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2372652D2A3BC8EE004F4B3D /* ContentView.swift */; };
+		237265302A3BC8EF004F4B3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2372652F2A3BC8EF004F4B3D /* Assets.xcassets */; };
+		237265332A3BC8EF004F4B3D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237265322A3BC8EF004F4B3D /* Preview Assets.xcassets */; };
+		2372653D2A3BC8EF004F4B3D /* miami_assistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2372653C2A3BC8EF004F4B3D /* miami_assistenceTests.swift */; };
+		237265472A3BC8EF004F4B3D /* miami_assistenceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237265462A3BC8EF004F4B3D /* miami_assistenceUITests.swift */; };
+		237265492A3BC8EF004F4B3D /* miami_assistenceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237265482A3BC8EF004F4B3D /* miami_assistenceUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		237265392A3BC8EF004F4B3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 237265202A3BC8EE004F4B3D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 237265272A3BC8EE004F4B3D;
+			remoteInfo = "miami assistence";
+		};
+		237265432A3BC8EF004F4B3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 237265202A3BC8EE004F4B3D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 237265272A3BC8EE004F4B3D;
+			remoteInfo = "miami assistence";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		237265282A3BC8EE004F4B3D /* miami assistence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "miami assistence.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2372652B2A3BC8EE004F4B3D /* miami_assistenceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miami_assistenceApp.swift; sourceTree = "<group>"; };
+		2372652D2A3BC8EE004F4B3D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2372652F2A3BC8EF004F4B3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		237265322A3BC8EF004F4B3D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		237265382A3BC8EF004F4B3D /* miami assistenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "miami assistenceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2372653C2A3BC8EF004F4B3D /* miami_assistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miami_assistenceTests.swift; sourceTree = "<group>"; };
+		237265422A3BC8EF004F4B3D /* miami assistenceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "miami assistenceUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		237265462A3BC8EF004F4B3D /* miami_assistenceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miami_assistenceUITests.swift; sourceTree = "<group>"; };
+		237265482A3BC8EF004F4B3D /* miami_assistenceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miami_assistenceUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		237265252A3BC8EE004F4B3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		237265352A3BC8EF004F4B3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2372653F2A3BC8EF004F4B3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2372651F2A3BC8EE004F4B3D = {
+			isa = PBXGroup;
+			children = (
+				2372652A2A3BC8EE004F4B3D /* miami assistence */,
+				2372653B2A3BC8EF004F4B3D /* miami assistenceTests */,
+				237265452A3BC8EF004F4B3D /* miami assistenceUITests */,
+				237265292A3BC8EE004F4B3D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		237265292A3BC8EE004F4B3D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				237265282A3BC8EE004F4B3D /* miami assistence.app */,
+				237265382A3BC8EF004F4B3D /* miami assistenceTests.xctest */,
+				237265422A3BC8EF004F4B3D /* miami assistenceUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2372652A2A3BC8EE004F4B3D /* miami assistence */ = {
+			isa = PBXGroup;
+			children = (
+				2372652B2A3BC8EE004F4B3D /* miami_assistenceApp.swift */,
+				2372652D2A3BC8EE004F4B3D /* ContentView.swift */,
+				2372652F2A3BC8EF004F4B3D /* Assets.xcassets */,
+				237265312A3BC8EF004F4B3D /* Preview Content */,
+			);
+			path = "miami assistence";
+			sourceTree = "<group>";
+		};
+		237265312A3BC8EF004F4B3D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				237265322A3BC8EF004F4B3D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2372653B2A3BC8EF004F4B3D /* miami assistenceTests */ = {
+			isa = PBXGroup;
+			children = (
+				2372653C2A3BC8EF004F4B3D /* miami_assistenceTests.swift */,
+			);
+			path = "miami assistenceTests";
+			sourceTree = "<group>";
+		};
+		237265452A3BC8EF004F4B3D /* miami assistenceUITests */ = {
+			isa = PBXGroup;
+			children = (
+				237265462A3BC8EF004F4B3D /* miami_assistenceUITests.swift */,
+				237265482A3BC8EF004F4B3D /* miami_assistenceUITestsLaunchTests.swift */,
+			);
+			path = "miami assistenceUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		237265272A3BC8EE004F4B3D /* miami assistence */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2372654C2A3BC8EF004F4B3D /* Build configuration list for PBXNativeTarget "miami assistence" */;
+			buildPhases = (
+				237265242A3BC8EE004F4B3D /* Sources */,
+				237265252A3BC8EE004F4B3D /* Frameworks */,
+				237265262A3BC8EE004F4B3D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "miami assistence";
+			productName = "miami assistence";
+			productReference = 237265282A3BC8EE004F4B3D /* miami assistence.app */;
+			productType = "com.apple.product-type.application";
+		};
+		237265372A3BC8EF004F4B3D /* miami assistenceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2372654F2A3BC8EF004F4B3D /* Build configuration list for PBXNativeTarget "miami assistenceTests" */;
+			buildPhases = (
+				237265342A3BC8EF004F4B3D /* Sources */,
+				237265352A3BC8EF004F4B3D /* Frameworks */,
+				237265362A3BC8EF004F4B3D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2372653A2A3BC8EF004F4B3D /* PBXTargetDependency */,
+			);
+			name = "miami assistenceTests";
+			productName = "miami assistenceTests";
+			productReference = 237265382A3BC8EF004F4B3D /* miami assistenceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		237265412A3BC8EF004F4B3D /* miami assistenceUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 237265522A3BC8EF004F4B3D /* Build configuration list for PBXNativeTarget "miami assistenceUITests" */;
+			buildPhases = (
+				2372653E2A3BC8EF004F4B3D /* Sources */,
+				2372653F2A3BC8EF004F4B3D /* Frameworks */,
+				237265402A3BC8EF004F4B3D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				237265442A3BC8EF004F4B3D /* PBXTargetDependency */,
+			);
+			name = "miami assistenceUITests";
+			productName = "miami assistenceUITests";
+			productReference = 237265422A3BC8EF004F4B3D /* miami assistenceUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		237265202A3BC8EE004F4B3D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					237265272A3BC8EE004F4B3D = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					237265372A3BC8EF004F4B3D = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 237265272A3BC8EE004F4B3D;
+					};
+					237265412A3BC8EF004F4B3D = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 237265272A3BC8EE004F4B3D;
+					};
+				};
+			};
+			buildConfigurationList = 237265232A3BC8EE004F4B3D /* Build configuration list for PBXProject "miami assistence" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2372651F2A3BC8EE004F4B3D;
+			productRefGroup = 237265292A3BC8EE004F4B3D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				237265272A3BC8EE004F4B3D /* miami assistence */,
+				237265372A3BC8EF004F4B3D /* miami assistenceTests */,
+				237265412A3BC8EF004F4B3D /* miami assistenceUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		237265262A3BC8EE004F4B3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237265332A3BC8EF004F4B3D /* Preview Assets.xcassets in Resources */,
+				237265302A3BC8EF004F4B3D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		237265362A3BC8EF004F4B3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		237265402A3BC8EF004F4B3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		237265242A3BC8EE004F4B3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2372652E2A3BC8EE004F4B3D /* ContentView.swift in Sources */,
+				2372652C2A3BC8EE004F4B3D /* miami_assistenceApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		237265342A3BC8EF004F4B3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2372653D2A3BC8EF004F4B3D /* miami_assistenceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2372653E2A3BC8EF004F4B3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237265492A3BC8EF004F4B3D /* miami_assistenceUITestsLaunchTests.swift in Sources */,
+				237265472A3BC8EF004F4B3D /* miami_assistenceUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2372653A2A3BC8EF004F4B3D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 237265272A3BC8EE004F4B3D /* miami assistence */;
+			targetProxy = 237265392A3BC8EF004F4B3D /* PBXContainerItemProxy */;
+		};
+		237265442A3BC8EF004F4B3D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 237265272A3BC8EE004F4B3D /* miami assistence */;
+			targetProxy = 237265432A3BC8EF004F4B3D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2372654A2A3BC8EF004F4B3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2372654B2A3BC8EF004F4B3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2372654D2A3BC8EF004F4B3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"miami assistence/Preview Content\"";
+				DEVELOPMENT_TEAM = Z42V6W967K;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistence";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2372654E2A3BC8EF004F4B3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"miami assistence/Preview Content\"";
+				DEVELOPMENT_TEAM = Z42V6W967K;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistence";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		237265502A3BC8EF004F4B3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z42V6W967K;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistenceTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/miami assistence.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/miami assistence";
+			};
+			name = Debug;
+		};
+		237265512A3BC8EF004F4B3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z42V6W967K;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistenceTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/miami assistence.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/miami assistence";
+			};
+			name = Release;
+		};
+		237265532A3BC8EF004F4B3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z42V6W967K;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistenceUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "miami assistence";
+			};
+			name = Debug;
+		};
+		237265542A3BC8EF004F4B3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z42V6W967K;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistenceUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "miami assistence";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		237265232A3BC8EE004F4B3D /* Build configuration list for PBXProject "miami assistence" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2372654A2A3BC8EF004F4B3D /* Debug */,
+				2372654B2A3BC8EF004F4B3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2372654C2A3BC8EF004F4B3D /* Build configuration list for PBXNativeTarget "miami assistence" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2372654D2A3BC8EF004F4B3D /* Debug */,
+				2372654E2A3BC8EF004F4B3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2372654F2A3BC8EF004F4B3D /* Build configuration list for PBXNativeTarget "miami assistenceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				237265502A3BC8EF004F4B3D /* Debug */,
+				237265512A3BC8EF004F4B3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		237265522A3BC8EF004F4B3D /* Build configuration list for PBXNativeTarget "miami assistenceUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				237265532A3BC8EF004F4B3D /* Debug */,
+				237265542A3BC8EF004F4B3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 237265202A3BC8EE004F4B3D /* Project object */;
+}
