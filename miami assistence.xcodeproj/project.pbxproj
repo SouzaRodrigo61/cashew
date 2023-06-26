@@ -7,13 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2372652C2A3BC8EE004F4B3D /* miami_assistenceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2372652B2A3BC8EE004F4B3D /* miami_assistenceApp.swift */; };
+		2305BCEB2A4926EF009C7DAD /* QuickSignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2305BCEA2A4926EF009C7DAD /* QuickSignInWithApple.swift */; };
+		2305BCEE2A49ADF8009C7DAD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2305BCED2A49ADF8009C7DAD /* Launch Screen.storyboard */; };
+		236DDDCD2A452C0B00B0EE49 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236DDDCC2A452C0B00B0EE49 /* String+Extension.swift */; };
+		2372652C2A3BC8EE004F4B3D /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2372652B2A3BC8EE004F4B3D /* App.swift */; };
 		2372652E2A3BC8EE004F4B3D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2372652D2A3BC8EE004F4B3D /* ContentView.swift */; };
 		237265302A3BC8EF004F4B3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2372652F2A3BC8EF004F4B3D /* Assets.xcassets */; };
 		237265332A3BC8EF004F4B3D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237265322A3BC8EF004F4B3D /* Preview Assets.xcassets */; };
 		2372653D2A3BC8EF004F4B3D /* miami_assistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2372653C2A3BC8EF004F4B3D /* miami_assistenceTests.swift */; };
 		237265472A3BC8EF004F4B3D /* miami_assistenceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237265462A3BC8EF004F4B3D /* miami_assistenceUITests.swift */; };
 		237265492A3BC8EF004F4B3D /* miami_assistenceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237265482A3BC8EF004F4B3D /* miami_assistenceUITestsLaunchTests.swift */; };
+		237265592A3BCA02004F4B3D /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 237265582A3BCA02004F4B3D /* ComposableArchitecture */; };
+		237AE7752A43A624005149F0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237AE7742A43A624005149F0 /* HomeView.swift */; };
+		237AE7772A43A631005149F0 /* HomeDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237AE7762A43A631005149F0 /* HomeDomain.swift */; };
+		237AE7792A43A63B005149F0 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237AE7782A43A63B005149F0 /* HomeModel.swift */; };
+		237AE77B2A45271B005149F0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 237AE77A2A45271B005149F0 /* Localizable.xcstrings */; };
+		237B608A2A4884D30058B18E /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237B60892A4884D30058B18E /* NotificationService.swift */; };
+		237B608E2A4884D30058B18E /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 237B60872A4884D30058B18E /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		237B60952A4886860058B18E /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 237B60942A4886860058B18E /* OneSignal */; };
+		237B60982A4886BF0058B18E /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 237B60972A4886BF0058B18E /* OneSignalExtension */; };
+		237B609D2A488C900058B18E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237B609C2A488C8F0058B18E /* StoreKit.framework */; };
+		237B60BF2A48B3D00058B18E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237B60A32A48B0D70058B18E /* WidgetKit.framework */; };
+		237B60C02A48B3D00058B18E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237B60A52A48B0D70058B18E /* SwiftUI.framework */; };
+		237B60C32A48B3D00058B18E /* MiamiAssistenceWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237B60C22A48B3D00058B18E /* MiamiAssistenceWidgetBundle.swift */; };
+		237B60C52A48B3D00058B18E /* MiamiAssistenceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237B60C42A48B3D00058B18E /* MiamiAssistenceWidget.swift */; };
+		237B60C72A48B3D10058B18E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237B60C62A48B3D10058B18E /* Assets.xcassets */; };
+		237B60CB2A48B3D10058B18E /* MiamiAssistenceWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 237B60BE2A48B3D00058B18E /* MiamiAssistenceWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,11 +50,43 @@
 			remoteGlobalIDString = 237265272A3BC8EE004F4B3D;
 			remoteInfo = "miami assistence";
 		};
+		237B608C2A4884D30058B18E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 237265202A3BC8EE004F4B3D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 237B60862A4884D30058B18E;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
+		237B60C92A48B3D10058B18E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 237265202A3BC8EE004F4B3D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 237B60BD2A48B3D00058B18E;
+			remoteInfo = MiamiAssistenceWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		237B608F2A4884D40058B18E /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				237B60CB2A48B3D10058B18E /* MiamiAssistenceWidgetExtension.appex in Embed Foundation Extensions */,
+				237B608E2A4884D30058B18E /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		2305BCEA2A4926EF009C7DAD /* QuickSignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSignInWithApple.swift; sourceTree = "<group>"; };
+		2305BCED2A49ADF8009C7DAD /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		236DDDCC2A452C0B00B0EE49 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		237265282A3BC8EE004F4B3D /* miami assistence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "miami assistence.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2372652B2A3BC8EE004F4B3D /* miami_assistenceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miami_assistenceApp.swift; sourceTree = "<group>"; };
+		2372652B2A3BC8EE004F4B3D /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		2372652D2A3BC8EE004F4B3D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2372652F2A3BC8EF004F4B3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		237265322A3BC8EF004F4B3D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -44,6 +95,26 @@
 		237265422A3BC8EF004F4B3D /* miami assistenceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "miami assistenceUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		237265462A3BC8EF004F4B3D /* miami_assistenceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miami_assistenceUITests.swift; sourceTree = "<group>"; };
 		237265482A3BC8EF004F4B3D /* miami_assistenceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miami_assistenceUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		237AE7742A43A624005149F0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		237AE7762A43A631005149F0 /* HomeDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDomain.swift; sourceTree = "<group>"; };
+		237AE7782A43A63B005149F0 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		237AE77A2A45271B005149F0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		237B60872A4884D30058B18E /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		237B60892A4884D30058B18E /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		237B608B2A4884D30058B18E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		237B60992A48878B0058B18E /* miami assistence.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "miami assistence.entitlements"; sourceTree = "<group>"; };
+		237B609A2A4887A20058B18E /* miami-assistence-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "miami-assistence-Info.plist"; sourceTree = SOURCE_ROOT; };
+		237B609B2A4888CF0058B18E /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		237B609C2A488C8F0058B18E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		237B60A32A48B0D70058B18E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		237B60A52A48B0D70058B18E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		237B60B92A48B0E00058B18E /* WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetExtension.entitlements; sourceTree = "<group>"; };
+		237B60BE2A48B3D00058B18E /* MiamiAssistenceWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MiamiAssistenceWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		237B60C22A48B3D00058B18E /* MiamiAssistenceWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiamiAssistenceWidgetBundle.swift; sourceTree = "<group>"; };
+		237B60C42A48B3D00058B18E /* MiamiAssistenceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiamiAssistenceWidget.swift; sourceTree = "<group>"; };
+		237B60C62A48B3D10058B18E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		237B60C82A48B3D10058B18E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		237B60CF2A48B4380058B18E /* MiamiAssistenceWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiamiAssistenceWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +122,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				237B609D2A488C900058B18E /* StoreKit.framework in Frameworks */,
+				237265592A3BCA02004F4B3D /* ComposableArchitecture in Frameworks */,
+				237B60952A4886860058B18E /* OneSignal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,16 +142,72 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		237B60842A4884D30058B18E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237B60982A4886BF0058B18E /* OneSignalExtension in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		237B60BB2A48B3D00058B18E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237B60C02A48B3D00058B18E /* SwiftUI.framework in Frameworks */,
+				237B60BF2A48B3D00058B18E /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2305BCE82A4926D3009C7DAD /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				2305BCEC2A49ADC8009C7DAD /* LaunchScreen */,
+				237AE7712A43A4D5005149F0 /* Assets */,
+				2305BCE92A4926E2009C7DAD /* Components */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		2305BCE92A4926E2009C7DAD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2305BCEA2A4926EF009C7DAD /* QuickSignInWithApple.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2305BCEC2A49ADC8009C7DAD /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2305BCED2A49ADF8009C7DAD /* Launch Screen.storyboard */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		236DDDCB2A452BF600B0EE49 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				236DDDCC2A452C0B00B0EE49 /* String+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2372651F2A3BC8EE004F4B3D = {
 			isa = PBXGroup;
 			children = (
+				237B60CF2A48B4380058B18E /* MiamiAssistenceWidgetExtension.entitlements */,
+				237B60B92A48B0E00058B18E /* WidgetExtension.entitlements */,
 				2372652A2A3BC8EE004F4B3D /* miami assistence */,
 				2372653B2A3BC8EF004F4B3D /* miami assistenceTests */,
 				237265452A3BC8EF004F4B3D /* miami assistenceUITests */,
+				237B60882A4884D30058B18E /* OneSignalNotificationServiceExtension */,
+				237B60C12A48B3D00058B18E /* MiamiAssistenceWidget */,
 				237265292A3BC8EE004F4B3D /* Products */,
+				237B60962A4886BF0058B18E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,6 +217,8 @@
 				237265282A3BC8EE004F4B3D /* miami assistence.app */,
 				237265382A3BC8EF004F4B3D /* miami assistenceTests.xctest */,
 				237265422A3BC8EF004F4B3D /* miami assistenceUITests.xctest */,
+				237B60872A4884D30058B18E /* OneSignalNotificationServiceExtension.appex */,
+				237B60BE2A48B3D00058B18E /* MiamiAssistenceWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,10 +226,13 @@
 		2372652A2A3BC8EE004F4B3D /* miami assistence */ = {
 			isa = PBXGroup;
 			children = (
-				2372652B2A3BC8EE004F4B3D /* miami_assistenceApp.swift */,
-				2372652D2A3BC8EE004F4B3D /* ContentView.swift */,
-				2372652F2A3BC8EF004F4B3D /* Assets.xcassets */,
+				237B609A2A4887A20058B18E /* miami-assistence-Info.plist */,
+				237B60992A48878B0058B18E /* miami assistence.entitlements */,
 				237265312A3BC8EF004F4B3D /* Preview Content */,
+				237AE76E2A43A480005149F0 /* App */,
+				237AE76F2A43A4BA005149F0 /* Core */,
+				2305BCE82A4926D3009C7DAD /* Design */,
+				237AE7702A43A4C0005149F0 /* Feature */,
 			);
 			path = "miami assistence";
 			sourceTree = "<group>";
@@ -127,6 +262,89 @@
 			path = "miami assistenceUITests";
 			sourceTree = "<group>";
 		};
+		237AE76E2A43A480005149F0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2372652B2A3BC8EE004F4B3D /* App.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		237AE76F2A43A4BA005149F0 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				236DDDCB2A452BF600B0EE49 /* Extensions */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		237AE7702A43A4C0005149F0 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				237AE7732A43A612005149F0 /* Home */,
+				237AE7722A43A535005149F0 /* Content */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		237AE7712A43A4D5005149F0 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				2372652F2A3BC8EF004F4B3D /* Assets.xcassets */,
+				237AE77A2A45271B005149F0 /* Localizable.xcstrings */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		237AE7722A43A535005149F0 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				2372652D2A3BC8EE004F4B3D /* ContentView.swift */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		237AE7732A43A612005149F0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				237AE7742A43A624005149F0 /* HomeView.swift */,
+				237AE7762A43A631005149F0 /* HomeDomain.swift */,
+				237AE7782A43A63B005149F0 /* HomeModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		237B60882A4884D30058B18E /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				237B609B2A4888CF0058B18E /* OneSignalNotificationServiceExtension.entitlements */,
+				237B60892A4884D30058B18E /* NotificationService.swift */,
+				237B608B2A4884D30058B18E /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		237B60962A4886BF0058B18E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				237B609C2A488C8F0058B18E /* StoreKit.framework */,
+				237B60A32A48B0D70058B18E /* WidgetKit.framework */,
+				237B60A52A48B0D70058B18E /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		237B60C12A48B3D00058B18E /* MiamiAssistenceWidget */ = {
+			isa = PBXGroup;
+			children = (
+				237B60C22A48B3D00058B18E /* MiamiAssistenceWidgetBundle.swift */,
+				237B60C42A48B3D00058B18E /* MiamiAssistenceWidget.swift */,
+				237B60C62A48B3D10058B18E /* Assets.xcassets */,
+				237B60C82A48B3D10058B18E /* Info.plist */,
+			);
+			path = MiamiAssistenceWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -137,12 +355,19 @@
 				237265242A3BC8EE004F4B3D /* Sources */,
 				237265252A3BC8EE004F4B3D /* Frameworks */,
 				237265262A3BC8EE004F4B3D /* Resources */,
+				237B608F2A4884D40058B18E /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				237B608D2A4884D30058B18E /* PBXTargetDependency */,
+				237B60CA2A48B3D10058B18E /* PBXTargetDependency */,
 			);
 			name = "miami assistence";
+			packageProductDependencies = (
+				237265582A3BCA02004F4B3D /* ComposableArchitecture */,
+				237B60942A4886860058B18E /* OneSignal */,
+			);
 			productName = "miami assistence";
 			productReference = 237265282A3BC8EE004F4B3D /* miami assistence.app */;
 			productType = "com.apple.product-type.application";
@@ -183,6 +408,43 @@
 			productReference = 237265422A3BC8EF004F4B3D /* miami assistenceUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		237B60862A4884D30058B18E /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 237B60922A4884D40058B18E /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				237B60832A4884D30058B18E /* Sources */,
+				237B60842A4884D30058B18E /* Frameworks */,
+				237B60852A4884D30058B18E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			packageProductDependencies = (
+				237B60972A4886BF0058B18E /* OneSignalExtension */,
+			);
+			productName = OneSignalNotificationServiceExtension;
+			productReference = 237B60872A4884D30058B18E /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		237B60BD2A48B3D00058B18E /* MiamiAssistenceWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 237B60CC2A48B3D10058B18E /* Build configuration list for PBXNativeTarget "MiamiAssistenceWidgetExtension" */;
+			buildPhases = (
+				237B60BA2A48B3D00058B18E /* Sources */,
+				237B60BB2A48B3D00058B18E /* Frameworks */,
+				237B60BC2A48B3D00058B18E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MiamiAssistenceWidgetExtension;
+			productName = MiamiAssistenceWidgetExtension;
+			productReference = 237B60BE2A48B3D00058B18E /* MiamiAssistenceWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -204,17 +466,29 @@
 						CreatedOnToolsVersion = 15.0;
 						TestTargetID = 237265272A3BC8EE004F4B3D;
 					};
+					237B60862A4884D30058B18E = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					237B60BD2A48B3D00058B18E = {
+						CreatedOnToolsVersion = 15.0;
+					};
 				};
 			};
 			buildConfigurationList = 237265232A3BC8EE004F4B3D /* Build configuration list for PBXProject "miami assistence" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 2372651F2A3BC8EE004F4B3D;
+			packageReferences = (
+				237265572A3BCA02004F4B3D /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				2372655A2A3BCA18004F4B3D /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				237B60932A4886860058B18E /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+			);
 			productRefGroup = 237265292A3BC8EE004F4B3D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -222,6 +496,8 @@
 				237265272A3BC8EE004F4B3D /* miami assistence */,
 				237265372A3BC8EF004F4B3D /* miami assistenceTests */,
 				237265412A3BC8EF004F4B3D /* miami assistenceUITests */,
+				237B60862A4884D30058B18E /* OneSignalNotificationServiceExtension */,
+				237B60BD2A48B3D00058B18E /* MiamiAssistenceWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -233,6 +509,8 @@
 			files = (
 				237265332A3BC8EF004F4B3D /* Preview Assets.xcassets in Resources */,
 				237265302A3BC8EF004F4B3D /* Assets.xcassets in Resources */,
+				2305BCEE2A49ADF8009C7DAD /* Launch Screen.storyboard in Resources */,
+				237AE77B2A45271B005149F0 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +528,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		237B60852A4884D30058B18E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		237B60BC2A48B3D00058B18E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237B60C72A48B3D10058B18E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -257,8 +550,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				237AE7772A43A631005149F0 /* HomeDomain.swift in Sources */,
+				237AE7752A43A624005149F0 /* HomeView.swift in Sources */,
 				2372652E2A3BC8EE004F4B3D /* ContentView.swift in Sources */,
-				2372652C2A3BC8EE004F4B3D /* miami_assistenceApp.swift in Sources */,
+				237AE7792A43A63B005149F0 /* HomeModel.swift in Sources */,
+				236DDDCD2A452C0B00B0EE49 /* String+Extension.swift in Sources */,
+				2305BCEB2A4926EF009C7DAD /* QuickSignInWithApple.swift in Sources */,
+				2372652C2A3BC8EE004F4B3D /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +577,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		237B60832A4884D30058B18E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237B608A2A4884D30058B18E /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		237B60BA2A48B3D00058B18E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237B60C32A48B3D00058B18E /* MiamiAssistenceWidgetBundle.swift in Sources */,
+				237B60C52A48B3D00058B18E /* MiamiAssistenceWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -291,6 +606,16 @@
 			isa = PBXTargetDependency;
 			target = 237265272A3BC8EE004F4B3D /* miami assistence */;
 			targetProxy = 237265432A3BC8EF004F4B3D /* PBXContainerItemProxy */;
+		};
+		237B608D2A4884D30058B18E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 237B60862A4884D30058B18E /* OneSignalNotificationServiceExtension */;
+			targetProxy = 237B608C2A4884D30058B18E /* PBXContainerItemProxy */;
+		};
+		237B60CA2A48B3D10058B18E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 237B60BD2A48B3D00058B18E /* MiamiAssistenceWidgetExtension */;
+			targetProxy = 237B60C92A48B3D10058B18E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -347,7 +672,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -404,7 +729,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -417,24 +742,31 @@
 		2372654D2A3BC8EF004F4B3D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "miami assistence/miami assistence.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"miami assistence/Preview Content\"";
 				DEVELOPMENT_TEAM = Z42V6W967K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "miami-assistence-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Miami Assistence";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistence";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -446,24 +778,31 @@
 		2372654E2A3BC8EF004F4B3D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "miami assistence/miami assistence.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"miami assistence/Preview Content\"";
 				DEVELOPMENT_TEAM = Z42V6W967K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "miami-assistence-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Miami Assistence";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistence";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -548,6 +887,118 @@
 			};
 			name = Release;
 		};
+		237B60902A4884D40058B18E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z42V6W967K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistence.OneSignalNotificationServiceExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		237B60912A4884D40058B18E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z42V6W967K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistence.OneSignalNotificationServiceExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		237B60CD2A48B3D10058B18E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MiamiAssistenceWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z42V6W967K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MiamiAssistenceWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MiamiAssistenceWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistence.MiamiAssistenceWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		237B60CE2A48B3D10058B18E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MiamiAssistenceWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z42V6W967K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MiamiAssistenceWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MiamiAssistenceWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.souzarodrigo.miami-assistence.MiamiAssistenceWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -587,7 +1038,70 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		237B60922A4884D40058B18E /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				237B60902A4884D40058B18E /* Debug */,
+				237B60912A4884D40058B18E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		237B60CC2A48B3D10058B18E /* Build configuration list for PBXNativeTarget "MiamiAssistenceWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				237B60CD2A48B3D10058B18E /* Debug */,
+				237B60CE2A48B3D10058B18E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		237265572A3BCA02004F4B3D /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.54.1;
+			};
+		};
+		2372655A2A3BCA18004F4B3D /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.52.2;
+			};
+		};
+		237B60932A4886860058B18E /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.12.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		237265582A3BCA02004F4B3D /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 237265572A3BCA02004F4B3D /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		237B60942A4886860058B18E /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 237B60932A4886860058B18E /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignal;
+		};
+		237B60972A4886BF0058B18E /* OneSignalExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 237B60932A4886860058B18E /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalExtension;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 237265202A3BC8EE004F4B3D /* Project object */;
 }
