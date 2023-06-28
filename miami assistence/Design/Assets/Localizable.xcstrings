@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "pt-BR",
   "strings" : {
+    "%lf" : {
+
+    },
     "by_user" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -50,6 +53,9 @@
           }
         }
       }
+    },
+    "Version: 1.0.0" : {
+
     },
     "world" : {
       "extractionState" : "manual",

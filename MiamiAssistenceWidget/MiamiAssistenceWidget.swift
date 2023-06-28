@@ -47,7 +47,7 @@ struct MiamiAssistenceWidgetEntryView : View {
           Text("Hello World!")
                 .foregroundStyle(.black)
             Spacer()
-        }.containerBackground(.mint, for: .widget)
+        }.containerBackground(.miamiLightGray, for: .widget)
     }
 }
 

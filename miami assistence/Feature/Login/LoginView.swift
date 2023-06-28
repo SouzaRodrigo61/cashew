@@ -24,17 +24,23 @@ struct LoginView: View {
     }
     
     var body: some View {
-        VStack(alignment: .center) {
-            Text("by_user".localized(args: "Rodrigo", "Abestado"))
-                .font(.largeTitle)
-                .foregroundStyle(Color("purple-miami"))
-                .accessibilityLabel("by_user".localized(args: "Rodrigo", "Abestado"))
-            
-            QuickSignInWithApple()
-                .frame(width: 280, height: 54)
-                .onTapGesture(perform: showAppleLoginView)
+        GeometryReader {
+            VStack(alignment: .center) {
+                Text("by_user".localized(args: "Rodrigo", "Abestado"))
+                    .font(.largeTitle)
+                    .foregroundStyle(Color("miami-darkPurple"))
+                    .accessibilityLabel("by_user".localized(args: "Rodrigo", "Abestado"))
+                
+                Spacer()
+                
+                QuickSignInWithApple()
+                    .padding(.horizontal, 16)
+                    .frame(height: 54)
+                    .onTapGesture(perform: showAppleLoginView)
+            }
+            .frame(width: $0.size.width)
+            .background(.miamiWhite)
         }
-        .background(.white)
     }
 }
 

@@ -9,18 +9,15 @@ import SwiftUI
 import AuthenticationServices
 
 struct QuickSignInWithApple: UIViewRepresentable {
-    
     @Environment(\.colorScheme) var colorScheme
     
     typealias UIViewType = ASAuthorizationAppleIDButton
     
     func makeUIView(context: Context) -> UIViewType {
-        return ASAuthorizationAppleIDButton(type: .signIn,
-                                            style: colorScheme == .dark ? .white : .black)
+        return ASAuthorizationAppleIDButton(type: .signIn, style: colorScheme == .dark ? .white : .black)
     }
     
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-    }
+    func updateUIView(_ uiView: UIViewType, context: Context) { }
 }
 
 #Preview {
