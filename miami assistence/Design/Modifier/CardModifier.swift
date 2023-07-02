@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CardModifier: ViewModifier {
     let padding: CGFloat
-    let height: CGFloat
     let width: CGFloat
     let color: Color
     let alignment: Alignment
@@ -18,9 +17,7 @@ struct CardModifier: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .padding(padding)
-            .frame(width: width,
-                   height: height,
-                   alignment: alignment)
+            .frame(width: width, alignment: alignment)
             .background(color)
             .cornerRadius(12, corners: corners)
             .shadow(color: .miamiWhite.opacity(0.2), radius: 20)

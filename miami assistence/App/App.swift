@@ -13,14 +13,8 @@ struct MiamiAssistenceApp: App {
     
     var body: some Scene {
         WindowGroup {
-            GeometryReader {
-                let safeArea = $0.safeAreaInsets
-                let size = $0.size
-                
-                NavigationStack {
-                    HomeView(safeArea: safeArea, size: size)
-                        .ignoresSafeArea(.container, edges: [.top, .bottom])
-                }
+            NavigationStack {
+                HomeView()
             }
         }
     }

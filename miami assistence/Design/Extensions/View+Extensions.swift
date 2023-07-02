@@ -10,9 +10,9 @@ import SwiftUI
 extension View {
     
     @ViewBuilder
-    func cardModifier(padding: CGFloat, height: CGFloat, width: CGFloat, color: Color = .miamiWhite, alignment: Alignment = .topLeading, corners: UIRectCorner = .allCorners) -> some View {
+    func cardModifier(padding: CGFloat, width: CGFloat, color: Color = .miamiWhite, alignment: Alignment = .topLeading, corners: UIRectCorner = .allCorners) -> some View {
         self
-            .modifier(CardModifier(padding: padding, height: height, width: width, color: color, alignment: alignment, corners: corners))
+            .modifier(CardModifier(padding: padding, width: width, color: color, alignment: alignment, corners: corners))
     }
     
     @ViewBuilder

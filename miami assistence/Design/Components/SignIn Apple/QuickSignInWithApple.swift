@@ -20,7 +20,7 @@ struct QuickSignInWithApple: UIViewRepresentable {
     func updateUIView(_ uiView: UIViewType, context: Context) { }
 }
 
-#Preview {
-    QuickSignInWithApple()
-        .frame(width: 120, height: 44)
-}
+//#Preview {
+//    QuickSignInWithApple()
+//        .frame(width: 120, height: 44)
+//}

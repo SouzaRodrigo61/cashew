@@ -63,9 +63,9 @@ struct MiamiAssistenceWidget: Widget {
     }
 }
 
-#Preview(as: .systemExtraLarge) {
-    MiamiAssistenceWidget()
-} timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
-}
+//#Preview(as: .systemExtraLarge) {
+//    MiamiAssistenceWidget()
+//} timeline: {
+//    SimpleEntry(date: .now, emoji: "😀")
+//    SimpleEntry(date: .now, emoji: "🤩")
+//}

@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-struct HomeDomain: ReducerProtocol {
+struct ProfileDomain: ReducerProtocol {
     struct State: Equatable {
         var userType: UserType
     }
