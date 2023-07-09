@@ -22,15 +22,4 @@ extension String {
     func localized(args: CVarArg...) -> String {
         return String(format: localized, arguments: args)
     }
-    
-    
-    ///
-    /// This function serves to add formatted string and return Date.
-    ///
-    func formattedDate(with format: String = "yyyy-MM-dd HH:mm:ss") -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        guard let date = dateFormatter.date(from: self) else { return .now }
-        return date
-    }
 }
