@@ -37,7 +37,7 @@ struct ProfileView: View {
                 
                 LogoutGroup()
             }
-            .cardModifier(padding: 16.0, width: size.width)
+//            .cardModifier(padding: 16.0, width: size.width)
             .shadow(color: .miamiBlack.opacity(0.2), radius: 20, x: 0, y: 0)
             
             SizedBox(height: (size.height * 0.05 ) + safeArea.bottom + 80)
@@ -130,7 +130,7 @@ struct ProfileView: View {
                 
                 SizedBox(height: 16)
             }
-            .cardModifier(padding: 0, width: size.width, alignment: .bottom, corners: [.bottomLeft, .bottomRight])
+//            .cardModifier(padding: 0, width: size.width, alignment: .bottom, corners: [.bottomLeft, .bottomRight])
             .frame(height: size.height + ( minY > 0 ? minY : 0))
             .clipped()
             .offset(y: -minY)

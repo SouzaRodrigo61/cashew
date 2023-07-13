@@ -19,7 +19,7 @@ struct CardModifier: ViewModifier {
             .padding(padding)
             .frame(width: width, alignment: alignment)
             .background(color)
-            .cornerRadius(12, corners: corners)
+//            .cornerRadius(12, corners: corners)
             .shadow(color: .miamiWhite.opacity(0.2), radius: 20)
     }
 }

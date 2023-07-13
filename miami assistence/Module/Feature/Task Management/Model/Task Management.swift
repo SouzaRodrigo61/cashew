@@ -16,13 +16,13 @@ struct TaskManagementModel: Identifiable {
     var tint: Color
 }
 
-var tasks: [TaskManagementModel] = [
+var sampleTasks: [TaskManagementModel] = [
     .init(title: "Record Video", createdAt: .updateHour(-5), isCompleted: true, tint: .miamiRed),
-    .init(title: "Record Video", createdAt: .updateHour(-3), isCompleted: true, tint: .miamiGray),
+    .init(title: "Record Video", createdAt: .updateHour(-3), isCompleted: false, tint: .miamiGray),
     .init(title: "Record Video", createdAt: .updateHour(-4), isCompleted: true, tint: .miamiPurple),
-    .init(title: "Record Video", createdAt: .updateHour(0), isCompleted: true, tint: .yellow),
+    .init(title: "Record Video", createdAt: .updateHour(0), isCompleted: false, tint: .yellow),
     .init(title: "Record Video", createdAt: .updateHour(2), isCompleted: true, tint: .purple),
-    .init(title: "Record Video", createdAt: .updateHour(1), isCompleted: true, tint: .green),
-    .init(title: "Record Video", createdAt: .updateHour(6), isCompleted: true, tint: .orange)
+    .init(title: "Record Video", createdAt: .updateHour(1), isCompleted: false, tint: .green),
+    .init(title: "Record Video", createdAt: .updateHour(6), isCompleted: false, tint: .orange)
 ]
 

@@ -1,31 +1,10 @@
 {
   "sourceLanguage" : "pt-BR",
   "strings" : {
-    "%@" : {
-
-    },
-    "%lld" : {
-
-    },
     "Abestaiado" : {
 
     },
-    "Date - %@" : {
-
-    },
-    "Hello" : {
-
-    },
-    "Hello, World!" : {
-
-    },
-    "No task found!!!" : {
-
-    },
     "Not defined" : {
-
-    },
-    "planner.isCurrent(.now): %@" : {
 
     },
     "profile.company" : {
@@ -478,9 +457,6 @@
       }
     },
     "Sign in with Google" : {
-
-    },
-    "Today" : {
 
     },
     "Ttt" : {
