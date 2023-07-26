@@ -1,28 +1,13 @@
 {
   "sourceLanguage" : "pt-BR",
   "strings" : {
-    "%@" : {
-
-    },
-    "%lld" : {
-
-    },
-    "Abestaiado" : {
-
-    },
     "Date - %@" : {
 
     },
     "Hello" : {
 
     },
-    "Hello, World!" : {
-
-    },
-    "No task found!!!" : {
-
-    },
-    "Not defined" : {
+    "Onboarding With TCA" : {
 
     },
     "planner.isCurrent(.now): %@" : {
@@ -80,6 +65,7 @@
       }
     },
     "profile.company.dashboard.describle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -152,6 +138,7 @@
       }
     },
     "profile.company.link.describle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -179,6 +166,7 @@
       }
     },
     "profile.company.schedule.describle" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -476,15 +464,6 @@
           }
         }
       }
-    },
-    "Sign in with Google" : {
-
-    },
-    "Today" : {
-
-    },
-    "Ttt" : {
-
     },
     "user.finder" : {
       "extractionState" : "manual",

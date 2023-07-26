@@ -13,7 +13,7 @@ struct MiamiAssistenceApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Onboarding.dev()
         }
     }
 }
