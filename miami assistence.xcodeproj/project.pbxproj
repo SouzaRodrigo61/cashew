@@ -14,6 +14,11 @@
 		231FF94E2A59FE8F0071CF74 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231FF94D2A59FE8F0071CF74 /* Color+Extensions.swift */; };
 		233BE61F2A51C567000538B2 /* SizedBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233BE61E2A51C567000538B2 /* SizedBox.swift */; };
 		233BE6222A51C9D0000538B2 /* TabContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233BE6212A51C9D0000538B2 /* TabContainer.swift */; };
+		2359915B2A6C6E3B00C2677A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2359915A2A6C6E3B00C2677A /* SplashView.swift */; };
+		2359915E2A6C75E600C2677A /* CreateTypeCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2359915D2A6C75E600C2677A /* CreateTypeCompanyView.swift */; };
+		235991612A6C76E600C2677A /* Sign Up.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235991602A6C76E600C2677A /* Sign Up.swift */; };
+		235991632A6C778800C2677A /* Sign Up Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235991622A6C778800C2677A /* Sign Up Navigation.swift */; };
+		235991672A6D3BB000C2677A /* NavigationTransitions in Frameworks */ = {isa = PBXBuildFile; productRef = 235991662A6D3BB000C2677A /* NavigationTransitions */; };
 		235C8FD22A4B10930018CA55 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235C8FD12A4B10930018CA55 /* View+Extensions.swift */; };
 		235C8FD52A4B10B30018CA55 /* CardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235C8FD42A4B10B30018CA55 /* CardModifier.swift */; };
 		236B94642A5244E500941F6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 236B94632A5244E500941F6B /* GoogleService-Info.plist */; };
@@ -61,6 +66,7 @@
 		23DD7A2C2A59FC1D00C56C7F /* TaskManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DD7A2B2A59FC1D00C56C7F /* TaskManagementView.swift */; };
 		23DD7A302A59FC5300C56C7F /* Task Management.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DD7A2F2A59FC5300C56C7F /* Task Management.swift */; };
 		23E7C9042A503F8F00E8FAFD /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E7C9032A503F8F00E8FAFD /* TabBar.swift */; };
+		23F03A8C2A60D95F0095F6E7 /* CreateCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F03A8B2A60D95F0095F6E7 /* CreateCompanyView.swift */; };
 		23FB3F882A4DA80600A75CA5 /* ResponsiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FB3F872A4DA80600A75CA5 /* ResponsiveView.swift */; };
 		23FB3F8A2A4DA98100A75CA5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FB3F892A4DA98100A75CA5 /* HomeView.swift */; };
 /* End PBXBuildFile section */
@@ -119,6 +125,10 @@
 		231FF94D2A59FE8F0071CF74 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		233BE61E2A51C567000538B2 /* SizedBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizedBox.swift; sourceTree = "<group>"; };
 		233BE6212A51C9D0000538B2 /* TabContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContainer.swift; sourceTree = "<group>"; };
+		2359915A2A6C6E3B00C2677A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		2359915D2A6C75E600C2677A /* CreateTypeCompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTypeCompanyView.swift; sourceTree = "<group>"; };
+		235991602A6C76E600C2677A /* Sign Up.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sign Up.swift"; sourceTree = "<group>"; };
+		235991622A6C778800C2677A /* Sign Up Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sign Up Navigation.swift"; sourceTree = "<group>"; };
 		235C8FD12A4B10930018CA55 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		235C8FD42A4B10B30018CA55 /* CardModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModifier.swift; sourceTree = "<group>"; };
 		236B94632A5244E500941F6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -162,6 +172,7 @@
 		23DD7A2B2A59FC1D00C56C7F /* TaskManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagementView.swift; sourceTree = "<group>"; };
 		23DD7A2F2A59FC5300C56C7F /* Task Management.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task Management.swift"; sourceTree = "<group>"; };
 		23E7C9032A503F8F00E8FAFD /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		23F03A8B2A60D95F0095F6E7 /* CreateCompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyView.swift; sourceTree = "<group>"; };
 		23FB3F872A4DA80600A75CA5 /* ResponsiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveView.swift; sourceTree = "<group>"; };
 		23FB3F892A4DA98100A75CA5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +188,7 @@
 				236B947A2A52539200941F6B /* GoogleSignInSwift in Frameworks */,
 				237C3DF02A52E6E1001F4616 /* FirebaseAuthCombine-Community in Frameworks */,
 				237265592A3BCA02004F4B3D /* ComposableArchitecture in Frameworks */,
+				235991672A6D3BB000C2677A /* NavigationTransitions in Frameworks */,
 				236B94692A52459100941F6B /* FirebaseAnalytics in Frameworks */,
 				237B60952A4886860058B18E /* OneSignal in Frameworks */,
 				236B94712A52459100941F6B /* FirebaseCrashlytics in Frameworks */,
@@ -280,6 +292,41 @@
 			path = "SignIn Apple";
 			sourceTree = "<group>";
 		};
+		235991582A6C6DD600C2677A /* Create Company */ = {
+			isa = PBXGroup;
+			children = (
+				23F03A8B2A60D95F0095F6E7 /* CreateCompanyView.swift */,
+			);
+			path = "Create Company";
+			sourceTree = "<group>";
+		};
+		235991592A6C6DE900C2677A /* Splash View */ = {
+			isa = PBXGroup;
+			children = (
+				2359915A2A6C6E3B00C2677A /* SplashView.swift */,
+			);
+			path = "Splash View";
+			sourceTree = "<group>";
+		};
+		2359915C2A6C75AF00C2677A /* Sign Up Flow */ = {
+			isa = PBXGroup;
+			children = (
+				2359915F2A6C75EE00C2677A /* Create Type Company */,
+				235991582A6C6DD600C2677A /* Create Company */,
+				235991602A6C76E600C2677A /* Sign Up.swift */,
+				235991622A6C778800C2677A /* Sign Up Navigation.swift */,
+			);
+			path = "Sign Up Flow";
+			sourceTree = "<group>";
+		};
+		2359915F2A6C75EE00C2677A /* Create Type Company */ = {
+			isa = PBXGroup;
+			children = (
+				2359915D2A6C75E600C2677A /* CreateTypeCompanyView.swift */,
+			);
+			path = "Create Type Company";
+			sourceTree = "<group>";
+		};
 		235C8FD02A4B10850018CA55 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,10 +391,10 @@
 		2372652A2A3BC8EE004F4B3D /* miami assistence */ = {
 			isa = PBXGroup;
 			children = (
-				236B94632A5244E500941F6B /* GoogleService-Info.plist */,
 				237B60992A48878B0058B18E /* miami assistence.entitlements */,
+				236B94632A5244E500941F6B /* GoogleService-Info.plist */,
 				237B609A2A4887A20058B18E /* miami-assistence-Info.plist */,
-				23978B782A55D694002ECB4A /* Module */,
+				23978B782A55D694002ECB4A /* Poc */,
 				237265312A3BC8EF004F4B3D /* Preview Content */,
 			);
 			path = "miami assistence";
@@ -398,10 +445,11 @@
 		237AE7702A43A4C0005149F0 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				2359915C2A6C75AF00C2677A /* Sign Up Flow */,
+				23F03A8A2A60ADCF0095F6E7 /* Onboarding */,
 				23DD7A2A2A59FBFD00C56C7F /* Task Management */,
 				23FB3F8B2A4DA98500A75CA5 /* Home */,
 				237AE7732A43A612005149F0 /* Profile */,
-				237AE7722A43A535005149F0 /* Login */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -465,7 +513,7 @@
 			path = MiamiAssistenceWidget;
 			sourceTree = "<group>";
 		};
-		23978B782A55D694002ECB4A /* Module */ = {
+		23978B782A55D694002ECB4A /* Poc */ = {
 			isa = PBXGroup;
 			children = (
 				237AE76E2A43A480005149F0 /* App */,
@@ -473,7 +521,7 @@
 				2305BCE82A4926D3009C7DAD /* Design */,
 				237AE7702A43A4C0005149F0 /* Feature */,
 			);
-			path = Module;
+			path = Poc;
 			sourceTree = "<group>";
 		};
 		23A0A4C42A4B67A80069CC7F /* Shape */ = {
@@ -508,6 +556,15 @@
 				23131BF42A5A55200056E579 /* TaskRowView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		23F03A8A2A60ADCF0095F6E7 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				237AE7722A43A535005149F0 /* Login */,
+				235991592A6C6DE900C2677A /* Splash View */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		23FB3F8B2A4DA98500A75CA5 /* Home */ = {
@@ -549,6 +606,7 @@
 				236B94792A52539200941F6B /* GoogleSignInSwift */,
 				237C3DED2A52E6E1001F4616 /* FirebaseAuth */,
 				237C3DEF2A52E6E1001F4616 /* FirebaseAuthCombine-Community */,
+				235991662A6D3BB000C2677A /* NavigationTransitions */,
 			);
 			productName = "miami assistence";
 			productReference = 237265282A3BC8EE004F4B3D /* miami assistence.app */;
@@ -673,6 +731,8 @@
 				23E7C9002A4F9A7800E8FAFD /* XCRemoteSwiftPackageReference "TabBar" */,
 				236B94672A52459100941F6B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				236B94762A52539200941F6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				235991642A6CCB6B00C2677A /* XCRemoteSwiftPackageReference "swiftui-navigation-transitions" */,
+				235991652A6D3BB000C2677A /* XCRemoteSwiftPackageReference "swiftui-navigation-transitions" */,
 			);
 			productRefGroup = 237265292A3BC8EE004F4B3D /* Products */;
 			projectDirPath = "";
@@ -742,15 +802,20 @@
 				23080E9F2A574AE70010ECFB /* SwipeableStack.swift in Sources */,
 				23A0A4C62A4B67B70069CC7F /* RoundedCorner.swift in Sources */,
 				233BE61F2A51C567000538B2 /* SizedBox.swift in Sources */,
+				235991612A6C76E600C2677A /* Sign Up.swift in Sources */,
 				23FB3F8A2A4DA98100A75CA5 /* HomeView.swift in Sources */,
 				233BE6222A51C9D0000538B2 /* TabContainer.swift in Sources */,
+				2359915E2A6C75E600C2677A /* CreateTypeCompanyView.swift in Sources */,
 				23A0A4C12A4B25950069CC7F /* AppDelegate.swift in Sources */,
 				23DD7A2C2A59FC1D00C56C7F /* TaskManagementView.swift in Sources */,
+				2359915B2A6C6E3B00C2677A /* SplashView.swift in Sources */,
 				23DD7A302A59FC5300C56C7F /* Task Management.swift in Sources */,
 				237AE7772A43A631005149F0 /* ProfileDomain.swift in Sources */,
 				236B947C2A52E30F00941F6B /* SignInWorker.swift in Sources */,
+				23F03A8C2A60D95F0095F6E7 /* CreateCompanyView.swift in Sources */,
 				237AE7752A43A624005149F0 /* ProfileView.swift in Sources */,
 				23A0A4BF2A4B1AB50069CC7F /* StickerHeader.swift in Sources */,
+				235991632A6C778800C2677A /* Sign Up Navigation.swift in Sources */,
 				23E7C9042A503F8F00E8FAFD /* TabBar.swift in Sources */,
 				231FF94E2A59FE8F0071CF74 /* Color+Extensions.swift in Sources */,
 				23FB3F882A4DA80600A75CA5 /* ResponsiveView.swift in Sources */,
@@ -1267,6 +1332,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		235991642A6CCB6B00C2677A /* XCRemoteSwiftPackageReference "swiftui-navigation-transitions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:davdroman/swiftui-navigation-transitions.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.1;
+			};
+		};
+		235991652A6D3BB000C2677A /* XCRemoteSwiftPackageReference "swiftui-navigation-transitions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:davdroman/swiftui-navigation-transitions.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.1;
+			};
+		};
 		236B94672A52459100941F6B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1318,6 +1399,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		235991662A6D3BB000C2677A /* NavigationTransitions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 235991642A6CCB6B00C2677A /* XCRemoteSwiftPackageReference "swiftui-navigation-transitions" */;
+			productName = NavigationTransitions;
+		};
 		236B94682A52459100941F6B /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 236B94672A52459100941F6B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

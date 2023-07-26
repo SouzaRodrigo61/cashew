@@ -44,10 +44,13 @@ struct MiamiAssistenceWidgetEntryView : View {
 
     var body: some View {
         VStack {
-          Text("Hello World!")
+            Text("Rodrigo")
                 .foregroundStyle(.black)
+            Text(entry.emoji)
+                  .foregroundStyle(.black)
             Spacer()
-        }.containerBackground(.miamiLightGray, for: .widget)
+        }
+        .containerBackground(.miamiLightGray, for: .widget)
     }
 }
 
@@ -58,14 +61,15 @@ struct MiamiAssistenceWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             MiamiAssistenceWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Miami Assistence")
+        .description("Show your application.")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
-//#Preview(as: .systemExtraLarge) {
-//    MiamiAssistenceWidget()
-//} timeline: {
-//    SimpleEntry(date: .now, emoji: "😀")
-//    SimpleEntry(date: .now, emoji: "🤩")
-//}
+#Preview(as: .systemMedium) {
+    MiamiAssistenceWidget()
+} timeline: {
+    SimpleEntry(date: .now, emoji: "😀")
+    SimpleEntry(date: .now, emoji: "🤩")
+}
