@@ -33,15 +33,6 @@ struct LoginView: View {
         GeometryReader {
             VStack(alignment: .center) {
                 
-                TimelineView(.animation) { context in
-                    let date = context.date
-                    let value = context.cadence <= .live ?
-                        nanosValue(for: date): secondsValue(for: date)
-
-                    Circle()
-                        .trim(from: 0, to: value)
-                        .stroke()
-                }
                 
                 Spacer()
                 

@@ -13,7 +13,9 @@ struct MiamiAssistenceApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Group {
+                SignUpView()
+            }
         }
     }
 }

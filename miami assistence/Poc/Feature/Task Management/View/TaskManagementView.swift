@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct TaskView: View {
     var body: some View {
         TaskManagementView()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -213,8 +213,3 @@ struct TaskManagementView: View {
         }
     }
 }
-
-#Preview {
-    ContentView()
-}
-

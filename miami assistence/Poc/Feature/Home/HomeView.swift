@@ -17,8 +17,7 @@ struct HomeView: View {
                 case 1:
                     ProfileView(safeArea: prop.safeArea, size: prop.size)
                 case 2:
-                    Text("Abestaiado")
-                        .foregroundStyle(.miamiDarkGraySecond)
+                    TaskView()
                 case 3:
                     Text("Ttt")
                         .foregroundStyle(.miamiDarkGraySecond)

@@ -1,7 +1,22 @@
 {
   "sourceLanguage" : "pt-BR",
   "strings" : {
-    "Abestaiado" : {
+    "" : {
+
+    },
+    "Area atuação da empresa" : {
+
+    },
+    "Back" : {
+
+    },
+    "Continuar" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "Nome da sua empresa" : {
 
     },
     "Not defined" : {
@@ -455,6 +470,12 @@
           }
         }
       }
+    },
+    "Qual a area atuação da empresa ?" : {
+
+    },
+    "Qual nome da sua empresa ?" : {
+
     },
     "Sign in with Google" : {
 
