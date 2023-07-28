@@ -13,7 +13,10 @@ struct MiamiAssistenceApp: App {
     
     var body: some Scene {
         WindowGroup {
-            Onboarding.dev()
+            NavigationStack {
+                Main.dev()
+            }
+            .preferredColorScheme(.light)
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Onboarding+Feature.swift
+//  Create Company+Feature.swift
 //  miami assistence
 //
 //  Created by Rodrigo Souza on 26/07/23.
@@ -7,11 +7,13 @@
 
 import ComposableArchitecture
 
-extension Onboarding {
+extension CreateCompany {
     struct Feature: ReducerProtocol {
-        struct State: Equatable {}
+        struct State: Equatable {
+        }
         
-        enum Action: Equatable {}
+        enum Action: Equatable {
+        }
         
         var body: some ReducerProtocol<State, Action> {
             EmptyReducer()
