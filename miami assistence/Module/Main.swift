@@ -9,6 +9,9 @@ import ComposableArchitecture
 
 enum Main {
     static func dev() -> View {
-        View(path: .init(initialState: .init(path: .onboarding), reducer: Destination()))
+        View(store: .init(
+            initialState: .init(path: StackState([.onboarding(Onboarding.Feature.State())])),
+            reducer: Feature()
+        ))
     }
 }

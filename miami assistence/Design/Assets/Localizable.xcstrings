@@ -1,16 +1,25 @@
 {
   "sourceLanguage" : "pt-BR",
   "strings" : {
-    "Date - %@" : {
+    "Continuar" : {
 
     },
-    "Hello" : {
+    "Go to Home" : {
 
     },
-    "Onboarding With TCA" : {
+    "Go to Login" : {
 
     },
-    "planner.isCurrent(.now): %@" : {
+    "Go to Login Flow" : {
+
+    },
+    "Go to Onboarding" : {
+
+    },
+    "Home Stateless" : {
+
+    },
+    "Login Stateless" : {
 
     },
     "profile.company" : {
@@ -465,6 +474,12 @@
         }
       }
     },
+    "Star system name" : {
+
+    },
+    "This screen demonstrates a basic feature hosted in a navigation stack.\n\nYou can also have the child feature dismiss itself, which will communicate back to the root stack view to pop the feature off the stack." : {
+
+    },
     "user.finder" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -515,6 +530,9 @@
           }
         }
       }
+    },
+    "Voltar" : {
+
     },
     "work.progress" : {
       "extractionState" : "manual",

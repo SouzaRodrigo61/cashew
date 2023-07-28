@@ -10,7 +10,7 @@ import SwiftUI
 
 extension CreateTypeCompany {
     struct View: SwiftUI.View {
-        let path: StoreOf<Destination>
+        let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
             Form {
@@ -25,16 +25,16 @@ extension CreateTypeCompany {
                 
                 Section {
                     Button("Voltar") {
-                        withAnimation {
-                            path.send(.dismissButtonTapped)
-                        }
+//                        withAnimation {
+//                            path.send(.dismissButtonTapped)
+//                        }
                     }
                 }
                 
                 Button("Go to Login Flow") {
-                    withAnimation {
-                        path.send(.moveToLoginFlow)
-                    }
+//                    withAnimation {
+//                        path.send(.moveToLoginFlow)
+//                    }
 
                 }
             }

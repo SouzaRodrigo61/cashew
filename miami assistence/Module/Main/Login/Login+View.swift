@@ -10,22 +10,21 @@ import SwiftUI
 
 extension Login {
     struct View: SwiftUI.View {
-        let path: StoreOf<Destination>
-        let mainPath: StoreOf<Main.Destination>
+        let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
             VStack {
                 Text("Login Stateless")
                 
                 Button("Go to Onboarding") {
-                    withAnimation(.snappy) {
-                        mainPath.send(.path(.onboarding))
-                    }
+//                    withAnimation(.snappy) {
+//                        mainPath.send(.path(.onboarding))
+//                    }
                 }
                 Button("Go to Home") {
-                    withAnimation(.snappy) {
-                        mainPath.send(.path(.home))
-                    }
+//                    withAnimation(.snappy) {
+//                        mainPath.send(.path(.home))
+//                    }
                 }
             }
         }

@@ -13,10 +13,15 @@ extension Onboarding {
         }
         
         enum Action: Equatable {
+            case buttonTapped
         }
         
         var body: some ReducerProtocol<State, Action> {
-            EmptyReducer()
+            Reduce(self.core)
+        }
+        
+        private func core(into state: inout State, action: Action) -> EffectTask<Action> {
+            return .none
         }
     }
 }

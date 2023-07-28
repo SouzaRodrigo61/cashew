@@ -8,8 +8,4 @@
 import ComposableArchitecture
 import Foundation
 
-enum Onboarding {
-    static func builder(with store: StoreOf<Main.Destination>) -> View {
-        View(path: Destination.builder(with: store))
-    }
-}
+enum Onboarding {}

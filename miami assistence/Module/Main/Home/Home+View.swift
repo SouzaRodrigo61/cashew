@@ -10,22 +10,21 @@ import SwiftUI
 
 extension Home {
     struct View: SwiftUI.View {
-        let path: StoreOf<Destination>
-        let mainPath: StoreOf<Main.Destination>
+        let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
             VStack {
                 Text("Home Stateless")
                 
                 Button("Go to Onboarding") {
-                    withAnimation(.snappy) {
-                        mainPath.send(.path(.onboarding))
-                    }
+//                    withAnimation(.snappy) {
+//                        mainPath.send(.path(.onboarding))
+//                    }
                 }
                 Button("Go to Login") {
-                    withAnimation(.snappy) {
-                        mainPath.send(.path(.login))
-                    }
+//                    withAnimation(.snappy) {
+//                        mainPath.send(.path(.login))
+//                    }
                 }
             }
         }

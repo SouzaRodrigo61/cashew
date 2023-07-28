@@ -10,7 +10,7 @@ import SwiftUI
 
 extension CreateCompany {
     struct View: SwiftUI.View {
-        let path: StoreOf<Destination>
+        let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
             Form {
@@ -27,20 +27,20 @@ extension CreateCompany {
                     
                     
                     Button("Voltar") {
-                        withAnimation {
-                            path.send(.dismissButtonTapped)
-                        }
+//                        withAnimation {
+//                            path.send(.dismissButtonTapped)
+//                        }
                     }
                 }
                 
                 
                 Button("Continuar") {
-                    withAnimation {
-                        path.send(.moveToCreateTypeCompany)
-                    }
+//                    withAnimation {
+//                        path.send(.moveToCreateTypeCompany)
+//                    }
                 }
             }
-            .toolbar(.hidden, for: .navigationBar)
+//            .toolbar(.hidden, for: .navigationBar)
         }
     }
 }

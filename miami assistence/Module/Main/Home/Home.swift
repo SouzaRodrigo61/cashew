@@ -7,8 +7,8 @@
 
 import ComposableArchitecture
 
-enum Home {    
-    static func builder(with store: StoreOf<Main.Destination>) -> View {
-        View(path: Destination.builder(), mainPath: store)
-    }
+enum Home {}
+
+extension Home.Feature.State {
+    /// Builder for State
 }

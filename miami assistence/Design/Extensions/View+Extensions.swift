@@ -8,19 +8,7 @@
 import SwiftUI
 
 extension View {
-    
-    @ViewBuilder
-    func cardModifier(padding: CGFloat, width: CGFloat, color: Color = .miamiWhite, alignment: Alignment = .topLeading, corners: UIRectCorner = .allCorners) -> some View {
-        self
-            .modifier(CardModifier(padding: padding, width: width, color: color, alignment: alignment, corners: corners))
-    }
-    
-    @ViewBuilder
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        self
-            .clipShape(RoundedCorner(radius: radius, corners: corners))
-    }
-    
+        
     @ViewBuilder
     func hSpacing(_ alignment: Alignment) -> some View {
         self.frame(maxWidth: .infinity, alignment: alignment)

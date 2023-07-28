@@ -7,8 +7,4 @@
 
 import ComposableArchitecture
 
-enum Login {
-    static func builder(with store: StoreOf<Main.Destination>) -> View {
-        View(path: Destination.builder(), mainPath: store)
-    }
-}
+enum Login {}
