@@ -13,6 +13,8 @@ extension CreateCompany {
         }
         
         enum Action: Equatable {
+            case dismissTapped
+            case buttonTapped
         }
         
         var body: some ReducerProtocol<State, Action> {

@@ -9,3 +9,9 @@ import ComposableArchitecture
 import Foundation
 
 enum Onboarding {}
+
+extension Onboarding.Feature.State {
+    static func new() -> Self {
+        .init(path: StackState([]))
+    }
+}

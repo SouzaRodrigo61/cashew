@@ -23,19 +23,12 @@ extension CreateTypeCompany {
                       """
                 )
                 
-                Section {
-                    Button("Voltar") {
-//                        withAnimation {
-//                            path.send(.dismissButtonTapped)
-//                        }
-                    }
+                Button("Voltar") {
+                    store.send(.dismissTapped, transaction: .init(animation: .bouncy))
                 }
                 
-                Button("Go to Login Flow") {
-//                    withAnimation {
-//                        path.send(.moveToLoginFlow)
-//                    }
-
+                Button("Continuar") {
+                    store.send(.buttonTapped, transaction: .init(animation: .bouncy))
                 }
             }
             .toolbar(.hidden, for: .navigationBar)

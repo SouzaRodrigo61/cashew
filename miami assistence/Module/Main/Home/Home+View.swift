@@ -17,14 +17,7 @@ extension Home {
                 Text("Home Stateless")
                 
                 Button("Go to Onboarding") {
-//                    withAnimation(.snappy) {
-//                        mainPath.send(.path(.onboarding))
-//                    }
-                }
-                Button("Go to Login") {
-//                    withAnimation(.snappy) {
-//                        mainPath.send(.path(.login))
-//                    }
+                    store.send(.buttonTapped, transaction: .init(animation: .bouncy))
                 }
             }
         }

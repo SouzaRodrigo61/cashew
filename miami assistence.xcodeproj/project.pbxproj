@@ -265,11 +265,12 @@
 		235991782A714DCB00C2677A /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				235991792A71504D00C2677A /* Login */,
 				23E2D1932A71BEC000180C1C /* Create Type Company */,
 				23E2D1922A71BEA600180C1C /* Create Company */,
 				235991742A714D8F00C2677A /* Onboarding.swift */,
-				235991722A714D8E00C2677A /* Onboarding+Feature.swift */,
 				235991732A714D8E00C2677A /* Onboarding+View.swift */,
+				235991722A714D8E00C2677A /* Onboarding+Feature.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -442,7 +443,6 @@
 			isa = PBXGroup;
 			children = (
 				2359917A2A7150B200C2677A /* Home */,
-				235991792A71504D00C2677A /* Login */,
 				235991782A714DCB00C2677A /* Onboarding */,
 			);
 			path = Main;

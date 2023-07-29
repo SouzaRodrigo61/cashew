@@ -16,7 +16,7 @@ struct MiamiAssistenceApp: App {
             NavigationStack {
                 Main.dev()
             }
-            .preferredColorScheme(.light)
+            .preferredColorScheme(.dark)
         }
     }
 }

@@ -23,24 +23,15 @@ extension CreateCompany {
                       """
                 )
                 
-                Section {
-                    
-                    
-                    Button("Voltar") {
-//                        withAnimation {
-//                            path.send(.dismissButtonTapped)
-//                        }
-                    }
+                Button("Voltar") {
+                    store.send(.dismissTapped, transaction: .init(animation: .bouncy))
                 }
-                
                 
                 Button("Continuar") {
-//                    withAnimation {
-//                        path.send(.moveToCreateTypeCompany)
-//                    }
+                    store.send(.buttonTapped, transaction: .init(animation: .bouncy))
                 }
             }
-//            .toolbar(.hidden, for: .navigationBar)
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
 }

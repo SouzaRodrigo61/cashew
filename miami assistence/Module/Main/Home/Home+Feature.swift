@@ -13,6 +13,7 @@ extension Home {
         }
         
         enum Action: Equatable {
+            case buttonTapped
         }
         
         var body: some ReducerProtocol<State, Action> {

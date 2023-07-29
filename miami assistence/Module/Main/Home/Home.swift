@@ -10,5 +10,7 @@ import ComposableArchitecture
 enum Home {}
 
 extension Home.Feature.State {
-    /// Builder for State
+    static func new() -> Self {
+        .init()
+    }
 }

@@ -8,13 +8,7 @@
 import Foundation
 import FirebaseAnalytics
 
-enum Analitycs {
-    
-    static func tracking(action: Main.Feature.Action, state: Main.Feature.State) {
-        dump(action, name: "Action")
-        dump(state.path, name: "State")
-    }
-}
+enum Analitycs {}
 
 
 // MARK: -  For study
