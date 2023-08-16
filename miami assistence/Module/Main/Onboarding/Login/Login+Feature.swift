@@ -8,14 +8,14 @@
 import ComposableArchitecture
 
 extension Login {
-    struct Feature: ReducerProtocol {
+    struct Feature: Reducer {
         struct State: Equatable {
         }
         
         enum Action: Equatable {
         }
         
-        var body: some ReducerProtocol<State, Action> {
+        var body: some Reducer<State, Action> {
             EmptyReducer()
         }
     }

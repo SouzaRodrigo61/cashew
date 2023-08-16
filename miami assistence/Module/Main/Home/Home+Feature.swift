@@ -8,7 +8,7 @@
 import ComposableArchitecture
 
 extension Home {
-    struct Feature: ReducerProtocol {
+    struct Feature: Reducer {
         struct State: Equatable {
         }
         
@@ -16,7 +16,7 @@ extension Home {
             case buttonTapped
         }
         
-        var body: some ReducerProtocol<State, Action> {
+        var body: some Reducer<State, Action> {
             EmptyReducer()
         }
     }

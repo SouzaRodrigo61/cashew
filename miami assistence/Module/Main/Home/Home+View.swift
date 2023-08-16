@@ -20,6 +20,7 @@ extension Home {
                     store.send(.buttonTapped, transaction: .init(animation: .bouncy))
                 }
             }
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
 }

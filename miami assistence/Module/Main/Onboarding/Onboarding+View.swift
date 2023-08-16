@@ -15,35 +15,55 @@ extension Onboarding {
         
         var body: some SwiftUI.View {
             NavigationStackStore(store.scope(state: \.path, action: Feature.Action.path)) {
-                VStack {
-                    Text(
-                          """
-                          This screen demonstrates a basic feature hosted in a navigation stack.
-                          
-                          You can also have the child feature dismiss itself, which will communicate back to the \
-                          root stack view to pop the feature off the stack.
-                          """
-                    )
-                    .padding(.horizontal)
-                    Button("Go to Home") {
-                        store.send(.goToHomeTapped, transaction: .init(animation: .bouncy))
-                    }
-                    
-                    Spacer()
-                    
-                    Button {
-                        store.send(.buttonTapped, animation: .snappy(duration: 2))
-                    } label : {
-                        HStack {
-                            Image(systemName: "star")
-                            Text("Star system name")
+                GeometryReader { geo in
+                    VStack {
+                        Spacer()
+                        
+                        VStack(alignment: .leading) {
+                            Text("onboarding.text.manager")
+                                .foregroundStyle(.dark)
+                                .font(.largeTitle.bold())
+                            Text("onboarding.text.everything")
+                                .foregroundStyle(.cornFlower)
+                                .font(.largeTitle.bold())
+                            Text("onboarding.text.everywhere")
+                                .foregroundStyle(.cornFlower)
+                                .font(.largeTitle.bold())
+                            Text("onboarding.text.anytime")
+                                .foregroundStyle(.blush)
+                                .font(.largeTitle.bold())
+                        }
+                        .padding(.horizontal, 16)
+                        .hSpacing(.leading)
+                        .padding(.bottom, 16)
+                        
+                        VStack {
+                            Text("onboarding.text.small_text")
+                                .foregroundStyle(.dark)
+                        }
+                        .padding(.horizontal, 16)
+                        .hSpacing(.leading)
+                        
+                        Spacer()
+
+                        
+                        Button {
+                            store.send(.goToHomeTapped)
+                        } label: {
+                            VStack {
+                                Text("onboarding.button.get_started")
+                                    .foregroundStyle(.white)
+                                    .font(.body.bold())
+                            }
+                            .padding()
+                            .hSpacing(.center)
+                            .background(.dark, in: .rect(cornerRadius: 8))
+                            .padding(.horizontal)
                         }
                     }
-                    .foregroundStyle(.miamiWhite)
-                    .padding()
-                    .background(.miamiDarkGraySecond, in: .rect(cornerRadius: 16))
-                    
+                    .background(.alabaster)
                 }
+                .ignoresSafeArea(.container, edges: .top)
                 .toolbar(.hidden, for: .navigationBar)
             } destination: {
                 switch $0 {

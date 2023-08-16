@@ -12,6 +12,6 @@ enum Onboarding {}
 
 extension Onboarding.Feature.State {
     static func new() -> Self {
-        .init(path: StackState([]))
+        .init(path: StackState([  ]))
     }
 }

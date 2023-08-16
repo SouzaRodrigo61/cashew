@@ -8,8 +8,8 @@
 import ComposableArchitecture
 
 extension Onboarding {
-    struct Feature: ReducerProtocol {
-        struct Path: ReducerProtocol {
+    struct Feature: Reducer {
+        struct Path: Reducer {
             enum State: Equatable {
                 case login(Login.Feature.State = .init())
                 case createCompany(CreateCompany.Feature.State = .init())
@@ -22,7 +22,7 @@ extension Onboarding {
                 case login(Login.Feature.Action)
             }
             
-            var body: some ReducerProtocol<State, Action> {
+            var body: some Reducer<State, Action> {
                 Scope(state: /State.createCompany, action: /Action.createCompany) {
                     CreateCompany.Feature()
                 }
@@ -45,13 +45,16 @@ extension Onboarding {
             case goToHomeTapped
         }
         
-        var body: some ReducerProtocol<State, Action> {
+        var body: some Reducer<State, Action> {
             Reduce(self.core)
+                .forEach(\.path, action: /Action.path) {
+                    Path()
+                }
         }
         
         @Dependency(\.dismiss) var dismiss
         
-        private func core(into state: inout State, action: Action) -> EffectTask<Action> {
+        private func core(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
             case .goToHomeTapped:
                 state = .new()
@@ -83,9 +86,6 @@ extension Onboarding {
                 default:
                     return .none
                 }
-                
-            default:
-                return .none
             }
         }
     }
