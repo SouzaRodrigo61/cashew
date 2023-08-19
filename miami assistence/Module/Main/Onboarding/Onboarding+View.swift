@@ -48,7 +48,7 @@ extension Onboarding {
 
                         
                         Button {
-                            store.send(.goToHomeTapped)
+                            store.send(.goToHomeTapped, transaction: .init(animation: .bouncy))
                         } label: {
                             VStack {
                                 Text("onboarding.button.get_started")

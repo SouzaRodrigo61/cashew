@@ -11,6 +11,6 @@ enum Home {}
 
 extension Home.Feature.State {
     static func new() -> Self {
-        .init()
+        .init(task: .init(), header: .init(), bottomSheet: .init())
     }
 }

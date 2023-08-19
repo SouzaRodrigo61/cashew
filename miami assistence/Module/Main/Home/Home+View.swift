@@ -13,14 +13,25 @@ extension Home {
         let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
-            VStack {
-                Text("Home Stateless")
-                
-                Button("Go to Onboarding") {
-                    store.send(.buttonTapped, transaction: .init(animation: .bouncy))
+            WithViewStore(store, observe: { $0 }) { viewStore in
+                ZStack(alignment: .bottom) {
+                    VStack(spacing: 0) {
+                        IfLetStore(store.scope(state: \.header, action: Feature.Action.header)) {
+                            Header.View(store: $0)
+                        }
+                        
+                        IfLetStore(store.scope(state: \.task, action: Feature.Action.task)) {
+                            Task.View(store: $0)
+                        }
+                    }
+                    
+                    IfLetStore(store.scope(state: \.bottomSheet, action: Feature.Action.bottomSheet)) {
+                        BottomSheet.View(store: $0)
+                    }
                 }
+                .ignoresSafeArea(.container, edges: .bottom)
+                .toolbar(.hidden, for: .navigationBar)
             }
-            .toolbar(.hidden, for: .navigationBar)
         }
     }
 }
