@@ -22,7 +22,7 @@ extension Task {
                                 Text(item.title)
                                     .padding(.horizontal, 16)
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                    .frame(height: 44)
+                                    .frame(height: 54)
                                     .foregroundStyle(.dark)
                                     .background(.white, in: .rect(cornerRadius: 10))
                                     .contentShape(.dragPreview, .rect(cornerRadius: 10))
@@ -35,10 +35,10 @@ extension Task {
                                     .draggable(item.id.uuidString) {
                                         Text(item.title)
                                             .padding(.horizontal, 16)
-                                            .frame(maxWidth: .infinity)
-                                            .frame(height: 44)
+                                            .frame(width: 200, alignment: .leading)
+                                            .frame(height: 54)
                                             .foregroundStyle(.dark)
-                                            .background(.white)
+                                            .background(.white, in: .rect(cornerRadius: 10))
                                             .contentShape(.dragPreview, .rect(cornerRadius: 10))
                                             .onAppear {
                                                 store.send(.currentlyDragging(item))

@@ -13,6 +13,9 @@ extension Header {
         }
         
         enum Action: Equatable {
+            case todayTapped
+            case searchTapped
+            case moreTapped
         }
         
         var body: some Reducer<State, Action> {

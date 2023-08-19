@@ -34,6 +34,7 @@ extension Home {
                 .ifLet(\.bottomSheet, action: /Action.bottomSheet) {
                     BottomSheet.Feature()
                 }
+                ._printChanges()
         }
     }
 }

@@ -15,7 +15,7 @@ extension Header {
         var body: some SwiftUI.View {
             HStack(alignment: .center, spacing: 0) {
                 Button {
-                    
+                    store.send(.todayTapped)
                 } label: {
                     HStack(alignment: .center) {
                         Image(systemName: "calendar")
@@ -41,7 +41,7 @@ extension Header {
                 
                 HStack(alignment: .center, spacing: 0) {
                     Button {
-                        
+                        store.send(.searchTapped)
                     } label: {
                         Image(systemName: "magnifyingglass")
                             .font(.title3)
@@ -51,7 +51,7 @@ extension Header {
                     .buttonStyle(.pressBordered)
                     
                     Button {
-                        
+                        store.send(.moreTapped)
                     } label: {
                         Image(systemName: "ellipsis")
                             .font(.title3)
