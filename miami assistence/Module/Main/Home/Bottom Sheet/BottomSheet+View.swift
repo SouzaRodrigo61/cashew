@@ -64,14 +64,8 @@ extension BottomSheet {
                 .padding(.horizontal, 16)
                 .frame(height: viewStore.state.collapse ? 400 : 80, alignment: .top)
                 .frame(maxWidth: .infinity)
-                .background(.gunmetal)
+                .background(.gunmetal, in: .rect(cornerRadius: viewStore.state.collapse ? 16 : 0))
             }
         }
     }
-}
-
-#Preview {
-    BottomSheet.View(store: .init(initialState: .init(), reducer: {
-        BottomSheet.Feature()
-    }))
 }

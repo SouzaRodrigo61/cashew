@@ -10,16 +10,20 @@ import ComposableArchitecture
 extension Header {
     struct Feature: Reducer {
         struct State: Equatable {
+            var today: HeaderToday.Feature.State?
         }
         
         enum Action: Equatable {
-            case todayTapped
+            case today(HeaderToday.Feature.Action)
             case searchTapped
             case moreTapped
         }
         
         var body: some Reducer<State, Action> {
             EmptyReducer()
+                .ifLet(\.today, action: /Action.today) {
+                    HeaderToday.Feature()
+                }
         }
     }
 }
