@@ -38,6 +38,9 @@
 		235991862A715F0200C2677A /* Onboarding+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235991722A714D8E00C2677A /* Onboarding+Feature.swift */; };
 		235991872A715F0400C2677A /* Onboarding+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235991732A714D8E00C2677A /* Onboarding+View.swift */; };
 		235C8FD22A4B10930018CA55 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235C8FD12A4B10930018CA55 /* View+Extensions.swift */; };
+		236602522A94146400E9CA6A /* TaskPlus+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236602512A94146400E9CA6A /* TaskPlus+View.swift */; };
+		236602542A94146B00E9CA6A /* TaskPlus+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236602532A94146B00E9CA6A /* TaskPlus+Feature.swift */; };
+		236602562A94147500E9CA6A /* TaskPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236602552A94147500E9CA6A /* TaskPlus.swift */; };
 		236B94642A5244E500941F6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 236B94632A5244E500941F6B /* GoogleService-Info.plist */; };
 		236B94652A5244E500941F6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 236B94632A5244E500941F6B /* GoogleService-Info.plist */; };
 		236B94662A5244E500941F6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 236B94632A5244E500941F6B /* GoogleService-Info.plist */; };
@@ -62,6 +65,7 @@
 		236C12922A91BBCD002F8A66 /* TaskDetail+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236C12912A91BBCD002F8A66 /* TaskDetail+View.swift */; };
 		236C12942A923AF3002F8A66 /* Task+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236C12932A923AF3002F8A66 /* Task+Model.swift */; };
 		236C12962A939116002F8A66 /* Home+Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236C12952A939116002F8A66 /* Home+Destination.swift */; };
+		236C129A2A940531002F8A66 /* OffsettableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236C12992A940531002F8A66 /* OffsettableScrollView.swift */; };
 		236DDDCD2A452C0B00B0EE49 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236DDDCC2A452C0B00B0EE49 /* String+Extension.swift */; };
 		237265302A3BC8EF004F4B3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2372652F2A3BC8EF004F4B3D /* Assets.xcassets */; };
 		237265332A3BC8EF004F4B3D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237265322A3BC8EF004F4B3D /* Preview Assets.xcassets */; };
@@ -171,6 +175,9 @@
 		235991742A714D8F00C2677A /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		235991812A715C1200C2677A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		235C8FD12A4B10930018CA55 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		236602512A94146400E9CA6A /* TaskPlus+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskPlus+View.swift"; sourceTree = "<group>"; };
+		236602532A94146B00E9CA6A /* TaskPlus+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskPlus+Feature.swift"; sourceTree = "<group>"; };
+		236602552A94147500E9CA6A /* TaskPlus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPlus.swift; sourceTree = "<group>"; };
 		236B94632A5244E500941F6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		236C12772A90F7C3002F8A66 /* TaskCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreate.swift; sourceTree = "<group>"; };
 		236C127A2A90F7D8002F8A66 /* TaskCreate+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskCreate+Feature.swift"; sourceTree = "<group>"; };
@@ -186,6 +193,7 @@
 		236C12912A91BBCD002F8A66 /* TaskDetail+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskDetail+View.swift"; sourceTree = "<group>"; };
 		236C12932A923AF3002F8A66 /* Task+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Model.swift"; sourceTree = "<group>"; };
 		236C12952A939116002F8A66 /* Home+Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+Destination.swift"; sourceTree = "<group>"; };
+		236C12992A940531002F8A66 /* OffsettableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsettableScrollView.swift; sourceTree = "<group>"; };
 		236DDDCC2A452C0B00B0EE49 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		237265282A3BC8EE004F4B3D /* miami assistence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "miami assistence.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2372652F2A3BC8EF004F4B3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -279,6 +287,7 @@
 		2305BCE82A4926D3009C7DAD /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				236C12982A94050B002F8A66 /* ScrollView */,
 				231E6C9E2A8F1975009569C1 /* Button */,
 				235C8FD02A4B10850018CA55 /* Extensions */,
 				2305BCEC2A49ADC8009C7DAD /* LaunchScreen */,
@@ -298,6 +307,7 @@
 		2306FD952A8FCF31002F323D /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				236C129B2A940788002F8A66 /* Plus */,
 				236C12862A91AA34002F8A66 /* Item */,
 				236C127E2A90F7ED002F8A66 /* Detail */,
 				236C12792A90F7C8002F8A66 /* Create */,
@@ -402,9 +412,7 @@
 		2359917A2A7150B200C2677A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				2306FD9D2A8FD337002F323D /* Bottom Sheet */,
-				2306FD9C2A8FD32F002F323D /* Header */,
-				2306FD952A8FCF31002F323D /* Task */,
+				236C12972A93ABFF002F8A66 /* Components */,
 				23582F5A2A71E9E600FDF7FE /* Home.swift */,
 				23582F5C2A71E9F900FDF7FE /* Home+Feature.swift */,
 				23582F5E2A71EA0200FDF7FE /* Home+View.swift */,
@@ -461,6 +469,34 @@
 				236C128B2A91BBA8002F8A66 /* TaskItem+View.swift */,
 			);
 			path = Item;
+			sourceTree = "<group>";
+		};
+		236C12972A93ABFF002F8A66 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2306FD9D2A8FD337002F323D /* Bottom Sheet */,
+				2306FD9C2A8FD32F002F323D /* Header */,
+				2306FD952A8FCF31002F323D /* Task */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		236C12982A94050B002F8A66 /* ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				236C12992A940531002F8A66 /* OffsettableScrollView.swift */,
+			);
+			path = ScrollView;
+			sourceTree = "<group>";
+		};
+		236C129B2A940788002F8A66 /* Plus */ = {
+			isa = PBXGroup;
+			children = (
+				236602552A94147500E9CA6A /* TaskPlus.swift */,
+				236602532A94146B00E9CA6A /* TaskPlus+Feature.swift */,
+				236602512A94146400E9CA6A /* TaskPlus+View.swift */,
+			);
+			path = Plus;
 			sourceTree = "<group>";
 		};
 		236DDDCB2A452BF600B0EE49 /* Extensions */ = {
@@ -846,9 +882,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				236602562A94147500E9CA6A /* TaskPlus.swift in Sources */,
+				236602542A94146B00E9CA6A /* TaskPlus+Feature.swift in Sources */,
 				23978B7C2A55DBA4002ECB4A /* Date+Extension.swift in Sources */,
 				231E6C982A8F1910009569C1 /* ButtonStyle+Extensions.swift in Sources */,
 				2306FD932A8FCB5D002F323D /* Button+Design.swift in Sources */,
+				236C129A2A940531002F8A66 /* OffsettableScrollView.swift in Sources */,
 				23582F5F2A71EA0200FDF7FE /* Home+View.swift in Sources */,
 				236C12852A9175A9002F8A66 /* HeaderToday+View.swift in Sources */,
 				236C128E2A91BBB9002F8A66 /* TaskDetail.swift in Sources */,
@@ -894,6 +933,7 @@
 				235C8FD22A4B10930018CA55 /* View+Extensions.swift in Sources */,
 				23582F652A72AA1F00FDF7FE /* Login+Feature.swift in Sources */,
 				2306FDA92A8FD5FC002F323D /* BottomSheet+View.swift in Sources */,
+				236602522A94146400E9CA6A /* TaskPlus+View.swift in Sources */,
 				235991852A715EFE00C2677A /* Onboarding.swift in Sources */,
 				23E2D1A12A71CD1B00180C1C /* CreateTypeCompany+View.swift in Sources */,
 				23582F5B2A71E9E600FDF7FE /* Home.swift in Sources */,
@@ -1096,7 +1136,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "miami-assistence-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Miami Assistence";
+				INFOPLIST_KEY_CFBundleDisplayName = Cashew;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1132,7 +1172,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "miami-assistence-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Miami Assistence";
+				INFOPLIST_KEY_CFBundleDisplayName = Cashew;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

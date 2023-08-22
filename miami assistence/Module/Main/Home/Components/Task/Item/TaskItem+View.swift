@@ -19,13 +19,17 @@ extension TaskItem {
                 Button {
                     store.send(.sendToDetail(viewStore.task))
                 } label: {
-                    VStack {
+                    HStack {
                         Text(viewStore.task.title)
                         Text(viewStore.task.date.description)
                         Text(viewStore.task.duration.description)
                     }
                 }
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    Text("Delete")
+                }
                 .padding(.horizontal, 16)
+                .frame(height: 64)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(.dark)
                 .background(.white, in: .rect(cornerRadius: 10))
@@ -34,6 +38,9 @@ extension TaskItem {
                     if let draggedTask = draggedTask, draggedTask.id == viewStore.task.id, isDragging {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundStyle(.lotion)
+                    } else if let draggedTask = draggedTask, draggedTask.id == viewStore.task.id, !isDragging {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.aliceBlue, lineWidth: 1)
                     }
                 }
                 .draggable(viewStore.task.id.uuidString) {

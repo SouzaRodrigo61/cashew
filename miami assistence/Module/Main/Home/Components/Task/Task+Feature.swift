@@ -16,16 +16,34 @@ extension Task {
     struct Feature: Reducer {
         struct State: Equatable {
             var item: IdentifiedArrayOf<TaskItem.Feature.State> = [
-                .init(task: .init(title: "Apple", date: .now, duration: 3600)),
-                .init(task: .init(title: "Banana", date: .now.addingTimeInterval(-oneDay), duration: 3600)),
-                .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600))
+                .init(task: .init(title: "Apple", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                
+                .init(task: .init(title: "Banana", date: .now.addingTimeInterval(-oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                
+                .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                
+                    .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                
+                    .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                
+                    .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                
+                    .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                
+                    .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                
+                    .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                
+                    .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                
+                    .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
             ]
             
             var currentlyTask: Task.Model?
             var dragging: Bool = false
             
             var create: TaskCreate.Feature.State?
-            var details: TaskDetail.Feature.State?
+            var plus: TaskPlus.Feature.State?
         }
         
         enum Action: Equatable {
@@ -35,6 +53,10 @@ extension Task {
             
             case create(TaskCreate.Feature.Action)
             case details(TaskDetail.Feature.Action)
+            case plus(TaskPlus.Feature.Action)
+            
+            case whenScrolled
+            case progressAndPlus(CGFloat)
             
             case goToDetail(Task.Model)
         }
@@ -60,6 +82,13 @@ extension Task {
                 return whenDraggingTaskMoveAndChangeTime(into: &state, task: droppingTask)
             case let .item(_, .sendToDetail(task)):
                 return .send(.goToDetail(task))
+            case .whenScrolled:
+                state.create = nil
+                return .none
+            case let .progressAndPlus(progress):
+                state.plus = .init(progress: progress)
+                
+                return .none
             default:
                 return .none
             }
@@ -72,7 +101,6 @@ extension Task {
             
             return .none
         }
-        
         
         private func removeCurrentlyDragging(into state: inout State) -> Effect<Action> {
             state.dragging = false

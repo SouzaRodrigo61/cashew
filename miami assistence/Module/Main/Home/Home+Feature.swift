@@ -48,6 +48,10 @@ extension Home {
             case let .task(.goToDetail(task)):
                 state.destination.append(.taskDetail(.init(task: task)))
                 return .none
+            case .bottomSheet(.addButtonTapped):
+                state.task?.create = .init()
+                
+                return .none
             default:
                 return .none
             }

@@ -8,6 +8,19 @@
 import SwiftUI
 
 extension View {
+    
+    @ViewBuilder
+    func offset(coordinateSpace: String, offset: @escaping (CGFloat) -> ()) -> some View {
+        self.overlay {
+            GeometryReader { geo in
+                let minY = geo.frame(in: .named(coordinateSpace)).minY
+                
+                Color.clear
+                    .preference(key: ValueKey.self, value: minY)
+                    .onPreferenceChange(ValueKey.self) { offset($0) }
+            }
+        }
+    }
         
     @ViewBuilder
     func hSpacing(_ alignment: Alignment) -> some View {
@@ -45,5 +58,13 @@ extension View {
         }
         
         return safeArea
+    }
+}
+
+struct ValueKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }
