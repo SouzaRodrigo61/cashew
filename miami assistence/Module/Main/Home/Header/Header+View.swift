@@ -14,34 +14,15 @@ extension Header {
         
         var body: some SwiftUI.View {
             HStack(alignment: .center, spacing: 0) {
-                Button {
-                    
-                } label: {
-                    HStack(alignment: .center) {
-                        Image(systemName: "calendar")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundStyle(.royalBlue)
-                        
-                        HStack(alignment: .bottom) {
-                            Text("Hoje")
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .foregroundStyle(.black)
-                            Text("qui. 17 de ago.")
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.gray)
-                        }
-                    }
+                IfLetStore(store.scope(state: \.today, action: Feature.Action.today)) {
+                    HeaderToday.View(store: $0)
                 }
-                .buttonStyle(.scale)
                 
                 Spacer()
                 
                 HStack(alignment: .center, spacing: 0) {
                     Button {
-                        
+                        store.send(.searchTapped)
                     } label: {
                         Image(systemName: "magnifyingglass")
                             .font(.title3)
@@ -51,7 +32,7 @@ extension Header {
                     .buttonStyle(.pressBordered)
                     
                     Button {
-                        
+                        store.send(.moreTapped)
                     } label: {
                         Image(systemName: "ellipsis")
                             .font(.title3)

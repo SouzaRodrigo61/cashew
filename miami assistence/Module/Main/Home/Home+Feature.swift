@@ -13,6 +13,8 @@ extension Home {
             var task: Task.Feature.State?
             var header: Header.Feature.State?
             var bottomSheet: BottomSheet.Feature.State?
+            
+            var destination: StackState<Destination.State>
         }
         
         enum Action: Equatable {
@@ -21,10 +23,12 @@ extension Home {
             case bottomSheet(BottomSheet.Feature.Action)
             
             case buttonTapped
+            
+            case destination(StackAction<Destination.State, Destination.Action>)
         }
         
         var body: some Reducer<State, Action> {
-            EmptyReducer()
+            Reduce(self.core)
                 .ifLet(\.task, action: /Action.task) {
                     Task.Feature()
                 }
@@ -34,6 +38,19 @@ extension Home {
                 .ifLet(\.bottomSheet, action: /Action.bottomSheet) {
                     BottomSheet.Feature()
                 }
+                .forEach(\.destination, action: /Action.destination) {
+                    Destination()
+                }
+        }
+        
+        private func core(into state: inout State, action: Action) -> Effect<Action> {
+            switch action {
+            case let .task(.goToDetail(task)):
+                state.destination.append(.taskDetail(.init(task: task)))
+                return .none
+            default:
+                return .none
+            }
         }
     }
 }

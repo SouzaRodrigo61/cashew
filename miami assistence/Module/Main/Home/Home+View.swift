@@ -13,25 +13,37 @@ extension Home {
         let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
-            WithViewStore(store, observe: { $0 }) { viewStore in
-                ZStack(alignment: .bottom) {
-                    VStack(spacing: 0) {
-                        IfLetStore(store.scope(state: \.header, action: Feature.Action.header)) {
-                            Header.View(store: $0)
+            NavigationStackStore(store.scope(state: \.destination, action: Feature.Action.destination)) {
+                WithViewStore(store, observe: { $0 }) { viewStore in
+                    ZStack(alignment: .bottom) {
+                        VStack(spacing: 0) {
+                            IfLetStore(store.scope(state: \.header, action: Feature.Action.header)) {
+                                Header.View(store: $0)
+                            }
+                            
+                            IfLetStore(store.scope(state: \.task, action: Feature.Action.task)) {
+                                Task.View(store: $0)
+                            }
                         }
                         
-                        IfLetStore(store.scope(state: \.task, action: Feature.Action.task)) {
-                            Task.View(store: $0)
+                        IfLetStore(store.scope(state: \.bottomSheet, action: Feature.Action.bottomSheet)) {
+                            BottomSheet.View(store: $0)
                         }
                     }
-                    
-                    IfLetStore(store.scope(state: \.bottomSheet, action: Feature.Action.bottomSheet)) {
-                        BottomSheet.View(store: $0)
-                    }
+                    .ignoresSafeArea(.container, edges: .bottom)
+                    .toolbar(.hidden, for: .navigationBar)
                 }
-                .ignoresSafeArea(.container, edges: .bottom)
-                .toolbar(.hidden, for: .navigationBar)
+            } destination: {
+                switch $0 {
+                case .taskDetail:
+                    CaseLet(
+                        /Destination.State.taskDetail,
+                         action: Destination.Action.taskDetail,
+                         then: TaskDetail.View.init(store:)
+                    )
+                }
             }
+            
         }
     }
 }
