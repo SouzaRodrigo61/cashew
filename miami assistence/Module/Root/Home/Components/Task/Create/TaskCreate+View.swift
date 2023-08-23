@@ -20,7 +20,7 @@ extension TaskCreate {
                   This screen demonstrates a basic feature hosted in a navigation stack.
                   """
             )
-            .toolbar(.hidden, for: .navigationBar)
+            .frame(height: 300)
         }
     }
 }

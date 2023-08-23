@@ -23,7 +23,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         OneSignal.setAppId("6691ab8a-ba15-4a95-9f45-4b81a19bb214")
         
         OneSignal.promptForPushNotifications(userResponse: { accepted in
-            dump("User accepted notification: \(accepted)")
+//            dump("User accepted notification: \(accepted)")
         })
         
         // Set your customer userId

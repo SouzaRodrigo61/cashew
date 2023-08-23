@@ -18,9 +18,9 @@ extension Task {
             var item: IdentifiedArrayOf<TaskItem.Feature.State> = [
                 .init(task: .init(title: "Apple", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
                 
-                .init(task: .init(title: "Banana", date: .now.addingTimeInterval(-oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                    .init(task: .init(title: "Banana", date: .now.addingTimeInterval(-oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
                 
-                .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
+                    .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
                 
                     .init(task: .init(title: "Cherry", date: .now.addingTimeInterval(oneDay), duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
                 
@@ -44,6 +44,8 @@ extension Task {
             
             var create: TaskCreate.Feature.State?
             var plus: TaskPlus.Feature.State?
+            
+            var refreshScrollView: Refreshable.Feature.State = .init(refreshHeight: 100)
         }
         
         enum Action: Equatable {
@@ -52,11 +54,12 @@ extension Task {
             case item(TaskItem.Feature.State.ID, TaskItem.Feature.Action)
             
             case create(TaskCreate.Feature.Action)
-            case details(TaskDetail.Feature.Action)
             case plus(TaskPlus.Feature.Action)
             
+            case refreshScrollView(Refreshable.Feature.Action)
+            
             case whenScrolled
-            case progressAndPlus(CGFloat)
+            case activeCreateNewTask
             
             case goToDetail(Task.Model)
         }
@@ -65,6 +68,12 @@ extension Task {
             Reduce(self.core)
                 .forEach(\.item, action: /Action.item) {
                     TaskItem.Feature()
+                }
+                .ifLet(\.create, action: /Action.create) {
+                    TaskCreate.Feature()
+                }
+                .ifLet(\.plus, action: /Action.plus) {
+                    TaskPlus.Feature()
                 }
         }
         
@@ -82,11 +91,60 @@ extension Task {
                 return whenDraggingTaskMoveAndChangeTime(into: &state, task: droppingTask)
             case let .item(_, .sendToDetail(task)):
                 return .send(.goToDetail(task))
-            case .whenScrolled:
-                state.create = nil
+            case let .refreshScrollView(.progressSetted(progress)):
+                state.refreshScrollView.progress = progress
+                
+                guard state.plus != nil else { return .none }
+                state.plus?.progress = progress
+                
                 return .none
-            case let .progressAndPlus(progress):
-                state.plus = .init(progress: progress)
+            case let .refreshScrollView(.contentOffsetGetted(progress)):
+                var valueProgress = (progress / state.refreshScrollView.refreshHeight)
+                
+                valueProgress = (valueProgress < 0 ? 0 : valueProgress)
+                valueProgress = (valueProgress > 1 ? 1 : valueProgress)
+                
+                state.refreshScrollView.contentOffset = progress
+                
+                return .send(.refreshScrollView(.progressSetted(valueProgress)), animation: .easeInOut)
+            case .refreshScrollView(.scrollViewWillEndDragging(_)):
+                return .none
+                
+            case .refreshScrollView(.scrollViewWillBeginDecelerating):
+                state.refreshScrollView.isScroll = false
+                state.refreshScrollView.isRefreshing = false
+                
+                if state.refreshScrollView.progress > 0.75 {
+                    state.refreshScrollView.isRefreshing = true
+                    
+                    
+                    return .run { send in
+                        await send(.refreshScrollView(.progressSetted(1)), animation: .bouncy)
+                        
+                        try await SwiftUI.Task.sleep(nanoseconds: 3_000_000_000)
+                        await send(.refreshScrollView(.refreshActived), animation: .easeOut(duration: 0.8))
+                        await send(.activeCreateNewTask, animation: .easeOut(duration: 0.4))
+                    }
+                    
+                }
+                
+                return .send(.refreshScrollView(.refreshActived), animation: .easeOut(duration: 0.8))
+            case .refreshScrollView(.scrollViewWillBeginDragging):
+                state.refreshScrollView.isScroll = true
+                state.create = nil
+                state.plus = .init(progress: 0)
+                
+                return .none
+                
+            case .refreshScrollView(.refreshActived):
+                state.refreshScrollView.isRefreshing = false
+                state.refreshScrollView.isScroll = false
+                state.plus = nil
+
+                return .send(.refreshScrollView(.progressSetted(0)), animation: .snappy)
+                
+            case .activeCreateNewTask:
+                state.create = .init()
                 
                 return .none
             default:
@@ -116,12 +174,13 @@ extension Task {
         }
         
         private func setCurrentlyTaskWhenDragging(into state: inout State, task: Task.Model) -> Effect<Action> {
-                state.currentlyTask = task
-                
-                let generator = UIImpactFeedbackGenerator(style: .light)
-                 generator.impactOccurred()
-                
-                return .none
+            state.currentlyTask = task
+            state.dragging = false
+            
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+            
+            return .none
         }
         
         private func whenDraggingTaskMoveAndChangeTime(into state: inout State, task: Task.Model) -> Effect<Action> {

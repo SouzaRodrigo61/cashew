@@ -22,6 +22,7 @@
 		231E6C9B2A8F1942009569C1 /* PressBorderedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E6C9A2A8F1942009569C1 /* PressBorderedButtonStyle.swift */; };
 		231E6C9D2A8F1964009569C1 /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231E6C9C2A8F1964009569C1 /* ScaleButtonStyle.swift */; };
 		231FF94E2A59FE8F0071CF74 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231FF94D2A59FE8F0071CF74 /* Color+Extensions.swift */; };
+		234749462A953CF400B19513 /* ScrollViewDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234749452A953CF400B19513 /* ScrollViewDetector.swift */; };
 		2354BE092A73ECE4003E4CA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354BE072A73ECE4003E4CA9 /* AppDelegate.swift */; };
 		2354BE0A2A73ECE4003E4CA9 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354BE082A73ECE4003E4CA9 /* App.swift */; };
 		23582F532A71E50600FDF7FE /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23582F522A71E50600FDF7FE /* Root.swift */; };
@@ -65,7 +66,7 @@
 		236C12922A91BBCD002F8A66 /* TaskDetail+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236C12912A91BBCD002F8A66 /* TaskDetail+View.swift */; };
 		236C12942A923AF3002F8A66 /* Task+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236C12932A923AF3002F8A66 /* Task+Model.swift */; };
 		236C12962A939116002F8A66 /* Home+Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236C12952A939116002F8A66 /* Home+Destination.swift */; };
-		236C129A2A940531002F8A66 /* OffsettableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236C12992A940531002F8A66 /* OffsettableScrollView.swift */; };
+		236C129A2A940531002F8A66 /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236C12992A940531002F8A66 /* RefreshableScrollView.swift */; };
 		236DDDCD2A452C0B00B0EE49 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236DDDCC2A452C0B00B0EE49 /* String+Extension.swift */; };
 		237265302A3BC8EF004F4B3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2372652F2A3BC8EF004F4B3D /* Assets.xcassets */; };
 		237265332A3BC8EF004F4B3D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237265322A3BC8EF004F4B3D /* Preview Assets.xcassets */; };
@@ -159,6 +160,7 @@
 		231E6C9A2A8F1942009569C1 /* PressBorderedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressBorderedButtonStyle.swift; sourceTree = "<group>"; };
 		231E6C9C2A8F1964009569C1 /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
 		231FF94D2A59FE8F0071CF74 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		234749452A953CF400B19513 /* ScrollViewDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDetector.swift; sourceTree = "<group>"; };
 		2354BE072A73ECE4003E4CA9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2354BE082A73ECE4003E4CA9 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		23582F522A71E50600FDF7FE /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
@@ -193,7 +195,7 @@
 		236C12912A91BBCD002F8A66 /* TaskDetail+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskDetail+View.swift"; sourceTree = "<group>"; };
 		236C12932A923AF3002F8A66 /* Task+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Model.swift"; sourceTree = "<group>"; };
 		236C12952A939116002F8A66 /* Home+Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+Destination.swift"; sourceTree = "<group>"; };
-		236C12992A940531002F8A66 /* OffsettableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsettableScrollView.swift; sourceTree = "<group>"; };
+		236C12992A940531002F8A66 /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
 		236DDDCC2A452C0B00B0EE49 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		237265282A3BC8EE004F4B3D /* miami assistence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "miami assistence.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2372652F2A3BC8EF004F4B3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -378,7 +380,7 @@
 		23582F512A71E46900FDF7FE /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				23978B782A55D694002ECB4A /* Main */,
+				23978B782A55D694002ECB4A /* Root */,
 				23582F522A71E50600FDF7FE /* Root.swift */,
 				23582F562A71E53300FDF7FE /* Root+View.swift */,
 				23582F582A71E53E00FDF7FE /* Root+Feature.swift */,
@@ -484,7 +486,8 @@
 		236C12982A94050B002F8A66 /* ScrollView */ = {
 			isa = PBXGroup;
 			children = (
-				236C12992A940531002F8A66 /* OffsettableScrollView.swift */,
+				236C12992A940531002F8A66 /* RefreshableScrollView.swift */,
+				234749452A953CF400B19513 /* ScrollViewDetector.swift */,
 			);
 			path = ScrollView;
 			sourceTree = "<group>";
@@ -633,13 +636,13 @@
 			path = MiamiAssistenceWidget;
 			sourceTree = "<group>";
 		};
-		23978B782A55D694002ECB4A /* Main */ = {
+		23978B782A55D694002ECB4A /* Root */ = {
 			isa = PBXGroup;
 			children = (
 				2359917A2A7150B200C2677A /* Home */,
 				235991782A714DCB00C2677A /* Onboarding */,
 			);
-			path = Main;
+			path = Root;
 			sourceTree = "<group>";
 		};
 		23E2D1922A71BEA600180C1C /* Create Company */ = {
@@ -887,10 +890,11 @@
 				23978B7C2A55DBA4002ECB4A /* Date+Extension.swift in Sources */,
 				231E6C982A8F1910009569C1 /* ButtonStyle+Extensions.swift in Sources */,
 				2306FD932A8FCB5D002F323D /* Button+Design.swift in Sources */,
-				236C129A2A940531002F8A66 /* OffsettableScrollView.swift in Sources */,
+				236C129A2A940531002F8A66 /* RefreshableScrollView.swift in Sources */,
 				23582F5F2A71EA0200FDF7FE /* Home+View.swift in Sources */,
 				236C12852A9175A9002F8A66 /* HeaderToday+View.swift in Sources */,
 				236C128E2A91BBB9002F8A66 /* TaskDetail.swift in Sources */,
+				234749462A953CF400B19513 /* ScrollViewDetector.swift in Sources */,
 				23582F572A71E53300FDF7FE /* Root+View.swift in Sources */,
 				2354BE0A2A73ECE4003E4CA9 /* App.swift in Sources */,
 				236C127D2A90F7E1002F8A66 /* TaskCreate+View.swift in Sources */,
