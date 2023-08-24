@@ -90,6 +90,7 @@
 		237C3DEE2A52E6E1001F4616 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 237C3DED2A52E6E1001F4616 /* FirebaseAuth */; settings = {ATTRIBUTES = (Required, ); }; };
 		237C3DF02A52E6E1001F4616 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 237C3DEF2A52E6E1001F4616 /* FirebaseAuthCombine-Community */; };
 		23978B7C2A55DBA4002ECB4A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23978B7B2A55DBA4002ECB4A /* Date+Extension.swift */; };
+		23C2A0E62A97CBF70073E5FC /* ImpactFeedbackGenerator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2A0E52A97CBF70073E5FC /* ImpactFeedbackGenerator+Extensions.swift */; };
 		23E2D1952A71BEDB00180C1C /* CreateCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E2D1942A71BEDB00180C1C /* CreateCompany.swift */; };
 		23E2D1972A71BEFD00180C1C /* CreateCompany+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E2D1962A71BEFD00180C1C /* CreateCompany+Feature.swift */; };
 		23E2D1992A71C0AF00180C1C /* CreateCompany+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E2D1982A71C0AF00180C1C /* CreateCompany+View.swift */; };
@@ -224,6 +225,7 @@
 		237B60C82A48B3D10058B18E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		237B60CF2A48B4380058B18E /* MiamiAssistenceWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiamiAssistenceWidgetExtension.entitlements; sourceTree = "<group>"; };
 		23978B7B2A55DBA4002ECB4A /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		23C2A0E52A97CBF70073E5FC /* ImpactFeedbackGenerator+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImpactFeedbackGenerator+Extensions.swift"; sourceTree = "<group>"; };
 		23E2D1942A71BEDB00180C1C /* CreateCompany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompany.swift; sourceTree = "<group>"; };
 		23E2D1962A71BEFD00180C1C /* CreateCompany+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateCompany+Feature.swift"; sourceTree = "<group>"; };
 		23E2D1982A71C0AF00180C1C /* CreateCompany+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateCompany+View.swift"; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 				235C8FD12A4B10930018CA55 /* View+Extensions.swift */,
 				231FF94D2A59FE8F0071CF74 /* Color+Extensions.swift */,
 				231E6C972A8F1910009569C1 /* ButtonStyle+Extensions.swift */,
+				23C2A0E52A97CBF70073E5FC /* ImpactFeedbackGenerator+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				231FF94E2A59FE8F0071CF74 /* Color+Extensions.swift in Sources */,
 				236C127B2A90F7D8002F8A66 /* TaskCreate+Feature.swift in Sources */,
 				23582F592A71E53E00FDF7FE /* Root+Feature.swift in Sources */,
+				23C2A0E62A97CBF70073E5FC /* ImpactFeedbackGenerator+Extensions.swift in Sources */,
 				23582F532A71E50600FDF7FE /* Root.swift in Sources */,
 				2306FDA32A8FD5DC002F323D /* Header+Feature.swift in Sources */,
 				236C128C2A91BBA8002F8A66 /* TaskItem+View.swift in Sources */,

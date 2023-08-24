@@ -11,36 +11,36 @@ import SwiftUI
 extension TaskItem {
     struct View: SwiftUI.View {
         let store: StoreOf<Feature>
-        let draggedTask: Task.Model?
-        let isDragging: Bool
+        
+        
+        @State private var dragOffset = CGSize.zero
         
         var body: some SwiftUI.View {
             WithViewStore(store, observe: { $0 }) { viewStore in
                 Button {
                     store.send(.sendToDetail(viewStore.task))
                 } label: {
+                    
+                    // TODO: Create UI for this component
+                    
                     HStack {
                         Text(viewStore.task.title)
                         Text(viewStore.task.date.description)
                         Text(viewStore.task.duration.description)
                     }
                 }
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Text("Delete")
-                }
                 .padding(.horizontal, 16)
+                .hSpacing(.leading)
                 .frame(height: 64)
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(.dark)
                 .background(.white, in: .rect(cornerRadius: 10))
                 .contentShape(.dragPreview, .rect(cornerRadius: 10))
                 .overlay {
-                    if let draggedTask = draggedTask, draggedTask.id == viewStore.task.id, isDragging {
+                    if let draggingTaskId = viewStore.draggingTaskId,
+                       draggingTaskId == viewStore.task.id &&
+                       viewStore.isDragging {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundStyle(.lotion)
-                    } else if let draggedTask = draggedTask, draggedTask.id == viewStore.task.id, !isDragging {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(.aliceBlue, lineWidth: 1)
                     }
                 }
                 .draggable(viewStore.task.id.uuidString) {

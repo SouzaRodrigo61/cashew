@@ -57,7 +57,6 @@ extension Onboarding {
         private func core(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
             case .goToHomeTapped:
-                state = .new()
                 return .none
             case .buttonTapped:
                 state.path.append(.createCompany(.init()))

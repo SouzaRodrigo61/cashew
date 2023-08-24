@@ -16,12 +16,15 @@ struct Refreshable {
             var isScroll: Bool = false
             var isRefreshing: Bool = false
             var contentOffset: CGFloat = 0
+            var scrollOffset: CGFloat = 0
         }
         
         enum Action: Equatable {
             case contentOffsetGetted(CGFloat)
             case progressSetted(CGFloat)
             case refreshActived
+            
+            case dragged(CGFloat)
             
             case scrollViewDidEndDecelerating
             case scrollViewWillEndDragging(CGPoint)
@@ -31,7 +34,15 @@ struct Refreshable {
         }
         
         var body: some Reducer<State, Action> {
-            EmptyReducer()
+            Reduce { state, action in
+                switch action {
+                case let .dragged(value):
+                    state.scrollOffset = value
+                    return .none
+                default:
+                    return .none
+                }
+            }
         }
     }
 }
@@ -40,15 +51,14 @@ struct RefreshableScrollView<T: View, R: View>: View {
     let store: StoreOf<Refreshable.Feature>
     
     let axes: Axis.Set
-    let showsIndicator: Bool
+    let showsIndicator: ScrollIndicatorVisibility
     let content: T
     let refresh: R
     
-    @State private var scrollOffset: CGFloat = 0
-    @State private var contentOffset: CGFloat = 0
+    
     
     init(axes: Axis.Set = .vertical,
-         showsIndicator: Bool = true,
+         showsIndicator: ScrollIndicatorVisibility = .automatic,
          store: StoreOf<Refreshable.Feature>,
          @ViewBuilder content: @escaping () -> T,
          @ViewBuilder refresh: @escaping () -> R
@@ -63,48 +73,41 @@ struct RefreshableScrollView<T: View, R: View>: View {
     var body: some View {
         GeometryReader { geo in
             WithViewStore(store, observe: { $0 } ) { viewStore in
-                ScrollViewReader { scrollProxy in
-                    ScrollView(axes) {
+                ScrollView(axes) {
+                    
+                    ZStack(alignment: .top) {
                         
-                        ZStack(alignment: .top) {
-                            refresh
-                                .offset(y: viewStore.state.isRefreshing
-                                            ? -(contentOffset < 0 ? 0 : contentOffset)
-                                            : viewStore.state.isScroll
-                                                ? -(contentOffset < 0 ? 0 : contentOffset)
-                                                : -100)
-                            
-                            
-                            VStack {
-                                if viewStore.isRefreshing {
-                                    Spacer(minLength: viewStore.refreshHeight)
-                                }
-                                
-                                content
-                            }
+                        refresh
+                            .frame(height: viewStore.refreshHeight * viewStore.progress, alignment: .bottom)
+                            .opacity(viewStore.isScroll ? 1 : viewStore.isRefreshing ? 1 : 0)
+                            .opacity(viewStore.progress)
+                            .offset(y: viewStore.isRefreshing ? -16 : -(viewStore.contentOffset))
+                        
+                        
+                        content
+                            .offset(y: viewStore.isRefreshing
+                                    ? viewStore.refreshHeight - 8
+                                    : viewStore.isScroll ? 8 : 0)
+                    }
+                    .background { ScrollViewDetector(store: store) }
+                    .background {
+                        GeometryReader { geometry in
+                            Color.clear
+                                .preference(key: ScrollOffsetPreferenceKey.self,
+                                            value: geometry.frame(in: .named("SCROLL")).origin)
                         }
-                        .background { ScrollViewDetector(store: store) }
-                        .background {
-                            GeometryReader { geometry in
-                                Color.clear
-                                    .preference(key: ScrollOffsetPreferenceKey.self,
-                                                value: geometry.frame(in: .named("SCROLL")).origin)
-                            }
-                        }
-                        .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                            contentOffset = value.y
-                            
-                            if !viewStore.state.isRefreshing {
-                                if value.y > 0 {
-                                    scrollOffset = value.y
-                                    store.send(.contentOffsetGetted(value.y))
-                                }
+                    }
+                    .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in                        
+                        if !viewStore.isRefreshing {
+                            if value.y > 0 {
+                                store.send(.contentOffsetGetted(value.y))
                             }
                         }
                     }
-                    .scrollIndicators(.hidden)
-                    .coordinateSpace(name: "SCROLL")
                 }
+                .scrollDisabled(viewStore.isRefreshing)
+                .scrollIndicators(showsIndicator)
+                .coordinateSpace(name: "SCROLL")
             }
         }
         
