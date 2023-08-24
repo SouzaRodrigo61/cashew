@@ -8,10 +8,9 @@
 import ComposableArchitecture
 import Foundation
 
-extension TaskPlus {
+extension TaskCreate {
     struct Feature: Reducer {
         struct State: Equatable {
-            var progress: CGFloat
         }
         
         enum Action: Equatable {

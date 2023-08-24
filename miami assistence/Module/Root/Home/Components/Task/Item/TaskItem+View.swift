@@ -44,7 +44,7 @@ extension TaskItem {
                        viewStore.isDragging {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundStyle(.lotion)
-                    } else if let draggedTask = draggedTask, draggedTask.id == viewStore.task.id, !isDragging {
+                    } else if let draggedTask = viewStore.draggingTaskId, draggedTask == viewStore.task.id, !viewStore.isDragging {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(.aliceBlue, lineWidth: 1)
                     }

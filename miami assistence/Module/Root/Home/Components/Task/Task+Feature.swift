@@ -15,35 +15,7 @@ let oneDay: TimeInterval = 60 * 60
 extension Task {
     struct Feature: Reducer {
         struct State: Equatable {
-            var item: IdentifiedArrayOf<TaskItem.Feature.State> = [
-                .init(task: .init(title: "Apple", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                
-                    .init(task: .init(title: "Banana", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                
-                
-                    .init(task: .init(title: "Orange", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                
-                
-                    .init(task: .init(title: "Strawberry", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                
-                    .init(task: .init(title: "Strawberry", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                
-                    .init(task: .init(title: "Strawberry", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                
-                    .init(task: .init(title: "Strawberry", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                .init(task: .init(title: "Strawberry", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                .init(task: .init(title: "Strawberry", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                .init(task: .init(title: "Strawberry", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                
-                    .init(task: .init(title: "Strawberry", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                
-                    .init(task: .init(title: "Strawberry", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                
-                    .init(task: .init(title: "Strawberry", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                
-                    .init(task: .init(title: "Strawberry", date: .now, duration: 3600, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])),
-                
-            ]
+            var item: IdentifiedArrayOf<TaskItem.Feature.State> = []
             
             var create: TaskCreate.Feature.State?
             var plus: TaskPlus.Feature.State?
@@ -87,17 +59,16 @@ extension Task.Feature {
         switch action {
         case .reOrdering:
             return reSortingWhenNeeded(into: &state)
-            
         case .removeDragging:
             return removeCurrentlyDragging(into: &state)
+            
         case .item(_, .removeCurrentlyDragging):
             return removeCurrentlyTaskWhenDragging(into: &state)
         case let .item(_, .currentlyDragging(task)):
             return setCurrentlyTaskWhenDragging(into: &state, task: task)
         case let .item(_, .dragged(droppingTask)):
             return whenDraggingTaskMoveAndChangeTime(into: &state, task: droppingTask)
-        case let .item(_, .sendToDetail(task)):
-            return .send(.goToDetail(task))
+
         case let .refreshScrollView(.progressSetted(progress)):
             return refreshScrollViewProgressSetted(into: &state, progress)
         case let .refreshScrollView(.contentOffsetGetted(progress)):
@@ -108,9 +79,12 @@ extension Task.Feature {
             return refreshScrollViewScrollViewWillBeginDragging(into: &state)
         case .refreshScrollView(.refreshActived):
             return refreshScrollViewRefreshActived(into: &state)
+        
         case .showTaskCreate:
             state.create = state.create != nil ? nil : .init()
             return .none
+        case let .item(_, .sendToDetail(task)):
+            return .send(.goToDetail(task))
         default:
             return .none
         }
