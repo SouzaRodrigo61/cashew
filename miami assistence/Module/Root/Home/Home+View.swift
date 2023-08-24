@@ -14,25 +14,23 @@ extension Home {
         
         var body: some SwiftUI.View {
             NavigationStackStore(store.scope(state: \.destination, action: Feature.Action.destination)) {
-                WithViewStore(store, observe: { $0 }) { viewStore in
-                    ZStack(alignment: .bottom) {
-                        VStack(spacing: 0) {
-                            IfLetStore(store.scope(state: \.header, action: Feature.Action.header)) {
-                                Header.View(store: $0)
-                            }
-                            
-                            IfLetStore(store.scope(state: \.task, action: Feature.Action.task)) {
-                                Task.View(store: $0)
-                            }
+                ZStack(alignment: .bottom) {
+                    VStack(spacing: 0) {
+                        IfLetStore(store.scope(state: \.header, action: Feature.Action.header)) {
+                            Header.View(store: $0)
                         }
                         
-                        IfLetStore(store.scope(state: \.bottomSheet, action: Feature.Action.bottomSheet)) {
-                            BottomSheet.View(store: $0)
+                        IfLetStore(store.scope(state: \.task, action: Feature.Action.task)) {
+                            Task.View(store: $0)
                         }
                     }
-                    .ignoresSafeArea(.container, edges: .bottom)
-                    .toolbar(.hidden, for: .navigationBar)
+                    
+                    IfLetStore(store.scope(state: \.bottomSheet, action: Feature.Action.bottomSheet)) {
+                        BottomSheet.View(store: $0)
+                    }
                 }
+                .ignoresSafeArea(.container, edges: .bottom)
+                .toolbar(.hidden, for: .navigationBar)                
             } destination: {
                 switch $0 {
                 case .taskDetail:

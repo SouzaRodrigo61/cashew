@@ -13,6 +13,9 @@ extension TaskItem {
         struct State: Equatable, Identifiable {
             var id = UUID()
             var task: Task.Model
+            
+            var draggingTaskId: UUID?
+            var isDragging: Bool = false
         }
         
         enum Action: Equatable {

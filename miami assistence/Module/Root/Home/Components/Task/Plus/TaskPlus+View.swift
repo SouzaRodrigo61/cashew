@@ -17,6 +17,7 @@ extension TaskPlus {
                 Image(systemName: "plus.circle.fill")
                     .resizable()
                     .foregroundStyle(Color.pink.opacity(0.8))
+                    .padding(1.5)
                     .background {
                         Circle()
                             .stroke(
@@ -36,7 +37,7 @@ extension TaskPlus {
                                     .rotationEffect(.degrees(-90))
                             }
                     }
-                    .frame(width: 44, height: 44, alignment: .bottom)
+                    .frame(width: 35, height: 35, alignment: .bottom)
             }
         }
     }

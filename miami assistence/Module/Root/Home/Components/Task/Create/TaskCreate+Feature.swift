@@ -1,29 +1,25 @@
 //
-//  Create+Feature.swift
+//  TaskPlus+Feature.swift
 //  miami assistence
 //
-//  Created by Rodrigo Souza on 19/08/23.
+//  Created by Rodrigo Souza on 21/08/23.
 //
 
 import ComposableArchitecture
+import Foundation
 
-extension TaskCreate {
+extension TaskPlus {
     struct Feature: Reducer {
         struct State: Equatable {
-            var today: HeaderToday.Feature.State?
+            var progress: CGFloat
         }
         
         enum Action: Equatable {
-            case today(HeaderToday.Feature.Action)
-            case searchTapped
-            case moreTapped
+            
         }
         
         var body: some Reducer<State, Action> {
             EmptyReducer()
-                .ifLet(\.today, action: /Action.today) {
-                    HeaderToday.Feature()
-                }
         }
     }
 }
