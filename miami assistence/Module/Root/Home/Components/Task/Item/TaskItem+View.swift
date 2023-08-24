@@ -29,6 +29,9 @@ extension TaskItem {
                         Text(viewStore.task.duration.description)
                     }
                 }
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    Text("Delete")
+                }
                 .padding(.horizontal, 16)
                 .hSpacing(.leading)
                 .frame(height: 64)
@@ -41,6 +44,9 @@ extension TaskItem {
                        viewStore.isDragging {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundStyle(.lotion)
+                    } else if let draggedTask = draggedTask, draggedTask.id == viewStore.task.id, !isDragging {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.aliceBlue, lineWidth: 1)
                     }
                 }
                 .draggable(viewStore.task.id.uuidString) {
