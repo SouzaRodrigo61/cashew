@@ -13,7 +13,6 @@ extension TaskItem {
         let store: StoreOf<Feature>
         
         @State private var isChecked = false
-//        @State private var dragOffset = CGSize.zero
         
         var body: some SwiftUI.View {
             WithViewStore(store, observe: { $0 }) { viewStore in
@@ -29,8 +28,14 @@ extension TaskItem {
                 .background(.white, in: .rect(cornerRadius: 10))
                 .contentShape(.dragPreview, .rect(cornerRadius: 10))
                 .overlay {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(viewStore.isDragging ? .royalBlue : .lotion, lineWidth: 2)
+                    if let draggingTaskId = viewStore.draggingTaskId, draggingTaskId == viewStore.task.id, viewStore.isDragging {
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .stroke(.alabaster, lineWidth: 2)
+                            .background(.lotion)
+                    } else {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.lotion, lineWidth: 2)
+                    }
                 }
                 .padding(.horizontal, 16)
                 .draggable(viewStore.task.id.uuidString) {
@@ -51,6 +56,8 @@ extension TaskItem {
                 } isTargeted: { status in
                     if status {
                         store.send(.dragged(viewStore.task), animation: .snappy)
+                    } else {
+                        store.send(.removeDragging)
                     }
                 }
                 

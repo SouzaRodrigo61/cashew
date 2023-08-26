@@ -32,7 +32,6 @@ extension Task {
                                         ForEachStore(store.scope(state: \.item, action: Feature.Action.item)) {
                                             TaskItem.View(store: $0)
                                         }
-                                        
                                     }
                                     .padding(.vertical, 16)
                                 }

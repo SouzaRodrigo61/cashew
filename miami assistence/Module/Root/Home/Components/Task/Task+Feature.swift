@@ -35,6 +35,8 @@ extension Task {
             
             case goToDetail(Task.Model)
             case showTaskCreate
+            
+            case dropDestinationOutScreen([String])
         }
         
         var body: some Reducer<State, Action> {
@@ -64,6 +66,8 @@ extension Task.Feature {
             
         case .item(_, .removeCurrentlyDragging):
             return removeCurrentlyTaskWhenDragging(into: &state)
+        case .item(_, .removeDragging):
+            return removeCurrentlyDragged(into: &state)
         case let .item(_, .currentlyDragging(task)):
             return setCurrentlyTaskWhenDragging(into: &state, task: task)
         case let .item(_, .dragged(droppingTask)):
@@ -96,6 +100,23 @@ extension Task.Feature {
             
             return .none
             
+        case let .dropDestinationOutScreen(items):
+            let droppedId = state.item
+                .map { contain in
+                    items.filter { UUID(uuidString: $0) == contain.task.id }
+                }
+                .first(where: { !$0.isEmpty})
+                
+            guard let dropped = droppedId else { return .none }
+            
+            dropped.forEach { value in
+                if let index = state.item.firstIndex(where: { UUID(uuidString: value) == $0.task.id }) {
+                    state.item[index].isDragging = false
+                    state.item[index].draggingTaskId = nil
+                }
+            }
+            
+            return .none
         default:
             return .none
         }
@@ -109,6 +130,14 @@ extension Task.Feature {
     private func reSortingWhenNeeded(into state: inout State) -> Effect<Action> {
         return .none
     }
+    
+    private func removeCurrentlyDragged(into state: inout State) -> Effect<Action> {
+        guard let sourceIndex = state.item.firstIndex(where: { $0.draggingTaskId != nil }) else { return .none }
+        state.item[sourceIndex].isDragging = false
+        
+        return .none
+    }
+
     
     private func removeCurrentlyDragging(into state: inout State) -> Effect<Action> {
         guard let sourceIndex = state.item.firstIndex(where: { $0.draggingTaskId != nil }) else { return .none }

@@ -21,6 +21,7 @@ extension TaskItem {
         enum Action: Equatable {
             case currentlyDragging(Task.Model)
             case removeCurrentlyDragging
+            case removeDragging
             case dragged(Task.Model)
             case sendToDetail(Task.Model)
         }
