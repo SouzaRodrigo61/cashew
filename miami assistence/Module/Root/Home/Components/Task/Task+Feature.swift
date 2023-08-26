@@ -20,7 +20,7 @@ extension Task {
             var create: TaskCreate.Feature.State?
             var plus: TaskPlus.Feature.State?
             
-            var refreshScrollView: Refreshable.Feature.State = .init(refreshHeight: 60)
+            var refreshScrollView: Refreshable.Feature.State = .init(refreshHeight: 40)
         }
         
         enum Action: Equatable {
@@ -79,12 +79,23 @@ extension Task.Feature {
             return refreshScrollViewScrollViewWillBeginDragging(into: &state)
         case .refreshScrollView(.refreshActived):
             return refreshScrollViewRefreshActived(into: &state)
+        case let .refreshScrollView(.scrollOffset(offset)):
+            state.refreshScrollView.scrollOffset = offset
+            return .none
         
         case .showTaskCreate:
-            state.create = state.create != nil ? nil : .init()
+            state.create = .init()
             return .none
+            
         case let .item(_, .sendToDetail(task)):
             return .send(.goToDetail(task))
+            
+        case .create(.createTask):
+            state.item.append(.init(task: .init(title: UUID().uuidString, date: .now, duration: 3600, isAlert: true, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])))
+            state.create = nil
+            
+            return .none
+            
         default:
             return .none
         }
@@ -96,12 +107,6 @@ extension Task.Feature {
 extension Task.Feature {
     
     private func reSortingWhenNeeded(into state: inout State) -> Effect<Action> {
-        state.item.sort { $0.task.date < $1.task.date }
-        
-        guard let sourceIndex = state.item.firstIndex(where: { $0.isDragging }) else { return .none }
-        state.item[sourceIndex].isDragging = false
-        state.item[sourceIndex].draggingTaskId = nil
-        
         return .none
     }
     
@@ -110,7 +115,7 @@ extension Task.Feature {
         state.item[sourceIndex].isDragging = false
         state.item[sourceIndex].draggingTaskId = nil
         
-        return .send(.reOrdering)
+        return .none
     }
     
     private func removeCurrentlyTaskWhenDragging(into state: inout State) -> Effect<Action> {
@@ -118,7 +123,7 @@ extension Task.Feature {
         state.item[sourceIndex].isDragging = false
         state.item[sourceIndex].draggingTaskId = nil
         
-        return .send(.reOrdering)
+        return .none
     }
     
     private func setCurrentlyTaskWhenDragging(into state: inout State, task: Task.Model) -> Effect<Action> {
@@ -134,7 +139,6 @@ extension Task.Feature {
         UIImpactFeedbackGenerator.feedback(.soft)
         
         guard let currentlyTask = state.item.first(where: { $0.draggingTaskId != nil }) else { return .none }
-        
         guard let sourceIndex = state.item.firstIndex(where: { $0.task.id == currentlyTask.task.id }) else { return .none }
         guard let destinationIndex = state.item.firstIndex(where: { $0.task.id == task.id }) else { return .none }
         
@@ -165,6 +169,7 @@ extension Task.Feature {
     }
     
     private func refreshScrollViewContentOffsetGetted(into state: inout State, _ progress: CGFloat) -> Effect<Action> {
+        
         var valueProgress = (progress / state.refreshScrollView.refreshHeight)
         
         valueProgress = (valueProgress < 0 ? 0 : valueProgress)
@@ -183,41 +188,50 @@ extension Task.Feature {
         
         state.refreshScrollView.isScroll = false
         state.refreshScrollView.isRefreshing = false
+        
+        guard state.create == nil else {
+            return .send(.refreshScrollView(.refreshActived), animation: .smooth)
+        }
                 
-        if state.refreshScrollView.progress > 0.75 {
-            state.refreshScrollView.isRefreshing = true
-
-            
-            if state.refreshScrollView.contentOffset > state.refreshScrollView.refreshHeight {
-                state.refreshScrollView.contentOffset = state.refreshScrollView.refreshHeight
-            }
-            
-            state.refreshScrollView.progress = 1
-            
-            guard state.plus != nil else { return .none }
-            state.plus?.progress = 1
-            
-            UIImpactFeedbackGenerator.feedback(.heavy)
-
-            return .run { send in
-                try await SwiftUI.Task.sleep(nanoseconds: 1_000_000_000)
-                await send(.refreshScrollView(.refreshActived), animation: .spring(.smooth))
-                await send(.showTaskCreate)
-            }
+        guard state.refreshScrollView.progress > 0.75 else {
+            return .send(.refreshScrollView(.refreshActived), animation: .smooth)
         }
         
-        return .send(.refreshScrollView(.refreshActived), animation: .timingCurve(0, 0, 0, -100))
+        state.refreshScrollView.isRefreshing = true
+
+        if state.refreshScrollView.contentOffset > state.refreshScrollView.refreshHeight {
+            state.refreshScrollView.contentOffset = state.refreshScrollView.refreshHeight
+        }
+        
+        state.refreshScrollView.progress = 1
+        
+        guard state.plus != nil else { return .none }
+        state.plus?.progress = 1
+        
+        UIImpactFeedbackGenerator.feedback(.heavy)
+
+        return .run(priority: .userInitiated) { send in
+            try await SwiftUI.Task.sleep(nanoseconds: 1_000_000_000)
+            await send(.refreshScrollView(.refreshActived), animation: .smooth)
+            await send(.showTaskCreate, animation: .spring)
+        }
+        
+        
     }
     
     private func refreshScrollViewScrollViewWillBeginDragging(into state: inout State) -> Effect<Action> {
         state.refreshScrollView.isScroll = true
-        state.plus = .init(progress: 0.0)
+        
+        if state.create == nil {
+            state.plus = .init(progress: 0.0)
+        }
+        
         state.refreshScrollView.contentOffset = 0.0
         state.refreshScrollView.scrollOffset = 0.0
         state.refreshScrollView.progress = 0.0
         
         // TODO: Remove this action when solve bug on drag and drop
-        return .send(.reOrdering)
+        return .send(.reOrdering, animation: .smooth)
     }
     
     private func refreshScrollViewRefreshActived(into state: inout State) -> Effect<Action> {

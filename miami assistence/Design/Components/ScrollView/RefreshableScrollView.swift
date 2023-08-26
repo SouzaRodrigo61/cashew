@@ -25,6 +25,7 @@ struct Refreshable {
             case refreshActived
             
             case dragged(CGFloat)
+            case scrollOffset(CGFloat)
             
             case scrollViewDidEndDecelerating
             case scrollViewWillEndDragging(CGPoint)
@@ -55,7 +56,7 @@ struct RefreshableScrollView<T: View, R: View>: View {
     let content: T
     let refresh: R
     
-    
+    @State private var contentHeight: CGFloat = 0
     
     init(axes: Axis.Set = .vertical,
          showsIndicator: ScrollIndicatorVisibility = .automatic,
@@ -71,23 +72,22 @@ struct RefreshableScrollView<T: View, R: View>: View {
     }
     
     var body: some View {
-        GeometryReader { geo in
+        GeometryReader { metrics in
             WithViewStore(store, observe: { $0 } ) { viewStore in
                 ScrollView(axes) {
-                    
                     ZStack(alignment: .top) {
-                        
                         refresh
                             .frame(height: viewStore.refreshHeight * viewStore.progress, alignment: .bottom)
                             .opacity(viewStore.isScroll ? 1 : viewStore.isRefreshing ? 1 : 0)
                             .opacity(viewStore.progress)
-                            .offset(y: viewStore.isRefreshing ? -16 : -(viewStore.contentOffset))
-                        
+                            .offset(y: viewStore.isRefreshing ? 0 : -(viewStore.contentOffset))
                         
                         content
                             .offset(y: viewStore.isRefreshing
-                                    ? viewStore.refreshHeight - 8
+                                    ? viewStore.refreshHeight + 8
                                     : viewStore.isScroll ? 8 : 0)
+                            .frame(minHeight: metrics.size.height, alignment: .top)
+                        
                     }
                     .background { ScrollViewDetector(store: store) }
                     .background {
@@ -97,7 +97,9 @@ struct RefreshableScrollView<T: View, R: View>: View {
                                             value: geometry.frame(in: .named("SCROLL")).origin)
                         }
                     }
-                    .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in                        
+                    .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                        store.send(.scrollOffset(value.y))
+                        
                         if !viewStore.isRefreshing {
                             if value.y > 0 {
                                 store.send(.contentOffsetGetted(value.y))
@@ -105,12 +107,12 @@ struct RefreshableScrollView<T: View, R: View>: View {
                         }
                     }
                 }
-                .scrollDisabled(viewStore.isRefreshing)
+                .padding(.top, 1)
+//                .scrollDisabled(viewStore.isRefreshing)
                 .scrollIndicators(showsIndicator)
                 .coordinateSpace(name: "SCROLL")
             }
         }
-        
     }
 }
 
@@ -118,5 +120,38 @@ fileprivate struct ScrollOffsetPreferenceKey: PreferenceKey {
     static var defaultValue: CGPoint = .zero
     
     static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
+    }
+}
+
+extension ScrollView {
+    
+    public func fixFlickering() -> some View {
+        
+        return self.fixFlickering { (scrollView) in
+            
+            return scrollView
+        }
+    }
+    
+    public func fixFlickering<T: View>(@ViewBuilder configurator: @escaping (ScrollView<AnyView>) -> T) -> some View {
+        
+        GeometryReader { geometryWithSafeArea in
+            GeometryReader { geometry in
+                configurator(
+                ScrollView<AnyView>(self.axes, showsIndicators: self.showsIndicators) {
+                    AnyView(
+                    VStack {
+                        self.content
+                    }
+                    .padding(.top, geometryWithSafeArea.safeAreaInsets.top)
+                    .padding(.bottom, geometryWithSafeArea.safeAreaInsets.bottom)
+                    .padding(.leading, geometryWithSafeArea.safeAreaInsets.leading)
+                    .padding(.trailing, geometryWithSafeArea.safeAreaInsets.trailing)
+                    )
+                }
+                )
+            }
+            .edgesIgnoringSafeArea(.all)
+        }
     }
 }

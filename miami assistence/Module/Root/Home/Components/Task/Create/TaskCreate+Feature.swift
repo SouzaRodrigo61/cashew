@@ -14,7 +14,7 @@ extension TaskCreate {
         }
         
         enum Action: Equatable {
-            
+            case createTask
         }
         
         var body: some Reducer<State, Action> {

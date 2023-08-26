@@ -19,6 +19,6 @@ extension Root.Feature {
 
 extension Root.Feature.State {
     static func build() -> Self {
-        .onboarding(.new())
+        .home(.new())
     }
 }

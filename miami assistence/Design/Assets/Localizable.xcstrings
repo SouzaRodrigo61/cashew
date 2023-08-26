@@ -1,10 +1,10 @@
 {
   "sourceLanguage" : "pt-BR",
   "strings" : {
-    "Continuar" : {
+    "Add Tasking" : {
 
     },
-    "Delete" : {
+    "Continuar" : {
 
     },
     "Go to Home" : {
@@ -568,6 +568,9 @@
       }
     },
     "qui. 17 de ago." : {
+
+    },
+    "Show only when doesn't has task itens!" : {
 
     },
     "This screen demonstrates a basic feature hosted in a navigation stack." : {

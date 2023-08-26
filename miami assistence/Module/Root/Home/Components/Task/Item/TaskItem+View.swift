@@ -12,43 +12,27 @@ extension TaskItem {
     struct View: SwiftUI.View {
         let store: StoreOf<Feature>
         
-        
-        @State private var dragOffset = CGSize.zero
+        @State private var isChecked = false
+//        @State private var dragOffset = CGSize.zero
         
         var body: some SwiftUI.View {
             WithViewStore(store, observe: { $0 }) { viewStore in
                 Button {
                     store.send(.sendToDetail(viewStore.task))
                 } label: {
-                    
-                    // TODO: Create UI for this component
-                    
-                    HStack {
-                        Text(viewStore.task.title)
-                        Text(viewStore.task.date.description)
-                        Text(viewStore.task.duration.description)
-                    }
-                }
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Text("Delete")
+                    taskItem(viewStore.task)
+                        .hSpacing(.leading)
                 }
                 .padding(.horizontal, 16)
-                .hSpacing(.leading)
+                .padding(8)
                 .frame(height: 64)
-                .foregroundStyle(.dark)
                 .background(.white, in: .rect(cornerRadius: 10))
                 .contentShape(.dragPreview, .rect(cornerRadius: 10))
                 .overlay {
-                    if let draggingTaskId = viewStore.draggingTaskId,
-                       draggingTaskId == viewStore.task.id &&
-                       viewStore.isDragging {
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundStyle(.lotion)
-                    } else if let draggedTask = viewStore.draggingTaskId, draggedTask == viewStore.task.id, !viewStore.isDragging {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(.aliceBlue, lineWidth: 1)
-                    }
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(viewStore.isDragging ? .royalBlue : .lotion, lineWidth: 2)
                 }
+                .padding(.horizontal, 16)
                 .draggable(viewStore.task.id.uuidString) {
                     Text(viewStore.task.title)
                         .padding(.vertical, 16)
@@ -63,12 +47,37 @@ extension TaskItem {
                 }
                 .dropDestination(for: String.self) { items, location in
                     store.send(.removeCurrentlyDragging)
-                    return false
+                    return true
                 } isTargeted: { status in
                     if status {
                         store.send(.dragged(viewStore.task), animation: .snappy)
                     }
                 }
+                
+            }
+        }
+        
+        
+        @ViewBuilder
+        private func taskItem(_ task: Task.Model) -> some SwiftUI.View {
+            // TODO: Create UI for this component
+            
+            HStack {
+                Image(systemName: "minus")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.dark)
+                    .padding(.trailing, 8)
+                
+                Toggle(isOn: $isChecked) { }
+                    .toggleStyle(.checkmark)
+                    .foregroundStyle(.dark)
+                
+                Text(task.title)
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.dark)
+                    .padding(.leading, 8)
             }
         }
     }

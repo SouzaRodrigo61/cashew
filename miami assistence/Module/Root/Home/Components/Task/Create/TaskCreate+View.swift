@@ -15,12 +15,21 @@ extension TaskCreate {
         
         var body: some SwiftUI.View {
             
-            Text(
-                  """
-                  This screen demonstrates a basic feature hosted in a navigation stack.
-                  """
-            )
+            VStack {
+                Text(
+                      """
+                      This screen demonstrates a basic feature hosted in a navigation stack.
+                      """
+                )
+                
+                Button {
+                    store.send(.createTask, animation: .snappy)
+                } label: {
+                    Text("Add Tasking")
+                }
+            }
             .frame(height: 300)
+            .background(.white)
         }
     }
 }
