@@ -24,14 +24,14 @@ extension TaskItem {
                 }
                 .padding(.horizontal, 16)
                 .padding(8)
-                .frame(height: 64)
+                .frame(minHeight: 64)
                 .background(.white, in: .rect(cornerRadius: 10))
                 .contentShape(.dragPreview, .rect(cornerRadius: 10))
                 .overlay {
                     if let draggingTaskId = viewStore.draggingTaskId, draggingTaskId == viewStore.task.id, viewStore.isDragging {
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .stroke(.alabaster, lineWidth: 2)
-                            .background(.lotion)
+                            .stroke(.cornFlower, lineWidth: 2)
+                            
                     } else {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(.lotion, lineWidth: 2)
@@ -47,20 +47,19 @@ extension TaskItem {
                         .background(.white, in: .rect(cornerRadius: 10))
                         .contentShape(.dragPreview, .rect(cornerRadius: 10))
                         .onAppear {
-                            store.send(.currentlyDragging(viewStore.task))
+                            store.send(.currentlyDragging(viewStore.task), animation: .linear)
                         }
                 }
                 .dropDestination(for: String.self) { items, location in
-                    store.send(.removeCurrentlyDragging)
+                    store.send(.removeCurrentlyDragging, animation: .linear)
                     return true
                 } isTargeted: { status in
                     if status {
-                        store.send(.dragged(viewStore.task), animation: .snappy)
+                        store.send(.dragged(viewStore.task), animation: .linear)
                     } else {
-                        store.send(.removeDragging)
+                        store.send(.removeDragging, animation: .linear)
                     }
                 }
-                
             }
         }
         
@@ -69,16 +68,16 @@ extension TaskItem {
         private func taskItem(_ task: Task.Model) -> some SwiftUI.View {
             // TODO: Create UI for this component
             
-            HStack {
+            HStack(alignment: .center) {
                 Image(systemName: "minus")
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundStyle(.dark)
                     .padding(.trailing, 8)
-                
-                Toggle(isOn: $isChecked) { }
-                    .toggleStyle(.checkmark)
-                    .foregroundStyle(.dark)
+ 
+//                Toggle(isOn: $isChecked) { }
+//                    .toggleStyle(.checkmark)
+//                    .foregroundStyle(.dark)
                 
                 Text(task.title)
                     .font(.title3)
@@ -86,6 +85,7 @@ extension TaskItem {
                     .foregroundStyle(.dark)
                     .padding(.leading, 8)
             }
+            .hSpacing(.leading)
         }
     }
 }
