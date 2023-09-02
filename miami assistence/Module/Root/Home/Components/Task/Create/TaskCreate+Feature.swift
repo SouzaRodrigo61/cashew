@@ -11,14 +11,17 @@ import Foundation
 extension TaskCreate {
     struct Feature: Reducer {
         struct State: Equatable {
+            @BindingState var title: String = ""
         }
         
-        enum Action: Equatable {
-            case createTask
+        enum Action: BindableAction, Equatable, Sendable {
+            case binding(BindingAction<State>)
+            case createTaskTapped
+            case closeTapped
         }
         
         var body: some Reducer<State, Action> {
-            EmptyReducer()
+            BindingReducer()
         }
     }
 }

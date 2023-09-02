@@ -16,6 +16,15 @@
     "Hoje" : {
 
     },
+    "Item na lista %@" : {
+
+    },
+    "Item para force scroll" : {
+
+    },
+    "Lista de dados" : {
+
+    },
     "Login Stateless" : {
 
     },
@@ -577,6 +586,15 @@
 
     },
     "This screen demonstrates a basic feature hosted in a navigation stack.\n\nYou can also have the child feature dismiss itself, which will communicate back to the root stack view to pop the feature off the stack." : {
+
+    },
+    "Title do item" : {
+
+    },
+    "Title: %@" : {
+
+    },
+    "Untitled Todo" : {
 
     },
     "user.finder" : {

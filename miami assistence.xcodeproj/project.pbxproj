@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2305A50F2AA2B039008F9920 /* SwipeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2305A50E2AA2B039008F9920 /* SwipeAction.swift */; };
+		2305A5112AA2B09D008F9920 /* SwipeAction+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2305A5102AA2B09D008F9920 /* SwipeAction+Button.swift */; };
+		2305A5132AA2B0A6008F9920 /* SwipeAction+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2305A5122AA2B0A6008F9920 /* SwipeAction+View.swift */; };
 		2305BCEE2A49ADF8009C7DAD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2305BCED2A49ADF8009C7DAD /* Launch Screen.storyboard */; };
 		2306FD932A8FCB5D002F323D /* Button+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2306FD922A8FCB5D002F323D /* Button+Design.swift */; };
 		2306FD972A8FCFEB002F323D /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2306FD962A8FCFEB002F323D /* Task.swift */; };
@@ -148,6 +151,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2305A50E2AA2B039008F9920 /* SwipeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeAction.swift; sourceTree = "<group>"; };
+		2305A5102AA2B09D008F9920 /* SwipeAction+Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwipeAction+Button.swift"; sourceTree = "<group>"; };
+		2305A5122AA2B0A6008F9920 /* SwipeAction+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwipeAction+View.swift"; sourceTree = "<group>"; };
 		2305BCED2A49ADF8009C7DAD /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2306FD922A8FCB5D002F323D /* Button+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Design.swift"; sourceTree = "<group>"; };
 		2306FD962A8FCFEB002F323D /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -292,6 +298,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2305A50D2AA2B013008F9920 /* SwipeAction */ = {
+			isa = PBXGroup;
+			children = (
+				2305A50E2AA2B039008F9920 /* SwipeAction.swift */,
+				2305A5102AA2B09D008F9920 /* SwipeAction+Button.swift */,
+				2305A5122AA2B0A6008F9920 /* SwipeAction+View.swift */,
+			);
+			path = SwipeAction;
+			sourceTree = "<group>";
+		};
 		2305BCE82A4926D3009C7DAD /* Design */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +393,7 @@
 		23429E992A9915A400104F02 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2305A50D2AA2B013008F9920 /* SwipeAction */,
 				23429E9A2A9915AD00104F02 /* Toggle */,
 				236C12982A94050B002F8A66 /* ScrollView */,
 				231E6C9E2A8F1975009569C1 /* Button */,
@@ -944,10 +961,12 @@
 				23E2D1952A71BEDB00180C1C /* CreateCompany.swift in Sources */,
 				2376934B2A73F7AC0068E5BD /* Analitycs.swift in Sources */,
 				23582F632A72AA0B00FDF7FE /* Login.swift in Sources */,
+				2305A5112AA2B09D008F9920 /* SwipeAction+Button.swift in Sources */,
 				23E2D1992A71C0AF00180C1C /* CreateCompany+View.swift in Sources */,
 				23E2D19F2A71CC6300180C1C /* CreateTypeCompany+Feature.swift in Sources */,
 				236C12942A923AF3002F8A66 /* Task+Model.swift in Sources */,
 				235991862A715F0200C2677A /* Onboarding+Feature.swift in Sources */,
+				2305A50F2AA2B039008F9920 /* SwipeAction.swift in Sources */,
 				236C128A2A91BB9C002F8A66 /* TaskItem+Feature.swift in Sources */,
 				236C12782A90F7C3002F8A66 /* TaskCreate.swift in Sources */,
 				2306FD9F2A8FD346002F323D /* BottomSheet.swift in Sources */,
@@ -957,6 +976,7 @@
 				23C2A0E62A97CBF70073E5FC /* ImpactFeedbackGenerator+Extensions.swift in Sources */,
 				23582F532A71E50600FDF7FE /* Root.swift in Sources */,
 				2306FDA32A8FD5DC002F323D /* Header+Feature.swift in Sources */,
+				2305A5132AA2B0A6008F9920 /* SwipeAction+View.swift in Sources */,
 				23E6F8392A98153F00301968 /* TaskEmpty.swift in Sources */,
 				236C128C2A91BBA8002F8A66 /* TaskItem+View.swift in Sources */,
 				23582F672A72AA2A00FDF7FE /* Login+View.swift in Sources */,

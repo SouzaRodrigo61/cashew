@@ -43,11 +43,13 @@ struct ScrollViewDetector: UIViewRepresentable {
         }
         
         func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-            store.send(.scrollViewWillBeginDecelerating, animation: .linear)
+            dump("scrollViewWillBeginDecelerating")
+//            store.send(.scrollViewWillBeginDecelerating, animation: .linear)
         }
         
         func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-            store.send(.scrollViewWillBeginDragging, animation: .linear)
+            dump("scrollViewWillBeginDragging")
+//            store.send(.scrollViewWillBeginDragging, animation: .linear)
         }
     }
 }

@@ -11,55 +11,45 @@ import SwiftUI
 extension Task {
     struct View: SwiftUI.View {
         
-        @Environment(\.refresh) private var refresh
-        @State private var isLoading = false // 1
-        
         let store: StoreOf<Feature>
-        let column: [GridItem] = [ .init(.flexible()) ]
         
-        @State var progress: CGFloat = 0.0
+        @State var offset: CGFloat = .zero
+
+        @State private var dragId: String = ""
         
         var body: some SwiftUI.View {
             GeometryReader { geo in
-                RefreshableScrollView(axes: .vertical, showsIndicator: .hidden, store: store.scope(state: \.refreshScrollView, action: Feature.Action.refreshScrollView)) {
-                    WithViewStore(store, observe: \.create) { taskCreate in
-                        LazyVStack {
-                            WithViewStore(store, observe: \.item) { viewStore in
-                                if viewStore.isEmpty {
-                                    TaskEmpty.View()
-                                } else {
-                                    LazyVStack(spacing: 8) {
-                                        ForEachStore(store.scope(state: \.item, action: Feature.Action.item)) {
-                                            TaskItem.View(store: $0)
-                                        }
-                                    }
-                                    .padding(.vertical, 16)
-                                }
-                            }
-                        }
-                        .offset(y: taskCreate.state != nil ? 310 : 0)
+                List {
+                    ForEachStore(store.scope(state: \.item, action: Feature.Action.item)) {
+                        TaskItem.View(store: $0)
                     }
-                } refresh: {
-                    IfLetStore(store.scope(state: \.plus, action: Feature.Action.plus)) {
-                        TaskPlus.View(store: $0)
-                    }
+                    .onMove { _, _ in }
+                    .listRowInsets(.init())
+                    .listRowSeparator(.hidden)
+                    .listSectionSeparator(.hidden)
+                    .listRowBackground(Color.alabaster)
                 }
+                .coordinateSpace(name: "SCROLL")
+                .accessibilityLabel("Lista de dados")
+                .contentMargins(8, for: .scrollContent)
+                .listRowSpacing(8)
+                .scrollIndicators(.hidden)
+                .environment(\.defaultMinListRowHeight, 64)
+                .scrollContentBackground(.hidden)
                 .overlay(alignment: .top) {
-                    WithViewStore(store, observe: \.refreshScrollView) { viewStore in
-                        VStack {
-                            IfLetStore(store.scope(state: \.create, action: Feature.Action.create)) {
-                                TaskCreate.View(store: $0)
-                            }
+                    VStack {
+                        IfLetStore(store.scope(state: \.create, action: Feature.Action.create)) {
+                            TaskCreate.View(store: $0)
                         }
-                        .clipShape(.rect(cornerRadius: 16))
-                        .padding(.top, 4)
-                        .shadow(radius: 8)
-                        .offset(y: viewStore.scrollOffset < 0 ? 0 : viewStore.scrollOffset / .pi)
                     }
-                    
+                    .clipShape(.rect(cornerRadius: 16))
+                    .padding(.top, 4)
+                    .shadow(radius: 8)
                 }
-                .frame(height: abs(geo.size.height - 80))
+                .frame(height: abs(geo.size.height - 80), alignment: .top)
+                .scrollDismissesKeyboard(.interactively)
             }
         }
     }
+    
 }

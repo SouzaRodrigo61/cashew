@@ -50,6 +50,11 @@ extension Home {
                 return .none
             case .bottomSheet(.addButtonTapped):
                 state.task?.create = .init()
+                state.bottomSheet?.collapse = false
+                
+                return .none
+            case .task(.showTaskCreate):
+                state.bottomSheet?.collapse = false
                 
                 return .none
             default:

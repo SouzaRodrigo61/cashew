@@ -108,7 +108,8 @@ struct RefreshableScrollView<T: View, R: View>: View {
                     }
                 }
                 .padding(.top, 1)
-//                .scrollDisabled(viewStore.isRefreshing)
+                .scrollDismissesKeyboard(.interactively)
+                .ignoresSafeArea(.keyboard, edges: .bottom)
                 .scrollIndicators(showsIndicator)
                 .coordinateSpace(name: "SCROLL")
             }
@@ -116,7 +117,7 @@ struct RefreshableScrollView<T: View, R: View>: View {
     }
 }
 
-fileprivate struct ScrollOffsetPreferenceKey: PreferenceKey {
+struct ScrollOffsetPreferenceKey: PreferenceKey {
     static var defaultValue: CGPoint = .zero
     
     static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {

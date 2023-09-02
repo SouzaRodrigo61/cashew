@@ -13,13 +13,13 @@ extension BottomSheet {
         let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
-            WithViewStore(store, observe: { $0 }) { viewStore in
+            WithViewStore(store, observe: \.collapse) { viewStore in
                 HStack(alignment: .center) {
                     Button {
                         store.send(.buttonTapped, animation: .snappy)
                     } label: {
                         Image(systemName: "line.3.horizontal")
-                            .font(.title)
+                            .font(.largeTitle)
                             .foregroundStyle(.aliceBlue)
                             .fontWeight(.bold)
                     }
@@ -27,44 +27,19 @@ extension BottomSheet {
                     Spacer()
                     
                     Button {
-                        // On Tapped Gesture this action make
-                        store.send(.changeHeightTapped, animation: .smooth)
-                    } label: {
-                        HStack(spacing: 0) {
-                            Image(systemName: "arrow.left")
-                            
-                            Image(systemName: viewStore.state.collapse
-                                  ? "chevron.compact.down"
-                                  : "chevron.compact.up")
-                            .frame(width: 30)
-                             
-                            .padding(.horizontal, 8)
-                            Image(systemName: "arrow.right")
-                        }
-                        .frame(height: 20)
-                        .foregroundStyle(.aliceBlue)
-                        .font(.title2)
-                        .fontWeight(.bold)
-
-                    }                    
-                    .buttonStyle(.scale)
-                    
-                    Spacer()
-                    
-                    Button {
                         store.send(.addButtonTapped, animation: .snappy)
                     } label: {
                         Image(systemName: "plus.circle.fill")
-                            .font(.title)
+                            .font(.largeTitle)
                             .foregroundStyle(.royalBlue)
                     }
                     
                 }
                 .padding(.top, 8)
                 .padding(.horizontal, 16)
-                .frame(height: viewStore.state.collapse ? 400 : 80, alignment: .top)
+                .frame(height: viewStore.state ? 400 : 100, alignment: .top)
                 .frame(maxWidth: .infinity)
-                .background(.gunmetal, in: .rect(cornerRadius: viewStore.state.collapse ? 16 : 0))
+                .background(.gunmetal, in: .rect(cornerRadius: viewStore.state ? 16 : 0))
             }
         }
     }
