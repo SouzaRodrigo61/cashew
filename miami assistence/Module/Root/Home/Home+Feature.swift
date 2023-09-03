@@ -52,9 +52,18 @@ extension Home {
                 state.task?.create = .init()
                 state.bottomSheet?.collapse = false
                 
+                guard state.header != nil else { return .none }                
+                state.header?.isScroll = false
+                
                 return .none
             case .task(.showTaskCreate):
                 state.bottomSheet?.collapse = false
+                
+                return .none
+            case let .task(.isScrolling(value)):
+                guard state.header != nil else { return .none }
+                
+                state.header?.isScroll = value
                 
                 return .none
             default:

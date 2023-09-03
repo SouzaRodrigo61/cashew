@@ -9,6 +9,11 @@ import ComposableArchitecture
 import SwiftUI
 import Foundation
 
+enum GestureAnimation: CaseIterable {
+    case leading
+    case trailing
+}
+
 extension TaskItem {
     struct View: SwiftUI.View {
         let store: StoreOf<Feature>
@@ -18,14 +23,20 @@ extension TaskItem {
         @State private var offset: CGFloat = .zero
         @State private var proxyOffset: CGPoint = .zero
         
+        @State private var colorRectangle: Color = .lotion
+        @State private var colorView: Color = .clear
+        
+        @State private var gestureDirection: GestureAnimation = .leading
+        
         var body: some SwiftUI.View {
             GeometryReader { geo in
                 WithViewStore(store, observe: \.task) { viewStore in
-                    content(id: viewStore.id, title: viewStore.title)
+                    content(id: viewStore.id, title: viewStore.title, leadingAction, trailingAction)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .matchedGeometryEffect(id: viewStore.id, in: namespace)
                     .contentShape(.dragPreview, .rect(cornerRadius: 10))
                     .onDrag {
+                        store.send(.setCurrentlyDragged(viewStore.state))
                         return NSItemProvider()
                     } preview: {
                         Text(viewStore.title)
@@ -43,16 +54,25 @@ extension TaskItem {
         
         
         @ViewBuilder
-        private func content(id: UUID, title: String) -> some SwiftUI.View {
+        private func content(id: UUID, title: String, _ leadingAction: @escaping () -> Void, _ trailingAction: @escaping () -> Void) -> some SwiftUI.View {
             ZStack {
-                VStack {}
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(.green)
-                
+                VStack {
+                    Image(systemName: gestureDirection == .trailing ? "checkmark" : "zzz")
+                        .padding(.horizontal, 8)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundStyle(.white)
+                        .offset(x: (offset / 4))
+                        .animation(.spring(), value: offset)
+                }
+                .frame(maxWidth: .infinity, 
+                       maxHeight: .infinity,
+                       alignment: gestureDirection == .trailing ? .trailing : .leading)
+                .background(colorRectangle)
                 
                 GeometryReader { proxy in
                     VStack {
-                        HStack() {
+                        HStack {
                             Image(systemName: "minus")
                                 .accessibilityLabel("Item para force scroll")
                                 .font(.title3)
@@ -67,74 +87,93 @@ extension TaskItem {
                                 .fontWeight(.bold)
                                 .foregroundStyle(.dark)
                                 .padding(.leading, 8)
-                            
-                            Spacer()
                         }
                         .padding(.vertical, 8)
                     }
                     .id(id)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     .background(
-                        RoundedRectangle(cornerRadius: 6)
-                        .foregroundStyle(.lotion)
-                        .shadow(radius: 8)
+                        VStack {
+                            RoundedRectangle(cornerRadius: 9.5)
+                                .strokeBorder(colorView, lineWidth: 2)
+                                .background(.lotion.shadow(.drop(radius: 7)), in: .rect(cornerRadius: 9.5))
+                        }
                     )
                     .offset(x: offset)
+                    .animation(.spring(), value: offset)
                     .gesture(
                         DragGesture(minimumDistance: 10)
                             .onChanged { value in
                                 if value.translation.width > 0 {
-                                    let axisX = value.location.x / (4.2)
+                                    gestureDirection = .leading
+                                    let axisX = (value.location.x - value.startLocation.x) / .pi
                                     
                                     withAnimation {
+                                        colorRectangle = .cyan
                                         offset = axisX
                                     }
                                 } else {
-                                    let axisX = (proxy.frame(in: .local).maxX - value.location.x) / .pi
+                                    gestureDirection = .trailing
+                                    let axisX = (proxy.frame(in: .local).maxX - (value.location.x)) / 4.5
                                     
                                     withAnimation {
+                                        colorRectangle = .green
                                         offset = -axisX
                                     }
                                 }
-
-                                
                             }
-                            .onEnded{ _ in
+                            .onEnded { value in
+                                if value.translation.width > 0 {
+                                    let axisX = (value.location.x - value.startLocation.x) / .pi
+
+                                    if axisX > 40 {
+                                        
+                                        withAnimation {
+                                            colorView = .cyan.opacity(0.5)
+                                        }
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                            withAnimation {
+                                                colorView = .lotion
+                                            }
+                                            
+                                            leadingAction()
+                                        }
+                                    }
+                                } else {
+                                    let axisX = (proxy.frame(in: .local).maxX - (value.location.x)) / 4.5
+                                    
+                                    if axisX > 40 {
+                                        withAnimation {
+                                            colorView = .green.opacity(0.5)
+                                        }
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                            withAnimation {
+                                                colorView = .lotion
+                                            }
+                                            
+                                            trailingAction()
+                                        }
+                                    }
+                                }
+                                
                                 withAnimation(.bouncy) {
                                     offset = .zero
                                 }
-
                             }
                     )
                 }
-                
             }
+        }
+        
+        
+        private func leadingAction() {
+            dump("Leading")
+        }
+        
+        private func trailingAction() {
+            dump("Trailing")
         }
     }
 }
-
-
-
-//                    .swipeActions(
-//                        leading: [
-//                            SwipeAction.Button(text: Text("Text"), action: {
-//                                print("Text")
-//                            }),
-//                            SwipeAction.Button(
-//                                icon: Image(systemName: "flag"), action: {
-//                                    print("Flag")
-//                                }, tint: .green)
-//                        ],
-//                        allowsFullSwipeLeading: true,
-//                        trailing: [
-//                            SwipeAction.Button(text: Text("Read"),
-//                                              icon: Image(systemName: "envelope.open"),
-//                                              action: {
-//                                                  print("Read")
-//                                              }, tint: .blue),
-//                            SwipeAction.Button(icon: Image(systemName: "trash"), action: {
-//                                print("Trash")
-//                            }, tint: .red)
-//                        ],
-//                        allowsFullSwipeTrailing: true
-//                    )

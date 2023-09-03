@@ -22,7 +22,6 @@ extension BottomSheet {
         
         var body: some Reducer<State, Action> {
             Reduce(self.core)
-                ._printChanges()
         }
         
         private func core(into state: inout State, action: Action) -> Effect<Action> {

@@ -24,6 +24,8 @@ extension Task {
             
             case goToDetail(Task.Model)
             case showTaskCreate
+            
+            case isScrolling(Bool)
         }
         
         var body: some Reducer<State, Action> {

@@ -13,9 +13,9 @@ extension Task {
         
         let store: StoreOf<Feature>
         
-        @State var offset: CGFloat = .zero
+        @State var offset: CGFloat = .nan
 
-        @State private var dragId: String = ""
+        @State private var axisY: CGFloat = .nan
         
         var body: some SwiftUI.View {
             GeometryReader { geo in
@@ -28,6 +28,22 @@ extension Task {
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(.hidden)
                     .listRowBackground(Color.alabaster)
+                    .background {
+                        GeometryReader { geometry in
+                            Color.clear
+                                .preference(key: ScrollOffsetPreferenceKey.self,
+                                            value: geometry.frame(in: .named("SCROLL")).origin)
+                        }
+                    }
+                    .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                        if axisY.isNaN { axisY = value.y }
+                        
+                        if value.y != axisY {
+                            store.send(.isScrolling(true), animation: .smooth)
+                        } else {
+                            store.send(.isScrolling(false), animation: .smooth)
+                        }
+                    }
                 }
                 .coordinateSpace(name: "SCROLL")
                 .accessibilityLabel("Lista de dados")
@@ -46,10 +62,9 @@ extension Task {
                     .padding(.top, 4)
                     .shadow(radius: 8)
                 }
-                .frame(height: abs(geo.size.height - 80), alignment: .top)
+                .frame(height: abs(geo.size.height - 100), alignment: .top)
                 .scrollDismissesKeyboard(.interactively)
             }
         }
     }
-    
 }
