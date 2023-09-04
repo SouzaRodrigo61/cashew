@@ -20,12 +20,11 @@ extension TaskCreate {
         var body: some SwiftUI.View {
             WithViewStore(store, observe: { $0 } ) { viewStore in
                 VStack {
-                    
                     HStack {
                         Spacer()
                         
                         Button {
-                            store.send(.closeTapped, animation: .snappy)
+                            store.send(.closeTapped, animation: .bouncy)
                         } label: {
                             Image(systemName: "xmark.circle.fill")
                                 .font(.title2)
@@ -47,15 +46,14 @@ extension TaskCreate {
                     .vSpacing(.top)
                     
                     Button {
-                        store.send(.createTaskTapped, animation: .snappy)
+                        store.send(.createTaskTapped, animation: .bouncy)
                     } label: {
                         Text("Add Tasking")
                     }
                     .padding(.bottom, 8)
                 }
                 .onAppear { focusedField = .name }
-                .hSpacing(.topLeading)
-                .frame(height: 300)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.white)
             }
         }

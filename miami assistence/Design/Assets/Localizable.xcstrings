@@ -4,6 +4,39 @@
     "Add Tasking" : {
 
     },
+    "bottom_sheet.label.create" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Criar"
+          }
+        }
+      }
+    },
+    "calendar.date.today" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoje"
+          }
+        }
+      }
+    },
     "Continuar" : {
 
     },
@@ -13,14 +46,14 @@
     "Go to Onboarding" : {
 
     },
-    "Hoje" : {
-
-    },
     "Item na lista %@" : {
 
     },
     "Item para force scroll" : {
 
+    },
+    "Key" : {
+      "extractionState" : "manual"
     },
     "Lista de dados" : {
 
@@ -576,11 +609,38 @@
         }
       }
     },
-    "qui. 17 de ago." : {
+    "Schedule" : {
 
     },
     "Show only when doesn't has task itens!" : {
 
+    },
+    "task.empty.label.content" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não tem nenhum registro de atividades no dia %@"
+          }
+        }
+      }
+    },
+    "task.list.label.create" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create activity"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Criar atividade"
+          }
+        }
+      }
     },
     "This screen demonstrates a basic feature hosted in a navigation stack." : {
 

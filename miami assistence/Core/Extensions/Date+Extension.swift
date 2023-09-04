@@ -93,6 +93,23 @@ extension Date {
         return self.formatted(.dateTime .day())
     }
     
+    func week() -> String {
+        return self.formatted(.dateTime .weekday(.short) .day(.twoDigits) .month(.abbreviated)).replacing(",", with: "")
+    }
+    
+    func validateIsToday(dateToValidate: Date) -> String {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date()) // Get the start of today's date
+
+        if calendar.isDate(dateToValidate, inSameDayAs: today) {
+            // The input date is today
+            return "calendar.date.today"
+        } else {
+            // The input date is not today
+            return self.formatted(.dateTime .weekday(.short))
+        }
+    }
+    
     static func updateHour(_ value: Int) -> Date {
         let calendar = Calendar.current
         return calendar.date(byAdding: .hour, value: value, to: .init()) ?? .init()

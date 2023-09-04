@@ -13,33 +13,21 @@ extension BottomSheet {
         let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
-            WithViewStore(store, observe: \.collapse) { viewStore in
-                HStack(alignment: .center) {
-                    Button {
-                        store.send(.buttonTapped, animation: .snappy)
-                    } label: {
-                        Image(systemName: "line.3.horizontal")
-                            .font(.largeTitle)
-                            .foregroundStyle(.aliceBlue)
-                            .fontWeight(.bold)
-                    }
-                    
-                    Spacer()
-                    
-                    Button {
-                        store.send(.addButtonTapped, animation: .snappy)
-                    } label: {
+            HStack {
+                Spacer()
+                
+                Button {
+                    store.send(.addButtonTapped, animation: .bouncy )
+                } label: {                    
+                    HStack(spacing: 8) {
                         Image(systemName: "plus.circle.fill")
-                            .font(.largeTitle)
-                            .foregroundStyle(.royalBlue)
+                        Text("bottom_sheet.label.create")
                     }
-                    
+                    .font(.system(.body, design: .rounded))
+                    .bold()
+                    .foregroundColor(.gray)
                 }
-                .padding(.top, 8)
-                .padding(.horizontal, 16)
-                .frame(height: viewStore.state ? 400 : 100, alignment: .top)
-                .frame(maxWidth: .infinity)
-                .background(.gunmetal, in: .rect(cornerRadius: viewStore.state ? 16 : 0))
+                .buttonStyle(.pressBordered)
             }
         }
     }

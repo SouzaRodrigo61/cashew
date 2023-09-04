@@ -26,6 +26,8 @@ extension TaskItem {
         enum Action: Equatable {
             case setCurrentlyDragged(Task.Model)
             case moveCurrentlyDragged(Int, Int)
+            
+            case contentTapped(Task.Model)
         }
         
         var body: some Reducer<State, Action> {

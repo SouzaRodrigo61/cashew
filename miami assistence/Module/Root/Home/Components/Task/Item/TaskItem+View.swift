@@ -48,13 +48,18 @@ extension TaskItem {
                             .background(.white, in: .rect(cornerRadius: 10))
                             .contentShape(.dragPreview, .rect(cornerRadius: 10))
                     }
+                    .onTapGesture {
+                        store.send(.contentTapped(viewStore.state), animation: .bouncy)
+                    }
                 }
             }
         }
         
         
         @ViewBuilder
-        private func content(id: UUID, title: String, _ leadingAction: @escaping () -> Void, _ trailingAction: @escaping () -> Void) -> some SwiftUI.View {
+        private func content(id: UUID, title: String, 
+                             _ leadingAction: @escaping () -> Void,
+                             _ trailingAction: @escaping () -> Void) -> some SwiftUI.View {
             ZStack {
                 VStack {
                     Image(systemName: gestureDirection == .trailing ? "checkmark" : "zzz")
@@ -102,7 +107,7 @@ extension TaskItem {
                     .offset(x: offset)
                     .animation(.spring(), value: offset)
                     .gesture(
-                        DragGesture(minimumDistance: 10)
+                        DragGesture(minimumDistance: 20)
                             .onChanged { value in
                                 if value.translation.width > 0 {
                                     gestureDirection = .leading
@@ -114,11 +119,20 @@ extension TaskItem {
                                     }
                                 } else {
                                     gestureDirection = .trailing
-                                    let axisX = (proxy.frame(in: .local).maxX - (value.location.x)) / 4.5
-                                    
-                                    withAnimation {
-                                        colorRectangle = .green
-                                        offset = -axisX
+                                    if value.startLocation.x > proxy.frame(in: .local).midX {
+                                        let axisX = (proxy.frame(in: .local).maxX - (value.location.x)) / .pi
+                                        
+                                        withAnimation {
+                                            colorRectangle = .green
+                                            offset = -axisX
+                                        }
+                                    } else {
+                                        let axisX = (value.startLocation.x - value.location.x) / .pi
+                                        
+                                        withAnimation {
+                                            colorRectangle = .green
+                                            offset = -axisX
+                                        }
                                     }
                                 }
                             }

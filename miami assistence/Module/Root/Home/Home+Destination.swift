@@ -10,16 +10,16 @@ import ComposableArchitecture
 extension Home {
     struct Destination: Reducer {
         enum State: Equatable {
-            case taskDetail(TaskDetail.Feature.State = .init())
+            case note(Note.Feature.State = .init())
         }
         
         enum Action: Equatable {
-            case taskDetail(TaskDetail.Feature.Action)
+            case note(Note.Feature.Action)
         }
         
         var body: some Reducer<State, Action> {
-            Scope(state: /State.taskDetail, action: /Action.taskDetail) {
-                TaskDetail.Feature()
+            Scope(state: /State.note, action: /Action.note) {
+                Note.Feature()
             }
         }
     }

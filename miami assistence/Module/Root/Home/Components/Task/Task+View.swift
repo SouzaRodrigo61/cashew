@@ -28,22 +28,29 @@ extension Task {
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(.hidden)
                     .listRowBackground(Color.alabaster)
-                    .background {
-                        GeometryReader { geometry in
-                            Color.clear
-                                .preference(key: ScrollOffsetPreferenceKey.self,
-                                            value: geometry.frame(in: .named("SCROLL")).origin)
-                        }
+                    
+                    IfLetStore(store.scope(state: \.empty, action: Feature.Action.empty)) { _ in
+                        TaskEmpty.View()
                     }
-                    .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                        if axisY.isNaN { axisY = value.y }
-                        
-                        if value.y != axisY {
-                            store.send(.isScrolling(true), animation: .smooth)
-                        } else {
-                            store.send(.isScrolling(false), animation: .smooth)
+                    .listRowInsets(.init())
+                    .listRowSeparator(.hidden)
+                    .listSectionSeparator(.hidden)
+                    
+                    Button {
+                        store.send(.showTaskCreate, animation: .easeIn)
+                    } label: {
+                        HStack(spacing: 8) {
+                            Image(systemName: "calendar.badge.plus")
+                                .font(.system(.title, design: .rounded))
+                                .foregroundStyle(.royalBlue)
+                            Text("task.list.label.create")
+                                .foregroundStyle(.dark)
+                                .font(.system(.title3, design: .rounded))
                         }
+                        .padding(.horizontal, 8)
                     }
+                    .listRowInsets(.init())
+                    .buttonStyle(.scale)
                 }
                 .coordinateSpace(name: "SCROLL")
                 .accessibilityLabel("Lista de dados")
@@ -52,17 +59,7 @@ extension Task {
                 .scrollIndicators(.hidden)
                 .environment(\.defaultMinListRowHeight, 64)
                 .scrollContentBackground(.hidden)
-                .overlay(alignment: .top) {
-                    VStack {
-                        IfLetStore(store.scope(state: \.create, action: Feature.Action.create)) {
-                            TaskCreate.View(store: $0)
-                        }
-                    }
-                    .clipShape(.rect(cornerRadius: 16))
-                    .padding(.top, 4)
-                    .shadow(radius: 8)
-                }
-                .frame(height: abs(geo.size.height - 100), alignment: .top)
+                .frame(height: geo.size.height, alignment: .top)
                 .scrollDismissesKeyboard(.interactively)
             }
         }

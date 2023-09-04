@@ -20,8 +20,21 @@ extension TaskCreate {
             case closeTapped
         }
         
+        
+        @Dependency(\.dismiss) var dismiss
+        
         var body: some Reducer<State, Action> {
             BindingReducer()
+            Reduce { state, action in
+                switch action {
+                case .closeTapped:
+                    return .run { _ in await self.dismiss() }
+                case .createTaskTapped:
+                    return .run { _ in await self.dismiss() }
+                case .binding(_):
+                    return .none
+                }
+            }
         }
     }
 }

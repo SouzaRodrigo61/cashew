@@ -13,19 +13,15 @@ extension Task {
     struct Feature: Reducer {
         struct State: Equatable {
             var item: IdentifiedArrayOf<TaskItem.Feature.State> = []
-            
-            var create: TaskCreate.Feature.State?
+            var empty: TaskEmpty.Feature.State?
         }
         
         enum Action: Equatable {
             case item(TaskItem.Feature.State.ID, TaskItem.Feature.Action)
-            
-            case create(TaskCreate.Feature.Action)
+            case empty(TaskEmpty.Feature.Action)
             
             case goToDetail(Task.Model)
             case showTaskCreate
-            
-            case isScrolling(Bool)
         }
         
         var body: some Reducer<State, Action> {
@@ -33,11 +29,10 @@ extension Task {
                 .forEach(\.item, action: /Action.item) {
                     TaskItem.Feature()
                 }
-                .ifLet(\.create, action: /Action.create) {
-                    TaskCreate.Feature()
+                .ifLet(\.empty, action: /Action.empty) {
+                    TaskEmpty.Feature()
                 }
         }
-        
     }
 }
 
@@ -49,20 +44,7 @@ extension Task.Feature {
             return setCurrentlyTaskWhenDragging(into: &state, task: task)
         case .item(_, .moveCurrentlyDragged(_, _)):
             return .none
-        case .showTaskCreate:
-            state.create = .init()
-            return .none
-        case .create(.createTaskTapped):
-            guard let title = state.create?.title, state.create != nil else { return .none }
-            
-            state.item.append(.init(task: .init(title: title, date: .now, duration: 3600, isAlert: true, isRepeted: false, createdAt: .now, updatedAt: .now, tag: [], note: [])))
-            state.create = nil
-            
-            return .none
-        case .create(.closeTapped):
-            state.create = nil
-            
-            return .none
+        
         default:
             return .none
         }

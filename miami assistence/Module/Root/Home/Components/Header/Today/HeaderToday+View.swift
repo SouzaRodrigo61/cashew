@@ -14,30 +14,33 @@ extension HeaderToday {
         
         
         var body: some SwiftUI.View {
-            WithViewStore(store, observe: { $0 }) { viewStore in
-                Button {
-                    store.send(.buttonTapped)
-                } label: {
-                    HStack(alignment: .center) {
-                        Image(systemName: "calendar")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundStyle(.royalBlue)
-                        
-                        HStack(alignment: .bottom) {
-                            Text("Hoje")
-                                .font(.title2)
+            Button {
+                store.send(.buttonTapped)
+            } label: {
+                HStack(alignment: .center) {
+                    Image(systemName: "calendar")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundStyle(.royalBlue)
+                    
+                    HStack(alignment: .bottom) {
+                        WithViewStore(store, observe: \.week) { viewStore in
+                            Text(viewStore.state.localized)
+                                .font(.system(.title2, design: .rounded))
                                 .fontWeight(.bold)
                                 .foregroundStyle(.black)
-                            Text("qui. 17 de ago.")
-                                .font(.title3)
+                        }
+                        WithViewStore(store, observe: \.weekCompleted) { viewStore in
+                            Text(viewStore.state)
+                                .font(.system(.title3, design: .rounded))
                                 .fontWeight(.semibold)
                                 .foregroundStyle(.gray)
                         }
                     }
                 }
-                .buttonStyle(.scale)
             }
+            .buttonStyle(.scale)
+            .onAppear { store.send(.onAppered, animation: .snappy) }
         }
     }
 }
