@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import FirebaseAnalytics
 
 enum Analitycs {}
 

@@ -7,19 +7,28 @@
 
 import ComposableArchitecture
 import Foundation
+import SwiftUI
 
-extension TaskPlus {
+extension TaskCreate {
     struct Feature: Reducer {
         struct State: Equatable {
-            var progress: CGFloat
+            @BindingState var title: String = ""
+            
+            @BindingState var color: Color = .clear
+            @BindingState var date: Date = .now
+            @BindingState var startedHour: Date = .now
+            
+            var activityDuration: Double = .zero
         }
         
-        enum Action: Equatable {
-            
+        enum Action: BindableAction, Equatable, Sendable {
+            case binding(BindingAction<State>)
+            case createTaskTapped
+            case closeTapped
         }
         
         var body: some Reducer<State, Action> {
-            EmptyReducer()
+            BindingReducer()
         }
     }
 }

@@ -11,6 +11,7 @@ extension Header {
     struct Feature: Reducer {
         struct State: Equatable {
             var today: HeaderToday.Feature.State?
+            var isScroll: Bool = false
         }
         
         enum Action: Equatable {

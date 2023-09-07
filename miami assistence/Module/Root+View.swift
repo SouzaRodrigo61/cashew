@@ -17,15 +17,11 @@ extension Root {
                 switch $0 {
                 case .home:
                     CaseLet(/Feature.State.home, action: Feature.Action.home) { store in
-                        NavigationStack {
-                            Home.View(store: store)
-                        }
+                        Home.View(store: store)
                     }
                 case .onboarding:
                     CaseLet(/Feature.State.onboarding, action: Feature.Action.onboarding) { store in
-                        NavigationStack {
-                            Onboarding.View(store: store)
-                        }
+                        Onboarding.View(store: store)
                     }
                 }
             }

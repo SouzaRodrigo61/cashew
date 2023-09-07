@@ -7,18 +7,36 @@
 //
 
 import ComposableArchitecture
+import Foundation
 
 extension HeaderToday {
     struct Feature: Reducer {
         struct State: Equatable {
+            var week: String = ""
+            var weekCompleted: String = ""
         }
         
         enum Action: Equatable {
             case buttonTapped
+            
+            case onAppered
         }
         
         var body: some Reducer<State, Action> {
-            EmptyReducer()
+            Reduce(self.core)
+        }
+        
+        private func core(into state: inout State, action: Action) -> Effect<Action> {
+            switch action {
+            case .onAppered:
+                state.week = Date().validateIsToday(dateToValidate: .now)
+                state.weekCompleted = Date().week()
+                
+                return .none
+                
+            default:
+                return .none
+            }
         }
     }
 }

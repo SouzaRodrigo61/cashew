@@ -16,13 +16,18 @@ extension TaskItem {
             
             var draggingTaskId: UUID?
             var isDragging: Bool = false
+            
+            var minY: CGFloat = 0
+            var maxY: CGFloat = 0
+            
+            var isSelected: Bool = false
         }
         
         enum Action: Equatable {
-            case currentlyDragging(Task.Model)
-            case removeCurrentlyDragging
-            case dragged(Task.Model)
-            case sendToDetail(Task.Model)
+            case setCurrentlyDragged(Task.Model)
+            case moveCurrentlyDragged(Int, Int)
+            
+            case contentTapped(Task.Model)
         }
         
         var body: some Reducer<State, Action> {

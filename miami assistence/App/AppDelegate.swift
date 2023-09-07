@@ -7,13 +7,9 @@
 
 import SwiftUI
 import OneSignal
-import FirebaseCore
-import GoogleSignIn
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        
-        FirebaseApp.configure()
 
         // Remove this method to stop OneSignal Debugging
 //        OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
@@ -30,9 +26,5 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // OneSignal.setExternalUserId("userId")
         
         return true
-    }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-      return GIDSignIn.sharedInstance.handle(url)
     }
 }

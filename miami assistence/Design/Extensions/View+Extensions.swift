@@ -59,6 +59,16 @@ extension View {
         
         return safeArea
     }
+    
+    func swipeActions(leading: [SwipeAction.Button] = [],
+                      allowsFullSwipeLeading: Bool = false,
+                      trailing: [SwipeAction.Button] = [],
+                      allowsFullSwipeTrailing: Bool = false) -> some View {
+        modifier(SwipeAction.View(leading: leading,
+                                 allowsFullSwipeLeading: allowsFullSwipeLeading,
+                                 trailing: trailing,
+                                 allowsFullSwipeTrailing: allowsFullSwipeTrailing))
+    }
 }
 
 struct ValueKey: PreferenceKey {
