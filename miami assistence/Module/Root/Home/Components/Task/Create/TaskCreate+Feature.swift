@@ -7,11 +7,18 @@
 
 import ComposableArchitecture
 import Foundation
+import SwiftUI
 
 extension TaskCreate {
     struct Feature: Reducer {
         struct State: Equatable {
             @BindingState var title: String = ""
+            
+            @BindingState var color: Color = .clear
+            @BindingState var date: Date = .now
+            @BindingState var startedHour: Date = .now
+            
+            var activityDuration: Double = .zero
         }
         
         enum Action: BindableAction, Equatable, Sendable {
@@ -20,21 +27,8 @@ extension TaskCreate {
             case closeTapped
         }
         
-        
-        @Dependency(\.dismiss) var dismiss
-        
         var body: some Reducer<State, Action> {
             BindingReducer()
-            Reduce { state, action in
-                switch action {
-                case .closeTapped:
-                    return .run { _ in await self.dismiss() }
-                case .createTaskTapped:
-                    return .run { _ in await self.dismiss() }
-                case .binding(_):
-                    return .none
-                }
-            }
         }
     }
 }

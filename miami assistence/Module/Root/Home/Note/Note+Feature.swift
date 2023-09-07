@@ -10,14 +10,30 @@ import ComposableArchitecture
 extension Note {
     struct Feature: Reducer {
         struct State: Equatable {
-            var task: Task.Model?
+            var showContent: Bool = false
+            
+            var task: Task.Model
         }
         
         enum Action: Equatable {
+            case onAppear
+            case closeTapped
         }
         
+        @Dependency(\.dismiss) var dismiss
+        
         var body: some Reducer<State, Action> {
-            EmptyReducer()
+            Reduce { state, action in
+                switch action {
+                case .onAppear:
+                    state.showContent.toggle()
+                    return .none
+                case .closeTapped:
+                    return .run { send in
+                        await dismiss()
+                    }
+                }
+            }
         }
     }
 }

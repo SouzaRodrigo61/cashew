@@ -10,7 +10,7 @@ import ComposableArchitecture
 extension Home {
     struct Destination: Reducer {
         enum State: Equatable {
-            case note(Note.Feature.State = .init())
+            case note(Note.Feature.State)
         }
         
         enum Action: Equatable {

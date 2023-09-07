@@ -13,22 +13,15 @@ extension BottomSheet {
         let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
-            HStack {
-                Spacer()
-                
-                Button {
-                    store.send(.addButtonTapped, animation: .bouncy )
-                } label: {                    
-                    HStack(spacing: 8) {
-                        Image(systemName: "plus.circle.fill")
-                        Text("bottom_sheet.label.create")
-                    }
-                    .font(.system(.body, design: .rounded))
-                    .bold()
-                    .foregroundColor(.gray)
-                }
-                .buttonStyle(.pressBordered)
+            Button {
+                store.send(.addButtonTapped, animation: .bouncy )
+            } label: {
+                Image(systemName: "plus.circle.fill")
+                    .font(.system(size: 40, design: .rounded))
+                    .foregroundColor(.royalBlue)
             }
+            .buttonStyle(.scale)
+            .padding(.trailing, 16)
         }
     }
 }

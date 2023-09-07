@@ -1,10 +1,8 @@
 {
   "sourceLanguage" : "pt-BR",
   "strings" : {
-    "Add Tasking" : {
-
-    },
     "bottom_sheet.label.create" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -40,10 +38,19 @@
     "Continuar" : {
 
     },
+    "Data: %@" : {
+
+    },
+    "Duration: %@" : {
+
+    },
     "Go to Home" : {
 
     },
     "Go to Onboarding" : {
+
+    },
+    "Hour: %@" : {
 
     },
     "Item na lista %@" : {
@@ -615,6 +622,96 @@
     "Show only when doesn't has task itens!" : {
 
     },
+    "task.button.create.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nova atividade"
+          }
+        }
+      }
+    },
+    "task.create.button.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create the task"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Criar atividade"
+          }
+        }
+      }
+    },
+    "task.create.nav.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Create activity"
+          }
+        }
+      }
+    },
+    "task.create.picker.color" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select the color"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleciona a cor"
+          }
+        }
+      }
+    },
+    "task.create.picker.date" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start time"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora de inicio"
+          }
+        }
+      }
+    },
+    "task.create.textfield.placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Task name"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome da atividade"
+          }
+        }
+      }
+    },
     "task.empty.label.content" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -627,6 +724,7 @@
       }
     },
     "task.list.label.create" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -642,19 +740,10 @@
         }
       }
     },
-    "This screen demonstrates a basic feature hosted in a navigation stack." : {
-
-    },
     "This screen demonstrates a basic feature hosted in a navigation stack.\n\nYou can also have the child feature dismiss itself, which will communicate back to the root stack view to pop the feature off the stack." : {
 
     },
     "Title do item" : {
-
-    },
-    "Title: %@" : {
-
-    },
-    "Untitled Todo" : {
 
     },
     "user.finder" : {

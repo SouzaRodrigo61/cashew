@@ -22,6 +22,8 @@ extension Task {
             
             case goToDetail(Task.Model)
             case showTaskCreate
+            
+            case onAppear
         }
         
         var body: some Reducer<State, Action> {
@@ -43,6 +45,13 @@ extension Task.Feature {
         case let .item(_, .setCurrentlyDragged(task)):
             return setCurrentlyTaskWhenDragging(into: &state, task: task)
         case .item(_, .moveCurrentlyDragged(_, _)):
+            return .none
+            
+        case .onAppear:
+            if state.item.isEmpty {
+                state.empty = .init()
+            }
+            
             return .none
         
         default:
