@@ -40,7 +40,6 @@ extension HeaderToday {
                 }
             }
             .buttonStyle(.scale)
-            .onAppear { store.send(.onAppered, animation: .snappy) }
         }
     }
 }

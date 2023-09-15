@@ -14,6 +14,7 @@ extension Home {
             var task: Task.Feature.State?
             var header: Header.Feature.State?
             var bottomSheet: BottomSheet.Feature.State?
+            var tabCalendar: TabCalendar.Feature.State
             
             var destination: StackState<Destination.State>
             
@@ -21,25 +22,32 @@ extension Home {
             @PresentationState var schedule: Schedule.Feature.State?
             
             var contentTask: Task.Model?
+            
+            /// Custom Matched Geometry Animation
             var forcePadding: Bool = false
+            
+            
+            var currentIndex: Int = 1
         }
         
         enum Action: Equatable {
             
-            // Components
+            /// Components Stores
             case task(Task.Feature.Action)
             case header(Header.Feature.Action)
             case bottomSheet(BottomSheet.Feature.Action)
             case taskCreate(TaskCreate.Feature.Action)
+            case tabCalendar(TabCalendar.Feature.Action)
             
-            // Handle
+            /// Local Actions
             case buttonTapped
-            
             case matcheAnimationRemoved
             
-            // Stacks
-            case destination(StackAction<Destination.State, Destination.Action>)
+            case onAppear
+            case tabSelected(Int)
             
+            /// Navigation Stores
+            case destination(StackAction<Destination.State, Destination.Action>)
             case schedule(PresentationAction<Schedule.Feature.Action>)
         }
         
@@ -127,6 +135,46 @@ extension Home {
                 state.contentTask = nil
                 
                 return .none
+            
+            case .tabCalendar(.onAppear):
+                dump(state.tabCalendar.weekSlider)
+                
+                return .none
+                
+            case let .tabCalendar(.previousDay(day)):
+
+                state.tabCalendar.weekSlider.insert(day.createPreviousDay(), at: 0)
+                state.tabCalendar.weekSlider.removeLast()
+                
+                state.tabCalendar.currentIndex = 1
+                state.tabCalendar.createDay = false
+                
+                return .none
+                
+            case let .tabCalendar(.nextDay(day)):
+                
+                state.tabCalendar.weekSlider.append(day.createNextDay())
+                state.tabCalendar.weekSlider.removeFirst()
+                
+                state.tabCalendar.currentIndex = 1
+                state.tabCalendar.createDay = false
+                
+                return .none
+                
+            case .tabSelected(let index):
+                state.tabCalendar.currentIndex = index
+                if index == 0 || index == (state.tabCalendar.weekSlider.count - 1) {
+                    state.tabCalendar.createDay = true
+                }
+                
+                let currentDate = state.tabCalendar.weekSlider[index].date
+                guard state.header != nil else { return .none }
+                
+                return .send(.header(.today(.changeDay(currentDate))))
+            
+            case .onAppear:
+                
+                return .send(.header(.today(.changeDay(.now))))
             default:
                 return .none
             }

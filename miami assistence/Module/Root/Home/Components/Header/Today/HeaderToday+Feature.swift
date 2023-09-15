@@ -19,7 +19,7 @@ extension HeaderToday {
         enum Action: Equatable {
             case buttonTapped
             
-            case onAppered
+            case changeDay(Date)
         }
         
         var body: some Reducer<State, Action> {
@@ -28,9 +28,9 @@ extension HeaderToday {
         
         private func core(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
-            case .onAppered:
-                state.week = Date().validateIsToday(dateToValidate: .now)
-                state.weekCompleted = Date().week()
+            case .changeDay(let day):
+                state.week = day.validateIsToday()
+                state.weekCompleted = day.week()
                 
                 return .none
                 

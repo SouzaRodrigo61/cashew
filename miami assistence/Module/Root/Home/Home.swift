@@ -14,6 +14,7 @@ extension Home.Feature.State {
         .init(task: .init(),
               header: .init(today: .init()),
               bottomSheet: .init(),
+              tabCalendar: .init(),
               destination: StackState([]))
     }
 }

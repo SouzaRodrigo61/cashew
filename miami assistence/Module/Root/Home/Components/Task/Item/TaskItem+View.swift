@@ -191,7 +191,7 @@ extension TaskItem {
                 HStack {
                     if showOverlay {
                         Image(systemName: "minus")
-                            .accessibilityLabel("Item para force scroll")
+                            .accessibilityHint("task.item.accessibility.image.hint")
                             .font(.title3)
                             .fontWeight(.bold)
                             .foregroundStyle(.dark)
@@ -199,8 +199,8 @@ extension TaskItem {
                     }
                                         
                     Text(title)
-                        .accessibilityLabel("Title do item")
-                        .accessibilityHint("Item na lista \(title)")
+                        .accessibilityLabel("task.item.accessibility.text.label")
+                        .accessibilityHint("task.item.accessibility.text.hint \(title)")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundStyle(.dark)
