@@ -14,20 +14,12 @@ extension CreateTypeCompany {
         
         var body: some SwiftUI.View {
             Form {
-                Text(
-                      """
-                      This screen demonstrates a basic feature hosted in a navigation stack.
-                      
-                      You can also have the child feature dismiss itself, which will communicate back to the \
-                      root stack view to pop the feature off the stack.
-                      """
-                )
                 
-                Button("Voltar") {
+                Button("button.back") {
                     store.send(.dismissTapped, transaction: .init(animation: .bouncy))
                 }
                 
-                Button("Continuar") {
+                Button("button.continues") {
                     store.send(.buttonTapped, transaction: .init(animation: .bouncy))
                 }
             }

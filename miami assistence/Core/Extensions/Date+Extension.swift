@@ -103,7 +103,7 @@ extension Date {
 
         if calendar.isDate(dateToValidate, inSameDayAs: today) {
             // The input date is today
-            return "calendar.date.today"
+            return "calendar.date.today".localized
         } else {
             // The input date is not today
             return self.formatted(.dateTime .weekday(.short))
@@ -113,5 +113,61 @@ extension Date {
     static func updateHour(_ value: Int) -> Date {
         let calendar = Calendar.current
         return calendar.date(byAdding: .hour, value: value, to: .init()) ?? .init()
+    }
+    
+    
+    /// Fetching Week Based on given Date
+    func fetchWeek(_ date: Date = .init()) -> [Days] {
+        let calendar = Calendar.current
+        let startOfDate = calendar.startOfDay(for: date)
+        
+        var week: [Days] = []
+
+        
+        if let previousDay = calendar.date(byAdding: .day, value: -1, to: startOfDate) {
+            week.append(.init(date: previousDay))
+        }
+        week.append(.init(date: startOfDate))
+        
+        if let nextDay = calendar.date(byAdding: .day, value: 1, to: startOfDate) {
+            week.append(.init(date: nextDay))
+        }
+        
+        /// Iterating to get the Full Week
+//        (0..<7).forEach { index in
+//            if let weekDay = calendar.date(byAdding: .day, value: index, to: startOfWeek) {
+//                week.append(.init(date: weekDay))
+//            }
+//        }
+        
+        return week
+    }
+    
+    // Creating Next Day
+    func createNextDay() -> Days {
+        let calendar = Calendar.current
+
+        guard let nextDay = calendar.date(byAdding: .day, value: 1, to: self) else {
+            return .init(date: self)
+        }
+        
+        return .init(date: nextDay)
+    }
+    
+    
+    // Creating Previous Day
+    func createPreviousDay() -> Days {
+        let calendar = Calendar.current
+
+        guard let day = calendar.date(byAdding: .day, value: -1, to: self) else {
+            return .init(date: self)
+        }
+        
+        return .init(date: day)
+    }
+    
+    struct Days: Identifiable, Equatable {
+        var id: UUID = .init()
+        var date: Date
     }
 }
