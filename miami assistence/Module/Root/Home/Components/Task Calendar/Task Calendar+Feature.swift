@@ -8,9 +8,14 @@
 import Foundation
 import ComposableArchitecture
 
-extension TabCalendar {
+extension TaskCalendar {
     struct Feature: Reducer {
+        
+        
         struct State: Equatable {
+            
+            var task: Task.Feature.State?
+            var header: Header.Feature.State?
             var weekSlider: [Date.Days] = Date().fetchWeek()
             var currentDate: Date = .init()
             var currentIndex: Int = 1
@@ -19,18 +24,26 @@ extension TabCalendar {
         }
         
         enum Action: Equatable {
+            
+            case task(Task.Feature.Action)
+            case header(Header.Feature.Action)
+            
             case nextDay(Date)
             case previousDay(Date)
             
-            
             case tabSelected(Int)
-            
             
             case onAppear
         }
         
         var body: some Reducer<State, Action> {
             EmptyReducer()
+                .ifLet(\.task, action: /Action.task) {
+                    Task.Feature()
+                }
+                .ifLet(\.header, action: /Action.header) {
+                    Header.Feature()
+                }
         }
     }
 }

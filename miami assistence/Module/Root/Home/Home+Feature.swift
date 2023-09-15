@@ -11,10 +11,8 @@ import ComposableArchitecture
 extension Home {
     struct Feature: Reducer {
         struct State: Equatable {
-            var task: Task.Feature.State?
-            var header: Header.Feature.State?
             var bottomSheet: BottomSheet.Feature.State?
-            var tabCalendar: TabCalendar.Feature.State
+            var taskCalendar: TaskCalendar.Feature.State
             
             var destination: StackState<Destination.State>
             
@@ -33,11 +31,9 @@ extension Home {
         enum Action: Equatable {
             
             /// Components Stores
-            case task(Task.Feature.Action)
-            case header(Header.Feature.Action)
             case bottomSheet(BottomSheet.Feature.Action)
             case taskCreate(TaskCreate.Feature.Action)
-            case tabCalendar(TabCalendar.Feature.Action)
+            case taskCalendar(TaskCalendar.Feature.Action)
             
             /// Local Actions
             case buttonTapped
@@ -53,12 +49,6 @@ extension Home {
         
         var body: some Reducer<State, Action> {
             Reduce(self.core)
-                .ifLet(\.task, action: /Action.task) {
-                    Task.Feature()
-                }
-                .ifLet(\.header, action: /Action.header) {
-                    Header.Feature()
-                }
                 .ifLet(\.bottomSheet, action: /Action.bottomSheet) {
                     BottomSheet.Feature()
                 }
@@ -80,27 +70,27 @@ extension Home {
                 
                 state.bottomSheet?.collapse = false
                 
-                guard state.header != nil else { return .none }
-                state.header?.isScroll = false
+                guard state.taskCalendar.header != nil else { return .none }
+                state.taskCalendar.header?.isScroll = false
                 
                 return .none
-            case .task(.showTaskCreate):
+            case .taskCalendar(.task(.showTaskCreate)):
                 state.taskCreate = .init()
                 
                 state.bottomSheet?.collapse = false
                 
-                guard state.header != nil else { return .none }
-                state.header?.isScroll = false
+                guard state.taskCalendar.header != nil else { return .none }
+                state.taskCalendar.header?.isScroll = false
                 
                 return .none
             case .taskCreate(.createTaskTapped):
                 guard let content = state.taskCreate else { return .none }
                 
-                guard state.task != nil else { return .none }
-                guard let count = state.task?.item.count else { return .none }
-                state.task?.empty = nil
+                guard state.taskCalendar.task != nil else { return .none }
+                guard let count = state.taskCalendar.task?.item.count else { return .none }
+                state.taskCalendar.task?.empty = nil
                 
-                state.task?.item.append(.init(task: .init(title: content.title, date: content.date, startedHour: content.startedHour, duration: content.activityDuration, color: content.color, isAlert: false, isRepeted: false, position: (count + 1), createdAt: .now, updatedAt: .now, tag: [], note: [])))
+                state.taskCalendar.task?.item.append(.init(task: .init(title: content.title, date: content.date, startedHour: content.startedHour, duration: content.activityDuration, color: content.color, isAlert: false, isRepeted: false, position: (count + 1), createdAt: .now, updatedAt: .now, tag: [], note: [])))
                 
                 state.taskCreate = nil
                 
@@ -108,17 +98,17 @@ extension Home {
             case .taskCreate(.closeTapped):
                 state.taskCreate = nil
                 
-                guard state.header != nil else { return .none }
-                state.header?.isScroll = false
+                guard state.taskCalendar.header != nil else { return .none }
+                state.taskCalendar.header?.isScroll = false
                 
                 return .none
-            case let .task(.item(_, .contentTapped(task))):
+            case let .taskCalendar(.task(.item(_, .contentTapped(task)))):
                 state.destination.append(.note(.init(task: task)))
                 state.contentTask = task
                 
                 return .none
                 
-            case .header(.today(.buttonTapped)):
+            case .taskCalendar(.header(.today(.buttonTapped))):
                 state.schedule = .init()
                 
                 return .none
@@ -130,51 +120,66 @@ extension Home {
                     await send(.matcheAnimationRemoved, animation: .smooth)
                 }
                 
+            case let .taskCalendar(.previousDay(day)):
+
+                state.taskCalendar.weekSlider.insert(day.createPreviousDay(), at: 0)
+                state.taskCalendar.weekSlider.removeLast()
+                
+                state.taskCalendar.currentIndex = 1
+                state.taskCalendar.createDay = false
+                
+                return .none
+                
+            case let .taskCalendar(.nextDay(day)):
+                
+                state.taskCalendar.weekSlider.append(day.createNextDay())
+                state.taskCalendar.weekSlider.removeFirst()
+                
+                state.taskCalendar.currentIndex = 1
+                state.taskCalendar.createDay = false
+                
+                return .none
+                
+            case let .taskCalendar(.tabSelected(index)):
+                state.taskCalendar.currentIndex = index
+                if index == 0 || index == (state.taskCalendar.weekSlider.count - 1) {
+                    state.taskCalendar.createDay = true
+                }
+                
+                let currentDate = state.taskCalendar.weekSlider[index].date
+                
+                state.taskCalendar.task = .init(empty: .init(.init(currentDate: currentDate)))
+                state.taskCalendar.header = .init(
+                    today: .init(
+                        week: currentDate.validateIsToday(),
+                        weekCompleted: currentDate.week()
+                    )
+                )
+                
+                return .none
+                
+                
             case .matcheAnimationRemoved:
                 state.forcePadding = false
                 state.contentTask = nil
                 
                 return .none
             
-            case .tabCalendar(.onAppear):
-                dump(state.tabCalendar.weekSlider)
+            case .taskCalendar(.onAppear):
+                dump(state.taskCalendar.weekSlider)
                 
                 return .none
                 
-            case let .tabCalendar(.previousDay(day)):
-
-                state.tabCalendar.weekSlider.insert(day.createPreviousDay(), at: 0)
-                state.tabCalendar.weekSlider.removeLast()
-                
-                state.tabCalendar.currentIndex = 1
-                state.tabCalendar.createDay = false
-                
-                return .none
-                
-            case let .tabCalendar(.nextDay(day)):
-                
-                state.tabCalendar.weekSlider.append(day.createNextDay())
-                state.tabCalendar.weekSlider.removeFirst()
-                
-                state.tabCalendar.currentIndex = 1
-                state.tabCalendar.createDay = false
-                
-                return .none
-                
-            case .tabSelected(let index):
-                state.tabCalendar.currentIndex = index
-                if index == 0 || index == (state.tabCalendar.weekSlider.count - 1) {
-                    state.tabCalendar.createDay = true
-                }
-                
-                let currentDate = state.tabCalendar.weekSlider[index].date
-                guard state.header != nil else { return .none }
-                
-                return .send(.header(.today(.changeDay(currentDate))))
-            
             case .onAppear:
+                state.taskCalendar.task = .init(empty: .init(.init(currentDate: .now)))
+                state.taskCalendar.header = .init(
+                    today: .init(
+                        week: Date().validateIsToday(),
+                        weekCompleted: Date().week()
+                    )
+                )
                 
-                return .send(.header(.today(.changeDay(.now))))
+                return .none
             default:
                 return .none
             }

@@ -28,8 +28,8 @@ extension Task {
                 .listSectionSeparator(.hidden)
                 .listRowBackground(Color.alabaster)
                 
-                IfLetStore(store.scope(state: \.empty, action: Feature.Action.empty)) { _ in
-                    TaskEmpty.View()
+                IfLetStore(store.scope(state: \.empty, action: Feature.Action.empty)) { 
+                    TaskEmpty.View(store: $0)
                 }
                 .listRowInsets(.init())
                 .listRowSeparator(.hidden)
@@ -60,7 +60,6 @@ extension Task {
             .scrollIndicators(.hidden)
             .environment(\.defaultMinListRowHeight, 64)
             .scrollContentBackground(.hidden)
-            .onAppear { store.send(.onAppear, animation: .default) }
         }
         
     }

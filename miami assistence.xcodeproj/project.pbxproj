@@ -28,8 +28,9 @@
 		2322C8262AA7845D000F0576 /* Note+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2322C8252AA7845D000F0576 /* Note+Model.swift */; };
 		2322C8282AA7848C000F0576 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2322C8272AA7848C000F0576 /* Tag.swift */; };
 		2322C82A2AA78496000F0576 /* Tag+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2322C8292AA78496000F0576 /* Tag+Model.swift */; };
-		2340DEC72AB359B300F42FCE /* TabCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340DEC62AB359B300F42FCE /* TabCalendar.swift */; };
-		2340DECA2AB359D000F42FCE /* TabCalendar+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340DEC92AB359D000F42FCE /* TabCalendar+Feature.swift */; };
+		2340DEC72AB359B300F42FCE /* Task Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340DEC62AB359B300F42FCE /* Task Calendar.swift */; };
+		2340DECA2AB359D000F42FCE /* Task Calendar+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340DEC92AB359D000F42FCE /* Task Calendar+Feature.swift */; };
+		2340DECC2AB4C2DA00F42FCE /* Task Calendar+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340DECB2AB4C2DA00F42FCE /* Task Calendar+View.swift */; };
 		23429E9C2A9915BA00104F02 /* CheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23429E9B2A9915BA00104F02 /* CheckboxToggleStyle.swift */; };
 		234749462A953CF400B19513 /* ScrollViewDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234749452A953CF400B19513 /* ScrollViewDetector.swift */; };
 		2354BE092A73ECE4003E4CA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354BE072A73ECE4003E4CA9 /* AppDelegate.swift */; };
@@ -176,8 +177,9 @@
 		2322C8252AA7845D000F0576 /* Note+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Model.swift"; sourceTree = "<group>"; };
 		2322C8272AA7848C000F0576 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		2322C8292AA78496000F0576 /* Tag+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+Model.swift"; sourceTree = "<group>"; };
-		2340DEC62AB359B300F42FCE /* TabCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCalendar.swift; sourceTree = "<group>"; };
-		2340DEC92AB359D000F42FCE /* TabCalendar+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabCalendar+Feature.swift"; sourceTree = "<group>"; };
+		2340DEC62AB359B300F42FCE /* Task Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task Calendar.swift"; sourceTree = "<group>"; };
+		2340DEC92AB359D000F42FCE /* Task Calendar+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task Calendar+Feature.swift"; sourceTree = "<group>"; };
+		2340DECB2AB4C2DA00F42FCE /* Task Calendar+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task Calendar+View.swift"; sourceTree = "<group>"; };
 		23429E9B2A9915BA00104F02 /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		234749452A953CF400B19513 /* ScrollViewDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDetector.swift; sourceTree = "<group>"; };
 		2354BE072A73ECE4003E4CA9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -412,13 +414,16 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		2340DEC52AB3599200F42FCE /* Tab Calendar */ = {
+		2340DEC52AB3599200F42FCE /* Task Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				2340DEC62AB359B300F42FCE /* TabCalendar.swift */,
-				2340DEC92AB359D000F42FCE /* TabCalendar+Feature.swift */,
+				2306FD9C2A8FD32F002F323D /* Header */,
+				2306FD952A8FCF31002F323D /* Task */,
+				2340DEC62AB359B300F42FCE /* Task Calendar.swift */,
+				2340DEC92AB359D000F42FCE /* Task Calendar+Feature.swift */,
+				2340DECB2AB4C2DA00F42FCE /* Task Calendar+View.swift */,
 			);
-			path = "Tab Calendar";
+			path = "Task Calendar";
 			sourceTree = "<group>";
 		};
 		23429E992A9915A400104F02 /* Components */ = {
@@ -556,11 +561,9 @@
 		236C12972A93ABFF002F8A66 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				2340DEC52AB3599200F42FCE /* Tab Calendar */,
+				2340DEC52AB3599200F42FCE /* Task Calendar */,
 				236F8C012AA69AE5006CC1BA /* Schedule */,
 				2306FD9D2A8FD337002F323D /* Bottom Sheet */,
-				2306FD9C2A8FD32F002F323D /* Header */,
-				2306FD952A8FCF31002F323D /* Task */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -993,6 +996,7 @@
 				236C129A2A940531002F8A66 /* RefreshableScrollView.swift in Sources */,
 				23582F5F2A71EA0200FDF7FE /* Home+View.swift in Sources */,
 				236C12852A9175A9002F8A66 /* HeaderToday+View.swift in Sources */,
+				2340DECC2AB4C2DA00F42FCE /* Task Calendar+View.swift in Sources */,
 				236C128E2A91BBB9002F8A66 /* Note.swift in Sources */,
 				234749462A953CF400B19513 /* ScrollViewDetector.swift in Sources */,
 				23582F572A71E53300FDF7FE /* Root+View.swift in Sources */,
@@ -1020,7 +1024,7 @@
 				23E2D1992A71C0AF00180C1C /* CreateCompany+View.swift in Sources */,
 				23E6122B2AA9441E00C916F1 /* UIToolbar.swift in Sources */,
 				23E2D19F2A71CC6300180C1C /* CreateTypeCompany+Feature.swift in Sources */,
-				2340DECA2AB359D000F42FCE /* TabCalendar+Feature.swift in Sources */,
+				2340DECA2AB359D000F42FCE /* Task Calendar+Feature.swift in Sources */,
 				236C12942A923AF3002F8A66 /* Task+Model.swift in Sources */,
 				235991862A715F0200C2677A /* Onboarding+Feature.swift in Sources */,
 				2305A50F2AA2B039008F9920 /* SwipeAction.swift in Sources */,
@@ -1032,7 +1036,7 @@
 				23582F592A71E53E00FDF7FE /* Root+Feature.swift in Sources */,
 				23C2A0E62A97CBF70073E5FC /* ImpactFeedbackGenerator+Extensions.swift in Sources */,
 				23582F532A71E50600FDF7FE /* Root.swift in Sources */,
-				2340DEC72AB359B300F42FCE /* TabCalendar.swift in Sources */,
+				2340DEC72AB359B300F42FCE /* Task Calendar.swift in Sources */,
 				2306FDA32A8FD5DC002F323D /* Header+Feature.swift in Sources */,
 				2305A5132AA2B0A6008F9920 /* SwipeAction+View.swift in Sources */,
 				23E6F8392A98153F00301968 /* TaskEmpty.swift in Sources */,

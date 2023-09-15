@@ -6,10 +6,12 @@
 //
 
 import ComposableArchitecture
+import Foundation
 
 extension TaskEmpty {
     struct Feature: Reducer {
         struct State: Equatable {
+            var currentDate: Date
         }
         
         enum Action: Equatable {

@@ -30,67 +30,8 @@ extension Home {
                 NavigationStackStore(store.scope(state: \.destination, action: Feature.Action.destination)) {
                 
                     ZStack(alignment: .bottomTrailing) {
-                        WithViewStore(store, observe: \.tabCalendar) { viewStore in
-                            
-                            // TODO: Move TabView for TabCalendar
-                            TabView(
-                                selection: viewStore.binding(
-                                    get: \.currentIndex,
-                                    send: Feature.Action.tabSelected
-                                )
-                            ) {
-                                ForEach(viewStore.weekSlider.indices, id: \.self) { index in
-                                    VStack(spacing: 0) {
-                                        // TODO: Header Get Index Date for calendar
-                                        IfLetStore(store.scope(state: \.header, action: Feature.Action.header)) {
-                                            Header.View(store: $0)
-                                        }
-                                        
-                                        // TODO: Task date with list
-                                        IfLetStore(store.scope(state: \.task, action: Feature.Action.task)) {
-                                            Task.View(store: $0)
-                                        }
-                                    }
-                                    .tag(index)
-                                    .background {
-                                        GeometryReader { geo in
-                                            let minX = geo.frame(in: .global).minX
-                                            
-                                            Color.clear
-                                                .preference(key: OffsetKey.self, value: minX)
-                                                .onPreferenceChange(OffsetKey.self) { value in
-                                                    /// When the Offset reaches 15 and if the createWeek is toggle then simply generating next set of week
-                                                    
-                                                    if viewStore.currentIndex == 0 {
-                                                        dump(value, name: "viewStore.currentIndex == 0")
-                                                    }
-                                                    
-                                                    if viewStore.currentIndex == 2 {
-                                                        dump(value, name: "viewStore.currentIndex == 2")
-                                                    }
-                                                    
-                                                    // TODO: Improved slider fluidity
-                                                    if viewStore.currentIndex == 0 
-                                                        && (value.rounded() >= 15 && value.rounded() <= 20)
-                                                        && viewStore.createDay {
-                                                        let day = viewStore.weekSlider[0].date
-                                                        store.send(.tabCalendar(.previousDay(day)))
-                                                    }
-                                                    
-                                                    if viewStore.currentIndex == (viewStore.weekSlider.count - 1) 
-                                                        && (value.rounded() <= -15 && value.rounded() >= -20)
-                                                        && viewStore.createDay {
-                                                        let day = viewStore.weekSlider[(viewStore.weekSlider.count - 1)].date
-                                                        store.send(.tabCalendar(.nextDay(day)))
-                                                    }
-                                                }
-                                        }
-                                    }
-                                }
-                            }
-                            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                            
-                        }
+                        TaskCalendar.View(store: store.scope(state: \.taskCalendar, action: Feature.Action.taskCalendar))
+                        
                         IfLetStore(store.scope(state: \.bottomSheet, action: Feature.Action.bottomSheet)) {
                             BottomSheet.View(store: $0)
                         }
