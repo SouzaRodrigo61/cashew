@@ -94,19 +94,19 @@ extension Date {
     }
     
     func week() -> String {
-        return self.formatted(.dateTime .weekday(.short) .day(.twoDigits) .month(.abbreviated)).replacing(",", with: "")
+        return self.formatted(.dateTime .weekday(.abbreviated) .day(.twoDigits) .month(.abbreviated)).replacing(",", with: "")
     }
     
-    func validateIsToday(dateToValidate: Date) -> String {
+    func validateIsToday() -> String {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date()) // Get the start of today's date
 
-        if calendar.isDate(dateToValidate, inSameDayAs: today) {
+        if calendar.isDate(self, inSameDayAs: today) {
             // The input date is today
             return "calendar.date.today".localized
         } else {
             // The input date is not today
-            return self.formatted(.dateTime .weekday(.short))
+            return self.formatted(.dateTime .weekday(.abbreviated))
         }
     }
     
@@ -125,20 +125,13 @@ extension Date {
 
         
         if let previousDay = calendar.date(byAdding: .day, value: -1, to: startOfDate) {
-            week.append(.init(date: previousDay))
+            week.append(.init(date: previousDay, isBefore: previousDay < .now))
         }
-        week.append(.init(date: startOfDate))
+        week.append(.init(date: startOfDate, isBefore: false))
         
         if let nextDay = calendar.date(byAdding: .day, value: 1, to: startOfDate) {
-            week.append(.init(date: nextDay))
+            week.append(.init(date: nextDay, isBefore: nextDay > .now))
         }
-        
-        /// Iterating to get the Full Week
-//        (0..<7).forEach { index in
-//            if let weekDay = calendar.date(byAdding: .day, value: index, to: startOfWeek) {
-//                week.append(.init(date: weekDay))
-//            }
-//        }
         
         return week
     }
@@ -148,10 +141,10 @@ extension Date {
         let calendar = Calendar.current
 
         guard let nextDay = calendar.date(byAdding: .day, value: 1, to: self) else {
-            return .init(date: self)
+            return .init(date: self, isBefore: self < .now)
         }
         
-        return .init(date: nextDay)
+        return .init(date: nextDay, isBefore: nextDay < .now)
     }
     
     
@@ -160,14 +153,15 @@ extension Date {
         let calendar = Calendar.current
 
         guard let day = calendar.date(byAdding: .day, value: -1, to: self) else {
-            return .init(date: self)
+            return .init(date: self, isBefore: false)
         }
         
-        return .init(date: day)
+        return .init(date: day, isBefore: day < .now)
     }
     
     struct Days: Identifiable, Equatable {
         var id: UUID = .init()
         var date: Date
+        var isBefore: Bool
     }
 }

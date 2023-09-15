@@ -43,7 +43,7 @@ extension Home {
             case buttonTapped
             case matcheAnimationRemoved
             
-            
+            case onAppear
             case tabSelected(Int)
             
             /// Navigation Stores
@@ -142,18 +142,12 @@ extension Home {
                 return .none
                 
             case let .tabCalendar(.previousDay(day)):
-                dump(day, name: "day")
-                dump(day.createPreviousDay(), name: "day.createPreviousDay()")
 
                 state.tabCalendar.weekSlider.insert(day.createPreviousDay(), at: 0)
                 state.tabCalendar.weekSlider.removeLast()
                 
-                
-                dump(state.tabCalendar.weekSlider, name: "state.tabCalendar.weekSlider")
-                
                 state.tabCalendar.currentIndex = 1
                 state.tabCalendar.createDay = false
-                
                 
                 return .none
                 
@@ -168,13 +162,19 @@ extension Home {
                 return .none
                 
             case .tabSelected(let index):
-                
                 state.tabCalendar.currentIndex = index
                 if index == 0 || index == (state.tabCalendar.weekSlider.count - 1) {
                     state.tabCalendar.createDay = true
                 }
                 
-                return .none
+                let currentDate = state.tabCalendar.weekSlider[index].date
+                guard state.header != nil else { return .none }
+                
+                return .send(.header(.today(.changeDay(currentDate))))
+            
+            case .onAppear:
+                
+                return .send(.header(.today(.changeDay(.now))))
             default:
                 return .none
             }
