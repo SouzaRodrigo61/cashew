@@ -11,12 +11,11 @@ import ComposableArchitecture
 extension Home {
     struct Feature: Reducer {
         struct State: Equatable {
-            var bottomSheet: BottomSheet.Feature.State?
             var taskCalendar: TaskCalendar.Feature.State
+            var bottomSheet: BottomSheet.Feature.State?
+            var taskCreate: TaskCreate.Feature.State?
             
             var destination: StackState<Destination.State>
-            
-            var taskCreate: TaskCreate.Feature.State?
             @PresentationState var schedule: Schedule.Feature.State?
             
             var contentTask: Task.Model?
@@ -36,11 +35,7 @@ extension Home {
             case taskCalendar(TaskCalendar.Feature.Action)
             
             /// Local Actions
-            case buttonTapped
             case matcheAnimationRemoved
-            
-            case onAppear
-            case tabSelected(Int)
             
             /// Navigation Stores
             case destination(StackAction<Destination.State, Destination.Action>)
@@ -167,17 +162,6 @@ extension Home {
             
             case .taskCalendar(.onAppear):
                 dump(state.taskCalendar.weekSlider)
-                
-                return .none
-                
-            case .onAppear:
-                state.taskCalendar.task = .init(empty: .init(.init(currentDate: .now)))
-                state.taskCalendar.header = .init(
-                    today: .init(
-                        week: Date().validateIsToday(),
-                        weekCompleted: Date().week()
-                    )
-                )
                 
                 return .none
             default:

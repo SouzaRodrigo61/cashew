@@ -32,15 +32,12 @@ extension Home {
                     ZStack(alignment: .bottomTrailing) {
                         TaskCalendar.View(store: store.scope(state: \.taskCalendar, action: Feature.Action.taskCalendar))
                         
-                        IfLetStore(store.scope(state: \.bottomSheet, action: Feature.Action.bottomSheet)) {
-                            BottomSheet.View(store: $0)
-                        }
+//                        IfLetStore(store.scope(state: \.bottomSheet, action: Feature.Action.bottomSheet)) {
+//                            BottomSheet.View(store: $0)
+//                        }
                     }
                     .transition(.scale)
-                    .onAppear {
-                        UIToolbar.changeAppearance(clear: true)
-                        store.send(.onAppear)
-                    }
+                    .onAppear { UIToolbar.changeAppearance(clear: true) }
                     .overlay {
                         IfLetStore(store.scope(state: \.taskCreate, action: Feature.Action.taskCreate)) {
                             TaskCreate.View(store: $0)

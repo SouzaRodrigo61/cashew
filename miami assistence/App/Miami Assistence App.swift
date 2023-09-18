@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct MiamiAssistenceApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @UIApplicationDelegateAdaptor(CoreApp.Delegate.self) var appDelegate
     
     var body: some Scene {
         WindowGroup {
