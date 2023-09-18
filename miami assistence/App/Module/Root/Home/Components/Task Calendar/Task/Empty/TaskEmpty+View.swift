@@ -6,18 +6,23 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 extension TaskEmpty {
     struct View: SwiftUI.View {
+        var store: StoreOf<Feature>
+        
         var body: some SwiftUI.View {
             
             HStack(spacing: 8) {
                 Image(systemName: "exclamationmark.shield.fill")
                     .font(.system(.title, design: .rounded))
                     .foregroundStyle(.royalBlue)
-                Text("task.empty.label.content".localized(args: Date().dayNum()))
-                    .foregroundStyle(.dark)
-                    .font(.system(.title3, design: .rounded))
+                WithViewStore(store, observe: \.currentDate) { viewStore in
+                    Text("task.empty.label.content".localized(args: viewStore.state.dayNum()))
+                        .foregroundStyle(.dark)
+                        .font(.system(.title3, design: .rounded))
+                }
             }
             .padding(.horizontal, 8)
         }

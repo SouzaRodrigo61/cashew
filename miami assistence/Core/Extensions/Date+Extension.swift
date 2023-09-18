@@ -94,7 +94,7 @@ extension Date {
     }
     
     func week() -> String {
-        return self.formatted(.dateTime .weekday(.abbreviated) .day(.twoDigits) .month(.abbreviated)).replacing(",", with: "")
+        return self.formatted(.dateTime .day(.twoDigits) .month(.wide)).replacing(",", with: "")
     }
     
     func validateIsToday() -> String {

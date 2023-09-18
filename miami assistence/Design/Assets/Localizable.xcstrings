@@ -248,8 +248,14 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Need change text  for empty label description"
+            "state" : "translated",
+            "value" : "Does not have any content for the day %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não possui nenhum conteúdo para o dia %@"
           }
         }
       }

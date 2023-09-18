@@ -3,4 +3,70 @@
    uuid = "ADCFB8DD-4DBE-42BF-8CBE-9DF3B504C0C7"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B0228DF3-E8C2-4772-81FB-C1FCF572F81D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "miami assistence/Module/Root/Home/Components/Task Calendar/Header/Today/HeaderToday+Feature.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "core(into:action:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "151A0ED3-AF70-49BB-A9C7-0E2E832469EF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "miami assistence/Core/App/CoreApp+Scene.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "windowScene(_:performActionFor:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "151A0ED3-AF70-49BB-A9C7-0E2E832469EF - 7a3dd0cf13b59193"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "miami_assistence.CoreApp.SceneDelegate.windowScene(_: __C.UIWindowScene, performActionFor: __C.UIApplicationShortcutItem, completionHandler: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "miami assistence"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodrigosouza/Documents/developement/miami%20app/iOS/miami%20assistence/miami%20assistence/Core/App/CoreApp+Scene.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  uuid = "151A0ED3-AF70-49BB-A9C7-0E2E832469EF - 52b07a6ab3f6b592"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "miami_assistence.CoreApp.Scene.windowScene(_: __C.UIWindowScene, performActionFor: __C.UIApplicationShortcutItem, completionHandler: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "miami assistence"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodrigosouza/Documents/developement/miami%20app/iOS/miami%20assistence/miami%20assistence/Core/App/CoreApp+Scene.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
