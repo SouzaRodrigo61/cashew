@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import OneSignal
+import OneSignalFramework
 import ComposableArchitecture
 
 extension CoreApp {

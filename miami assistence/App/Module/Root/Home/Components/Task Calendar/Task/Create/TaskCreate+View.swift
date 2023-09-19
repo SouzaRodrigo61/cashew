@@ -32,8 +32,15 @@ extension TaskCreate {
             WithViewStore(store, observe: { $0 } ) { viewStore in
                 VStack {
                     HStack {
-                        Text("task.create.nav.title")
-                            .font(.system(.title3, design: .rounded, weight: .bold))
+                        HStack(alignment: .bottom) {
+                            
+                            Text("task.create.nav.title")
+                                .font(.system(.title2, design: .rounded, weight: .bold))
+                            
+                            Text(viewStore.date.week())
+                                .font(.system(.body, design: .rounded, weight: .medium))
+                                .foregroundStyle(.gray)
+                        }
                         
                         Spacer()
                         
@@ -41,7 +48,7 @@ extension TaskCreate {
                             store.send(.closeTapped, animation: .bouncy)
                         } label: {
                             Image(systemName: "xmark.circle.fill")
-                                .font(.title)
+                                .font(.title2)
                                 .foregroundStyle(.gray)
                         }
                         .buttonStyle(.pressBordered)
@@ -58,35 +65,82 @@ extension TaskCreate {
                         .listRowBackground(Color.lotion)
                         
                         Section {
-                            ColorPicker("task.create.picker.color", selection: viewStore.$color, supportsOpacity: false)
-                                .font(.system(.headline, design: .rounded, weight: .semibold))
-                                .padding(.horizontal, 16)
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("task.create.tag")
+                                    .font(.system(.title3, design: .rounded, weight: .bold))
+                                    .padding(.horizontal, 16)
+                                    .padding(.bottom, 4)
+                                
+                                TextField("task.create.tag.placeholder", text: viewStore.$tag.value)
+                                    .font(.system(.body, design: .rounded, weight: .bold))
+                                    .foregroundStyle(.gray)
+                                    .padding(.horizontal, 16)
+                                
+                            }
+                            .padding(.vertical, 8)
                         }
                         .listRowInsets(.init())
                         .listRowBackground(Color.lotion)
                         
                         Section {
-                            DatePicker("task.create.picker.date",
-                                       selection: viewStore.$date,
-                                       in: dateRange,
-                                       displayedComponents: [.date])
-                            .padding(.horizontal, 16)
-                            .datePickerStyle(.graphical)
-                            
-                            .environment(\.locale, Locale.current)
-                            .environment(\.calendar, Locale.current.calendar)
-                            .environment(\.timeZone, TimeZone(abbreviation: TimeZone.current.abbreviation() ?? "")!)
-                            
-                            DatePicker("task.create.picker.date",
-                                       selection: viewStore.$startedHour,
-                                       in: dateRange,
-                                       displayedComponents: [.hourAndMinute])
-                            .padding(.horizontal, 16)
-                            .datePickerStyle(.graphical)
-                            
-                            .environment(\.locale, Locale.current)
-                            .environment(\.calendar, Locale.current.calendar)
-                            .environment(\.timeZone, TimeZone(abbreviation: TimeZone.current.abbreviation() ?? "")!)
+                            ColorPicker("task.create.picker.color", selection: viewStore.$color, supportsOpacity: false)
+                                .font(.system(.title3, design: .rounded, weight: .bold))
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
+                        }
+                        .listRowInsets(.init())
+                        .listRowBackground(Color.lotion)
+                        
+                        Section {
+                            VStack(alignment: .leading, spacing: 8) {
+                                
+                                Text("task.create.picker.datetime.title")
+                                    .font(.system(.title3, design: .rounded, weight: .bold))
+                                    .padding(.horizontal, 16)
+                                    .padding(.top, 8)
+                                
+                                Picker(selection: viewStore.$startedHour, label: Text("")) {
+                                    ForEach(0..<viewStore.hours.count, id: \.self) { index in
+                                        Text("\(viewStore.hours[index])")
+                                            .tag(index)
+                                    }
+                                }
+                                .pickerStyle(.wheel)
+                                .overlay(alignment: .center) {
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .frame(height: 40)
+                                        .foregroundStyle(.lotion)
+                                        .overlay {
+                                            Button {
+                                                store.send(.hourTapped)
+                                            } label: {
+                                                Text(viewStore.selectedHour)
+                                                    .font(.system(.title3, design: .rounded, weight: .bold))
+                                                    .getContrastText(backgroundColor: viewStore.color)
+                                                    .padding(.horizontal, 40)
+                                                    .padding(.vertical, 10)
+                                                    .background(viewStore.color, in: .rect(cornerRadius: 10))
+                                            }
+                                            .buttonStyle(.scale)
+                                        }
+                                }
+                                
+                                
+                                Picker("", selection: viewStore.$activityDuration) {
+                                    ForEach(Feature.State.ActivityDuration.allCases, id: \.self) { option in
+                                        if option.rawValue >= 60 {
+                                            Text("\(option.rawValue == 60 ? "1h" : "1:30h")")
+                                                .tag(option)
+                                        } else {
+                                            Text("\(option.rawValue) min")
+                                                .tag(option)
+                                        }
+                                    }
+                                }
+                                .pickerStyle(SegmentedPickerStyle())
+                                .padding(.horizontal, 16)
+                                .padding(.bottom, 8)
+                            }
                         }
                         .listRowInsets(.init())
                         .listRowBackground(Color.lotion)
@@ -101,17 +155,25 @@ extension TaskCreate {
                     .scrollContentBackground(.hidden)
                     .scrollDismissesKeyboard(.interactively)
                     
+                    
+                }
+                .overlay(alignment: .bottom) {
                     Button {
                         store.send(.createTaskTapped, animation: .smooth)
                     } label: {
                         Text("task.create.button.title")
-                            .foregroundStyle(.white)
+                            .font(.system(.title3, design: .rounded, weight: .bold))
+                            .getContrastText(backgroundColor: viewStore.color)
                             .padding(16)
                             .hSpacing(.center)
-                            .background(.dark, in: .rect(cornerRadius: 10))
+                            .background(viewStore.color, in: .rect(cornerRadius: 10))
                     }
                     .buttonStyle(.scale)
                     .padding(.horizontal, 16)
+                    .padding(.bottom, 6)
+                }
+                .onAppear {
+                    store.send(.onAppearSelectedHour, animation: .bouncy)
                 }
             }
         }

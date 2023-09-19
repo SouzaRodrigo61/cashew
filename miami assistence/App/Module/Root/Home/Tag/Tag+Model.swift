@@ -10,6 +10,7 @@ import Foundation
 extension Tag {
     struct Model: Identifiable, Equatable {
         var id = UUID()
-        var title: String
+        var value: String
+        var isInitial: Bool = false
     }
 }

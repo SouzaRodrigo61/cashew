@@ -1,6 +1,15 @@
 {
   "sourceLanguage" : "pt-BR",
   "strings" : {
+    "" : {
+
+    },
+    "%@" : {
+
+    },
+    "%lld min" : {
+
+    },
     "button.back" : {
 
     },
@@ -144,9 +153,6 @@
     "Schedule" : {
 
     },
-    "Show only when doesn't has task itens!" : {
-
-    },
     "task.button.create.title" : {
       "localizations" : {
         "en" : {
@@ -212,6 +218,7 @@
       }
     },
     "task.create.picker.date" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -223,6 +230,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hora de inicio"
+          }
+        }
+      }
+    },
+    "task.create.picker.datetime.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quando?"
+          }
+        }
+      }
+    },
+    "task.create.tag" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tag"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcação"
+          }
+        }
+      }
+    },
+    "task.create.tag.placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eg: New, Recurring..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exemplo: Novo, Recorrente ..."
           }
         }
       }
