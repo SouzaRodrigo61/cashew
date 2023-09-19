@@ -17,7 +17,7 @@ extension TaskCalendar {
             var task: Task.Feature.State?
             var header: Header.Feature.State?
             var weekSlider: [Date.Days] = Date().fetchWeek()
-            var currentDate: Date = .init()
+            var currentDate: Date = .now
             var currentIndex: Int = 1
             
             var createDay: Bool = false

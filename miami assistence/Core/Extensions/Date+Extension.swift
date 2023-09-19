@@ -93,6 +93,10 @@ extension Date {
         return self.formatted(.dateTime .day())
     }
     
+    func hourMinute() -> String {
+        self.formatted(.dateTime .hour() .minute())
+    }
+    
     func week() -> String {
         return self.formatted(.dateTime .day(.twoDigits) .month(.wide)).replacing(",", with: "")
     }
@@ -130,7 +134,7 @@ extension Date {
         week.append(.init(date: startOfDate, isBefore: false))
         
         if let nextDay = calendar.date(byAdding: .day, value: 1, to: startOfDate) {
-            week.append(.init(date: nextDay, isBefore: nextDay > .now))
+            week.append(.init(date: nextDay, isBefore: nextDay > .now, isTomorrow: date == .now ? true : false))
         }
         
         return week
@@ -148,6 +152,19 @@ extension Date {
     }
     
     
+    
+    // Creating Next Day
+    func createNextHourMinute(into value: Int = 1) -> String {
+        let calendar = Calendar.current
+
+        guard let nextDay = calendar.date(byAdding: .hour, value: value, to: self) else {
+            return ""
+        }
+        
+        return nextDay.hourMinute()
+    }
+    
+    
     // Creating Previous Day
     func createPreviousDay() -> Days {
         let calendar = Calendar.current
@@ -159,9 +176,91 @@ extension Date {
         return .init(date: day, isBefore: day < .now)
     }
     
+    func fetchHourOfDay(_ date: Date = .init()) -> [String] {
+
+        // Calendário para manipular datas e horas
+        let calendar = Calendar.current
+
+        // Definir o formato de exibição da hora
+        let formatedHour = DateFormatter()
+        formatedHour.dateFormat = "HH:mm"
+
+        // Definir a hora de início e a hora de término
+        guard let initialHour = calendar.date(bySettingHour: 6, minute: 0, second: 0, of: date) else { return [] }
+        guard let lastHour = calendar.date(bySettingHour: 22, minute: 0, second: 0, of: date) else { return [] }
+
+        // Verificar se a hora atual está dentro do intervalo permitido
+        if let now = calendar.date(bySettingHour: calendar.component(.hour, from: date), minute: calendar.component(.minute, from: Date()), second: 0, of: date),
+            now >= initialHour && now <= lastHour {
+            var arrayHour: [String] = []
+            var currentHour = initialHour
+
+            // Loop para adicionar horas em incrementos de 15 minutos
+            while currentHour <= lastHour {
+                let hour = formatedHour.string(from: currentHour)
+                arrayHour.append(hour)
+
+                if let nextHour = calendar.date(byAdding: .minute, value: 15, to: currentHour) {
+                    currentHour = nextHour
+                } else {
+                    break
+                }
+            }
+
+            // Agora você tem um array de horas em incrementos de 15 minutos dentro do intervalo permitido
+            return arrayHour
+        } else {
+            return []
+        }
+    }
+    
+    func fetchIndexByDeviceHour() -> Int {
+        
+        // Define the time display format, including the date
+        let timeFormat = DateFormatter()
+        timeFormat.dateFormat = "yyyy-MM-dd HH:mm"
+
+        // Create a list of times in 15-minute increments (example)
+        var timeArray: [String] = []
+        var currentTime = Calendar.current.date(bySettingHour: 6, minute: 0, second: 0, of: Date())!
+
+        while currentTime <= Calendar.current.date(bySettingHour: 22, minute: 0, second: 0, of: Date())! {
+            let formattedTime = timeFormat.string(from: currentTime)
+            timeArray.append(formattedTime)
+
+            if let nextTime = Calendar.current.date(byAdding: .minute, value: 15, to: currentTime) {
+                currentTime = nextTime
+            } else {
+                break
+            }
+        }
+
+        // Get the current time from the device
+        var currentDeviceTime = Calendar.current.date(bySettingHour: Calendar.current.component(.hour, from: Date()), minute: Calendar.current.component(.minute, from: Date()), second: 0, of: Date())!
+
+        // Find the next corresponding time in the list
+        var correspondingIndex: Int?
+        var smallestMinuteDifference = Int.max
+
+        for (index, time) in timeArray.enumerated() {
+            if let timeDate = timeFormat.date(from: time) {
+                let difference = Calendar.current.dateComponents([.hour, .minute], from: currentDeviceTime, to: timeDate)
+                let minuteDifference = difference.hour! * 60 + difference.minute!
+
+                if minuteDifference >= 0 && minuteDifference < smallestMinuteDifference {
+                    smallestMinuteDifference = minuteDifference
+                    correspondingIndex = index
+                }
+            }
+        }
+        
+        return correspondingIndex ?? 0
+    }
+    
     struct Days: Identifiable, Equatable {
         var id: UUID = .init()
         var date: Date
         var isBefore: Bool
+        var isTomorrow: Bool = false
     }
 }

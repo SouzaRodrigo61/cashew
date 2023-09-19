@@ -61,7 +61,8 @@ extension Home {
         private func core(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
             case .bottomSheet(.addButtonTapped):
-                state.taskCreate = .init()
+                let date = state.taskCalendar.weekSlider[state.taskCalendar.currentIndex]
+                state.taskCreate = .init(date: date.date)
                 
                 state.bottomSheet?.collapse = false
                 
@@ -70,7 +71,8 @@ extension Home {
                 
                 return .none
             case .taskCalendar(.task(.showTaskCreate)):
-                state.taskCreate = .init()
+                let date = state.taskCalendar.weekSlider[state.taskCalendar.currentIndex]
+                state.taskCreate = .init(date: date.date)
                 
                 state.bottomSheet?.collapse = false
                 
@@ -85,7 +87,7 @@ extension Home {
                 guard let count = state.taskCalendar.task?.item.count else { return .none }
                 state.taskCalendar.task?.empty = nil
                 
-                state.taskCalendar.task?.item.append(.init(task: .init(title: content.title, date: content.date, startedHour: content.startedHour, duration: content.activityDuration, color: content.color, isAlert: false, isRepeted: false, position: (count + 1), createdAt: .now, updatedAt: .now, tag: [], note: [])))
+                state.taskCalendar.task?.item.append(.init(task: .init(title: content.title, date: content.date, startedHour: .now, duration: Double(content.activityDuration.rawValue), color: content.color, isAlert: false, isRepeted: false, position: (count + 1), createdAt: .now, updatedAt: .now, tag: [], note: [])))
                 
                 state.taskCreate = nil
                 

@@ -33,4 +33,24 @@ extension String {
         guard let date = dateFormatter.date(from: self) else { return .now }
         return date
     }
+    
+    func calculateHourByValue(with value: Int = 60) -> String {
+        
+        // Defina o formato de exibição da hora
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+
+        // Converta a string em um objeto Date
+        if let hour = dateFormatter.date(from: self) {
+            // Use Calendar para adicionar uma hora
+            let calendar = Calendar.current
+            if let newHour = calendar.date(byAdding: .minute, value: value, to: hour) {
+                // Converta a nova hora em uma string formatada
+                let newHourString = dateFormatter.string(from: newHour)
+                return newHourString
+            }
+        } 
+        
+        return "Error"
+    }
 }
