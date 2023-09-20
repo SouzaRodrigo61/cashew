@@ -36,11 +36,10 @@ extension Header {
                             Button {
                                 store.send(.moreTapped)
                             } label: {
-                                Image(systemName: "ellipsis")
+                                Image(systemName: "gear")
                                     .font(.title3)
                                     .fontWeight(.bold)
                                     .foregroundStyle(.gray)
-                                    .padding(.vertical, 4)
                             }
                             .buttonStyle(.pressBordered)
                         }

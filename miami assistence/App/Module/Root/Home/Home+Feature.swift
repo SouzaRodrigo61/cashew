@@ -75,8 +75,10 @@ extension Home {
         
         private func core(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
-            case .onAppear:
                 
+                // MARK: - Home Basic Action
+                
+            case .onAppear:
                 return .run { send in
                     let tasks = try JSONDecoder().decode([Task.Model].self, from: loadData(.tasks))
                     await send(.loadedData(tasks), animation: .default)
@@ -86,7 +88,18 @@ extension Home {
                 state.tasks = loaded
                 showTaskByDate(&state)
                 return .none
-            
+                
+            case .matcheAnimationRemoved:
+                state.forcePadding = false
+                state.contentTask = nil
+                
+                return .none
+                
+            case .showTaskByDate:
+                showTaskByDate(&state)
+                
+                return .none
+                
             case .bottomSheet(.addButtonTapped):
                 let date = state.taskCalendar.weekSlider[state.taskCalendar.currentIndex]
                 state.taskCreate = .init(date: date.date)
@@ -97,6 +110,17 @@ extension Home {
                 state.taskCalendar.header?.isScroll = false
                 
                 return .none
+                
+            case .destination(.element(id: _, action: .note(.closeTapped))):
+                state.forcePadding = true
+                return .run { send in
+                    try! await SwiftUI.Task.sleep(for: .seconds(0.04))
+                    await send(.matcheAnimationRemoved, animation: .smooth)
+                }
+                
+                
+                // MARK:  TaskCalendar and Childs Actions
+                
             case .taskCalendar(.task(.showTaskCreate)):
                 let date = state.taskCalendar.weekSlider[state.taskCalendar.currentIndex]
                 state.taskCreate = .init(date: date.date)
@@ -107,43 +131,7 @@ extension Home {
                 state.taskCalendar.header?.isScroll = false
                 
                 return .none
-            case .taskCreate(.createTaskTapped):
-                guard let content = state.taskCreate else { return .none }
                 
-                guard state.taskCalendar.task != nil else { return .none }
-                guard let count = state.taskCalendar.task?.item.count else { return .none }
-                state.taskCalendar.task?.empty = nil
-                
-                let componets = content.tag.value.components(separatedBy: ", ")
-                let tags: [Tag.Model] = componets.map {
-                    .init(value: $0)
-                }
-                
-                // TODO: StartedHour show correct hour
-                state.tasks.append(.init(title: content.title, date: content.date, startedHour: .now, duration: Double(content.activityDuration.rawValue), color: content.color, isAlert: false, isRepeted: false, position: (count + 1), createdAt: .now, updatedAt: .now, tag: tags, note: []))
-                
-                state.taskCreate = nil
-                
-                return .run { [task = state.tasks] send in
-                    
-                    enum CancelID { case saveDebounce }
-                    try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
-                        try self.saveData(
-                            JSONEncoder().encode(task),
-                            .tasks
-                        )
-                    }
-                    
-                    await send(.showTaskByDate, animation: .snappy)
-                }
-                
-            case .taskCreate(.closeTapped):
-                state.taskCreate = nil
-                
-                guard state.taskCalendar.header != nil else { return .none }
-                state.taskCalendar.header?.isScroll = false
-                
-                return .none
             case let .taskCalendar(.task(.item(_, .contentTapped(task)))):
                 state.destination.append(.note(.init(task: task)))
                 state.contentTask = task
@@ -155,15 +143,8 @@ extension Home {
                 
                 return .none
                 
-            case .destination(.element(id: _, action: .note(.closeTapped))):
-                state.forcePadding = true
-                return .run { send in
-                    try! await SwiftUI.Task.sleep(for: .seconds(0.04))
-                    await send(.matcheAnimationRemoved, animation: .smooth)
-                }
-                
             case let .taskCalendar(.previousDay(day)):
-
+                
                 state.taskCalendar.weekSlider.insert(day.createPreviousDay(), at: 0)
                 state.taskCalendar.weekSlider.removeLast()
                 
@@ -203,21 +184,62 @@ extension Home {
                     send(.showTaskByDate, animation: .snappy)
                 }
                 
-            case .matcheAnimationRemoved:
-                state.forcePadding = false
-                state.contentTask = nil
-                
-                return .none
-            
-            case .taskCalendar(.onAppear):
-                dump(state.taskCalendar.weekSlider)
-                
+            case .taskCalendar(.header(.searchTapped)):
+                state.destination.append(.search(.init()))
                 return .none
                 
-            case .showTaskByDate:
-                showTaskByDate(&state)
+            case .taskCalendar(.header(.moreTapped)):
+                state.destination.append(.settings(.init()))
+                return .none
+                
+            case let .taskCalendar(.task(.item(id, .leadingAction(taskId)))):
+                dump("leadingAction: \(id) -> \(taskId)")
+                return .none
+                
+            case let .taskCalendar(.task(.item(id, .trailingAction(taskId)))):
+                dump("trailingAction: \(id) -> \(taskId)")
+                return .none
+                
+                // MARK: - Task Create Actions
+                
+            case .taskCreate(.createTaskTapped):
+                guard let content = state.taskCreate else { return .none }
+                
+                guard state.taskCalendar.task != nil else { return .none }
+                guard let count = state.taskCalendar.task?.item.count else { return .none }
+                state.taskCalendar.task?.empty = nil
+                
+                let componets = content.tag.value.components(separatedBy: ", ")
+                let tags: [Tag.Model] = componets.map {
+                    .init(value: $0)
+                }
+                
+                // TODO: StartedHour show correct hour
+                state.tasks.append(.init(title: content.title, date: content.date, startedHour: .now, duration: Double(content.activityDuration.rawValue), color: content.color, isAlert: false, isRepeted: false, position: (count + 1), createdAt: .now, updatedAt: .now, tag: tags, note: []))
+                
+                state.taskCreate = nil
+                
+                return .run { [task = state.tasks] send in
+                    
+                    enum CancelID { case saveDebounce }
+                    try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
+                        try self.saveData(
+                            JSONEncoder().encode(task),
+                            .tasks
+                        )
+                    }
+                    
+                    await send(.showTaskByDate, animation: .snappy)
+                }
+                
+            case .taskCreate(.closeTapped):
+                state.taskCreate = nil
+                
+                guard state.taskCalendar.header != nil else { return .none }
+                state.taskCalendar.header?.isScroll = false
                 
                 return .none
+                
             default:
                 return .none
             }

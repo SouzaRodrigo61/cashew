@@ -27,6 +27,7 @@ extension Task {
                 .listRowSeparator(.hidden)
                 .listSectionSeparator(.hidden)
                 .listRowBackground(Color.alabaster)
+                .transition(.opacity)
                 
                 IfLetStore(store.scope(state: \.empty, action: Feature.Action.empty)) { 
                     TaskEmpty.View(store: $0)

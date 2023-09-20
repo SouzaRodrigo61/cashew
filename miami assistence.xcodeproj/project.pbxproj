@@ -95,6 +95,12 @@
 		237B60C72A48B3D10058B18E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237B60C62A48B3D10058B18E /* Assets.xcassets */; };
 		237B60CB2A48B3D10058B18E /* MiamiAssistenceWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 237B60BE2A48B3D00058B18E /* MiamiAssistenceWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2390F7D32ABA973A007CCC02 /* Color+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390F7D22ABA973A007CCC02 /* Color+Codable.swift */; };
+		2390F7DB2ABB37A5007CCC02 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390F7DA2ABB37A5007CCC02 /* Settings.swift */; };
+		2390F7DD2ABB37B0007CCC02 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390F7DC2ABB37B0007CCC02 /* Search.swift */; };
+		2390F7E02ABB3837007CCC02 /* Settings+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390F7DF2ABB3837007CCC02 /* Settings+Feature.swift */; };
+		2390F7E22ABB383E007CCC02 /* Settings+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390F7E12ABB383E007CCC02 /* Settings+View.swift */; };
+		2390F7E42ABB384D007CCC02 /* Search+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390F7E32ABB384D007CCC02 /* Search+Feature.swift */; };
+		2390F7E62ABB3855007CCC02 /* Search+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390F7E52ABB3855007CCC02 /* Search+View.swift */; };
 		23978B7C2A55DBA4002ECB4A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23978B7B2A55DBA4002ECB4A /* Date+Extension.swift */; };
 		23AC6D732AA51D1E0000D04B /* TaskEmpty+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AC6D722AA51D1E0000D04B /* TaskEmpty+Feature.swift */; };
 		23AC6D752AA51D2D0000D04B /* TaskEmpty+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AC6D742AA51D2D0000D04B /* TaskEmpty+View.swift */; };
@@ -264,6 +270,12 @@
 		237B60C82A48B3D10058B18E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		237B60CF2A48B4380058B18E /* MiamiAssistenceWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiamiAssistenceWidgetExtension.entitlements; sourceTree = "<group>"; };
 		2390F7D22ABA973A007CCC02 /* Color+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Codable.swift"; sourceTree = "<group>"; };
+		2390F7DA2ABB37A5007CCC02 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		2390F7DC2ABB37B0007CCC02 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		2390F7DF2ABB3837007CCC02 /* Settings+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+Feature.swift"; sourceTree = "<group>"; };
+		2390F7E12ABB383E007CCC02 /* Settings+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+View.swift"; sourceTree = "<group>"; };
+		2390F7E32ABB384D007CCC02 /* Search+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search+Feature.swift"; sourceTree = "<group>"; };
+		2390F7E52ABB3855007CCC02 /* Search+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search+View.swift"; sourceTree = "<group>"; };
 		23978B7B2A55DBA4002ECB4A /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		23AC6D722AA51D1E0000D04B /* TaskEmpty+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskEmpty+Feature.swift"; sourceTree = "<group>"; };
 		23AC6D742AA51D2D0000D04B /* TaskEmpty+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskEmpty+View.swift"; sourceTree = "<group>"; };
@@ -522,8 +534,7 @@
 		2359917A2A7150B200C2677A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				2322C8242AA78451000F0576 /* Tag */,
-				236C127E2A90F7ED002F8A66 /* Note */,
+				2390F7DE2ABB37E2007CCC02 /* Destination */,
 				236C12972A93ABFF002F8A66 /* Components */,
 				23582F5A2A71E9E600FDF7FE /* Home.swift */,
 				23582F5C2A71E9F900FDF7FE /* Home+Feature.swift */,
@@ -591,6 +602,7 @@
 		236C12972A93ABFF002F8A66 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2322C8242AA78451000F0576 /* Tag */,
 				2340DEC52AB3599200F42FCE /* Task Calendar */,
 				236F8C012AA69AE5006CC1BA /* Schedule */,
 				2306FD9D2A8FD337002F323D /* Bottom Sheet */,
@@ -753,6 +765,36 @@
 				237B60C82A48B3D10058B18E /* Info.plist */,
 			);
 			path = MiamiAssistenceWidget;
+			sourceTree = "<group>";
+		};
+		2390F7D82ABB377A007CCC02 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2390F7DA2ABB37A5007CCC02 /* Settings.swift */,
+				2390F7DF2ABB3837007CCC02 /* Settings+Feature.swift */,
+				2390F7E12ABB383E007CCC02 /* Settings+View.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		2390F7D92ABB3785007CCC02 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				2390F7DC2ABB37B0007CCC02 /* Search.swift */,
+				2390F7E32ABB384D007CCC02 /* Search+Feature.swift */,
+				2390F7E52ABB3855007CCC02 /* Search+View.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		2390F7DE2ABB37E2007CCC02 /* Destination */ = {
+			isa = PBXGroup;
+			children = (
+				2390F7D92ABB3785007CCC02 /* Search */,
+				2390F7D82ABB377A007CCC02 /* Settings */,
+				236C127E2A90F7ED002F8A66 /* Note */,
+			);
+			path = Destination;
 			sourceTree = "<group>";
 		};
 		23978B782A55D694002ECB4A /* Root */ = {
@@ -1048,8 +1090,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				236602562A94147500E9CA6A /* Progress.swift in Sources */,
+				2390F7E62ABB3855007CCC02 /* Search+View.swift in Sources */,
+				2390F7E22ABB383E007CCC02 /* Settings+View.swift in Sources */,
 				236602542A94146B00E9CA6A /* Progress+Feature.swift in Sources */,
 				236F8C052AA69AFB006CC1BA /* Schedule+Feature.swift in Sources */,
+				2390F7E42ABB384D007CCC02 /* Search+Feature.swift in Sources */,
 				23978B7C2A55DBA4002ECB4A /* Date+Extension.swift in Sources */,
 				231E6C982A8F1910009569C1 /* ButtonStyle+Extensions.swift in Sources */,
 				2306FD932A8FCB5D002F323D /* Button+Design.swift in Sources */,
@@ -1060,9 +1105,11 @@
 				2340DECC2AB4C2DA00F42FCE /* Task Calendar+View.swift in Sources */,
 				23BF94222AB7D1A300EA3F64 /* CoreApp+Feature.swift in Sources */,
 				236C128E2A91BBB9002F8A66 /* Note.swift in Sources */,
+				2390F7DD2ABB37B0007CCC02 /* Search.swift in Sources */,
 				2390F7D32ABA973A007CCC02 /* Color+Codable.swift in Sources */,
 				2340DEDE2AB60A8C00F42FCE /* Dependency+Extension.swift in Sources */,
 				234749462A953CF400B19513 /* ScrollViewDetector.swift in Sources */,
+				2390F7E02ABB3837007CCC02 /* Settings+Feature.swift in Sources */,
 				23582F572A71E53300FDF7FE /* Root+View.swift in Sources */,
 				23AC6D732AA51D1E0000D04B /* TaskEmpty+Feature.swift in Sources */,
 				2322C82A2AA78496000F0576 /* Tag+Model.swift in Sources */,
@@ -1071,6 +1118,7 @@
 				23E2D19D2A71CBDE00180C1C /* CreateTypeCompany.swift in Sources */,
 				236C12922A91BBCD002F8A66 /* Note+View.swift in Sources */,
 				231E6C9D2A8F1964009569C1 /* ScaleButtonStyle.swift in Sources */,
+				2390F7DB2ABB37A5007CCC02 /* Settings.swift in Sources */,
 				2354BE092A73ECE4003E4CA9 /* CoreApp+Delegate.swift in Sources */,
 				231E6C9B2A8F1942009569C1 /* PressBorderedButtonStyle.swift in Sources */,
 				23AC6D752AA51D2D0000D04B /* TaskEmpty+View.swift in Sources */,

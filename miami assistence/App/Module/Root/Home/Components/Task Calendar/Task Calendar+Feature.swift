@@ -10,8 +10,6 @@ import ComposableArchitecture
 
 extension TaskCalendar {
     struct Feature: Reducer {
-        
-        
         struct State: Equatable {
             
             var task: Task.Feature.State?

@@ -31,7 +31,7 @@ extension TaskItem {
         var body: some SwiftUI.View {
             GeometryReader { geo in
                 WithViewStore(store, observe: \.task) { viewStore in
-                    content(id: viewStore.id, title: viewStore.title, leadingAction, trailingAction)
+                    content(id: viewStore.id, title: viewStore.title)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .contentShape(.dragPreview, .rect(cornerRadius: 10))
                         .onDrag {
@@ -57,9 +57,8 @@ extension TaskItem {
         @ViewBuilder
         private func content(
             id: UUID,
-            title: String,
-            _ leadingAction: @escaping () -> Void,
-            _ trailingAction: @escaping () -> Void) -> some SwiftUI.View {
+            title: String
+        ) -> some SwiftUI.View {
             ZStack {
                 VStack {
                     Image(systemName: gestureDirection == .trailing ? "checkmark" : "zzz")
@@ -83,7 +82,7 @@ extension TaskItem {
                             return [id.uuidString: anchor]
                         })
                         .gesture(
-                            DragGesture(minimumDistance: 20)
+                            DragGesture(minimumDistance: 5)
                                 .onChanged { value in
                                     if value.translation.width > 0 {
                                         gestureDirection = .leading
@@ -126,9 +125,9 @@ extension TaskItem {
                                                 withAnimation {
                                                     colorView = .lotion
                                                 }
-                                                
-                                                leadingAction()
                                             }
+                                            
+                                            store.send(.leadingAction(id), animation: .default)
                                         }
                                     } else {
                                         let axisX = (proxy.frame(in: .local).maxX - (value.location.x)) / 4.5
@@ -142,9 +141,9 @@ extension TaskItem {
                                                 withAnimation {
                                                     colorView = .lotion
                                                 }
-                                                
-                                                trailingAction()
                                             }
+                                            
+                                            store.send(.trailingAction(id), animation: .default)
                                         }
                                     }
                                     
@@ -155,15 +154,6 @@ extension TaskItem {
                         )
                 }
             }
-        }
-        
-        
-        private func leadingAction() {
-            dump("Leading")
-        }
-        
-        private func trailingAction() {
-            dump("Trailing")
         }
     }
     

@@ -25,24 +25,13 @@ extension Task {
         }
         
         var body: some Reducer<State, Action> {
-            Reduce(self.core)
+            EmptyReducer()
                 .forEach(\.item, action: /Action.item) {
                     TaskItem.Feature()
                 }
                 .ifLet(\.empty, action: /Action.empty) {
                     TaskEmpty.Feature()
                 }
-        }
-    }
-}
-
-// MARK: - Reduce Actions
-extension Task.Feature {
-    private func core(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-        
-        default:
-            return .none
         }
     }
 }

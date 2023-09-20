@@ -28,10 +28,14 @@ extension TaskItem {
             case moveCurrentlyDragged(Int, Int)
             
             case contentTapped(Task.Model)
+            
+            case leadingAction(UUID)
+            case trailingAction(UUID)
         }
         
         var body: some Reducer<State, Action> {
             EmptyReducer()
+                ._printChanges()
         }
     }
 }
