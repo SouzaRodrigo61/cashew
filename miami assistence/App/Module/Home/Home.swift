@@ -15,15 +15,6 @@ extension Home.Feature.State {
         let currentDate: Date = Date()
         
         return Self(
-            taskCalendar: .init(
-                task: .init(empty: .init(.init(currentDate: currentDate))), 
-                header: .init(
-                    today: .init(
-                        week: Date().validateIsToday(),
-                        weekCompleted: Date().week()
-                    )
-                )
-            ), 
             destination: StackState([])
         )
     }
