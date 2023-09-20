@@ -27,7 +27,7 @@ extension Note {
                                 WithViewStore(store, observe: \.showContent) {
                                     if $0.state {
                                         VStack {
-                                            TaskItem.Content(id: viewStore.id, title: viewStore.title, color: Color.clear, alignment: .topLeading, showOverlay: false)
+                                            TaskItem.View.Content(id: viewStore.id, title: viewStore.title, color: Color.clear, alignment: .topLeading, showOverlay: false)
                                         }
                                         .overlay(alignment: .topTrailing) {
                                             Button {
