@@ -27,20 +27,22 @@ extension TaskItem.View {
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundStyle(.white)
-                    .offset(x: (offset / 4))
+                    .offset(x: offset / 4)
                     .animation(.spring(), value: offset)
             }
-            .frame(maxWidth: .infinity,
-                   maxHeight: .infinity,
-                   alignment: gestureDirection == .trailing ? .trailing : .leading)
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: .infinity,
+                alignment: gestureDirection == .trailing ? .trailing : .leading
+            )
             .background(colorRectangle)
             
             GeometryReader { proxy in
                 Content(id: id, title: title, color: colorView)
                     .offset(x: offset)
                     .animation(.spring(), value: offset)
-                    .anchorPreference(key: MAnchorKey.self, value: .bounds) { anchor in
-                        return [id.uuidString: anchor]
+                    .anchorPreference(key: MAnchorKey.self, value: .bounds) {
+                        return [id.uuidString: $0]
                     }
                     .gesture(
                         DragGesture(minimumDistance: 5)
@@ -56,7 +58,7 @@ extension TaskItem.View {
                                 } else {
                                     gestureDirection = .trailing
                                     if value.startLocation.x > proxy.frame(in: .local).midX {
-                                        let axisX = (proxy.frame(in: .local).maxX - (value.location.x)) / .pi
+                                        let axisX = (proxy.frame(in: .local).maxX - value.location.x) / .pi
                                         
                                         withAnimation {
                                             colorRectangle = .green
@@ -86,12 +88,12 @@ extension TaskItem.View {
                                             withAnimation {
                                                 colorView = .lotion
                                             }
-                                            
-                                            self.store.send(.leadingAction(id))
                                         }
+                                        
+                                        store.send(.leadingAction(id))
                                     }
                                 } else {
-                                    let axisX = (proxy.frame(in: .local).maxX - (value.location.x)) / 4.5
+                                    let axisX = (proxy.frame(in: .local).maxX - value.location.x) / 4.5
                                     
                                     if axisX > 40 {
                                         withAnimation {
@@ -102,9 +104,9 @@ extension TaskItem.View {
                                             withAnimation {
                                                 colorView = .lotion
                                             }
-                                            
-                                            self.store.send(.trailingAction(id))
                                         }
+                                        
+                                        store.send(.trailingAction(id))
                                     }
                                 }
                                 
@@ -127,7 +129,14 @@ extension TaskItem.View {
         let showOverlay: Bool
         let forcePadding: Bool
         
-        init(id: UUID, title: String, color: Color, alignment: Alignment = .leading, showOverlay: Bool = true, forcePadding: Bool = false) {
+        init(
+            id: UUID,
+            title: String,
+            color: Color,
+            alignment: Alignment = .leading,
+            showOverlay: Bool = true,
+            forcePadding: Bool = false
+        ) {
             self.id = id
             self.title = title
             self.color = color

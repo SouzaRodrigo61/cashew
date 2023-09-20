@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import Foundation
 
-extension TaskEmpty {
+extension Empty {
     struct Feature: Reducer {
         struct State: Equatable {
             var currentDate: Date

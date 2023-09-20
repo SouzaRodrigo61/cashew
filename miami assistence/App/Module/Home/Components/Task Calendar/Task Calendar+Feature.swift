@@ -32,12 +32,6 @@ extension TaskCalendar {
         
         var body: some Reducer<State, Action> {
             EmptyReducer()
-            .ifLet(\.task, action: /Action.task) {
-                Task.Feature()
-            }
-            .ifLet(\.header, action: /Action.header) {
-                Header.Feature()
-            }
         }
     }
 }
