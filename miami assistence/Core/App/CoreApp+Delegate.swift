@@ -17,7 +17,6 @@ extension CoreApp {
             initialState: Feature.State(),
             reducer: {
                 Feature()
-                    ._printChanges()
             }
         )
         

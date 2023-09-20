@@ -12,12 +12,12 @@ import SwiftUI
 extension TaskCreate {
     struct View: SwiftUI.View {
         let store: StoreOf<Feature>
-        
-        @FocusState private var focusedField: Field?
         @State var username: String = ""
         
         @State var color = Color.blue
         @State var selectedDate = Date()
+        
+        @FocusState var focus: Feature.State.Field?
         
         let dateRange: ClosedRange<Date> = {
             let calendar = Calendar.current
@@ -71,10 +71,13 @@ extension TaskCreate {
                                     .padding(.horizontal, 16)
                                     .padding(.bottom, 4)
                                 
-                                TextField("task.create.tag.placeholder", text: viewStore.$tag.value)
-                                    .font(.system(.body, design: .rounded, weight: .bold))
-                                    .foregroundStyle(.gray)
-                                    .padding(.horizontal, 16)
+                                ForEach(viewStore.$tags) { $tag in
+                                    TextField("task.create.tag.placeholder", text: viewStore.$tag.value)
+                                        .font(.system(.body, design: .rounded, weight: .bold))
+                                        .focused(self.$focus, equals: Feature.State.Field.tag(tag.id))
+                                        .foregroundStyle(.gray)
+                                        .padding(.horizontal, 16)
+                                }
                                 
                             }
                             .padding(.vertical, 8)
@@ -177,11 +180,5 @@ extension TaskCreate {
                 }
             }
         }
-    }
-}
-
-extension TaskCreate.View {
-    private enum Field: Int, Hashable {
-        case name
     }
 }

@@ -94,6 +94,7 @@
 		237B60C52A48B3D00058B18E /* MiamiAssistenceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237B60C42A48B3D00058B18E /* MiamiAssistenceWidget.swift */; };
 		237B60C72A48B3D10058B18E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237B60C62A48B3D10058B18E /* Assets.xcassets */; };
 		237B60CB2A48B3D10058B18E /* MiamiAssistenceWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 237B60BE2A48B3D00058B18E /* MiamiAssistenceWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2390F7D32ABA973A007CCC02 /* Color+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390F7D22ABA973A007CCC02 /* Color+Codable.swift */; };
 		23978B7C2A55DBA4002ECB4A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23978B7B2A55DBA4002ECB4A /* Date+Extension.swift */; };
 		23AC6D732AA51D1E0000D04B /* TaskEmpty+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AC6D722AA51D1E0000D04B /* TaskEmpty+Feature.swift */; };
 		23AC6D752AA51D2D0000D04B /* TaskEmpty+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AC6D742AA51D2D0000D04B /* TaskEmpty+View.swift */; };
@@ -262,6 +263,7 @@
 		237B60C62A48B3D10058B18E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		237B60C82A48B3D10058B18E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		237B60CF2A48B4380058B18E /* MiamiAssistenceWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiamiAssistenceWidgetExtension.entitlements; sourceTree = "<group>"; };
+		2390F7D22ABA973A007CCC02 /* Color+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Codable.swift"; sourceTree = "<group>"; };
 		23978B7B2A55DBA4002ECB4A /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		23AC6D722AA51D1E0000D04B /* TaskEmpty+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskEmpty+Feature.swift"; sourceTree = "<group>"; };
 		23AC6D742AA51D2D0000D04B /* TaskEmpty+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskEmpty+View.swift"; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 			children = (
 				23429E992A9915A400104F02 /* Components */,
 				235C8FD02A4B10850018CA55 /* Extensions */,
+				2390F7D22ABA973A007CCC02 /* Color+Codable.swift */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -1057,6 +1060,7 @@
 				2340DECC2AB4C2DA00F42FCE /* Task Calendar+View.swift in Sources */,
 				23BF94222AB7D1A300EA3F64 /* CoreApp+Feature.swift in Sources */,
 				236C128E2A91BBB9002F8A66 /* Note.swift in Sources */,
+				2390F7D32ABA973A007CCC02 /* Color+Codable.swift in Sources */,
 				2340DEDE2AB60A8C00F42FCE /* Dependency+Extension.swift in Sources */,
 				234749462A953CF400B19513 /* ScrollViewDetector.swift in Sources */,
 				23582F572A71E53300FDF7FE /* Root+View.swift in Sources */,

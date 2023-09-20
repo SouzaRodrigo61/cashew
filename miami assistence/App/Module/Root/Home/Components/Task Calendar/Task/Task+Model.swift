@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension Task {
-    struct Model: Identifiable, Equatable {
+    struct Model: Identifiable, Equatable, Codable {
         
         var id = UUID()
         var title: String
@@ -27,8 +27,6 @@ extension Task {
         
         var tag: [Tag.Model]
         var note: [Note.Model]
-        
-
     }
     
 }

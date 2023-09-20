@@ -186,16 +186,17 @@ extension Date {
         formatedHour.dateFormat = "HH:mm"
 
         // Definir a hora de início e a hora de término
-        guard let initialHour = calendar.date(bySettingHour: 6, minute: 0, second: 0, of: date) else { return [] }
-        guard let lastHour = calendar.date(bySettingHour: 22, minute: 0, second: 0, of: date) else { return [] }
+        guard let initialHour = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: date) else { return [] }
+        guard let lastHour = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date) else { return [] }
 
-        // Verificar se a hora atual está dentro do intervalo permitido
-        if let now = calendar.date(bySettingHour: calendar.component(.hour, from: date), minute: calendar.component(.minute, from: Date()), second: 0, of: date),
+
+        if let now = calendar.date(bySettingHour: calendar.component(.hour, from: date), minute: calendar.component(.minute, from: date), second: 0, of: date),
             now >= initialHour && now <= lastHour {
             var arrayHour: [String] = []
             var currentHour = initialHour
 
             // Loop para adicionar horas em incrementos de 15 minutos
+            
             while currentHour <= lastHour {
                 let hour = formatedHour.string(from: currentHour)
                 arrayHour.append(hour)
@@ -222,9 +223,16 @@ extension Date {
 
         // Create a list of times in 15-minute increments (example)
         var timeArray: [String] = []
-        var currentTime = Calendar.current.date(bySettingHour: 6, minute: 0, second: 0, of: Date())!
+        guard var currentTime = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self) else { return 0 }
+        guard let lastTime = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: self) else { return 0 }
+        
+        guard let actualDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date()) else { return 0 }
+        guard let selfDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self) else { return 0 }
 
-        while currentTime <= Calendar.current.date(bySettingHour: 22, minute: 0, second: 0, of: Date())! {
+        guard actualDate == selfDate else { return 0 }
+        
+
+        while currentTime <= lastTime {
             let formattedTime = timeFormat.string(from: currentTime)
             timeArray.append(formattedTime)
 
@@ -236,12 +244,12 @@ extension Date {
         }
 
         // Get the current time from the device
-        var currentDeviceTime = Calendar.current.date(bySettingHour: Calendar.current.component(.hour, from: Date()), minute: Calendar.current.component(.minute, from: Date()), second: 0, of: Date())!
+        guard let currentDeviceTime = Calendar.current.date(bySettingHour: Calendar.current.component(.hour, from: Date()), minute: Calendar.current.component(.minute, from: Date()), second: 0, of: self) else { return 0 }
 
         // Find the next corresponding time in the list
-        var correspondingIndex: Int?
+        var correspondingIndex: Int = 0
         var smallestMinuteDifference = Int.max
-
+        
         for (index, time) in timeArray.enumerated() {
             if let timeDate = timeFormat.date(from: time) {
                 let difference = Calendar.current.dateComponents([.hour, .minute], from: currentDeviceTime, to: timeDate)
@@ -254,7 +262,15 @@ extension Date {
             }
         }
         
-        return correspondingIndex ?? 0
+        return correspondingIndex
+    }
+    
+    func compareDate(_ date: Date) -> Bool {
+        
+        guard let comparedDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: date) else { return false }
+        guard let selfDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self) else { return false }
+        
+        return comparedDate == selfDate
     }
     
     struct Days: Identifiable, Equatable {
