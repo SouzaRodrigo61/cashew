@@ -12,7 +12,7 @@ extension Home {
     struct Feature: Reducer {
         struct State: Equatable {
             var taskCalendar = TaskCalendar.Feature.State(
-                task: .init(empty: .init(.init(currentDate: Date()))),
+                task: .init(),
                 header: .init(
                     today: .init(
                         week: Date().validateIsToday(),
@@ -93,7 +93,6 @@ extension Home {
         private func taskCalendar(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
             case let .taskCalendar(.previousDay(day)):
-                
                 state.taskCalendar.weekSlider.insert(day.createPreviousDay(), at: 0)
                 state.taskCalendar.weekSlider.removeLast()
                 
@@ -103,7 +102,6 @@ extension Home {
                 return .none
                 
             case let .taskCalendar(.nextDay(day)):
-                
                 state.taskCalendar.weekSlider.append(day.createNextDay())
                 state.taskCalendar.weekSlider.removeFirst()
                 
@@ -121,7 +119,7 @@ extension Home {
                 let currentDate = state.taskCalendar.weekSlider[index].date
                 
                 state.taskCalendar.currentDate = currentDate
-                state.taskCalendar.task = .init(empty: .init(.init(currentDate: currentDate)))
+                state.taskCalendar.task = .init()
                 state.taskCalendar.header = .init(
                     today: .init(
                         week: currentDate.validateIsToday(),
@@ -150,11 +148,20 @@ extension Home {
                 
                 return .none
                 
+            case let .taskCalendar(.task(.item(_, .leadingAction(id)))):
+                dump(id, name: "leadingAction")
+                
+                return .none
+                
+            case let .taskCalendar(.task(.item(_, .trailingAction(id)))):
+                dump(id, name: "trailingAction")
+                
+                return .none
+                
             case .taskCalendar(.header(.today(.buttonTapped))):
                 state.schedule = .init()
                 
                 return .none
-                
                 
             case .taskCalendar(.header(.moreTapped)):
                 state.destination.append(.settings(.init()))
@@ -195,7 +202,6 @@ extension Home {
                 
                 guard state.taskCalendar.task != nil else { return .none }
                 guard let count = state.taskCalendar.task?.item.count else { return .none }
-                state.taskCalendar.task?.empty = nil
                 
                 let componets = content.tag.value.components(separatedBy: ", ")
                 let tags: [Tag.Model] = componets.map {
@@ -208,7 +214,6 @@ extension Home {
                 state.taskCreate = nil
                 
                 return .run { [task = state.tasks] send in
-                    
                     enum CancelID { case saveDebounce }
                     try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
                         try self.saveData(
@@ -227,6 +232,7 @@ extension Home {
                 state.taskCalendar.header?.isScroll = false
                 
                 return .none
+                
             default:
                 return .none
             }
@@ -235,7 +241,6 @@ extension Home {
         private func core(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
             case .onAppear:
-                
                 return .run { send in
                     let tasks = try JSONDecoder().decode([Task.Model].self, from: loadData(.tasks))
                     await send(.loadedData(tasks), animation: .default)
@@ -245,8 +250,6 @@ extension Home {
                 state.tasks = loaded
                 showTaskByDate(&state)
                 return .none
-                
-                
                 
             case .matcheAnimationRemoved:
                 state.forcePadding = false
@@ -292,8 +295,7 @@ extension Home {
             }
             
             state.taskCalendar.task = .init(.init(
-                item: tasks.isEmpty ? [] : identifiableTask,
-                empty: tasks.isEmpty ? .init(currentDate: showingDate) : nil
+                item: tasks.isEmpty ? [] : identifiableTask
             ))
             
         }

@@ -12,7 +12,6 @@ extension HeaderToday {
     struct View: SwiftUI.View {
         let store: StoreOf<Feature>
         
-        
         var body: some SwiftUI.View {
             Button {
                 store.send(.buttonTapped)

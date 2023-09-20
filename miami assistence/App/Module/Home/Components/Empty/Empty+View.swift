@@ -8,7 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 
-extension TaskEmpty {
+extension Empty {
     struct View: SwiftUI.View {
         var store: StoreOf<Feature>
         

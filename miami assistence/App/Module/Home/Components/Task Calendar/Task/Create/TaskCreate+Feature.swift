@@ -25,7 +25,6 @@ extension TaskCreate {
             
             var hours: [String]
             
-            
             enum ActivityDuration : Int, CaseIterable {
                 case FifteenMinutes = 15
                 case ThirtyMinutes = 30
@@ -79,10 +78,6 @@ extension TaskCreate {
             BindingReducer()
             Reduce { state, action in
                 switch action {
-//                case .binding(\.$tags):
-//                    return .none
-//                case .binding(\.$tag):
-//                    return .none
                 case .binding(\.$startedHour):
                     return selectedHour(into: &state)
                 case .binding(\.$activityDuration):

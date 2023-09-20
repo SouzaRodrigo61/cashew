@@ -28,13 +28,6 @@ extension Task {
                 .listSectionSeparator(.hidden)
                 .listRowBackground(Color.alabaster)
                 
-                IfLetStore(store.scope(state: \.empty, action: Feature.Action.empty)) { 
-                    TaskEmpty.View(store: $0)
-                }
-                .listRowInsets(.init())
-                .listRowSeparator(.hidden)
-                .listSectionSeparator(.hidden)
-                
                 Button {
                     store.send(.showTaskCreate, animation: .bouncy)
                 } label: {
