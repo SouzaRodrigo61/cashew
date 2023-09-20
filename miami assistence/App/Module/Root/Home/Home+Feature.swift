@@ -19,12 +19,18 @@ extension Home {
             @PresentationState var schedule: Schedule.Feature.State?
             
             var contentTask: Task.Model?
+            var tasks: [Task.Model] = []
             
             /// Custom Matched Geometry Animation
             var forcePadding: Bool = false
-            
-            
             var currentIndex: Int = 1
+            
+            init(taskCalendar: TaskCalendar.Feature.State, destination: StackState<Destination.State>, bottomSheet: BottomSheet.Feature.State? = nil) {
+                self.taskCalendar = taskCalendar
+                self.destination = destination
+                self.bottomSheet = bottomSheet
+            }
+            
         }
         
         enum Action: Equatable {
@@ -37,10 +43,19 @@ extension Home {
             /// Local Actions
             case matcheAnimationRemoved
             
+            case showTaskByDate
+            
             /// Navigation Stores
             case destination(StackAction<Destination.State, Destination.Action>)
             case schedule(PresentationAction<Schedule.Feature.Action>)
+            
+            case onAppear
+            case loadedData([Task.Model])
         }
+        
+        
+        @Dependency(\.storeManager.save) var saveData
+        @Dependency(\.storeManager.load) var loadData
         
         var body: some Reducer<State, Action> {
             Reduce(self.core)
@@ -60,6 +75,18 @@ extension Home {
         
         private func core(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
+            case .onAppear:
+                
+                return .run { send in
+                    let tasks = try JSONDecoder().decode([Task.Model].self, from: loadData(.tasks))
+                    await send(.loadedData(tasks), animation: .default)
+                }
+                
+            case .loadedData(let loaded):
+                state.tasks = loaded
+                showTaskByDate(&state)
+                return .none
+            
             case .bottomSheet(.addButtonTapped):
                 let date = state.taskCalendar.weekSlider[state.taskCalendar.currentIndex]
                 state.taskCreate = .init(date: date.date)
@@ -87,11 +114,29 @@ extension Home {
                 guard let count = state.taskCalendar.task?.item.count else { return .none }
                 state.taskCalendar.task?.empty = nil
                 
-                state.taskCalendar.task?.item.append(.init(task: .init(title: content.title, date: content.date, startedHour: .now, duration: Double(content.activityDuration.rawValue), color: content.color, isAlert: false, isRepeted: false, position: (count + 1), createdAt: .now, updatedAt: .now, tag: [], note: [])))
+                let componets = content.tag.value.components(separatedBy: ", ")
+                let tags: [Tag.Model] = componets.map {
+                    .init(value: $0)
+                }
+                
+                // TODO: StartedHour show correct hour
+                state.tasks.append(.init(title: content.title, date: content.date, startedHour: .now, duration: Double(content.activityDuration.rawValue), color: content.color, isAlert: false, isRepeted: false, position: (count + 1), createdAt: .now, updatedAt: .now, tag: tags, note: []))
                 
                 state.taskCreate = nil
                 
-                return .none
+                return .run { [task = state.tasks] send in
+                    
+                    enum CancelID { case saveDebounce }
+                    try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
+                        try self.saveData(
+                            JSONEncoder().encode(task),
+                            .tasks
+                        )
+                    }
+                    
+                    await send(.showTaskByDate, animation: .snappy)
+                }
+                
             case .taskCreate(.closeTapped):
                 state.taskCreate = nil
                 
@@ -145,6 +190,7 @@ extension Home {
                 
                 let currentDate = state.taskCalendar.weekSlider[index].date
                 
+                state.taskCalendar.currentDate = currentDate
                 state.taskCalendar.task = .init(empty: .init(.init(currentDate: currentDate)))
                 state.taskCalendar.header = .init(
                     today: .init(
@@ -153,8 +199,9 @@ extension Home {
                     )
                 )
                 
-                return .none
-                
+                return .run { @MainActor send in
+                    send(.showTaskByDate, animation: .snappy)
+                }
                 
             case .matcheAnimationRemoved:
                 state.forcePadding = false
@@ -166,9 +213,42 @@ extension Home {
                 dump(state.taskCalendar.weekSlider)
                 
                 return .none
+                
+            case .showTaskByDate:
+                showTaskByDate(&state)
+                
+                return .none
             default:
                 return .none
             }
         }
+        
+        private func showTaskByDate(_ state: inout State) {
+            let showingDate = state.taskCalendar.currentDate
+            
+            let tasks = state.tasks.filter { task in
+                task.date.compareDate(showingDate)
+            }
+            
+            var identifiableTask: IdentifiedArrayOf<TaskItem.Feature.State> = []
+            
+            if !tasks.isEmpty {
+                tasks.forEach { task in
+                    identifiableTask.append(.init(task: task))
+                }
+            }
+            
+            state.taskCalendar.task = .init(.init(
+                item: tasks.isEmpty ? [] : identifiableTask,
+                empty: tasks.isEmpty ? .init(currentDate: showingDate) : nil
+            ))
+
+        }
     }
+}
+
+
+
+extension URL {
+    static let tasks = Self.documentsDirectory.appending(component: "tasks.json")
 }

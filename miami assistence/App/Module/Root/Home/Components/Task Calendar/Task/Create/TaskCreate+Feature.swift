@@ -12,26 +12,55 @@ import SwiftUI
 extension TaskCreate {
     struct Feature: Reducer {
         struct State: Equatable {
-            @BindingState var title: String = ""
-            @BindingState var tag: Tag.Model = .init(value: "")
-            
-            @BindingState var color: Color = .blush
+            @BindingState var focus: Field? = .taskName
+            @BindingState var title: String
+            @BindingState var tag: Tag.Model
+            @BindingState var color: Color
             @BindingState var date: Date
-            @BindingState var startedHour: Int = Date().fetchIndexByDeviceHour()
+            @BindingState var startedHour: Int
+            @BindingState var tags: [Tag.Model]
+            @BindingState var activityDuration: ActivityDuration
             
-            @BindingState var activityDuration: ActivityDuration = .OneHour
+            var selectedHour: String
             
-            var selectedHour: String = ""
+            var hours: [String]
             
-            var hours: [String] = Date().fetchHourOfDay()
-            
-            var tags: [Tag.Model] = []
             
             enum ActivityDuration : Int, CaseIterable {
                 case FifteenMinutes = 15
                 case ThirtyMinutes = 30
                 case OneHour = 60
                 case HalfHour = 90
+            }
+            
+            enum Field: Hashable {
+                case taskName
+                case tag(Tag.Model.ID)
+            }
+            
+            init(title: String = "",
+                 tag: Tag.Model = .init(value: ""),
+                 color: Color  = .blush,
+                 date: Date,
+                 startedHour: Int = 0,
+                 activityDuration: ActivityDuration  = .OneHour,
+                 selectedHour: String = "",
+                 hours: [String] = [],
+                 tags: [Tag.Model] = [
+                    .init(value: "")
+                 ]
+            ) {
+                self.title = title
+                self.tag = tag
+                self.color = color
+                self.date = date
+                self.activityDuration = activityDuration
+                self.selectedHour = selectedHour
+                
+                self.tags = tags
+                
+                self.hours = date.fetchHourOfDay()
+                self.startedHour = date.fetchIndexByDeviceHour()
             }
         }
         
@@ -50,9 +79,10 @@ extension TaskCreate {
             BindingReducer()
             Reduce { state, action in
                 switch action {
-                case .binding(\.$tag):
-                    dump(state.tag, name: "Tag")
-                    return .none
+//                case .binding(\.$tags):
+//                    return .none
+//                case .binding(\.$tag):
+//                    return .none
                 case .binding(\.$startedHour):
                     return selectedHour(into: &state)
                 case .binding(\.$activityDuration):
@@ -67,10 +97,15 @@ extension TaskCreate {
         
         
         private func selectedHour(into state: inout State) -> Effect<Action> {
-            let hour = state.hours[state.startedHour]
-            let finishHour = hour.calculateHourByValue(with: state.activityDuration.rawValue)
-    
-            state.selectedHour = "\(hour) - \(finishHour)"
+            if !state.hours.isEmpty {
+                let hour = state.hours[state.startedHour]
+                let finishHour = hour.calculateHourByValue(with: state.activityDuration.rawValue)
+        
+                state.selectedHour = "\(hour) - \(finishHour)"
+            } else {
+                state.selectedHour = ""
+            }
+
             
             return .none
         }

@@ -8,9 +8,8 @@
 import Foundation
 
 extension Tag {
-    struct Model: Identifiable, Equatable {
+    struct Model: Equatable, Identifiable, Codable {
         var id = UUID()
         var value: String
-        var isInitial: Bool = false
     }
 }

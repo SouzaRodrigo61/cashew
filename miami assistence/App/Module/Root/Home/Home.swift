@@ -24,7 +24,6 @@ extension Home.Feature.State {
                     )
                 )
             ), 
-            bottomSheet: .init(),
             destination: StackState([])
         )
     }
