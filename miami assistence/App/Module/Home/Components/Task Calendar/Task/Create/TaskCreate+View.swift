@@ -65,36 +65,6 @@ extension TaskCreate {
                         .listRowBackground(Color.lotion)
                         
                         Section {
-                            VStack(alignment: .leading, spacing: 0) {
-                                Text("task.create.tag")
-                                    .font(.system(.title3, design: .rounded, weight: .bold))
-                                    .padding(.horizontal, 16)
-                                    .padding(.bottom, 4)
-                                
-                                ForEach(viewStore.$tags) { $tag in
-                                    TextField("task.create.tag.placeholder", text: viewStore.$tag.value)
-                                        .font(.system(.body, design: .rounded, weight: .bold))
-                                        .focused(self.$focus, equals: Feature.State.Field.tag(tag.id))
-                                        .foregroundStyle(.gray)
-                                        .padding(.horizontal, 16)
-                                }
-                                
-                            }
-                            .padding(.vertical, 8)
-                        }
-                        .listRowInsets(.init())
-                        .listRowBackground(Color.lotion)
-                        
-                        Section {
-                            ColorPicker("task.create.picker.color", selection: viewStore.$color, supportsOpacity: false)
-                                .font(.system(.title3, design: .rounded, weight: .bold))
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 8)
-                        }
-                        .listRowInsets(.init())
-                        .listRowBackground(Color.lotion)
-                        
-                        Section {
                             VStack(alignment: .leading, spacing: 8) {
                                 
                                 Text("task.create.picker.datetime.title")
@@ -115,7 +85,7 @@ extension TaskCreate {
                                         .foregroundStyle(.lotion)
                                         .overlay {
                                             Button {
-                                                store.send(.hourTapped)
+//                                                store.send(.hourTapped)
                                             } label: {
                                                 Text(viewStore.selectedHour)
                                                     .font(.system(.title3, design: .rounded, weight: .bold))
@@ -144,6 +114,36 @@ extension TaskCreate {
                                 .padding(.horizontal, 16)
                                 .padding(.bottom, 8)
                             }
+                        }
+                        .listRowInsets(.init())
+                        .listRowBackground(Color.lotion)
+                        
+                        Section {
+                            ColorPicker("task.create.picker.color", selection: viewStore.$color, supportsOpacity: false)
+                                .font(.system(.title3, design: .rounded, weight: .bold))
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
+                        }
+                        .listRowInsets(.init())
+                        .listRowBackground(Color.lotion)
+                        
+                        Section {
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("task.create.tag")
+                                    .font(.system(.title3, design: .rounded, weight: .bold))
+                                    .padding(.horizontal, 16)
+                                    .padding(.bottom, 4)
+                                
+                                ForEach(viewStore.$tags) { $tag in
+                                    TextField("task.create.tag.placeholder", text: viewStore.$tag.value)
+                                        .font(.system(.body, design: .rounded, weight: .bold))
+                                        .focused(self.$focus, equals: Feature.State.Field.tag(tag.id))
+                                        .foregroundStyle(.gray)
+                                        .padding(.horizontal, 16)
+                                }
+                                
+                            }
+                            .padding(.vertical, 8)
                         }
                         .listRowInsets(.init())
                         .listRowBackground(Color.lotion)

@@ -9,18 +9,11 @@ import Foundation
 
 extension Date {
     
-    func getMonthDecription() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM"
+    func format(_ format: String) -> String {
+        let formatted = DateFormatter()
+        formatted.dateFormat = format
         
-        return formatter.string(from: self)
-    }
-    
-    func getYearDecription() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY"
-        
-        return formatter.string(from: self)
+        return formatted.string(from: self)
     }
     
     func getDay() -> Int {
@@ -35,51 +28,9 @@ extension Date {
         return Calendar.current.component(.year, from: self)
     }
     
-    func startOfMonth() -> Date {
-        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
-    }
-    
-    func endOfMonth() -> Date {
-        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
-    }
-    
-    /// Extending Daate to get Current Month Dates...
-    func getAllDates() -> [Date] {
-        let calendar = Calendar.current
-        
-        // Getting start Date
-        guard let startDate = calendar.date(from: Calendar.current.dateComponents([.year, .month], from: self)) else { return [] }
-        
-        guard let range = calendar.range(of: .day, in: .month, for: startDate) else { return [] }
-        
-        return range.compactMap { day -> Date in
-            guard let dates = calendar.date(byAdding: .day, value: day - 1, to: startDate) else {
-                return .now
-            }
-            
-            return dates
-        }
-    }
-    
-    /// Extending Daate to get Current Month Dates...
-    func weekOfMonth() -> [Date] {
-        let calendar = Calendar.current
-        
-        guard let range = calendar.range(of: .day, in: .weekOfMonth, for: self) else { return [] }
-        
-        return range.compactMap { day -> Date in
-            guard let dates = calendar.date(byAdding: .day, value: day, to: self) else {
-                return .now
-            }
-            
-            return dates
-        }
-    }
-    
     func monthYYYY() -> String {
         return self.formatted(.dateTime .month(.wide) .year())
     }
-    
     
     func dayMonthAbbrev() -> String {
         return self.formatted(.dateTime .day() .month(.abbreviated))
@@ -114,46 +65,44 @@ extension Date {
         }
     }
     
-    static func updateHour(_ value: Int) -> Date {
-        let calendar = Calendar.current
-        return calendar.date(byAdding: .hour, value: value, to: .init()) ?? .init()
-    }
-    
-    
     /// Fetching Week Based on given Date
-    func fetchWeek(_ date: Date = .init()) -> [Days] {
+    func fetchWeeks(_ date: Date = .init()) -> [Week] {
         let calendar = Calendar.current
         let startOfDate = calendar.startOfDay(for: date)
         
-        var week: [Days] = []
-
+        var week: [Week] = []
+        let weekForDate = calendar.dateInterval(of: .weekOfMonth, for: startOfDate)
+        guard let startOfWeek = weekForDate?.start else { return [] }
         
-        if let previousDay = calendar.date(byAdding: .day, value: -1, to: startOfDate) {
-            week.append(.init(date: previousDay, isBefore: previousDay < .now))
-        }
-        week.append(.init(date: startOfDate, isBefore: false))
-        
-        if let nextDay = calendar.date(byAdding: .day, value: 1, to: startOfDate) {
-            week.append(.init(date: nextDay, isBefore: nextDay > .now, isTomorrow: date == .now ? true : false))
+        /// Iterating to get the Full Week
+        (0..<7).forEach { index in
+            if let weekDay = calendar.date(byAdding: .day, value: index, to: startOfWeek) {
+                week.append(.init(date: weekDay))
+            }
         }
         
         return week
     }
     
-    // Creating Next Day
-    func createNextDay() -> Days {
+    // Creating Next Week, based on the Last Current Week's Date
+    func createNextWeek() -> [Week] {
         let calendar = Calendar.current
-
-        guard let nextDay = calendar.date(byAdding: .day, value: 1, to: self) else {
-            return .init(date: self, isBefore: self < .now)
-        }
+        let startOfLastDate = calendar.startOfDay(for: self)
+        guard let nextDate = calendar.date(byAdding: .day, value: 1, to: startOfLastDate) else { return [] }
         
-        return .init(date: nextDay, isBefore: nextDay < .now)
+        return fetchWeeks(nextDate)
     }
     
+    // Creating Previous Week, based on the Last Current Week's Date
+    func createPreviousWeek() -> [Week] {
+        let calendar = Calendar.current
+        let startOfFirstDate = calendar.startOfDay(for: self)
+        guard let previousDate = calendar.date(byAdding: .day, value: -1, to: startOfFirstDate) else { return [] }
+        
+        return fetchWeeks(previousDate)
+    }
     
-    
-    // Creating Next Day
+    // Creating Next Hour Minute
     func createNextHourMinute(into value: Int = 1) -> String {
         let calendar = Calendar.current
 
@@ -164,18 +113,7 @@ extension Date {
         return nextDay.hourMinute()
     }
     
-    
-    // Creating Previous Day
-    func createPreviousDay() -> Days {
-        let calendar = Calendar.current
-
-        guard let day = calendar.date(byAdding: .day, value: -1, to: self) else {
-            return .init(date: self, isBefore: false)
-        }
-        
-        return .init(date: day, isBefore: day < .now)
-    }
-    
+    // TODO: Compact this code
     func fetchHourOfDay(_ date: Date = .init()) -> [String] {
 
         // Calendário para manipular datas e horas
@@ -215,6 +153,7 @@ extension Date {
         }
     }
     
+    // TODO: Compact this code
     func fetchIndexByDeviceHour() -> Int {
         
         // Define the time display format, including the date
@@ -266,11 +205,23 @@ extension Date {
     }
     
     func compareDate(_ date: Date) -> Bool {
-        
         guard let comparedDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: date) else { return false }
         guard let selfDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self) else { return false }
         
         return comparedDate == selfDate
+    }
+    
+    func isToday() -> Bool {
+        return Calendar.current.isDateInToday(self)
+    }
+    
+    func isAfterByDate(_ date: Date) -> Bool {
+        self > date
+    }
+    
+    struct Week: Identifiable, Equatable {
+        var id: UUID = .init()
+        var date: Date
     }
     
     struct Days: Identifiable, Equatable {

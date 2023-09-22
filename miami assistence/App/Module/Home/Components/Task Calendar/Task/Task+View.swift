@@ -28,22 +28,26 @@ extension Task {
                 .listSectionSeparator(.hidden)
                 .listRowBackground(Color.alabaster)
                 
-                Button {
-                    store.send(.showTaskCreate, animation: .bouncy)
-                } label: {
-                    HStack(spacing: 8) {
-                        Image(systemName: "plus.square.dashed")
-                            .font(.system(.title, design: .rounded))
-                            .foregroundStyle(.royalBlue)
-                        
-                        Text("task.button.create.title")
-                            .font(.system(.body, design: .rounded))
+                WithViewStore(store, observe: \.showCreateTask) { viewStore in
+                    if viewStore.state {
+                        Button {
+                            store.send(.showTaskCreate, animation: .bouncy)
+                        } label: {
+                            HStack(spacing: 8) {
+                                Image(systemName: "plus.square.dashed")
+                                    .font(.system(.title, design: .rounded))
+                                    .foregroundStyle(.royalBlue)
+                                
+                                Text("task.button.create.title")
+                                    .font(.system(.body, design: .rounded))
+                            }
+                            .hSpacing(.leading)
+                            .padding(.horizontal, 8)
+                        }
+                        .buttonStyle(.scale)
+                        .listRowInsets(.init())
                     }
-                    .hSpacing(.leading)
-                    .padding(.horizontal, 8)
                 }
-                .buttonStyle(.scale)
-                .listRowInsets(.init())
                 
             }
             .coordinateSpace(name: "SCROLL")

@@ -13,6 +13,7 @@ extension Task {
     struct Feature: Reducer {
         struct State: Equatable {
             var item: IdentifiedArrayOf<TaskItem.Feature.State> = []
+            var showCreateTask: Bool = true
         }
         
         enum Action: Equatable {

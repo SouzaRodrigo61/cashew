@@ -43,3 +43,19 @@ extension Note {
         }
     }
 }
+
+extension Note.Model {
+    static let mock: Self = .init(author: "Rodrigo", item: [
+        .init(position: 1, block: .image("abestado")),
+        .init(position: 2, block: .separator(.light)),
+        .init(position: 3, block: .text(.body("Body"))),
+        .init(position: 4, block: .text(.subTitle("subTitle"))),
+        .init(position: 5, block: .text(.heading("heading"))),
+        .init(position: 6, block: .text(.strong("strong"))),
+        .init(position: 7, block: .text(.body("Body"))),
+        .init(position: 8, block: .text(.caption("caption"))),
+        .init(position: 9, block: .text(.body("Body"))),
+        .init(position: 9, block: .empty)
+    ])
+}
+

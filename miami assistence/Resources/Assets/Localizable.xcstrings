@@ -245,13 +245,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "When?"
+            "value" : "Period?"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quando?"
+            "value" : "Periodo?"
           }
         }
       }
@@ -321,7 +321,7 @@
         }
       }
     },
-    "task.item.accessibility.image.hint" : {
+    "task.item.accessibility.hour.label" : {
 
     },
     "task.item.accessibility.text.hint %@" : {

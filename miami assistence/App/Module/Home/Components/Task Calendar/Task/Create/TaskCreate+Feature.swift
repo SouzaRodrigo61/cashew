@@ -24,6 +24,7 @@ extension TaskCreate {
             var selectedHour: String
             
             var hours: [String]
+            var hour: String
             
             enum ActivityDuration : Int, CaseIterable {
                 case FifteenMinutes = 15
@@ -60,6 +61,7 @@ extension TaskCreate {
                 
                 self.hours = date.fetchHourOfDay()
                 self.startedHour = date.fetchIndexByDeviceHour()
+                self.hour = ""
             }
         }
         
@@ -70,9 +72,8 @@ extension TaskCreate {
             
             case onAppearSelectedHour
             
-            case hourTapped
-            case dateTapped
         }
+        
         
         var body: some Reducer<State, Action> {
             BindingReducer()
@@ -97,11 +98,11 @@ extension TaskCreate {
                 let finishHour = hour.calculateHourByValue(with: state.activityDuration.rawValue)
         
                 state.selectedHour = "\(hour) - \(finishHour)"
+                state.hour = hour
             } else {
                 state.selectedHour = ""
             }
 
-            
             return .none
         }
     }
