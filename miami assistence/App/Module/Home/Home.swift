@@ -12,9 +12,10 @@ enum Home {}
 
 extension Home.Feature.State {
     static func new() -> Self {
-        let currentDate: Date = Date()
-        
-        return Self(
+        .init(
+            taskCalendar: .init(
+                task: .init()
+            ),
             destination: StackState([])
         )
     }

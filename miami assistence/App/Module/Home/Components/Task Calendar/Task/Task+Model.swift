@@ -14,7 +14,7 @@ extension Task {
         var id = UUID()
         var title: String
         var date: Date
-        var startedHour: Date
+        var startedHour: String
         var duration: TimeInterval
         var color: Color
         var isAlert: Bool

@@ -20,10 +20,7 @@ struct OffsetKey: PreferenceKey {
 extension Home {
     struct View: SwiftUI.View {
         let store: StoreOf<Feature>
-        
-        @State private var currentIndex: Int = 1
-        @State private var createWeek: Bool = false
-        
+
         var body: some SwiftUI.View {
             
             NavigationStack {
@@ -31,17 +28,6 @@ extension Home {
                     
                     TaskCalendar.View(store: store.scope(state: \.taskCalendar, action: Feature.Action.taskCalendar))
                         .transition(.scale)
-                        .onAppear {
-                            UIToolbar.changeAppearance(clear: true)
-                            store.send(.onAppear)
-                        }
-                        .overlay {
-                            IfLetStore(store.scope(state: \.taskCreate, action: Feature.Action.taskCreate)) {
-                                TaskCreate.View(store: $0)
-                            }
-                            .background(.white)
-                            .transition(.move(edge: .top))
-                        }
                     
                 } destination: {
                     switch $0 {
@@ -68,12 +54,12 @@ extension Home {
             }
             .overlayPreferenceValue(MAnchorKey.self) { value in
                 GeometryReader { geo in
-                    WithViewStore(store, observe: { $0 } ) { viewStore in
+                    WithViewStore(store, observe: \.taskCalendar ) { viewStore in
                         
                         if let task = viewStore.state.contentTask, let anchor = value[task.id.uuidString] {
-                            TaskItem.View.Content(
+                            TaskItem.Content(
                                 id: task.id,
-                                title: task.title,
+                                task: task,
                                 color: task.color,
                                 showOverlay: false,
                                 forcePadding: viewStore.state.forcePadding

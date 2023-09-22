@@ -107,6 +107,9 @@
 		23BB785D2ABB5C9200EB11DE /* Search+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB785C2ABB5C9200EB11DE /* Search+Feature.swift */; };
 		23BB785F2ABB5C9A00EB11DE /* Search+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB785E2ABB5C9A00EB11DE /* Search+View.swift */; };
 		23BB78612ABB7B6500EB11DE /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB78602ABB7B6500EB11DE /* URL+Extension.swift */; };
+		23BB78652ABCC5AB00EB11DE /* HeaderSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB78642ABCC5AB00EB11DE /* HeaderSlider.swift */; };
+		23BB78672ABCC5B200EB11DE /* HeaderSlider+Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB78662ABCC5B200EB11DE /* HeaderSlider+Feature.swift */; };
+		23BB78692ABCC5B900EB11DE /* HeaderSlider+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB78682ABCC5B900EB11DE /* HeaderSlider+View.swift */; };
 		23BF94192AB7B88400EA3F64 /* AsyncValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BF94182AB7B88400EA3F64 /* AsyncValue.swift */; };
 		23BF941B2AB7BB3900EA3F64 /* Manager+StoryKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BF941A2AB7BB3900EA3F64 /* Manager+StoryKit.swift */; };
 		23BF941D2AB7BE1D00EA3F64 /* Manager+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BF941C2AB7BE1D00EA3F64 /* Manager+UserDefaults.swift */; };
@@ -118,7 +121,7 @@
 		23BF942E2AB7EC8E00EA3F64 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237B609C2A488C8F0058B18E /* StoreKit.framework */; };
 		23BF94322AB8EDAC00EA3F64 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BF94312AB8EDAC00EA3F64 /* Text+Extension.swift */; };
 		23BFFF782ABB521C0061732E /* Color+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFFF772ABB521C0061732E /* Color+Codable.swift */; };
-		23BFFF7A2ABB57310061732E /* TaskItem+View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFFF792ABB57310061732E /* TaskItem+View+Extension.swift */; };
+		23BFFF7A2ABB57310061732E /* TaskItem+Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFFF792ABB57310061732E /* TaskItem+Content.swift */; };
 		23C2A0E62A97CBF70073E5FC /* ImpactFeedbackGenerator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2A0E52A97CBF70073E5FC /* ImpactFeedbackGenerator+Extensions.swift */; };
 		23C2BDD42AA7EF930029F837 /* UINavigationBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2BDD32AA7EF930029F837 /* UINavigationBar+Extensions.swift */; };
 		23E2D1952A71BEDB00180C1C /* CreateCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E2D1942A71BEDB00180C1C /* CreateCompany.swift */; };
@@ -284,6 +287,9 @@
 		23BB785C2ABB5C9200EB11DE /* Search+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search+Feature.swift"; sourceTree = "<group>"; };
 		23BB785E2ABB5C9A00EB11DE /* Search+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search+View.swift"; sourceTree = "<group>"; };
 		23BB78602ABB7B6500EB11DE /* URL+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
+		23BB78642ABCC5AB00EB11DE /* HeaderSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSlider.swift; sourceTree = "<group>"; };
+		23BB78662ABCC5B200EB11DE /* HeaderSlider+Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeaderSlider+Feature.swift"; sourceTree = "<group>"; };
+		23BB78682ABCC5B900EB11DE /* HeaderSlider+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeaderSlider+View.swift"; sourceTree = "<group>"; };
 		23BF94182AB7B88400EA3F64 /* AsyncValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncValue.swift; sourceTree = "<group>"; };
 		23BF941A2AB7BB3900EA3F64 /* Manager+StoryKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Manager+StoryKit.swift"; sourceTree = "<group>"; };
 		23BF941C2AB7BE1D00EA3F64 /* Manager+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Manager+UserDefaults.swift"; sourceTree = "<group>"; };
@@ -292,7 +298,7 @@
 		23BF94232AB7D9C100EA3F64 /* CoreApp+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreApp+Scene.swift"; sourceTree = "<group>"; };
 		23BF94312AB8EDAC00EA3F64 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		23BFFF772ABB521C0061732E /* Color+Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Codable.swift"; sourceTree = "<group>"; };
-		23BFFF792ABB57310061732E /* TaskItem+View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskItem+View+Extension.swift"; sourceTree = "<group>"; };
+		23BFFF792ABB57310061732E /* TaskItem+Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskItem+Content.swift"; sourceTree = "<group>"; };
 		23C2A0E52A97CBF70073E5FC /* ImpactFeedbackGenerator+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImpactFeedbackGenerator+Extensions.swift"; sourceTree = "<group>"; };
 		23C2BDD32AA7EF930029F837 /* UINavigationBar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extensions.swift"; sourceTree = "<group>"; };
 		23E2D1942A71BEDB00180C1C /* CreateCompany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompany.swift; sourceTree = "<group>"; };
@@ -381,8 +387,8 @@
 		2306FD952A8FCF31002F323D /* Task */ = {
 			isa = PBXGroup;
 			children = (
-				236C12862A91AA34002F8A66 /* Item */,
 				236C12792A90F7C8002F8A66 /* Create */,
+				236C12862A91AA34002F8A66 /* Item */,
 				2306FD962A8FCFEB002F323D /* Task.swift */,
 				2306FD982A8FCFF4002F323D /* Task+Feature.swift */,
 				2306FD9A2A8FCFFB002F323D /* Task+View.swift */,
@@ -394,6 +400,7 @@
 		2306FD9C2A8FD32F002F323D /* Header */ = {
 			isa = PBXGroup;
 			children = (
+				23BB78632ABCAB7700EB11DE /* Slider */,
 				236C127F2A9170F8002F8A66 /* Today */,
 				2306FDA02A8FD350002F323D /* Header.swift */,
 				2306FDA22A8FD5DC002F323D /* Header+Feature.swift */,
@@ -600,10 +607,10 @@
 		236C12862A91AA34002F8A66 /* Item */ = {
 			isa = PBXGroup;
 			children = (
+				23BB78622ABCA20200EB11DE /* Component */,
 				236C12872A91BB8C002F8A66 /* TaskItem.swift */,
 				236C12892A91BB9C002F8A66 /* TaskItem+Feature.swift */,
 				236C128B2A91BBA8002F8A66 /* TaskItem+View.swift */,
-				23BFFF792ABB57310061732E /* TaskItem+View+Extension.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -813,6 +820,24 @@
 				23BB78582ABB5C7200EB11DE /* Settings+View.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		23BB78622ABCA20200EB11DE /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				23BFFF792ABB57310061732E /* TaskItem+Content.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		23BB78632ABCAB7700EB11DE /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+				23BB78642ABCC5AB00EB11DE /* HeaderSlider.swift */,
+				23BB78662ABCC5B200EB11DE /* HeaderSlider+Feature.swift */,
+				23BB78682ABCC5B900EB11DE /* HeaderSlider+View.swift */,
+			);
+			path = Slider;
 			sourceTree = "<group>";
 		};
 		23BF94132AB6177000EA3F64 /* Async Value */ = {
@@ -1130,8 +1155,9 @@
 				2306FDA12A8FD350002F323D /* Header.swift in Sources */,
 				236C12902A91BBC6002F8A66 /* Note+Feature.swift in Sources */,
 				23BB78572ABB5C6B00EB11DE /* Settings+Feature.swift in Sources */,
-				23BFFF7A2ABB57310061732E /* TaskItem+View+Extension.swift in Sources */,
+				23BFFF7A2ABB57310061732E /* TaskItem+Content.swift in Sources */,
 				23BB78612ABB7B6500EB11DE /* URL+Extension.swift in Sources */,
+				23BB78652ABCC5AB00EB11DE /* HeaderSlider.swift in Sources */,
 				2306FD9B2A8FCFFB002F323D /* Task+View.swift in Sources */,
 				236C12812A917577002F8A66 /* HeaderToday.swift in Sources */,
 				23582F5D2A71E9F900FDF7FE /* Home+Feature.swift in Sources */,
@@ -1149,6 +1175,7 @@
 				23E2D19F2A71CC6300180C1C /* CreateTypeCompany+Feature.swift in Sources */,
 				2340DECA2AB359D000F42FCE /* Task Calendar+Feature.swift in Sources */,
 				236C12942A923AF3002F8A66 /* Task+Model.swift in Sources */,
+				23BB78672ABCC5B200EB11DE /* HeaderSlider+Feature.swift in Sources */,
 				235991862A715F0200C2677A /* Onboarding+Feature.swift in Sources */,
 				2305A50F2AA2B039008F9920 /* SwipeAction.swift in Sources */,
 				236C128A2A91BB9C002F8A66 /* TaskItem+Feature.swift in Sources */,
@@ -1163,6 +1190,7 @@
 				23C2A0E62A97CBF70073E5FC /* ImpactFeedbackGenerator+Extensions.swift in Sources */,
 				23582F532A71E50600FDF7FE /* Root.swift in Sources */,
 				2340DEC72AB359B300F42FCE /* Task Calendar.swift in Sources */,
+				23BB78692ABCC5B900EB11DE /* HeaderSlider+View.swift in Sources */,
 				2306FDA32A8FD5DC002F323D /* Header+Feature.swift in Sources */,
 				2305A5132AA2B0A6008F9920 /* SwipeAction+View.swift in Sources */,
 				23E6F8392A98153F00301968 /* Empty.swift in Sources */,
@@ -1390,7 +1418,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "miami assistence/miami assistence.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"miami assistence/Preview Content\"";
 				DEVELOPMENT_TEAM = Z42V6W967K;
 				ENABLE_PREVIEWS = YES;
@@ -1426,7 +1454,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "miami assistence/miami assistence.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"miami assistence/Preview Content\"";
 				DEVELOPMENT_TEAM = Z42V6W967K;
 				ENABLE_PREVIEWS = YES;
