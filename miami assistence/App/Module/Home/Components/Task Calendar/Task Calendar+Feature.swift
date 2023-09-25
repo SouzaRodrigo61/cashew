@@ -31,6 +31,7 @@ extension TaskCalendar {
             case matcheAnimationRemoved
             case onAppear
             case loadedData([Task.Model])
+            case saveNewTask([Task.Model])
             
             case task(Task.Feature.Action)
             case header(Header.Feature.Action)
@@ -90,9 +91,6 @@ extension TaskCalendar {
         
         private func taskCalendar(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
-                
-            
-                
             case .onAppear:
                 // TODO: Move this code for resueble
                 var weekSlider: [[Date.Week]] = []
@@ -144,16 +142,13 @@ extension TaskCalendar {
                 
                 return .none
                 
-            case let .task(.item(_, .leadingAction(id))):
-                state.tasks.removeAll { $0.id == id }
-                
-                
-                return .run { [task = state.tasks] send in
+            case let .saveNewTask(tasks):
+                return .run {  send in
                     enum CancelID { case saveDebounce }
                     do {
                         try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
                             try self.saveData(
-                                JSONEncoder().encode(task),
+                                JSONEncoder().encode(tasks),
                                 .tasks
                             )
                         }
@@ -164,8 +159,13 @@ extension TaskCalendar {
                     }
                 }
                 
-            case let .task(.item(_, .trailingAction(id))):
-
+            case let .task(.item(_, .leadingAction(id))):
+                state.tasks.removeAll { $0.id == id }
+                
+                return .send(.saveNewTask(state.tasks))
+                    
+            case .task(.item(_, .trailingAction(_))):
+                
                 return .none
                 
             default:
@@ -219,27 +219,12 @@ extension TaskCalendar {
                                                     createdAt: .now,
                                                     updatedAt: .now,
                                                     tag: tags,
-                                                    note: [Note.Model.mock]
+                                                    note: Note.Model.mock
                 )
                 
                 state.tasks.append(createdTask)
                 
-                
-                return .run { [task = state.tasks] send in
-                    enum CancelID { case saveDebounce }
-                    do {
-                        try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
-                            try self.saveData(
-                                JSONEncoder().encode(task),
-                                .tasks
-                            )
-                        }
-                        
-                        await send(.onAppear, animation: .snappy)
-                    } catch {
-                        dump("Erro for save data - \(error.localizedDescription)")
-                    }
-                }
+                return .send(.saveNewTask(state.tasks))
                 
             case .taskCreate(.closeTapped):
                 return .send(.onAppear, animation: .snappy)

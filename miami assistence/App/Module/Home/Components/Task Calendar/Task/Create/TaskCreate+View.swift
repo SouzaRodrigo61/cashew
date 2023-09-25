@@ -68,7 +68,7 @@ extension TaskCreate {
                             VStack(alignment: .leading, spacing: 8) {
                                 
                                 Text("task.create.picker.datetime.title")
-                                    .font(.system(.title3, design: .rounded, weight: .bold))
+                                    .font(.system(.headline, design: .rounded, weight: .bold))
                                     .padding(.horizontal, 16)
                                     .padding(.top, 8)
                                 
@@ -88,7 +88,7 @@ extension TaskCreate {
 //                                                store.send(.hourTapped)
                                             } label: {
                                                 Text(viewStore.selectedHour)
-                                                    .font(.system(.title3, design: .rounded, weight: .bold))
+                                                    .font(.system(.headline, design: .rounded, weight: .bold))
                                                     .getContrastText(backgroundColor: viewStore.color)
                                                     .padding(.horizontal, 40)
                                                     .padding(.vertical, 10)
@@ -120,7 +120,7 @@ extension TaskCreate {
                         
                         Section {
                             ColorPicker("task.create.picker.color", selection: viewStore.$color, supportsOpacity: false)
-                                .font(.system(.title3, design: .rounded, weight: .bold))
+                                .font(.system(.body, design: .rounded, weight: .bold))
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 8)
                         }
@@ -130,7 +130,7 @@ extension TaskCreate {
                         Section {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("task.create.tag")
-                                    .font(.system(.title3, design: .rounded, weight: .bold))
+                                    .font(.system(.headline, design: .rounded, weight: .bold))
                                     .padding(.horizontal, 16)
                                     .padding(.bottom, 4)
                                 
@@ -165,9 +165,9 @@ extension TaskCreate {
                         store.send(.createTaskTapped, animation: .smooth)
                     } label: {
                         Text("task.create.button.title")
-                            .font(.system(.title3, design: .rounded, weight: .bold))
+                            .font(.system(.headline, design: .rounded, weight: .bold))
                             .getContrastText(backgroundColor: viewStore.color)
-                            .padding(16)
+                            .padding(12)
                             .hSpacing(.center)
                             .background(viewStore.color, in: .rect(cornerRadius: 10))
                     }
