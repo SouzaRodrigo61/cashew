@@ -87,7 +87,7 @@ extension TaskItem {
                                         let axisX = (value.location.x - value.startLocation.x) / .pi
                                         
                                         withAnimation {
-                                            colorRectangle = .cyan
+                                            colorRectangle = .red
                                             offset = axisX
                                         }
                                     } else {
@@ -99,7 +99,7 @@ extension TaskItem {
                                                 offset = -axisX
                                             }
                                         } else {
-                                            let axisX = (value.startLocation.x - value.location.x) / .pi
+                                            let axisX = (value.startLocation.x - value.location.x) / 4.5
                                             
                                             withAnimation {
                                                 colorRectangle = .green

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension Note {
     struct Model: Equatable, Identifiable, Codable {
@@ -17,45 +18,128 @@ extension Note {
             var id = UUID()
             var position: Int
             var block: Block
-
-            enum Block: Equatable, Codable {
-                case empty
-                case image(String)
-                case text(Text)
-                case separator(Separator)
-
-                enum Text: Equatable, Codable {
-                    case title(String)
-                    case subTitle(String)
-                    case heading(String)
-                    case strong(String)
-                    case body(String)
-                    case caption(String)
-                }
-
-                enum Separator: Equatable, Codable {
+            
+            struct Block: Equatable, Identifiable, Codable {
+                var id = UUID()
+                var type: BlockType
+                var text: Text?
+                var asset: Asset?
+                var line: Line?
+                var background: Background
+                var isMarked: Bool
+                var alignment: Alignment
+                
+                
+                enum Line: Equatable, Codable {
                     case strong
                     case regular
                     case light
                     case dashed
                 }
+                
+                struct Asset: Equatable, Identifiable, Codable {
+                    var id = UUID()
+                    var asset: String
+                }
+                
+                enum Background: Equatable, Codable {
+                    case normal
+                    case focus
+                    case box
+                    case card
+                }
+                
+                enum BlockType: Equatable, Codable {
+                    case empty
+                    case image
+                    case text
+                    case separator
+                }
+                
+                enum Alignment: Equatable, Codable {
+                    case justify
+                    case leading
+                    case trailing
+                    case center
+                }
+                
+                struct Text: Equatable, Identifiable, Codable {
+                    var id = UUID()
+                    var size: FontSize
+                    var fontWeight: FontWeight
+                    var text: String
+                    
+                    enum FontSize: Equatable, Codable {
+                        case title
+                        case subTitle
+                        case heading
+                        case body
+                        case caption
+                    }
+                    
+                    enum FontWeight: Equatable, Codable {
+                        case bold
+                        case normal
+                        case regular
+                        case medium
+                        case tiny
+                    }
+                }
             }
+            
         }
     }
 }
 
 extension Note.Model {
-    static let mock: Self = .init(author: "Rodrigo", item: [
-        .init(position: 1, block: .image("abestado")),
-        .init(position: 2, block: .separator(.light)),
-        .init(position: 3, block: .text(.body("Body"))),
-        .init(position: 4, block: .text(.subTitle("subTitle"))),
-        .init(position: 5, block: .text(.heading("heading"))),
-        .init(position: 6, block: .text(.strong("strong"))),
-        .init(position: 7, block: .text(.body("Body"))),
-        .init(position: 8, block: .text(.caption("caption"))),
-        .init(position: 9, block: .text(.body("Body"))),
-        .init(position: 9, block: .empty)
-    ])
+    static let mock: Self = .init(
+        author: "Rodrigo",
+        item: [
+            .init(position: 1,
+                  block: .init(
+                    type: .text,
+                    text: .init(size: .body, fontWeight: .medium, text: "Testing"),
+                    background: .normal,
+                    isMarked: false,
+                    alignment: .leading)
+                 ),
+            
+                .init(position: 2,
+                      block: .init(
+                        type: .text,
+                        text: .init(size: .title, fontWeight: .bold, text: "Testing bold"),
+                        background: .normal,
+                        isMarked: false,
+                        alignment: .leading)
+                     ),
+            
+                .init(position: 3,
+                      block: .init(
+                        type: .separator,
+                        line: .regular,
+                        background: .normal,
+                        isMarked: false,
+                        alignment: .leading)
+                     ),
+            
+                .init(position: 4,
+                      block: .init(
+                        type: .image,
+                        asset: .init(asset: "Asset"),
+                        background: .normal,
+                        isMarked: false,
+                        alignment: .leading)
+                     ),
+            
+                .init(position: 5,
+                      block: .init(
+                        type: .separator,
+                        line: .strong,
+                        background: .normal,
+                        isMarked: false,
+                        alignment: .leading)
+                     ),
+        ]
+    )
 }
 

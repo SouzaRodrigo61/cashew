@@ -80,6 +80,14 @@ extension Home {
                     try! await SwiftUI.Task.sleep(for: .seconds(0.04))
                     await send(.taskCalendar(.matcheAnimationRemoved), animation: .smooth)
                 }
+            case .destination(.element(id: _, action: .note(.saveNote(let newTask)))):
+                let index = state.taskCalendar.tasks.firstIndex { $0.id == newTask.id }
+                guard let index = index else { return .none }
+                
+                state.taskCalendar.tasks.remove(at: index)
+                state.taskCalendar.tasks.insert(newTask, at: index)
+                
+                return .send(.taskCalendar(.saveNewTask(state.taskCalendar.tasks)))
             default:
                 return .none
             }

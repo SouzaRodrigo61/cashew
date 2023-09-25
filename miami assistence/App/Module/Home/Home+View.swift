@@ -52,25 +52,6 @@ extension Home {
                         .presentationDetents([.medium])
                 }
             }
-            .overlayPreferenceValue(MAnchorKey.self) { value in
-                GeometryReader { geo in
-                    WithViewStore(store, observe: \.taskCalendar ) { viewStore in
-                        
-                        if let task = viewStore.state.contentTask, let anchor = value[task.id.uuidString] {
-                            TaskItem.Content(
-                                id: task.id,
-                                task: task,
-                                color: task.color,
-                                showOverlay: false,
-                                forcePadding: viewStore.state.forcePadding
-                            )
-                            .frame(width: geo[anchor].width, height: geo[anchor].height)
-                            .offset(x: geo[anchor].minX, y: geo[anchor].minY)
-                            .animation(.snappy(duration: 0.35, extraBounce: 0), value: geo[anchor])
-                        }
-                    }
-                }
-            }
         }
     }
 }

@@ -26,7 +26,7 @@ extension Task {
         var updatedAt: Date
         
         var tag: [Tag.Model]
-        var note: [Note.Model]
+        var note: Note.Model
     }
     
 }
