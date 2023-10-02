@@ -127,7 +127,7 @@ extension TaskCalendar {
                             await send(.loadedData(tasks), animation: .default)
                         }
                     } catch {
-                        dump("Error for loaded \(error.localizedDescription)")
+                        // TODO: FIX IT
                     }
                 }
                 
@@ -143,7 +143,7 @@ extension TaskCalendar {
                 return .none
                 
             case let .saveNewTask(tasks):
-                return .run {  send in
+                return .run { send in
                     enum CancelID { case saveDebounce }
                     do {
                         try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
@@ -219,7 +219,7 @@ extension TaskCalendar {
                                                     createdAt: .now,
                                                     updatedAt: .now,
                                                     tag: tags,
-                                                    note: Note.Model.mock
+                                                    note: .init(author: "", item: [])
                 )
                 
                 state.tasks.append(createdTask)
