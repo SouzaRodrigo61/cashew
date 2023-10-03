@@ -32,45 +32,20 @@ extension TaskCalendar {
             case onAppear
             case loadedData([Task.Model])
             case saveNewTask([Task.Model])
+            case createTask(Task.Model)
             
             case task(Task.Feature.Action)
             case header(Header.Feature.Action)
             case bottomSheet(BottomSheet.Feature.Action)
             case taskCreate(TaskCreate.Feature.Action)
+            case taskResponse(TaskResult<[Task.Model]>)
             
         }
         
-        @Dependency(\.storeManager.load) var loadData
-        @Dependency(\.storeManager.save) var saveData
+        @Dependency(\.firebaseFiretore.task) var loadData
+        @Dependency(\.firebaseFiretore.createTask) var saveData
         
         var body: some Reducer<State, Action> {
-            Reduce { state, action in
-                switch action {
-                case .header(.slider(.selectDate(let date))):
-                    guard state.header?.today != nil else { return .none }
-                    
-                    state.header?.today?.week = date.validateIsToday()
-                    state.header?.today?.weekCompleted = date.week()
-                    
-                    state.currentDate = date
-                    
-                    
-                    return .run { send in
-                        enum CancelID { case saveDebounce }
-                        do {
-                            try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
-                                let tasks = try JSONDecoder().decode([Task.Model].self, from: loadData(.tasks))
-                                await send(.loadedData(tasks), animation: .default)
-                            }
-                        } catch {
-                            dump("Error for loaded \(error.localizedDescription)")
-                        }
-                    }
-                default:
-                    return .none
-                }
-            }
-            
             Reduce(self.bottomSheet)
             Reduce(self.taskCreate)
             Reduce(self.taskCalendar)
@@ -120,17 +95,32 @@ extension TaskCalendar {
                 state.taskCreate = nil
                 
                 return .run { send in
-                    enum CancelID { case saveDebounce }
-                    do {
-                        try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
-                            let tasks = try JSONDecoder().decode([Task.Model].self, from: loadData(.tasks))
-                            await send(.loadedData(tasks), animation: .default)
-                        }
-                    } catch {
-                        // TODO: FIX IT
+                    for try await data in try await loadData() {
+                        await send(.taskResponse(.success(data)), animation: .default)
                     }
+                } catch: { error, send in
+                    await send(.taskResponse(.failure(error)), animation: .default)
                 }
                 
+            case .taskResponse(.success(let tasks)):
+                return .run { @MainActor send in
+                    send(.loadedData(tasks))
+                }
+            case .taskResponse(.failure(let error)):
+                dump(error, name: "taskResponse - error")
+                
+                return .none
+                
+                
+            case .header(.slider(.selectDate(let date))):
+                guard state.header?.today != nil else { return .none }
+                
+                state.header?.today?.week = date.validateIsToday()
+                state.header?.today?.weekCompleted = date.week()
+                
+                state.currentDate = date
+                showTaskByDate(&state)
+                return .none
             case .loadedData(let loaded):
                 state.tasks = loaded
                 showTaskByDate(&state)
@@ -142,28 +132,20 @@ extension TaskCalendar {
                 
                 return .none
                 
-            case let .saveNewTask(tasks):
+            case let .createTask(task):
+                state.taskCreate = nil
                 return .run { send in
-                    enum CancelID { case saveDebounce }
-                    do {
-                        try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
-                            try self.saveData(
-                                JSONEncoder().encode(tasks),
-                                .tasks
-                            )
-                        }
-                        
-                        await send(.onAppear, animation: .snappy)
-                    } catch {
-                        dump("Erro for save data - \(error.localizedDescription)")
-                    }
+                    let task = try await saveData(task)
+                    dump(task, name: "task")
+                } catch: { error, send in
+                    dump("Erro for save data - \(error.localizedDescription)")
                 }
                 
             case let .task(.item(_, .leadingAction(id))):
                 state.tasks.removeAll { $0.id == id }
                 
                 return .send(.saveNewTask(state.tasks))
-                    
+                
             case .task(.item(_, .trailingAction(_))):
                 
                 return .none
@@ -222,9 +204,7 @@ extension TaskCalendar {
                                                     note: .init(author: "", item: [])
                 )
                 
-                state.tasks.append(createdTask)
-                
-                return .send(.saveNewTask(state.tasks))
+                return .send(.createTask(createdTask))
                 
             case .taskCreate(.closeTapped):
                 return .send(.onAppear, animation: .snappy)

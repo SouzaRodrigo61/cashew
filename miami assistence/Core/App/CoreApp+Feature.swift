@@ -47,7 +47,6 @@ extension CoreApp {
                 
                 return .none
             case .delegate(.didFinishLaunching):
-                
                 enum Cancel { case id }
                 return .run { send in
                     for try await config in try await firestore.config() {
@@ -65,7 +64,6 @@ extension CoreApp {
                 return .none
             case .configResponse(.failure(let configError)):
                 // TODO: Show error page
-                
                 dump(configError, name: "configError")
                 
                 return .none
