@@ -27,7 +27,7 @@ extension Home {
             case schedule(PresentationAction<Schedule.Feature.Action>)
         }
         
-        @Dependency(\.firebaseFiretore.updateNote) var updateNote
+//        @Dependency(\.firebaseFiretore.updateNote) var updateNote
         
         var body: some Reducer<State, Action> {
             Scope(state: \.taskCalendar, action: /Action.taskCalendar) {
@@ -89,11 +89,12 @@ extension Home {
                 state.taskCalendar.tasks.remove(at: index)
                 state.taskCalendar.tasks.insert(newTask, at: index)
                 
-                return .run { send in
-                    try await updateNote(newTask)
-                } catch: { error, send in
-                    dump(error, name: "Errorste")
-                }
+//                return .run { send in
+//                    try await updateNote(newTask)
+//                } catch: { error, send in
+//                    dump(error, name: "Errorste")
+//                }
+                return .none
             default:
                 return .none
             }

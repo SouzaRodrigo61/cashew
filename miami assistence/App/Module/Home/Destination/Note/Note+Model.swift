@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 extension Note {
     struct Model: Equatable, Identifiable, Codable {
@@ -16,7 +17,6 @@ extension Note {
 
         struct Item: Equatable, Identifiable, Codable {
             var id = UUID()
-            var position: Int
             var block: Block
             
             struct Block: Equatable, Identifiable, Codable {
@@ -86,7 +86,6 @@ extension Note {
                     }
                 }
             }
-            
         }
     }
 }

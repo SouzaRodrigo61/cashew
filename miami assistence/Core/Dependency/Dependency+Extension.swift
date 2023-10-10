@@ -23,19 +23,14 @@ extension DependencyValues {
         set { self[Manager.StoreKit.self] = newValue }
     }
     
-    var analytics: Manager.Analitycs {
-        get { self[Manager.Analitycs.self] }
-        set { self[Manager.Analitycs.self] = newValue }
+    var modelContext: Manager.SwiftDataClient {
+        get { self[Manager.SwiftDataClient.self] }
+        set { self[Manager.SwiftDataClient.self] = newValue }
     }
     
-    var firebaseCore: Manager.Firebase {
-        get { self[Manager.Firebase.self] }
-        set { self[Manager.Firebase.self] = newValue }
-    }
-    
-    var firebaseFiretore: Manager.FirestoreClient {
-        get { self[Manager.FirestoreClient.self] }
-        set { self[Manager.FirestoreClient.self] = newValue }
+    var modelTask: Manager.SwiftDataClient.TaskDatabase {
+        get { self[Manager.SwiftDataClient.TaskDatabase.self] }
+        set { self[Manager.SwiftDataClient.TaskDatabase.self] = newValue }
     }
 }
 

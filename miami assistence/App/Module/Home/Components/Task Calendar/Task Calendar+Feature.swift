@@ -42,14 +42,14 @@ extension TaskCalendar {
             
         }
         
-        @Dependency(\.firebaseFiretore.task) var loadData
-        @Dependency(\.firebaseFiretore.createTask) var saveData
+        @Dependency(\.modelTask.fetch) var loadData
+        @Dependency(\.modelTask.add) var saveData
         
         var body: some Reducer<State, Action> {
             Reduce(self.bottomSheet)
             Reduce(self.taskCreate)
             Reduce(self.taskCalendar)
-            
+            Reduce(self.managerData)
                 .ifLet(\.header, action: /Action.header) {
                     Header.Feature()
                 }
@@ -95,9 +95,8 @@ extension TaskCalendar {
                 state.taskCreate = nil
                 
                 return .run { send in
-                    for try await data in try await loadData() {
-                        await send(.taskResponse(.success(data)), animation: .default)
-                    }
+                    let data = try loadData()
+                    await send(.taskResponse(.success(data)), animation: .default)
                 } catch: { error, send in
                     await send(.taskResponse(.failure(error)), animation: .default)
                 }
@@ -121,25 +120,12 @@ extension TaskCalendar {
                 state.currentDate = date
                 showTaskByDate(&state)
                 return .none
-            case .loadedData(let loaded):
-                state.tasks = loaded
-                showTaskByDate(&state)
-                return .none
                 
             case .matcheAnimationRemoved:
                 state.forcePadding = false
                 state.contentTask = nil
                 
                 return .none
-                
-            case let .createTask(task):
-                state.taskCreate = nil
-                return .run { send in
-                    let task = try await saveData(task)
-                    dump(task, name: "task")
-                } catch: { error, send in
-                    dump("Erro for save data - \(error.localizedDescription)")
-                }
                 
             case let .task(.item(_, .leadingAction(id))):
                 state.tasks.removeAll { $0.id == id }
@@ -154,7 +140,6 @@ extension TaskCalendar {
                 return .none
             }
         }
-        
         
         private func bottomSheet(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
@@ -188,26 +173,36 @@ extension TaskCalendar {
                 }
                 
                 guard state.task != nil else { return .none }
-                guard let count = state.task?.item.count else { return .none }
-                
-                let createdTask: Task.Model = .init(title: content.title,
-                                                    date: content.date,
-                                                    startedHour: content.hour,
-                                                    duration: Double(content.activityDuration.rawValue),
-                                                    color: content.color,
-                                                    isAlert: false,
-                                                    isRepeted: false,
-                                                    position: (count + 1),
-                                                    createdAt: .now,
-                                                    updatedAt: .now,
-                                                    tag: tags,
-                                                    note: .init(author: "", item: [])
+
+                let createdTask: Task.Model = .init(title: content.title, date: content.date, startedHour: content.hour, duration: Double(content.activityDuration.rawValue)/*, color: content.color*/, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: tags, note: .init(author: "", item: [])
                 )
                 
                 return .send(.createTask(createdTask))
                 
             case .taskCreate(.closeTapped):
                 return .send(.onAppear, animation: .snappy)
+                
+            default:
+                return .none
+            }
+        }
+        
+        private func managerData(into state: inout State, action: Action) -> Effect<Action> {
+            switch action {
+                
+            case let .createTask(task):
+                state.taskCreate = nil
+                return .run { send in
+                    try saveData(task)
+                    await send(.onAppear)
+                } catch: { error, send in
+                    dump("Erro for save data - \(error.localizedDescription)")
+                }
+                
+            case .loadedData(let loaded):
+                state.tasks = loaded
+                showTaskByDate(&state)
+                return .none
                 
             default:
                 return .none
@@ -237,3 +232,5 @@ extension TaskCalendar {
         }
     }
 }
+
+

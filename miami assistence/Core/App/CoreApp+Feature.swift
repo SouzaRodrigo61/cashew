@@ -15,14 +15,12 @@ extension CoreApp {
         }
         
         @Dependency(\.userDefaults) var userDefaults
-        @Dependency(\.firebaseCore) var firebaseCore
-        @Dependency(\.firebaseFiretore) var firestore
         
         enum Action: Equatable {
             case shortcutItem(UIApplicationShortcutItem)
             case didFinishLaunching
             case delegate(Delegate)
-            case configResponse(TaskResult<Manager.FirestoreClient.Config>)
+//            case configResponse(TaskResult<Manager.FirestoreClient.Config>)
 
             public enum Delegate: Equatable {
               case didFinishLaunching
@@ -36,7 +34,6 @@ extension CoreApp {
         private func core(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
             case .didFinishLaunching:
-                firebaseCore.configure()
                 
                 return .run { @MainActor send in
                     send(.delegate(.didFinishLaunching))
@@ -47,25 +44,6 @@ extension CoreApp {
                 
                 return .none
             case .delegate(.didFinishLaunching):
-                enum Cancel { case id }
-                return .run { send in
-                    for try await config in try await firestore.config() {
-                        await send(.configResponse(.success(config)), animation: .default)
-                    }
-                } catch: { error, send in
-                    await send(.configResponse(.failure(error)), animation: .default)
-                }
-                .cancellable(id: Cancel.id)
-                
-            case .configResponse(.success(let config)):
-                // TODO: Configurations for observer in app
-                dump(config, name: "Sucess -> config")
-                
-                return .none
-            case .configResponse(.failure(let configError)):
-                // TODO: Show error page
-                dump(configError, name: "configError")
-                
                 return .none
             }
         }

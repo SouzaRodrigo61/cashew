@@ -24,7 +24,7 @@ extension CoreApp {
             _ application: UIApplication,
             didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
         ) -> Bool {
-            store.send(.didFinishLaunching)
+//            store.send(.didFinishLaunching)
             
             return true
         }
