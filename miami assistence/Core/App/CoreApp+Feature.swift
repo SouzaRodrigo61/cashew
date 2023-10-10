@@ -19,9 +19,8 @@ extension CoreApp {
         enum Action: Equatable {
             case shortcutItem(UIApplicationShortcutItem)
             case didFinishLaunching
-//            case didRegisterForRemoteNotifications(TaskResult<Data>)
-//            case configurationForConnecting(UIApplicationShortcutItem?)
             case delegate(Delegate)
+//            case configResponse(TaskResult<Manager.FirestoreClient.Config>)
 
             public enum Delegate: Equatable {
               case didFinishLaunching
@@ -35,6 +34,7 @@ extension CoreApp {
         private func core(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
             case .didFinishLaunching:
+                
                 return .run { @MainActor send in
                     send(.delegate(.didFinishLaunching))
                 }

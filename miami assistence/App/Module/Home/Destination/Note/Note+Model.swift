@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 extension Note {
     struct Model: Equatable, Identifiable, Codable {
@@ -16,7 +17,6 @@ extension Note {
 
         struct Item: Equatable, Identifiable, Codable {
             var id = UUID()
-            var position: Int
             var block: Block
             
             struct Block: Equatable, Identifiable, Codable {
@@ -86,60 +86,6 @@ extension Note {
                     }
                 }
             }
-            
         }
     }
 }
-
-extension Note.Model {
-    static let mock: Self = .init(
-        author: "Rodrigo",
-        item: [
-            .init(position: 1,
-                  block: .init(
-                    type: .text,
-                    text: .init(size: .body, fontWeight: .medium, text: "Testing"),
-                    background: .normal,
-                    isMarked: false,
-                    alignment: .leading)
-                 ),
-            
-                .init(position: 2,
-                      block: .init(
-                        type: .text,
-                        text: .init(size: .title, fontWeight: .bold, text: "Testing bold"),
-                        background: .normal,
-                        isMarked: false,
-                        alignment: .leading)
-                     ),
-            
-                .init(position: 3,
-                      block: .init(
-                        type: .separator,
-                        line: .regular,
-                        background: .normal,
-                        isMarked: false,
-                        alignment: .leading)
-                     ),
-            
-                .init(position: 4,
-                      block: .init(
-                        type: .image,
-                        asset: .init(asset: "Asset"),
-                        background: .normal,
-                        isMarked: false,
-                        alignment: .leading)
-                     ),
-            
-                .init(position: 5,
-                      block: .init(
-                        type: .separator,
-                        line: .strong,
-                        background: .normal,
-                        isMarked: false,
-                        alignment: .leading)
-                     ),
-        ]
-    )
-}
-

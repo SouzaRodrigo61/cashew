@@ -1,0 +1,123 @@
+{
+  "identifier" : "65F8A4B9",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6450650850",
+    "_askToBuyEnabled" : true,
+    "_billingGracePeriodEnabled" : true,
+    "_billingIssuesEnabled" : true,
+    "_compatibilityTimeRate" : {
+      "3" : 3
+    },
+    "_developerTeamID" : "Z42V6W967K",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 717875342.44625294,
+    "_locale" : "pt_PT",
+    "_renewalBillingIssuesEnabled" : true,
+    "_storefront" : "BRA",
+    "_storeKitErrors" : [
+      {
+        "current" : {
+          "index" : 2,
+          "type" : "generic"
+        },
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : {
+          "index" : 1,
+          "type" : "purchase"
+        },
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : {
+          "index" : 0,
+          "type" : "verification"
+        },
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : {
+          "index" : 2,
+          "type" : "generic"
+        },
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : {
+          "index" : 2,
+          "type" : "generic"
+        },
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ],
+    "_timeRate" : 10
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21389110",
+      "localizations" : [
+
+      ],
+      "name" : "completed",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "4.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6466761190",
+          "introductoryOffer" : null,
+          "localizations" : [
+
+          ],
+          "productID" : "miami.assistence.vierb.completed",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Vierb Completed",
+          "subscriptionGroupID" : "21389110",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

@@ -32,49 +32,24 @@ extension TaskCalendar {
             case onAppear
             case loadedData([Task.Model])
             case saveNewTask([Task.Model])
+            case createTask(Task.Model)
             
             case task(Task.Feature.Action)
             case header(Header.Feature.Action)
             case bottomSheet(BottomSheet.Feature.Action)
             case taskCreate(TaskCreate.Feature.Action)
+            case taskResponse(TaskResult<[Task.Model]>)
             
         }
         
-        @Dependency(\.storeManager.load) var loadData
-        @Dependency(\.storeManager.save) var saveData
+        @Dependency(\.modelTask.fetch) var loadData
+        @Dependency(\.modelTask.add) var saveData
         
         var body: some Reducer<State, Action> {
-            Reduce { state, action in
-                switch action {
-                case .header(.slider(.selectDate(let date))):
-                    guard state.header?.today != nil else { return .none }
-                    
-                    state.header?.today?.week = date.validateIsToday()
-                    state.header?.today?.weekCompleted = date.week()
-                    
-                    state.currentDate = date
-                    
-                    
-                    return .run { send in
-                        enum CancelID { case saveDebounce }
-                        do {
-                            try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
-                                let tasks = try JSONDecoder().decode([Task.Model].self, from: loadData(.tasks))
-                                await send(.loadedData(tasks), animation: .default)
-                            }
-                        } catch {
-                            dump("Error for loaded \(error.localizedDescription)")
-                        }
-                    }
-                default:
-                    return .none
-                }
-            }
-            
             Reduce(self.bottomSheet)
             Reduce(self.taskCreate)
             Reduce(self.taskCalendar)
-            
+            Reduce(self.managerData)
                 .ifLet(\.header, action: /Action.header) {
                     Header.Feature()
                 }
@@ -120,19 +95,29 @@ extension TaskCalendar {
                 state.taskCreate = nil
                 
                 return .run { send in
-                    enum CancelID { case saveDebounce }
-                    do {
-                        try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
-                            let tasks = try JSONDecoder().decode([Task.Model].self, from: loadData(.tasks))
-                            await send(.loadedData(tasks), animation: .default)
-                        }
-                    } catch {
-                        dump("Error for loaded \(error.localizedDescription)")
-                    }
+                    let data = try loadData()
+                    await send(.taskResponse(.success(data)), animation: .default)
+                } catch: { error, send in
+                    await send(.taskResponse(.failure(error)), animation: .default)
                 }
                 
-            case .loadedData(let loaded):
-                state.tasks = loaded
+            case .taskResponse(.success(let tasks)):
+                return .run { @MainActor send in
+                    send(.loadedData(tasks))
+                }
+            case .taskResponse(.failure(let error)):
+                dump(error, name: "taskResponse - error")
+                
+                return .none
+                
+                
+            case .header(.slider(.selectDate(let date))):
+                guard state.header?.today != nil else { return .none }
+                
+                state.header?.today?.week = date.validateIsToday()
+                state.header?.today?.weekCompleted = date.week()
+                
+                state.currentDate = date
                 showTaskByDate(&state)
                 return .none
                 
@@ -142,28 +127,11 @@ extension TaskCalendar {
                 
                 return .none
                 
-            case let .saveNewTask(tasks):
-                return .run {  send in
-                    enum CancelID { case saveDebounce }
-                    do {
-                        try await withTaskCancellation(id: CancelID.saveDebounce, cancelInFlight: true) {
-                            try self.saveData(
-                                JSONEncoder().encode(tasks),
-                                .tasks
-                            )
-                        }
-                        
-                        await send(.onAppear, animation: .snappy)
-                    } catch {
-                        dump("Erro for save data - \(error.localizedDescription)")
-                    }
-                }
-                
             case let .task(.item(_, .leadingAction(id))):
                 state.tasks.removeAll { $0.id == id }
                 
                 return .send(.saveNewTask(state.tasks))
-                    
+                
             case .task(.item(_, .trailingAction(_))):
                 
                 return .none
@@ -172,7 +140,6 @@ extension TaskCalendar {
                 return .none
             }
         }
-        
         
         private func bottomSheet(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
@@ -206,28 +173,36 @@ extension TaskCalendar {
                 }
                 
                 guard state.task != nil else { return .none }
-                guard let count = state.task?.item.count else { return .none }
-                
-                let createdTask: Task.Model = .init(title: content.title,
-                                                    date: content.date,
-                                                    startedHour: content.hour,
-                                                    duration: Double(content.activityDuration.rawValue),
-                                                    color: content.color,
-                                                    isAlert: false,
-                                                    isRepeted: false,
-                                                    position: (count + 1),
-                                                    createdAt: .now,
-                                                    updatedAt: .now,
-                                                    tag: tags,
-                                                    note: Note.Model.mock
+
+                let createdTask: Task.Model = .init(title: content.title, date: content.date, startedHour: content.hour, duration: Double(content.activityDuration.rawValue)/*, color: content.color*/, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: tags, note: .init(author: "", item: [])
                 )
                 
-                state.tasks.append(createdTask)
-                
-                return .send(.saveNewTask(state.tasks))
+                return .send(.createTask(createdTask))
                 
             case .taskCreate(.closeTapped):
                 return .send(.onAppear, animation: .snappy)
+                
+            default:
+                return .none
+            }
+        }
+        
+        private func managerData(into state: inout State, action: Action) -> Effect<Action> {
+            switch action {
+                
+            case let .createTask(task):
+                state.taskCreate = nil
+                return .run { send in
+                    try saveData(task)
+                    await send(.onAppear)
+                } catch: { error, send in
+                    dump("Erro for save data - \(error.localizedDescription)")
+                }
+                
+            case .loadedData(let loaded):
+                state.tasks = loaded
+                showTaskByDate(&state)
+                return .none
                 
             default:
                 return .none
@@ -257,3 +232,5 @@ extension TaskCalendar {
         }
     }
 }
+
+

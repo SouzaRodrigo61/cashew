@@ -65,6 +65,25 @@ extension TaskCreate {
                         .listRowBackground(Color.lotion)
                         
                         Section {
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("task.create.tag")
+                                    .font(.system(.headline, design: .rounded, weight: .bold))
+                                    .padding(.horizontal, 16)
+                                    .padding(.bottom, 4)
+                                
+                                TextField("task.create.tag.placeholder", text: viewStore.$tag.value)
+                                    .font(.system(.body, design: .rounded, weight: .bold))
+                                    .focused(self.$focus, equals: Feature.State.Field.tag(viewStore.tag.id))
+                                    .foregroundStyle(.gray)
+                                    .padding(.horizontal, 16)
+                                
+                            }
+                            .padding(.vertical, 8)
+                        }
+                        .listRowInsets(.init())
+                        .listRowBackground(Color.lotion)
+                        
+                        Section {
                             VStack(alignment: .leading, spacing: 8) {
                                 
                                 Text("task.create.picker.datetime.title")
@@ -127,26 +146,20 @@ extension TaskCreate {
                         .listRowInsets(.init())
                         .listRowBackground(Color.lotion)
                         
-                        Section {
-                            VStack(alignment: .leading, spacing: 0) {
-                                Text("task.create.tag")
-                                    .font(.system(.headline, design: .rounded, weight: .bold))
-                                    .padding(.horizontal, 16)
-                                    .padding(.bottom, 4)
+                        Button {
+                            store.send(.createTaskTapped, animation: .smooth)
+                        } label: {
+                            Text("task.create.button.title")
+                                .font(.system(.headline, design: .rounded, weight: .bold))
+                                .getContrastText(backgroundColor: viewStore.color)
+                                .padding(.vertical, 16)
                                 
-                                ForEach(viewStore.$tags) { $tag in
-                                    TextField("task.create.tag.placeholder", text: viewStore.$tag.value)
-                                        .font(.system(.body, design: .rounded, weight: .bold))
-                                        .focused(self.$focus, equals: Feature.State.Field.tag(tag.id))
-                                        .foregroundStyle(.gray)
-                                        .padding(.horizontal, 16)
-                                }
-                                
-                            }
-                            .padding(.vertical, 8)
+                                .hSpacing(.center)
+                                .background(viewStore.color, in: .rect(cornerRadius: 10))
                         }
-                        .listRowInsets(.init())
-                        .listRowBackground(Color.lotion)
+//                        .listRowInsets(.init())
+                        .buttonStyle(.scale)
+                        .padding(.bottom, 6)
                     }
                     .listSectionSpacing(8)
                     .coordinateSpace(name: "SCROLL")
@@ -157,23 +170,8 @@ extension TaskCreate {
                     .environment(\.defaultMinListRowHeight, 64)
                     .scrollContentBackground(.hidden)
                     .scrollDismissesKeyboard(.interactively)
+                    .scrollDismissesKeyboard(.immediately)
                     
-                    
-                }
-                .overlay(alignment: .bottom) {
-                    Button {
-                        store.send(.createTaskTapped, animation: .smooth)
-                    } label: {
-                        Text("task.create.button.title")
-                            .font(.system(.headline, design: .rounded, weight: .bold))
-                            .getContrastText(backgroundColor: viewStore.color)
-                            .padding(12)
-                            .hSpacing(.center)
-                            .background(viewStore.color, in: .rect(cornerRadius: 10))
-                    }
-                    .buttonStyle(.scale)
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 6)
                 }
                 .onAppear {
                     store.send(.onAppearSelectedHour, animation: .bouncy)

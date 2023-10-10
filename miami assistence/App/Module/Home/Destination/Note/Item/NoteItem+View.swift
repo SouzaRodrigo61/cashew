@@ -24,6 +24,7 @@ extension NoteItem {
                     NoteDivider.View(store: $0)
                 }
             }
+            .padding(.bottom, 8)
         }
     }
 }

@@ -24,9 +24,7 @@ extension TaskCalendar {
                     Header.View(store: $0)
                 }
             }
-            .onAppear {
-                store.send(.onAppear)
-            }
+            .onAppear { store.send(.onAppear) }
             .overlay {
                 IfLetStore(store.scope(state: \.taskCreate, action: Feature.Action.taskCreate)) {
                     TaskCreate.View(store: $0)

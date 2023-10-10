@@ -14,7 +14,7 @@ struct MiamiAssistenceApp: App {
     var body: some Scene {
         WindowGroup {
             Root.build()
-            .preferredColorScheme(.light)
+                .preferredColorScheme(.light)
         }
     }
 }

@@ -5,7 +5,6 @@
 //  Created by Rodrigo Souza on 16/09/23.
 //
 
-import Foundation
 import Dependencies
 
 extension DependencyValues {
@@ -24,9 +23,14 @@ extension DependencyValues {
         set { self[Manager.StoreKit.self] = newValue }
     }
     
-    var analytics: Manager.Analitycs {
-        get { self[Manager.Analitycs.self] }
-        set { self[Manager.Analitycs.self] = newValue }
+    var modelContext: Manager.SwiftDataClient {
+        get { self[Manager.SwiftDataClient.self] }
+        set { self[Manager.SwiftDataClient.self] = newValue }
+    }
+    
+    var modelTask: Manager.SwiftDataClient.TaskDatabase {
+        get { self[Manager.SwiftDataClient.TaskDatabase.self] }
+        set { self[Manager.SwiftDataClient.TaskDatabase.self] = newValue }
     }
 }
 
