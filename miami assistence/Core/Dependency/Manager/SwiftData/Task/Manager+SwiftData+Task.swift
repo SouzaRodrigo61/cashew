@@ -54,6 +54,8 @@ extension Manager.SwiftDataClient.TaskDatabase: DependencyKey {
                 
                 let modelToBeDelete = model
                 movieContext.delete(modelToBeDelete)
+                
+                try movieContext.save()
             } catch {
                 throw TaskError.delete
             }

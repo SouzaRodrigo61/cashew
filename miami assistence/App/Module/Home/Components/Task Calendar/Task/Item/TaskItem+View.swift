@@ -115,7 +115,7 @@ extension TaskItem {
                                         if axisX > 40 {
                                             
                                             withAnimation {
-                                                colorView = .cyan.opacity(0.5)
+                                                colorView = .red.opacity(0.5)
                                             }
                                             
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
