@@ -17,14 +17,14 @@ extension Note {
                 List {
                     Section {
                         VStack(alignment: .leading, spacing: 0) {
-//                            Text(viewStore.title)
-//                                .getContrast(backgroundColor: viewStore.color)
+                            Text(viewStore.title)
+                                .getContrast(backgroundColor: Color(hex: viewStore.color))
                             Text("Data: \(viewStore.date.description)")
-//                                .getContrast(backgroundColor: viewStore.color)
+                                .getContrast(backgroundColor: Color(hex: viewStore.color))
                             Text("Hour: \(viewStore.startedHour.description)")
-//                                .getContrast(backgroundColor: viewStore.color)
+                                .getContrast(backgroundColor: Color(hex: viewStore.color))
                             Text("Duration: \(viewStore.duration.description)")
-//                                .getContrast(backgroundColor: viewStore.color)
+                                .getContrast(backgroundColor: Color(hex: viewStore.color))
                         }
                         .padding(8)
                     }
@@ -56,7 +56,7 @@ extension Note {
                 .listSectionSeparator(.hidden)
                 .background(.regularMaterial, in: .rect(cornerRadius: 12))
                 .padding(8)
-//                .environment(\.colorScheme, viewStore.color.getContrast() ? .dark : .light)
+                .environment(\.colorScheme, Color(hex: viewStore.color).getContrast() ? .dark : .light)
                 .navigationBarBackButtonHidden(true)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -75,9 +75,9 @@ extension Note {
                             .font(.system(.title3, design: .rounded, weight: .bold))
                     }
                 }
-//                .toolbarColorScheme(viewStore.color.getContrast() ? .dark : .light, for: .navigationBar)
+                .toolbarColorScheme(Color(hex: viewStore.color).getContrast() ? .dark : .light, for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
-//                .background(viewStore.color)
+                .background(Color(hex: viewStore.color))
                 .onTapGesture(count: 2) {
                     store.send(.addBlock)
                 }

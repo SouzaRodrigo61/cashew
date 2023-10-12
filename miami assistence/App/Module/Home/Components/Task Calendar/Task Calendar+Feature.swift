@@ -44,6 +44,7 @@ extension TaskCalendar {
         
         @Dependency(\.modelTask.fetch) var loadData
         @Dependency(\.modelTask.add) var saveData
+        @Dependency(\.modelTask.delete) var deleteData
         
         var body: some Reducer<State, Action> {
             Reduce(self.bottomSheet)
@@ -128,9 +129,14 @@ extension TaskCalendar {
                 return .none
                 
             case let .task(.item(_, .leadingAction(id))):
-                state.tasks.removeAll { $0.id == id }
+                guard let task = state.tasks.first(where: { $0.id == id }) else { return .none }
                 
-                return .send(.saveNewTask(state.tasks))
+                return .run { send in
+                    try deleteData(task)
+                    await send(.onAppear)
+                } catch: { error, send in
+                    dump("Error")
+                }
                 
             case .task(.item(_, .trailingAction(_))):
                 
@@ -168,14 +174,13 @@ extension TaskCalendar {
                 guard state.task != nil else { return .none }
                 
                 let componets = content.tag.value.components(separatedBy: ", ")
-                let tags: [Tag.Model] = componets.map {
+                let _: [Tag.Model] = componets.map {
                     .init(value: $0)
                 }
                 
                 guard state.task != nil else { return .none }
 
-                let createdTask: Task.Model = .init(title: content.title, date: content.date, startedHour: content.hour, duration: Double(content.activityDuration.rawValue)/*, color: content.color*/, isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, tag: tags, note: .init(author: "", item: [])
-                )
+                let createdTask: Task.Model = .init(title: content.title, date: content.date, startedHour: content.hour, duration: Double(content.activityDuration.rawValue), isAlert: false, isRepeted: false, createdAt: .now, updatedAt: .now, color: content.color.toHex())
                 
                 return .send(.createTask(createdTask))
                 

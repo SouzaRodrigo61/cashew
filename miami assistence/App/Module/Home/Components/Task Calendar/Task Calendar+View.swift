@@ -7,6 +7,8 @@
 
 import SwiftUI
 import ComposableArchitecture
+import UserNotifications
+import CoreData
 
 extension TaskCalendar {
     struct View: SwiftUI.View {
@@ -31,6 +33,38 @@ extension TaskCalendar {
                 }
                 .background(.white)
                 .transition(.move(edge: .top))
+            }
+            .onReceive(NotificationCenter.default.publisher(
+                for: NSPersistentCloudKitContainer.eventChangedNotification
+            ).receive(on: DispatchQueue.main)) { notification in
+                guard let event = notification.userInfo?[NSPersistentCloudKitContainer.eventNotificationUserInfoKey] as? NSPersistentCloudKitContainer.Event else {
+                    return
+                }
+                if event.endDate != nil && event.type == .import {
+                    
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                        if success {
+                            let content = UNMutableNotificationContent()
+                            content.title = "Nova tarefa"
+                            content.subtitle = "Abra o app para visualizar o novo lancamento de tarefa"
+                            content.sound = UNNotificationSound.default
+
+                            // show this notification five seconds from now
+                            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+                            // choose a random identifier
+                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                            // add our notification request
+                            UNUserNotificationCenter.current().add(request)
+                        } else if let error = error {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    
+
+                    store.send(.onAppear)
+                }
             }
         }
     }

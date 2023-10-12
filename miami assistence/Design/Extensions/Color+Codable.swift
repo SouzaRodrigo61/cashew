@@ -67,3 +67,4 @@ extension Color: Codable {
         try container.encode(colorComponents.blue, forKey: .blue)
     }
 }
+

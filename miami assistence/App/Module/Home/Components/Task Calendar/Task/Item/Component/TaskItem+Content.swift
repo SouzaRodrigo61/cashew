@@ -40,7 +40,7 @@ extension TaskItem {
                     if showOverlay {
                         Text(task.startedHour)
                             .accessibilityLabel("task.item.accessibility.hour.label")
-                            .font(.body)
+                            .font(.callout)
                             .fontWeight(.bold)
                             .foregroundStyle(.dark)
                             .padding(.leading, 16)

@@ -24,7 +24,7 @@ extension Task {
             var date: Date = Date()
             var startedHour: String = ""
             var duration: TimeInterval = 0
-//            var color: Color
+            var color: String = ""
             var isAlert: Bool = false
             var isRepeted: Bool = false
             
@@ -34,12 +34,12 @@ extension Task {
 //            var tag: [Tag.Model] = []
 //            var note: Note.Model
             
-            init(title: String, date: Date, startedHour: String, duration: TimeInterval, isAlert: Bool, isRepeted: Bool, createdAt: Date, updatedAt: Date, tag: [Tag.Model], note: Note.Model) {
+            init(title: String, date: Date, startedHour: String, duration: TimeInterval, isAlert: Bool, isRepeted: Bool, createdAt: Date, updatedAt: Date, color: String) {
                 self.title = title
                 self.date = date
                 self.startedHour = startedHour
                 self.duration = duration
-//                self.color = color
+                self.color = color
                 self.isAlert = isAlert
                 self.isRepeted = isRepeted
                 self.createdAt = createdAt
@@ -58,7 +58,7 @@ extension Task {
                 self.date = try container.decode(Date.self, forKey: .date)
                 self.startedHour = try container.decode(String.self, forKey: .startedHour)
                 self.duration = try container.decode(TimeInterval.self, forKey: .duration)
-//                self.color = try container.decode(Color.self, forKey: .color)
+                self.color = try container.decode(String.self, forKey: .color)
                 self.isAlert = try container.decode(Bool.self, forKey: .isAlert)
                 self.isRepeted = try container.decode(Bool.self, forKey: .isRepeted)
                 self.createdAt = try container.decode(Date.self, forKey: .createdAt)
@@ -77,7 +77,7 @@ extension Task {
                 try container.encode(date, forKey: .date)
                 try container.encode(startedHour, forKey: .startedHour)
                 try container.encode(duration, forKey: .duration)
-//                try container.encode(color, forKey: .color)
+                try container.encode(color, forKey: .color)
                 try container.encode(isAlert, forKey: .isAlert)
                 try container.encode(isRepeted, forKey: .isRepeted)
                 try container.encode(createdAt, forKey: .createdAt)
@@ -93,7 +93,7 @@ extension Task {
                 case date
                 case startedHour
                 case duration
-//                case color
+                case color
                 case isAlert
                 case isRepeted
                 case createdAt

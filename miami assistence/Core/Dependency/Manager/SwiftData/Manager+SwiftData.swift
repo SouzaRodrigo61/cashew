@@ -18,16 +18,7 @@ extension Manager {
 extension Manager.SwiftDataClient: DependencyKey {
     static let appContext: ModelContext = {
         do {
-            
             let schema = Schema([Task.Model.self])
-            
-//            let configuration = ModelConfiguration(
-//                "SWDMyApp",
-//                schema: schema,
-//                sharedAppContainerIdentifier: "my.appgroup.id",
-//                cloudKitContainerIdentifier: "iCloud.my.icloud.id"
-//            )
-            
             
             let config = ModelConfiguration(schema: schema)
             let container = try ModelContainer(for: schema, configurations: config)
