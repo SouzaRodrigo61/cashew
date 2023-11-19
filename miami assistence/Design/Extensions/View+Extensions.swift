@@ -75,6 +75,10 @@ extension View {
     func isSameDate(_ date1: Date, _ date2: Date) -> Bool {
         return Calendar.current.isDate(date1, inSameDayAs: date2)
     }
+    
+    func sticky(_ stickyRects: [CGRect]) -> some View {
+        modifier(Sticky(stickyRects: stickyRects))
+    }
 }
 
 struct ValueKey: PreferenceKey {

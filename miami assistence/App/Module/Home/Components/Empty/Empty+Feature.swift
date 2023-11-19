@@ -12,9 +12,11 @@ extension Empty {
     struct Feature: Reducer {
         struct State: Equatable {
             var currentDate: Date
+            var showButton: Bool = true
         }
         
         enum Action: Equatable {
+            case buttonTapped
         }
         
         var body: some Reducer<State, Action> {

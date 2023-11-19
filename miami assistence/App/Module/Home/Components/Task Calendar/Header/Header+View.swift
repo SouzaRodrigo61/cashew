@@ -13,49 +13,42 @@ extension Header {
         let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
-            VStack(spacing: 0) {
-                HStack(alignment: .center, spacing: 0) {
-                    IfLetStore(store.scope(state: \.today, action: Feature.Action.today)) {
-                        HeaderToday.View(store: $0)
-                    }
+            GeometryReader { geo in
+                VStack(spacing: 0) {
+                    Rectangle()
+                        .fill(.white)
+                        .frame(height: geo.safeAreaInsets.top + 50)
                     
-                    Spacer()
-                    
-                    HStack(alignment: .center, spacing: 4) {
-                        Button {
-                            store.send(.searchTapped)
-                        } label: {
-                            Image(systemName: "magnifyingglass")
-                                .font(.title3)
-                                .fontWeight(.bold)
-                                .foregroundStyle(.gray)
+                    HStack(alignment: .center, spacing: 0) {
+                        IfLetStore(store.scope(state: \.today, action: Feature.Action.today)) {
+                            HeaderToday.View(store: $0)
                         }
-                        .buttonStyle(.pressBordered)
+                        .hSpacing(.leading)
                         
-                        Button {
-                            store.send(.moreTapped)
-                        } label: {
-                            Image(systemName: "gear")
-                                .font(.title3)
-                                .fontWeight(.bold)
-                                .foregroundStyle(.gray)
+                        Spacer()
+                        
+                        IfLetStore(store.scope(state: \.button, action: Feature.Action.button)) {
+                            HeaderButton.View(store: $0)
                         }
-                        .buttonStyle(.pressBordered)
                     }
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 8)
+                    
+    //                IfLetStore(store.scope(state: \.goal, action: Feature.Action.goal)) {
+    //                    HeaderGoalProgress.View(store: $0)
+    //                }
+    //                .padding(.horizontal, 8)
+                    
+                    IfLetStore(store.scope(state: \.slider, action: Feature.Action.slider)) {
+                        HeaderSlider.View(store: $0)
+                    }
+                    .padding(.horizontal, 8)
+                    
+                    Divider()
                 }
-                .padding(.horizontal, 8)
-                
-                IfLetStore(store.scope(state: \.slider, action: Feature.Action.slider)) {
-                    HeaderSlider.View(store: $0)
-                }
+                .frame(maxWidth: .infinity)
+                .background(.white)
             }
-            .frame(maxWidth: .infinity)
-            .background(
-                Color.white
-                    .shadow(color: .gray.opacity(0.2), radius: 2, x: 0, y: 2)
-                    .ignoresSafeArea(.container, edges: .top)
-            )
-            
         }
         
     }

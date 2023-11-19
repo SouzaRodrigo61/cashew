@@ -25,7 +25,7 @@ extension HeaderSlider {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-                .frame(height: 80)
+                .frame(height: 60)
                 .onAppear {
                     store.send(.onAppear, animation: .snappy)
                 }
@@ -36,39 +36,42 @@ extension HeaderSlider {
         private func WeekView(_ week: [Date.Week], currentDate: Date) -> some SwiftUI.View {
             HStack(alignment: .bottom, spacing: 0) {
                 ForEach(week) { day in
-                    VStack(spacing: 8) {
-                        Text(day.date.format("E"))
-                            .font(.callout)
+                    VStack(spacing: 0) {
+                        Text(day.date.format("E").capitalized)
+                            .font(.caption)
                             .fontWeight(day.date.isToday() ? .bold : .medium)
                             .textScale(.secondary)
-                            .foregroundStyle(day.date.isToday() ? .royalBlue : .gunmetal)
+                            .foregroundStyle(
+                                isSameDate(day.date, currentDate)
+                                ? .white : day.date.isToday()
+                                ? .royalBlue : day.date.isAfterByDate(.now)
+                                ? .gunmetal : .grey500)
+                            .padding(.bottom, 8)
                         Text(day.date.format("dd"))
-                            .font(.callout)
+                            .font(.body)
                             .fontWeight(.bold)
                             .textScale(.secondary)
                             .foregroundStyle(
                                 isSameDate(day.date, currentDate)
                                 ? .white : day.date.isToday()
                                 ? .royalBlue : day.date.isAfterByDate(.now)
-                                ? .gunmetal : .gray)
-                            .frame(width: 35, height: 35)
-                            .background {
-                                if isSameDate(day.date, currentDate) {
-                                    Circle()
-                                        .fill(.blue)
-                                        .matchedGeometryEffect(id: "currentlyDate", in: animation)
-                                }
-                            }
+                                ? .gunmetal : .grey500)
                     }
+                    .padding(.vertical, 4)
                     .foregroundStyle(isSameDate(day.date, currentDate) ? .white : .gray)
                     .hSpacing(.center)
-                    .contentShape(.rect)
+                    .background {
+                        if isSameDate(day.date, currentDate) {
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(.royalBlue)
+                                .matchedGeometryEffect(id: "currentlyDate", in: animation)
+                        }
+                    }
                     .onTapGesture {
-                        store.send(.selectDate(day.date), animation: .snappy)
+                        store.send(.selectDate(day.date), animation: .smooth)
                     }
                 }
             }
-            .padding(.bottom, 8)
             .background {
                 GeometryReader { geo in
                     let minX = geo.frame(in: .global).minX

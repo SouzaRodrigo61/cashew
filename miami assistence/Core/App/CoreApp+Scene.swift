@@ -15,7 +15,7 @@ extension CoreApp {
             performActionFor shortcutItem: UIApplicationShortcutItem,
             completionHandler: @escaping (Bool) -> Void
         ) {
-            Delegate.shared.store.send(.shortcutItem(shortcutItem))
+//            Delegate.shared.store.send(.shortcutItem(shortcutItem))
             completionHandler(true)
         }
     }

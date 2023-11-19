@@ -32,5 +32,20 @@ extension DependencyValues {
         get { self[Manager.SwiftDataClient.TaskDatabase.self] }
         set { self[Manager.SwiftDataClient.TaskDatabase.self] = newValue }
     }
+    
+    var analytics: Manager.Analitycs {
+        get { self[Manager.Analitycs.self] }
+        set { self[Manager.Analitycs.self] = newValue }
+    }
+    
+    var firebaseCore: Manager.Firebase {
+        get { self[Manager.Firebase.self] }
+        set { self[Manager.Firebase.self] = newValue }
+    }
+    
+    var firebaseFiretore: Manager.FirestoreClient {
+        get { self[Manager.FirestoreClient.self] }
+        set { self[Manager.FirestoreClient.self] = newValue }
+    }
 }
 

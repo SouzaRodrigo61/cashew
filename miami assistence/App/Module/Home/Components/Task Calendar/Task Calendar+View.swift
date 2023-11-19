@@ -15,17 +15,34 @@ extension TaskCalendar {
         let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
-            ZStack(alignment: .top) {
-                
-                IfLetStore(store.scope(state: \.task, action: Feature.Action.task)) {
-                    Task.View(store: $0)
-                }
-                .offset(y: 120)
-                
-                IfLetStore(store.scope(state: \.header, action: Feature.Action.header)) {
-                    Header.View(store: $0)
+            ScrollView {
+                LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
+                    Section {
+                        VStack(spacing: 0) {
+                            
+                            IfLetStore(store.scope(state: \.task, action: Feature.Action.task)) {
+                                Task.View(store: $0)
+                            }
+                            
+                            IfLetStore(store.scope(state: \.info, action: Feature.Action.info)) {
+                                TaskInfo.View(store: $0)
+                            }
+                            
+                            IfLetStore(store.scope(state: \.inspiration, action: Feature.Action.inspiration)) {
+                                TaskInspiration.View(store: $0)
+                            }
+                        }
+                        .offset(y: 140)
+                        
+                    } header: {
+                        IfLetStore(store.scope(state: \.header, action: Feature.Action.header)) {
+                            Header.View(store: $0)
+                        }
+                    }
                 }
             }
+            .ignoresSafeArea(.container, edges: .top)
+            .scrollIndicators(.hidden)
             .onAppear { store.send(.onAppear) }
             .overlay {
                 IfLetStore(store.scope(state: \.taskCreate, action: Feature.Action.taskCreate)) {
@@ -34,38 +51,33 @@ extension TaskCalendar {
                 .background(.white)
                 .transition(.move(edge: .top))
             }
-            .onReceive(NotificationCenter.default.publisher(
-                for: NSPersistentCloudKitContainer.eventChangedNotification
-            ).receive(on: DispatchQueue.main)) { notification in
-                guard let event = notification.userInfo?[NSPersistentCloudKitContainer.eventNotificationUserInfoKey] as? NSPersistentCloudKitContainer.Event else {
-                    return
+            .overlay(alignment: .bottomTrailing) {
+                Button {
+                    store.send(.showTaskCreate, animation: .bouncy)
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                        .foregroundStyle(.white)
+                        .frame(width: 36, height: 36)
+                        .background(.dark, in: .rect(cornerRadius: 8))
+                        .padding(2)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.blue, lineWidth: 2)
+                        )
                 }
-                if event.endDate != nil && event.type == .import {
-                    
-                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                        if success {
-                            let content = UNMutableNotificationContent()
-                            content.title = "Nova tarefa"
-                            content.subtitle = "Abra o app para visualizar o novo lancamento de tarefa"
-                            content.sound = UNNotificationSound.default
-
-                            // show this notification five seconds from now
-                            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-
-                            // choose a random identifier
-                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-                            // add our notification request
-                            UNUserNotificationCenter.current().add(request)
-                        } else if let error = error {
-                            print(error.localizedDescription)
-                        }
-                    }
-                    
-
-                    store.send(.onAppear)
-                }
+                .padding(.trailing, 16)
             }
         }
+    }
+}
+
+
+struct FramePreference: PreferenceKey {
+    static var defaultValue: [CGRect] = []
+
+    static func reduce(value: inout [CGRect], nextValue: () -> [CGRect]) {
+        value.append(contentsOf: nextValue())
     }
 }

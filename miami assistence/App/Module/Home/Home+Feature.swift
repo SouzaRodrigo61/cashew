@@ -49,7 +49,7 @@ extension Home {
             switch action {
                 
             case .taskCalendar(.task(.item(_, .contentTapped(let task)))):
-                state.destination.append(.note(.init(task: task)))
+                state.destination.append(.note(.init()))
                 state.taskCalendar.contentTask = task
                 
                 return .none

@@ -13,12 +13,16 @@ extension Header {
         struct State: Equatable {
             var today: HeaderToday.Feature.State?
             var slider: HeaderSlider.Feature.State?
+            var button: HeaderButton.Feature.State?
+            var goal: HeaderGoalProgress.Feature.State?
             var isScroll: Bool = false
         }
         
         enum Action: Equatable {
             case today(HeaderToday.Feature.Action)
             case slider(HeaderSlider.Feature.Action)
+            case button(HeaderButton.Feature.Action)
+            case goal(HeaderGoalProgress.Feature.Action)
             case searchTapped
             case moreTapped
         }
@@ -30,6 +34,12 @@ extension Header {
                 }
                 .ifLet(\.slider, action: /Action.slider) {
                     HeaderSlider.Feature()
+                }
+                .ifLet(\.button, action: /Action.button) {
+                    HeaderButton.Feature()
+                }
+                .ifLet(\.goal, action: /Action.goal) {
+                    HeaderGoalProgress.Feature()
                 }
         }
     }

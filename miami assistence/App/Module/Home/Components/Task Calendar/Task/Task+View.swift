@@ -17,46 +17,14 @@ extension Task {
         @State private var axisY: CGFloat = .nan
         
         var body: some SwiftUI.View {
-            
-            List {
+            IfLetStore(store.scope(state: \.isEmpty, action: Feature.Action.isEmpty)) {
+                Empty.View(store: $0)
+                    .padding(.horizontal, 8)
+            } else: {
                 ForEachStore(store.scope(state: \.item, action: Feature.Action.item)) {
                     TaskItem.View(store: $0)
                 }
-                .onMove { _, _ in }
-                .listRowInsets(.init())
-                .listRowSeparator(.hidden)
-                .listSectionSeparator(.hidden)
-                .listRowBackground(Color.alabaster)
-                
-                WithViewStore(store, observe: \.showCreateTask) { viewStore in
-                    if viewStore.state {
-                        Button {
-                            store.send(.showTaskCreate, animation: .bouncy)
-                        } label: {
-                            HStack(spacing: 8) {
-                                Image(systemName: "plus.square.dashed")
-                                    .font(.system(.title, design: .rounded))
-                                    .foregroundStyle(.royalBlue)
-                                
-                                Text("task.button.create.title")
-                                    .font(.system(.body, design: .rounded))
-                            }
-                            .hSpacing(.leading)
-                            .padding(.horizontal, 8)
-                        }
-                        .buttonStyle(.scale)
-                        .listRowInsets(.init())
-                    }
-                }
-                
             }
-            .coordinateSpace(name: "SCROLL")
-            .accessibilityLabel("Lista de dados")
-            .contentMargins(8, for: .scrollContent)
-            .listRowSpacing(8)
-            .scrollIndicators(.hidden)
-            .environment(\.defaultMinListRowHeight, 64)
-            .scrollContentBackground(.hidden)
         }
         
     }

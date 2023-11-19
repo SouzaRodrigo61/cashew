@@ -18,6 +18,9 @@ extension TaskCalendar {
             var task: Task.Feature.State?
             var header: Header.Feature.State?
             
+            var info: TaskInfo.Feature.State?
+            var inspiration: TaskInspiration.Feature.State?
+            
             var tasks: [Task.Model] = []
             
             var contentTask: Task.Model?
@@ -38,8 +41,12 @@ extension TaskCalendar {
             case header(Header.Feature.Action)
             case bottomSheet(BottomSheet.Feature.Action)
             case taskCreate(TaskCreate.Feature.Action)
+            case info(TaskInfo.Feature.Action)
+            case inspiration(TaskInspiration.Feature.Action)
+            
             case taskResponse(TaskResult<[Task.Model]>)
             
+            case showTaskCreate
         }
         
         @Dependency(\.modelTask.fetch) var loadData
@@ -62,6 +69,12 @@ extension TaskCalendar {
                 }
                 .ifLet(\.taskCreate, action: /Action.taskCreate) {
                     TaskCreate.Feature()
+                }
+                .ifLet(\.info, action: /Action.info) {
+                    TaskInfo.Feature()
+                }
+                .ifLet(\.inspiration, action: /Action.inspiration) {
+                    TaskInspiration.Feature()
                 }
         }
         
@@ -90,7 +103,9 @@ extension TaskCalendar {
                     slider: .init(.init(
                         currentDate: state.currentDate,
                         weekSlider: weekSlider
-                    ))
+                    )),
+                    button: .init(),
+                    goal: .init()
                 )
                 
                 state.taskCreate = nil
@@ -128,17 +143,13 @@ extension TaskCalendar {
                 
                 return .none
                 
-            case let .task(.item(_, .leadingAction(id))):
-                guard let task = state.tasks.first(where: { $0.id == id }) else { return .none }
+            case .showTaskCreate:
+                state.taskCreate = .init(date: state.currentDate)
                 
-                return .run { send in
-                    try deleteData(task)
-                    await send(.onAppear)
-                } catch: { error, send in
-                    dump("Error")
-                }
-                
-            case .task(.item(_, .trailingAction(_))):
+                return .none
+
+            case .task(.isEmpty(.buttonTapped)):
+                state.taskCreate = .init(date: state.currentDate)
                 
                 return .none
                 
@@ -161,11 +172,6 @@ extension TaskCalendar {
         
         private func taskCreate(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
-                
-            case .task(.showTaskCreate):
-                state.taskCreate = .init(date: state.currentDate)
-                
-                return .none
                 
             case .taskCreate(.createTaskTapped):
                 
@@ -198,7 +204,7 @@ extension TaskCalendar {
             case let .createTask(task):
                 state.taskCreate = nil
                 return .run { send in
-                    try saveData(task)
+                    try await saveData(task)
                     await send(.onAppear)
                 } catch: { error, send in
                     dump("Erro for save data - \(error.localizedDescription)")
@@ -230,8 +236,8 @@ extension TaskCalendar {
             }
             
             state.task = .init(.init(
-                item: tasks.isEmpty ? [] : identifiableTask,
-                showCreateTask: state.currentDate.isToday() ? true : state.currentDate.isAfterByDate(.now) ? true : false
+                item: identifiableTask,
+                isEmpty: tasks.isEmpty ? .init(currentDate: state.currentDate) : nil
             ))
             
         }
