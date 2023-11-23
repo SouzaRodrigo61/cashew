@@ -13,11 +13,12 @@ extension Task {
     struct Feature: Reducer {
         struct State: Equatable {
             var item: IdentifiedArrayOf<TaskItem.Feature.State> = []
-            var showCreateTask: Bool = true
+            var isEmpty: Empty.Feature.State?
         }
         
         enum Action: Equatable {
             case item(TaskItem.Feature.State.ID, TaskItem.Feature.Action)
+            case isEmpty(Empty.Feature.Action)
             
             case goToDetail(Task.Model)
             case showTaskCreate
@@ -25,6 +26,9 @@ extension Task {
         
         var body: some Reducer<State, Action> {
             EmptyReducer()
+                .ifLet(\.isEmpty, action: /Action.isEmpty) {
+                    Empty.Feature()
+                }
         }
     }
 }

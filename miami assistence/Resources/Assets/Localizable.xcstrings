@@ -10,6 +10,9 @@
     "%lld min" : {
 
     },
+    "Adhencekel" : {
+
+    },
     "button.back" : {
 
     },
@@ -33,19 +36,16 @@
         }
       }
     },
-    "Data: %@" : {
-
-    },
-    "Duration: %@" : {
-
-    },
     "Go to Home" : {
 
     },
     "Go to Onboarding" : {
 
     },
-    "Hour: %@" : {
+    "Goal Progress" : {
+
+    },
+    "Good" : {
 
     },
     "Lista de dados" : {
@@ -151,15 +151,67 @@
       }
     },
     "Schedule" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule"
+          }
+        }
+      }
     },
     "Search" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        }
+      }
+    },
+    "See Details" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See Details"
+          }
+        }
+      }
     },
     "Settings" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "Task Info" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Task Info"
+          }
+        }
+      }
+    },
+    "Task Inspiration" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Task Inspiration"
+          }
+        }
+      }
     },
     "task.button.create.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -304,19 +356,67 @@
         }
       }
     },
+    "task.empty.button.label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CREATE TASK"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CRIA ATIVIDADE"
+          }
+        }
+      }
+    },
     "task.empty.label.content" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Does not have any content for the day %@"
+            "value" : "Does not have any task for the day %@"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Não possui nenhum conteúdo para o dia %@"
+            "value" : "Não possui nenhuma tarefa para o dia: %@"
+          }
+        }
+      }
+    },
+    "task.empty.label.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No task yet boss"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhuma tarefa ainda chefe"
+          }
+        }
+      }
+    },
+    "task.header.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activities"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atividades"
           }
         }
       }

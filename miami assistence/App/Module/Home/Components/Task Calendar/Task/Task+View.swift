@@ -13,50 +13,27 @@ extension Task {
         let store: StoreOf<Feature>
         
         @State var offset: CGFloat = .nan
-
+        
         @State private var axisY: CGFloat = .nan
         
         var body: some SwiftUI.View {
-            
-            List {
-                ForEachStore(store.scope(state: \.item, action: Feature.Action.item)) {
-                    TaskItem.View(store: $0)
-                }
-                .onMove { _, _ in }
-                .listRowInsets(.init())
-                .listRowSeparator(.hidden)
-                .listSectionSeparator(.hidden)
-                .listRowBackground(Color.alabaster)
-                
-                WithViewStore(store, observe: \.showCreateTask) { viewStore in
-                    if viewStore.state {
-                        Button {
-                            store.send(.showTaskCreate, animation: .bouncy)
-                        } label: {
-                            HStack(spacing: 8) {
-                                Image(systemName: "plus.square.dashed")
-                                    .font(.system(.title, design: .rounded))
-                                    .foregroundStyle(.royalBlue)
-                                
-                                Text("task.button.create.title")
-                                    .font(.system(.body, design: .rounded))
-                            }
-                            .hSpacing(.leading)
-                            .padding(.horizontal, 8)
-                        }
-                        .buttonStyle(.scale)
-                        .listRowInsets(.init())
+            IfLetStore(store.scope(state: \.isEmpty, action: Feature.Action.isEmpty)) {
+                Empty.View(store: $0)
+                    .padding(.horizontal, 8)
+            } else: {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("task.header.title")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .padding(.horizontal, 8)
+                        .padding(.bottom, 8)
+                        
+                    
+                    ForEachStore(store.scope(state: \.item, action: Feature.Action.item)) {
+                        TaskItem.View(store: $0)
                     }
                 }
-                
             }
-            .coordinateSpace(name: "SCROLL")
-            .accessibilityLabel("Lista de dados")
-            .contentMargins(8, for: .scrollContent)
-            .listRowSpacing(8)
-            .scrollIndicators(.hidden)
-            .environment(\.defaultMinListRowHeight, 64)
-            .scrollContentBackground(.hidden)
         }
         
     }

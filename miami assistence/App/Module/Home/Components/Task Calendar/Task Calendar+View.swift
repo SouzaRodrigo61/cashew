@@ -8,64 +8,82 @@
 import SwiftUI
 import ComposableArchitecture
 import UserNotifications
-import CoreData
 
 extension TaskCalendar {
     struct View: SwiftUI.View {
         let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
-            ZStack(alignment: .top) {
+            GeometryReader {
+                let safeArea = $0.safeAreaInsets
                 
-                IfLetStore(store.scope(state: \.task, action: Feature.Action.task)) {
-                    Task.View(store: $0)
-                }
-                .offset(y: 120)
-                
-                IfLetStore(store.scope(state: \.header, action: Feature.Action.header)) {
-                    Header.View(store: $0)
-                }
+                Home(safeArea)
+                    .ignoresSafeArea(.container, edges: .top)
             }
             .onAppear { store.send(.onAppear) }
-            .overlay {
-                IfLetStore(store.scope(state: \.taskCreate, action: Feature.Action.taskCreate)) {
-                    TaskCreate.View(store: $0)
-                }
-                .background(.white)
-                .transition(.move(edge: .top))
-            }
-            .onReceive(NotificationCenter.default.publisher(
-                for: NSPersistentCloudKitContainer.eventChangedNotification
-            ).receive(on: DispatchQueue.main)) { notification in
-                guard let event = notification.userInfo?[NSPersistentCloudKitContainer.eventNotificationUserInfoKey] as? NSPersistentCloudKitContainer.Event else {
-                    return
-                }
-                if event.endDate != nil && event.type == .import {
-                    
-                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                        if success {
-                            let content = UNMutableNotificationContent()
-                            content.title = "Nova tarefa"
-                            content.subtitle = "Abra o app para visualizar o novo lancamento de tarefa"
-                            content.sound = UNNotificationSound.default
-
-                            // show this notification five seconds from now
-                            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-
-                            // choose a random identifier
-                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-                            // add our notification request
-                            UNUserNotificationCenter.current().add(request)
-                        } else if let error = error {
-                            print(error.localizedDescription)
+            .overlay(alignment: .bottomTrailing) {
+                WithViewStore(store, observe: \.taskCreate) { viewStore in
+                    if viewStore.state == nil {
+                        Button {
+                            store.send(.showTaskCreate, animation: .bouncy)
+                        } label: {
+                            Image(systemName: "plus")
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.white)
+                                .frame(width: 36, height: 36)
+                                .background(.dark, in: .rect(cornerRadius: 8))
+                                .padding(2)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.cute500, lineWidth: 2)
+                                )
                         }
+                        .padding(.trailing, 16)
+                    } else {
+                        IfLetStore(store.scope(state: \.taskCreate, action: Feature.Action.taskCreate)) {
+                            TaskCreate.View(store: $0)
+                        }
+                        .background(.white)
+                        .transition(
+                            .opacity
+                            .combined(with: .move(edge: .bottom))
+                            .combined(with: .scale)
+                            .combined(with: .move(edge: .trailing))
+                        )
+                    }
+                }
+            }
+        }
+        
+        
+        // MARK: - Home ViewBuilder
+        @ViewBuilder
+        func Home(_ safeArea: EdgeInsets) -> some SwiftUI.View {
+            ScrollView(.vertical) {
+                VStack(spacing: 0) {
+                    IfLetStore(store.scope(state: \.header, action: Feature.Action.header)) {
+                        Header.View(store: $0, safeArea: safeArea)
                     }
                     
+                    VStack(spacing: 0) {
+                        IfLetStore(store.scope(state: \.task, action: Feature.Action.task)) {
+                            Task.View(store: $0)
+                        }
 
-                    store.send(.onAppear)
+                        IfLetStore(store.scope(state: \.info, action: Feature.Action.info)) {
+                            TaskInfo.View(store: $0)
+                        }
+
+                        IfLetStore(store.scope(state: \.inspiration, action: Feature.Action.inspiration)) {
+                            TaskInspiration.View(store: $0)
+                        }
+                    }
+                    .padding(.vertical, 8)
                 }
             }
+            .scrollIndicators(.hidden)
+            .scrollTargetBehavior(CustomScrollBehavior(maxHeight: 16))
         }
     }
 }

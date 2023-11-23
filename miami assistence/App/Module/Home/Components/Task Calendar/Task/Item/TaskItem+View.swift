@@ -20,140 +20,86 @@ extension TaskItem {
         @State var colorView: Color = .clear
         
         var body: some SwiftUI.View {
-            GeometryReader { geo in
-                WithViewStore(store, observe: \.task) { viewStore in
-                    content(id: viewStore.id, task: viewStore.state)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .contentShape(.dragPreview, .rect(cornerRadius: 10))
-                        .onDrag {
-                            store.send(.setCurrentlyDragged(viewStore.state))
-                            return NSItemProvider()
-                        } preview: {
-                            Text(viewStore.title)
-                                .padding(.vertical, 16)
-                                .padding(.horizontal, 16)
-                                .frame(width: 200, alignment: .leading)
-                                .foregroundStyle(.dark)
-                                .background(.white, in: .rect(cornerRadius: 10))
-                                .contentShape(.dragPreview, .rect(cornerRadius: 10))
+            WithViewStore(store, observe: \.task) { task in
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: 0) {
+                        Image(systemName: "book.pages.fill")
+                            .font(.title3)
+                            .symbolRenderingMode(.hierarchical)
+                            .frame(width: 50)
+                        
+                        HStack {
+                            Text(task.startedHour)
+                                .fontWeight(.heavy)
+                                .foregroundStyle(.grey500)
+                            
+                            Image(systemName: "minus")
+                                .font(.title3.bold())
+                                .symbolRenderingMode(.hierarchical)
+                                .foregroundStyle(.grey300)
+                            
+                            Text(task.startedHour.calculateHourByValue(with: Int(task.duration)))
+                                .fontWeight(.heavy)
+                                .foregroundStyle(.grey500)
                         }
-                        .onTapGesture {
-                            store.send(.contentTapped(viewStore.state))
+                        .accessibilityLabel("task.item.accessibility.hour.label")
+                        .font(.callout)
+                    }
+                    .foregroundStyle(.cute500)
+                    .hSpacing(.leading)
+                    
+                    HStack(spacing: 0) {
+                        HStack(alignment: .center) {
+                            DottedLine()
+                                .stroke(.grey300, style: StrokeStyle(lineWidth: 5, lineCap: .round, dash: [0,10]))
+                                .frame(maxHeight: .infinity)
+                                .frame(width: 4)
                         }
+                        .frame(width: 50, alignment: .center)
+                        
+                        SwipeAction.View(cornerRadius: 12, direction: .trailing) {
+                            VStack {
+                                Text(task.title)
+                                    .accessibilityLabel("task.item.accessibility.text.label")
+                                    .accessibilityHint("task.item.accessibility.text.hint \(task.title)")
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.grey900)
+                            }
+                            .frame(minHeight: 30)
+                            .padding(16)
+                            .hSpacing(.leading)
+                            .background(.grey200)
+                            
+                        } actions: {
+                            SwipeAction.Action(tint: .red, icon: "trash.fill") {
+                                DispatchQueue.main.async {
+                                    task.send(.deleteTask(task.state), animation: .snappy)
+                                }
+                            }
+                        }
+                        .padding(.trailing, 8)
+
+                    }
+                    .hSpacing(.leading)
+                }
+                .id(task.id)
+                .hSpacing(.leading)
+                .padding(.vertical, 4)
+                .onTapGesture {
+                    store.send(.contentTapped(task.state))
                 }
             }
         }
+    }
+}
+
+struct DottedLine: Shape {
         
-        @ViewBuilder
-        private func content(
-            id: UUID,
-            task: Task.Model
-        ) -> some SwiftUI.View {
-            ZStack {
-                HStack {
-                    Image(systemName: "zzz")
-                        .padding(.leading, 12)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.white)
-                        .offset(x: offset / 4)
-                        .animation(.spring(), value: offset)
-                    Spacer()
-                    Image(systemName: "checkmark")
-                        .padding(.trailing, 12)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.white)
-                        .offset(x: offset / 4)
-                        .animation(.spring(), value: offset)
-                }
-                .frame(
-                    maxWidth: .infinity,
-                    maxHeight: .infinity
-                )
-                .background(colorRectangle)
-                
-                GeometryReader { proxy in
-                    Content(id: id, task: task, color: colorView)
-                        .offset(x: offset)
-                        .animation(.spring(), value: offset)
-                        .anchorPreference(key: MAnchorKey.self, value: .bounds) {
-                            return [id.uuidString: $0]
-                        }
-                        .gesture(
-                            DragGesture(minimumDistance: 10)
-                                .onChanged { value in
-                                    if value.translation.width > 0 {
-                                        let axisX = (value.location.x - value.startLocation.x) / .pi
-                                        
-                                        withAnimation {
-                                            colorRectangle = .red
-                                            offset = axisX
-                                        }
-                                    } else {
-                                        if value.startLocation.x > proxy.frame(in: .local).midX {
-                                            let axisX = (proxy.frame(in: .local).maxX - value.location.x) / .pi
-                                            
-                                            withAnimation {
-                                                colorRectangle = .green
-                                                offset = -axisX
-                                            }
-                                        } else {
-                                            let axisX = (value.startLocation.x - value.location.x) / 4.5
-                                            
-                                            withAnimation {
-                                                colorRectangle = .green
-                                                offset = -axisX
-                                            }
-                                        }
-                                    }
-                                }
-                                .onEnded { value in
-                                    if value.translation.width > 0 {
-                                        let axisX = (value.location.x - value.startLocation.x) / .pi
-                                        
-                                        if axisX > 40 {
-                                            
-                                            withAnimation {
-                                                colorView = .red.opacity(0.5)
-                                            }
-                                            
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                                withAnimation {
-                                                    colorView = .lotion
-                                                }
-                                            }
-                                            
-                                            store.send(.leadingAction(id))
-                                        }
-                                    } else {
-                                        let axisX = (proxy.frame(in: .local).maxX - value.location.x) / 4.5
-                                        
-                                        if axisX > 40 {
-                                            
-                                            dump(axisX, name: "axisX")
-                                            
-                                            withAnimation {
-                                                colorView = .green.opacity(0.5)
-                                            }
-                                            
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                                withAnimation {
-                                                    colorView = .lotion
-                                                }
-                                            }
-                                            
-                                            store.send(.trailingAction(id))
-                                        }
-                                    }
-                                    
-                                    withAnimation(.bouncy) {
-                                        offset = .zero
-                                    }
-                                }
-                        )
-                }
-            }
-        }
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: rect.height))
+        return path
     }
 }

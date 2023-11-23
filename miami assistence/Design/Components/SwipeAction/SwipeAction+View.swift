@@ -8,210 +8,155 @@
 import SwiftUI
 
 extension SwipeAction {
-    struct View: SwiftUI.ViewModifier {
-        // How much does the user have to swipe at least to reveal buttons on either side
-        private static let minSwipeableWidth = Button.width * 0.8
+    struct View<Content: SwiftUI.View>: SwiftUI.View {
         
-        // Buttons at the leading (left-hand) side
-        let leading: [Button]
-        // Can you full swipe the leading side
-        let allowsFullSwipeLeading: Bool
-        // Buttons at the trailing (right-hand) side
-        let trailing: [Button]
-        // Can you full swipe the trailing side
-        let allowsFullSwipeTrailing: Bool
+        var cornerRadius: CGFloat = 0
+        var direction: Direction = .trailing
         
-        private let totalLeadingWidth: CGFloat!
-        private let totalTrailingWidth: CGFloat!
+        @ViewBuilder var content: Content
+        @ActionBuilder var actions: [Action]
         
-        @State private var offset: CGFloat = 0
-        @State private var prevOffset: CGFloat = 0
+        let viewID = UUID()
         
-        init(leading: [Button] = [], allowsFullSwipeLeading: Bool = false, trailing: [Button] = [], allowsFullSwipeTrailing: Bool = false) {
-            self.leading = leading
-            self.allowsFullSwipeLeading = allowsFullSwipeLeading && !leading.isEmpty
-            self.trailing = trailing
-            self.allowsFullSwipeTrailing = allowsFullSwipeTrailing && !trailing.isEmpty
-            totalLeadingWidth = Button.width * CGFloat(leading.count)
-            totalTrailingWidth = Button.width * CGFloat(trailing.count)
-        }
+        @State private var isEnabled: Bool = true
+        @State private var scrollOffset: CGFloat = .zero
         
-        func body(content: Content) -> some SwiftUI.View {
-            // Use a GeometryReader to get the size of the view on which we're adding
-            // the custom swipe actions.
-            GeometryReader { geo in
-                // Place leading buttons, the wrapped content and trailing buttons
-                // in an HStack with no spacing.
-                HStack(spacing: 0) {
-                    // If any swiping on the left-hand side has occurred, reveal
-                    // leading buttons. This also resolves button flickering.
-                    if offset > 0 {
-                        // If the user has swiped enough for it to qualify as a full swipe,
-                        // render just the first button across the entire swipe length.
-                        if fullSwipeEnabled(edge: .leading, width: geo.size.width) {
-                            button(for: leading.first)
-                                .frame(width: offset, height: geo.size.height)
-                                .clipShape(.rect(cornerRadius: 8))
-                        } else {
-                            // If we aren't in a full swipe, render all buttons with widths
-                            // proportional to the swipe length.
-                            HStack(spacing: 0) {
-                                ForEach(leading) { actionView in
-                                    button(for: actionView)
-                                        .frame(width: individualButtonWidth(edge: .leading),
-                                               height: geo.size.height)
+        var body: some SwiftUI.View {
+            ScrollViewReader { scrollProxy in
+                ScrollView(.horizontal) {
+                    LazyHStack(spacing: 0) {
+                        content
+                        /// To Take Full Available Space
+                            .containerRelativeFrame(.horizontal)
+                            .background(.white)
+                            .background {
+                                if let firstAction = actions.first {
+                                    Rectangle()
+                                        .foregroundStyle(firstAction.tint)
+                                        .opacity(scrollOffset == .zero ? 0 : 1)
                                 }
                             }
-                            .clipShape(.rect(cornerRadius: 8))
-                        }
-                    }
-                    
-                    // This is the list row itself
-                    content
-                    // Add horizontal padding as we removed it to allow the
-                    // swipe buttons to occupy full row height.
-                        .padding(.horizontal, 16)
-                        .frame(width: geo.size.width, height: geo.size.height, alignment: .leading)
-                        .offset(x: (offset > 0) ? 0 : offset)
-                    
-                    // If any swiping on the right-hand side has occurred, reveal
-                    // trailing buttons. This also resolves button flickering.
-                    if offset < 0 {
-                        Group {
-                            // If the user has swiped enough for it to qualify as a full swipe,
-                            // render just the last button across the entire swipe length.
-                            if fullSwipeEnabled(edge: .trailing, width: geo.size.width) {
-                                button(for: trailing.last)
-                                    .frame(width: -offset, height: geo.size.height)
-                                    .clipShape(.rect(cornerRadius: 8))
-                            } else {
-                                // If we aren't in a full swipe, render all buttons with widths
-                                // proportional to the swipe length.
-                                HStack(spacing: 0) {
-                                    ForEach(trailing) { actionView in
-                                        button(for: actionView)
-                                            .frame(width: individualButtonWidth(edge: .trailing),
-                                                   height: geo.size.height)
-                                    }
+                            .id(viewID)
+                            .transition(.identity)
+                            .overlay {
+                                GeometryReader {
+                                    let minX = $0.frame(in: .scrollView(axis: .horizontal)).minX
+                                    
+                                    Color.clear
+                                        .preference(key: OffsetKey.self, value: minX)
+                                        .onPreferenceChange(OffsetKey.self) { value in
+                                            scrollOffset = value
+                                        }
                                 }
-                                .clipShape(.rect(cornerRadius: 8))
                             }
-                        }
                         
-                        // The leading buttons need to move to the left as the swipe progresses.
-                        .offset(x: offset)
-                        
-                    }
-                    
-                }
-                // animate the view as `offset` changes
-                .animation(.spring(), value: offset)
-                // allows the DragGesture to work even if there are now interactable
-                // views in the row
-                .contentShape(Rectangle())
-                // The DragGesture distates the swipe. The minimumDistance is there to
-                // prevent the gesture from interfering with List vertical scrolling.
-                .gesture(
-                    DragGesture(minimumDistance: 10, coordinateSpace: .local)
-                        .onChanged { gesture in
-                            // Compute the total swipe based on the gesture values.
-                            var total = gesture.translation.width + prevOffset
-                            if !allowsFullSwipeLeading {
-                                total = min(total, totalLeadingWidth)
-                            }
-                            if !allowsFullSwipeTrailing {
-                                total = max(total, -totalLeadingWidth)
-                            }
-                            
-                            withAnimation(.smooth) {
-                                offset = total
+                        ActionButtons {
+                            withAnimation(.snappy) {
+                                scrollProxy.scrollTo(viewID, anchor: direction == .trailing ? .topLeading : .topTrailing)
                             }
                         }
-                        .onEnded { _ in
-                            // Adjust the offset based on if the user has swiped enough to reveal
-                            // all the buttons or not. Also handles full swipe logic.
-                            if offset > View.minSwipeableWidth && !leading.isEmpty {
-                                if !checkAndHandleFullSwipe(for: leading, edge: .leading, width: geo.size.width) {
-                                    offset = totalLeadingWidth
+                    }
+                    .scrollTargetLayout()
+                    .visualEffect { content, geo in
+                        content.offset(x: scrollOffset(geo))
+                    }
+                }
+                .scrollIndicators(.hidden)
+                .scrollTargetBehavior(.viewAligned)
+                .background {
+                    if let lastAction = actions.last {
+                        RoundedRectangle(cornerRadius: cornerRadius, style: .circular)
+                            .foregroundStyle(lastAction.tint)
+                            .opacity(scrollOffset == .zero ? 0 : 1)
+                    }
+                }
+                .clipShape(.rect(cornerRadius: cornerRadius))
+            }
+            .allowsHitTesting(isEnabled)
+            .transition(CustomTransaction())
+        }
+        
+        /// Action Buttons
+        @ViewBuilder
+        func ActionButtons(resetPosition: @escaping () -> ()) -> some SwiftUI.View {
+            // MARK: Each Button Will Have 100 Width
+            Rectangle()
+                .fill(.clear)
+                .frame(width: CGFloat(actions.count) * 100)
+                .overlay(alignment: direction.alignment) {
+                    HStack(spacing: 0) {
+                        ForEach(actions) { button in
+                            Button {
+                                SwiftUI.Task {
+                                    resetPosition()
+                                    try? await SwiftUI.Task.sleep(for: .seconds(0.25))
+                                    button.action()
                                 }
-                            } else if offset < -View.minSwipeableWidth && !trailing.isEmpty {
-                                if !checkAndHandleFullSwipe(for: trailing, edge: .trailing, width: -geo.size.width) {
-                                    offset = -totalTrailingWidth
-                                }
-                            } else {
-                                offset = 0
+                            } label: {
+                                Image(systemName: button.icon)
+                                    .font(button.iconFont)
+                                    .foregroundStyle(button.iconColor)
+                                    .frame(width: 100)
+                                    .frame(maxHeight: .infinity)
+                                    .contentShape(.rect)
                             }
-                            
-                            withAnimation(.smooth) {
-                                prevOffset = offset
-                            }
+                            .buttonStyle(.plain)
+                            .background(button.tint)
                         }
-                )
-            }
-            // Remove internal row padding to allow the buttons to occupy full row height
-            .listRowInsets(EdgeInsets())
-        }
-        
-        // Checks if full swipe is supported and currently active for the given edge.
-        // The current threshold is at half of the row width.
-        private func fullSwipeEnabled(edge: Edge, width: CGFloat) -> Bool {
-            let threshold = abs(width) / 2
-            return withAnimation(.smooth) {
-                switch (edge) {
-                case .leading:
-                    return allowsFullSwipeLeading && offset > threshold
-                case .trailing:
-                    return allowsFullSwipeTrailing && -offset > threshold
-                }
-            }
-        }
-        
-        // Creates the view for each SwipeActionButton. Also assigns it
-        // a tap gesture to handle the click and reset the offset.
-        private func button(for button: Button?) -> some SwiftUI.View {
-            button?
-                .onTapGesture {
-                    button?.action()
-                    withAnimation(.bouncy) {
-                        offset = 0
-                        prevOffset = 0
                     }
                 }
         }
         
-        // Calculates width for each button, proportional to the swipe.
-        private func individualButtonWidth(edge: Edge) -> CGFloat {
-            switch edge {
-            case .leading:
-                return (offset > 0) ? (offset / CGFloat(leading.count)) : 0
-            case .trailing:
-                return (offset < 0) ? (abs(offset) / CGFloat(trailing.count)) : 0
+        /// Block scrolling
+        func scrollOffset(_ proxy: GeometryProxy) -> CGFloat {
+            let minX = proxy.frame(in: .scrollView(axis: .horizontal)).minX
+            
+            return direction == .trailing ? (minX > 0 ? -minX : 0) : (minX < 0 ? -minX : 0)
+        }
+    }
+    
+    struct Action: Identifiable {
+        private(set) var id: UUID = .init()
+        var tint: Color
+        var icon: String
+        var iconFont: Font = .title
+        var iconColor: Color = .white
+        var isEnabled: Bool = true
+        var action: () -> ()
+    }
+    
+    @resultBuilder
+    struct ActionBuilder {
+        static func buildBlock(_ components: Action...) -> [Action] {
+            return components
+        }
+    }
+    
+    enum Direction {
+        case leading
+        case trailing
+        
+        var alignment: Alignment {
+            switch self {
+            case .leading: return .leading
+            case .trailing: return .trailing
             }
         }
-        
-        // Checks if the view is in full swipe. If so, trigger the action on the
-        // correct button (left- or right-most one), make it full the entire row
-        // and schedule everything to be reset after a while.
-        private func checkAndHandleFullSwipe(for collection: [Button],
-                                             edge: Edge,
-                                             width: CGFloat) -> Bool {
-            if fullSwipeEnabled(edge: edge, width: width) {
-                offset = width * CGFloat(collection.count) * 1.2
-                ((edge == .leading) ? collection.first : collection.last)?.action()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    withAnimation(.smooth) {
-                        offset = 0
-                        prevOffset = 0
-                    }
-                }
-                return true
-            } else {
-                return false
+    }
+}
+
+
+/// Custom Transition
+struct CustomTransaction: Transition {
+    func body(content: Content, phase: TransitionPhase) -> some View {
+        content.mask {
+            GeometryReader {
+                let size = $0.size
+                
+                Rectangle()
+                    .offset(y: phase == .identity ? 0 : -size.height)
             }
-        }
-        
-        private enum Edge {
-            case leading, trailing
+            .containerRelativeFrame(.horizontal)
         }
     }
 }

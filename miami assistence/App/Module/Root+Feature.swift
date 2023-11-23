@@ -34,9 +34,6 @@ extension Root {
             case .onboarding(.goToHomeTapped):
                 state = .home(.new())
                 return .none
-//            case .home(.buttonTapped):
-//                state = .onboarding(.new())
-//                return .none
             default:
                 return .none
             }

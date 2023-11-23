@@ -29,8 +29,7 @@ extension TaskItem {
             
             case contentTapped(Task.Model)
             
-            case leadingAction(UUID)
-            case trailingAction(UUID)
+            case deleteTask(Task.Model)
         }
         
         var body: some Reducer<State, Action> {

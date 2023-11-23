@@ -13,24 +13,8 @@ extension Note {
         let store: StoreOf<Feature>
         
         var body: some SwiftUI.View {
-            WithViewStore(store, observe: \.task) { viewStore in
+            WithViewStore(store, observe: \.note) { viewStore in
                 List {
-                    Section {
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text(viewStore.title)
-                                .getContrast(backgroundColor: Color(hex: viewStore.color))
-                            Text("Data: \(viewStore.date.description)")
-                                .getContrast(backgroundColor: Color(hex: viewStore.color))
-                            Text("Hour: \(viewStore.startedHour.description)")
-                                .getContrast(backgroundColor: Color(hex: viewStore.color))
-                            Text("Duration: \(viewStore.duration.description)")
-                                .getContrast(backgroundColor: Color(hex: viewStore.color))
-                        }
-                        .padding(8)
-                    }
-                    .listRowInsets(.init())
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
                     
                     Section {
                         VStack(alignment: .leading, spacing: 0) {
@@ -44,6 +28,7 @@ extension Note {
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(.hidden)
                     .listRowBackground(Color.clear)
+                    
                 }
                 .scrollDismissesKeyboard(.immediately)
                 .coordinateSpace(name: "FORMSCROLL")
@@ -56,28 +41,7 @@ extension Note {
                 .listSectionSeparator(.hidden)
                 .background(.regularMaterial, in: .rect(cornerRadius: 12))
                 .padding(8)
-                .environment(\.colorScheme, Color(hex: viewStore.color).getContrast() ? .dark : .light)
-                .navigationBarBackButtonHidden(true)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        
-                        Button {
-                            store.send(.closeTapped)
-                        } label: {
-                            HStack {
-                                Image(systemName: "chevron.backward")
-                                    .font(.system(.body, design: .rounded, weight: .bold))
-                            }
-                        }
-                    }
-                    ToolbarItem(placement: .principal) {
-                        Text(viewStore.title)
-                            .font(.system(.title3, design: .rounded, weight: .bold))
-                    }
-                }
-                .toolbarColorScheme(Color(hex: viewStore.color).getContrast() ? .dark : .light, for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
-                .background(Color(hex: viewStore.color))
                 .onTapGesture(count: 2) {
                     store.send(.addBlock)
                 }

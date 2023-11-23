@@ -15,16 +15,14 @@ extension CoreApp {
         static let shared = Delegate()
         let store = Store(
             initialState: Feature.State(),
-            reducer: {
-                Feature()
-            }
+            reducer: { Feature() }
         )
         
         func application(
             _ application: UIApplication,
             didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
         ) -> Bool {
-//            store.send(.didFinishLaunching)
+            store.send(.didFinishLaunching)
             
             return true
         }
