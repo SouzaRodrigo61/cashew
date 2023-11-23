@@ -25,7 +25,7 @@ extension HeaderSlider {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-                .frame(height: 60)
+                .frame(height: 50)
                 .onAppear {
                     store.send(.onAppear, animation: .snappy)
                 }
@@ -34,41 +34,46 @@ extension HeaderSlider {
         
         @ViewBuilder
         private func WeekView(_ week: [Date.Week], currentDate: Date) -> some SwiftUI.View {
-            HStack(alignment: .bottom, spacing: 0) {
+            HStack(alignment: .center, spacing: 0) {
                 ForEach(week) { day in
                     VStack(spacing: 0) {
                         Text(day.date.format("E").capitalized)
-                            .font(.caption)
+                            .font(.system(.caption, design: .monospaced))
                             .fontWeight(day.date.isToday() ? .bold : .medium)
                             .textScale(.secondary)
                             .foregroundStyle(
                                 isSameDate(day.date, currentDate)
-                                ? .white : day.date.isToday()
+                                ? .cute500 : day.date.isToday()
                                 ? .royalBlue : day.date.isAfterByDate(.now)
                                 ? .gunmetal : .grey500)
-                            .padding(.bottom, 8)
+                        //                            .matchedGeometryEffect(id: "currentlyDate", in: animation)
+                        
+                        Spacer()
+                        
                         Text(day.date.format("dd"))
-                            .font(.body)
+                            .font(.title3)
                             .fontWeight(.bold)
                             .textScale(.secondary)
                             .foregroundStyle(
                                 isSameDate(day.date, currentDate)
-                                ? .white : day.date.isToday()
+                                ? .cute500 : day.date.isToday()
                                 ? .royalBlue : day.date.isAfterByDate(.now)
                                 ? .gunmetal : .grey500)
-                    }
-                    .padding(.vertical, 4)
-                    .foregroundStyle(isSameDate(day.date, currentDate) ? .white : .gray)
-                    .hSpacing(.center)
-                    .background {
+                        //                            .matchedGeometryEffect(id: "currentlyDate", in: animation)
+                            .padding(.bottom, isSameDate(day.date, currentDate) ? 0 : 2)
+                        
+                        
                         if isSameDate(day.date, currentDate) {
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(.royalBlue)
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .fill(.cute500)
                                 .matchedGeometryEffect(id: "currentlyDate", in: animation)
+                                .frame(height: 2)
                         }
                     }
+                    .foregroundStyle(isSameDate(day.date, currentDate) ? .white : .gray)
+                    .hSpacing(.center)
                     .onTapGesture {
-                        store.send(.selectDate(day.date), animation: .smooth)
+                        store.send(.selectDate(day.date), animation: .snappy)
                     }
                 }
             }

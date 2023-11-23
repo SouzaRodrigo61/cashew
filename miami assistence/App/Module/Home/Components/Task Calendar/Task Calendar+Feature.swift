@@ -105,7 +105,8 @@ extension TaskCalendar {
                         weekSlider: weekSlider
                     )),
                     button: .init(),
-                    goal: .init()
+                    goal: state.currentDate.isToday() ? .init() : nil,
+                    currentDate: state.currentDate
                 )
                 
                 state.taskCreate = nil
@@ -134,6 +135,9 @@ extension TaskCalendar {
                 state.header?.today?.weekCompleted = date.week()
                 
                 state.currentDate = date
+                state.header?.currentDate = date
+                state.header?.goal = date.isToday() ? .init() : nil
+                
                 showTaskByDate(&state)
                 return .none
                 
@@ -200,11 +204,19 @@ extension TaskCalendar {
         
         private func managerData(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
+            
+            case let .task(.item(_, .deleteTask(task))):
+                return .run { send in
+                    try deleteData(task)
+                    await send(.onAppear)
+                } catch: { error, send in
+                    dump("Erro for delete data - \(error.localizedDescription)")
+                }
                 
             case let .createTask(task):
                 state.taskCreate = nil
                 return .run { send in
-                    try await saveData(task)
+                    try saveData(task)
                     await send(.onAppear)
                 } catch: { error, send in
                     dump("Erro for save data - \(error.localizedDescription)")

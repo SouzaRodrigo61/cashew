@@ -16,6 +16,7 @@ extension Header {
             var button: HeaderButton.Feature.State?
             var goal: HeaderGoalProgress.Feature.State?
             var isScroll: Bool = false
+            var currentDate: Date
         }
         
         enum Action: Equatable {

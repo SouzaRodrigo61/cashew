@@ -60,24 +60,8 @@ extension View {
         return safeArea
     }
     
-    func swipeActions(leading: [SwipeAction.Button] = [],
-                      allowsFullSwipeLeading: Bool = false,
-                      trailing: [SwipeAction.Button] = [],
-                      allowsFullSwipeTrailing: Bool = false) -> some View {
-        modifier(SwipeAction.View(leading: leading,
-                                 allowsFullSwipeLeading: allowsFullSwipeLeading,
-                                 trailing: trailing,
-                                 allowsFullSwipeTrailing: allowsFullSwipeTrailing))
-    }
-    
-    
-    
     func isSameDate(_ date1: Date, _ date2: Date) -> Bool {
         return Calendar.current.isDate(date1, inSameDayAs: date2)
-    }
-    
-    func sticky(_ stickyRects: [CGRect]) -> some View {
-        modifier(Sticky(stickyRects: stickyRects))
     }
 }
 

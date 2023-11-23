@@ -14,8 +14,8 @@ extension HeaderGoalProgress {
         
         var body: some SwiftUI.View {
             ZStack {
-                HStack {
-                    VStack {
+                HStack(spacing: 0) {
+                    VStack(alignment: .leading, spacing: 0) {
                         Text("Goal Progress")
                         Text("Good")
                         
@@ -26,15 +26,14 @@ extension HeaderGoalProgress {
                     
                     Spacer()
                     
-                    VStack {
+                    VStack(alignment: .trailing, spacing: 0) {
                         Text("Goal Progress")
                         Text("Adhencekel")
                         
                         Spacer()
                     }
                 }
-//                .padding(16)
-                .frame(height: 200)
+                .padding(16)
                 .foregroundStyle(.white)
             }
             .background(Color.gunmetal, in: .rect(cornerRadius: 12))

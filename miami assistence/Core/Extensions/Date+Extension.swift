@@ -16,6 +16,52 @@ extension Date {
         return formatted.string(from: self)
     }
     
+    static var currentMonth: Date {
+        let calendar = Calendar.current
+        guard let currentMonth = calendar.date(from: calendar.dateComponents([.month, .year], from: Date.now)) else { return Date.now }
+        
+        return currentMonth
+    }
+    
+    /// Extracting Dates for the Given Month
+    func extractDates() -> [Day] {
+        var days: [Day] = []
+        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "dd"
+        
+        guard let range = calendar.range(of: .day, in: .month, for: self)?.compactMap({ value -> Date? in
+            return calendar.date(byAdding: .day, value: value - 1, to: self)
+        }) else { return days }
+        
+        let firstWeekDay = calendar.component(.weekday, from: range.first!)
+        for index in Array(0..<firstWeekDay - 1).reversed() {
+            guard let date = calendar.date(byAdding: .day, value: -index - 1, to: range.first!) else { return days }
+            let shortSymbol = formatter.string(from: date)
+            
+            days.append(.init(shortSymbol: shortSymbol, date: date, ignored: true))
+        }
+        
+        
+        range.forEach {
+            let shortSymbol = formatter.string(from: $0)
+            days.append(.init(shortSymbol: shortSymbol, date: $0))
+        }
+        
+        let lastWeekDay = 7 - calendar.component(.weekday, from: range.last!)
+        if lastWeekDay > 0 {
+            for index in 0..<lastWeekDay {
+                guard let date = calendar.date(byAdding: .day, value: index + 1, to: range.last!) else { return days }
+                let shortSymbol = formatter.string(from: date)
+                
+                days.append(.init(shortSymbol: shortSymbol, date: date, ignored: true))
+            }
+        }
+        
+        return days
+    }
+    
     func getDay() -> Int {
         return Calendar.current.component(.day, from: self)
     }
@@ -222,6 +268,7 @@ extension Date {
     struct Week: Identifiable, Equatable {
         var id: UUID = .init()
         var date: Date
+        var activity: Int = 0
     }
     
     struct Days: Identifiable, Equatable {
@@ -229,5 +276,14 @@ extension Date {
         var date: Date
         var isBefore: Bool
         var isTomorrow: Bool = false
+    }
+    
+    struct Day: Identifiable, Equatable {
+        var id: UUID = .init()
+        var shortSymbol: String
+        var date: Date
+        
+        /// Previous / Next Month Excess Dates
+        var ignored: Bool = false
     }
 }

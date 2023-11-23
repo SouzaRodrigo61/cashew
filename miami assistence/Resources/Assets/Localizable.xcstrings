@@ -405,6 +405,22 @@
         }
       }
     },
+    "task.header.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activities"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atividades"
+          }
+        }
+      }
+    },
     "task.item.accessibility.hour.label" : {
 
     },

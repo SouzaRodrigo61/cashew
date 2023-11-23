@@ -13,7 +13,7 @@ extension Task {
         let store: StoreOf<Feature>
         
         @State var offset: CGFloat = .nan
-
+        
         @State private var axisY: CGFloat = .nan
         
         var body: some SwiftUI.View {
@@ -21,8 +21,17 @@ extension Task {
                 Empty.View(store: $0)
                     .padding(.horizontal, 8)
             } else: {
-                ForEachStore(store.scope(state: \.item, action: Feature.Action.item)) {
-                    TaskItem.View(store: $0)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("task.header.title")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .padding(.horizontal, 8)
+                        .padding(.bottom, 8)
+                        
+                    
+                    ForEachStore(store.scope(state: \.item, action: Feature.Action.item)) {
+                        TaskItem.View(store: $0)
+                    }
                 }
             }
         }
