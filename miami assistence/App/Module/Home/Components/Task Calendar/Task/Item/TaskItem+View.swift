@@ -69,7 +69,7 @@ extension TaskItem {
                             .frame(minHeight: 30)
                             .padding(16)
                             .hSpacing(.leading)
-                            .background(.grey200)
+                            .background(.grey100)
                             
                         } actions: {
                             SwipeAction.Action(tint: .red, icon: "trash.fill") {
@@ -77,6 +77,10 @@ extension TaskItem {
                                     task.send(.deleteTask(task.state), animation: .snappy)
                                 }
                             }
+                        }
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(.grey100, lineWidth: 0.5)
                         }
                         .padding(.trailing, 8)
 

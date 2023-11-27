@@ -10,6 +10,12 @@ import ComposableArchitecture
 
 extension TaskCalendar {
     struct Feature: Reducer {
+        
+        @Dependency(\.modelTask.fetch) var loadData
+        @Dependency(\.modelTask.add) var saveData
+        @Dependency(\.modelTask.delete) var deleteData
+        @Dependency(\.continuousClock) var clock
+        
         struct State: Equatable {
             
             var bottomSheet: BottomSheet.Feature.State?
@@ -28,6 +34,8 @@ extension TaskCalendar {
             /// Custom Matched Geometry Animation
             var forcePadding: Bool = false
             var currentDate: Date = .now
+            
+            var currentTimer: String = ""
         }
         
         enum Action: Equatable {
@@ -47,11 +55,9 @@ extension TaskCalendar {
             case taskResponse(TaskResult<[Task.Model]>)
             
             case showTaskCreate
+            
+            case timerTick
         }
-        
-        @Dependency(\.modelTask.fetch) var loadData
-        @Dependency(\.modelTask.add) var saveData
-        @Dependency(\.modelTask.delete) var deleteData
         
         var body: some Reducer<State, Action> {
             Reduce(self.bottomSheet)
@@ -113,7 +119,16 @@ extension TaskCalendar {
                 
                 return .run { send in
                     let data = try loadData()
-                    await send(.taskResponse(.success(data)), animation: .default)
+                    
+                    await withTaskGroup(of: Void.self) { group in
+                        group.addTask {
+                            await send(.taskResponse(.success(data)), animation: .default)
+                        }
+                        
+                        group.addTask(priority: .background) {
+                            await self.startTimer(send: send)
+                        }
+                    }
                 } catch: { error, send in
                     await send(.taskResponse(.failure(error)), animation: .default)
                 }
@@ -127,6 +142,16 @@ extension TaskCalendar {
                 
                 return .none
                 
+            case .timerTick:
+                var dateFormatter: DateFormatter {
+                    let fmtr = DateFormatter()
+                    fmtr.dateFormat = "LLLL dd, hh:mm:ss a"
+                    return fmtr
+                }
+                
+                state.currentTimer = dateFormatter.string(from: Date())
+                
+                return .none
                 
             case .header(.slider(.selectDate(let date))):
                 guard state.header?.today != nil else { return .none }
@@ -253,7 +278,12 @@ extension TaskCalendar {
             ))
             
         }
+        
+        
+        private func startTimer(send: Send<Action>) async {
+//            for await _ in self.clock.timer(interval: .seconds(60)) {
+//                await send(.timerTick)
+//            }
+        }
     }
 }
-
-

@@ -22,14 +22,12 @@ extension Header {
         var spacing: CGFloat { 8.0 }
         var weekLabelHeight: CGFloat { 50 }
         
-
-        
         var body: some SwiftUI.View {
             WithViewStore(store, observe: \.currentDate) { date in
                 
                 var goalProgressHeight: CGFloat { date.state.isToday() ? 200 : 0 }
                 var calendarHeight: CGFloat {
-                    calendarTitleViewHeight + weekLabelHeight + goalProgressHeight + safeArea.top + bottomPadding + bottomPadding
+                    calendarTitleViewHeight + weekLabelHeight + goalProgressHeight + safeArea.top + bottomPadding + (date.state.isToday() ? bottomPadding : 0 )
                 }
                 
                 GeometryReader {
@@ -37,7 +35,7 @@ extension Header {
                     let minY = $0.frame(in: .scrollView(axis: .vertical)).minY
                     
                     /// Converting Scroll Into Progress
-                    let maxHeight = size.height - (calendarTitleViewHeight + weekLabelHeight + 90 + safeArea.top + topPadding + spacing + spacing)
+                    let maxHeight = size.height - (calendarTitleViewHeight + weekLabelHeight + 90 + safeArea.top + topPadding + spacing + 4)
                     let progress = max(min((-minY / maxHeight), 1), 0)
                     
                     VStack(spacing: spacing) {
@@ -54,28 +52,54 @@ extension Header {
                                 HeaderButton.View(store: $0)
                             }
                         }
+                        .frame(height: calendarTitleViewHeight)
+                        .padding(.horizontal, horizontalPadding)
+                        
                         
                         IfLetStore(store.scope(state: \.goal, action: Feature.Action.goal)) {
-                            HeaderGoalProgress.View(store: $0)
+                            HeaderGoalProgress.View(store: $0, progress: progress)
                         }
                         .frame(height: goalProgressHeight - ((goalProgressHeight - 100) * progress), alignment: .top)
+                        .padding(.horizontal, horizontalPadding)
+                        .animation(.linear, value: progress)
+                        .transition(.opacity)
+                        
+                        
                         
                         IfLetStore(store.scope(state: \.slider, action: Feature.Action.slider)) {
                             HeaderSlider.View(store: $0)
                         }
+                        .frame(height: weekLabelHeight)
+                        .padding(.horizontal, horizontalPadding)
                         .contentShape(.rect)
                         .clipped()
                     }
-                    .padding(.horizontal, horizontalPadding)
                     .padding(.top, safeArea.top)
                     .padding(.bottom, bottomPadding)
                     .frame(maxWidth: .infinity)
                     .frame(height: date.state.isToday() ? size.height - (maxHeight * progress) : size.height, alignment: .top)
-                    .background(.lotion)
+//                    .background(.white)
+                    .background {
+                        Image(.topographic)
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundStyle(.grey600)
+                            .clipShape(.rect(cornerRadius: 12))
+                            .background {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white)
+        //                            .stroke(.grey100, lineWidth: 2)
+    
+                            }
+                    }
+                    .overlay(alignment: .bottom) {
+                        Divider()
+                    }
                     /// Sticking it to top
                     .clipped()
                     .contentShape(.rect)
                     .offset(y: -minY)
+                    
                 }
                 .frame(height: calendarHeight)
                 .zIndex(1000)

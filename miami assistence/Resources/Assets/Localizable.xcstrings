@@ -10,7 +10,10 @@
     "%lld min" : {
 
     },
-    "Adhencekel" : {
+    "$10,000.00" : {
+
+    },
+    "$15,145.00" : {
 
     },
     "button.back" : {
@@ -42,10 +45,61 @@
     "Go to Onboarding" : {
 
     },
-    "Goal Progress" : {
+    "goal.collapse.title" : {
 
     },
-    "Good" : {
+    "goal.label.expectation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Expectation"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espectativa"
+          }
+        }
+      }
+    },
+    "goal.label.income" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Income"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recebido"
+          }
+        }
+      }
+    },
+    "goal.pie.tip" : {
+
+    },
+    "goal.remining.cash.label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Remaining Cash"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receita Total"
+          }
+        }
+      }
+    },
+    "Index" : {
 
     },
     "Lista de dados" : {
@@ -171,6 +225,7 @@
       }
     },
     "See Details" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -428,6 +483,9 @@
 
     },
     "task.item.accessibility.text.label" : {
+
+    },
+    "Type" : {
 
     }
   },

@@ -13,6 +13,8 @@ extension TaskCalendar {
     struct View: SwiftUI.View {
         let store: StoreOf<Feature>
         
+        
+        
         var body: some SwiftUI.View {
             GeometryReader {
                 let safeArea = $0.safeAreaInsets

@@ -14,6 +14,8 @@ extension Task {
         struct State: Equatable {
             var item: IdentifiedArrayOf<TaskItem.Feature.State> = []
             var isEmpty: Empty.Feature.State?
+            
+            var currentHour: Date = .now
         }
         
         enum Action: Equatable {
