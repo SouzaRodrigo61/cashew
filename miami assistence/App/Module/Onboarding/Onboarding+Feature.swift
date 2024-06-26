@@ -8,14 +8,21 @@
 import ComposableArchitecture
 
 extension Onboarding {
-    struct Feature: Reducer {
-        struct Path: Reducer {
+    
+    @Reducer
+    struct Feature {
+        
+        @Reducer
+        struct Path {
+            
+            @CasePathable
             enum State: Equatable {
                 case login(Login.Feature.State = .init())
                 case createCompany(CreateCompany.Feature.State = .init())
                 case createTypeCompany(CreateTypeCompany.Feature.State = .init())
             }
             
+            @CasePathable
             enum Action: Equatable {
                 case createCompany(CreateCompany.Feature.Action)
                 case createTypeCompany(CreateTypeCompany.Feature.Action)
@@ -35,10 +42,12 @@ extension Onboarding {
             }
         }
         
+        @ObservableState
         struct State: Equatable {
             var path: StackState<Path.State>
         }
         
+        @CasePathable
         enum Action: Equatable {
             case path(StackAction<Path.State, Path.Action>)
             case buttonTapped

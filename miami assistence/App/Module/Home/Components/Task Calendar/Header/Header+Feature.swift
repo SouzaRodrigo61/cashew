@@ -9,7 +9,10 @@ import Foundation
 import ComposableArchitecture
 
 extension Header {
-    struct Feature: Reducer {
+    @Reducer
+    struct Feature {
+        
+        @ObservableState
         struct State: Equatable {
             var today: HeaderToday.Feature.State?
             var slider: HeaderSlider.Feature.State?
@@ -19,6 +22,7 @@ extension Header {
             var currentDate: Date
         }
         
+        @CasePathable
         enum Action: Equatable {
             case today(HeaderToday.Feature.Action)
             case slider(HeaderSlider.Feature.Action)

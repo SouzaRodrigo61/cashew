@@ -9,7 +9,10 @@ import ComposableArchitecture
 import Foundation
 
 extension NoteItem {
-    struct Feature: Reducer {
+    @Reducer
+    struct Feature {
+        
+        @ObservableState
         struct State: Equatable, Identifiable {
             var id = UUID()
             var text: NoteText.Feature.State?
@@ -17,8 +20,8 @@ extension NoteItem {
             var divider: NoteDivider.Feature.State?
         }
         
+        @CasePathable
         enum Action: Equatable {
-            
             case text(NoteText.Feature.Action)
             case asset(NoteAsset.Feature.Action)
             case divider(NoteDivider.Feature.Action)

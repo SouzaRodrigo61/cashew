@@ -36,11 +36,11 @@ extension CoreApp {
         private func core(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
             case .didFinishLaunching:
-                firebaseCore.configure()
-                
-                return .run { @MainActor send in
-                    send(.delegate(.didFinishLaunching))
-                }
+//                firebaseCore.configure()
+//                return .run { @MainActor send in
+//                    send(.delegate(.didFinishLaunching))
+//                }
+                return .none
                 
             case .shortcutItem(let type):
                 dump(type, name: "Type - shortcutItem")

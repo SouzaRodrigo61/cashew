@@ -9,13 +9,16 @@ import Foundation
 import ComposableArchitecture
 
 extension NoteDivider {
-    struct Feature: Reducer {
+    @Reducer
+    struct Feature {
+        
+        @ObservableState
         struct State: Equatable {
             var content: Note.Model.Item.Block.Line
         }
         
-        enum Action: Equatable {
-        }
+        @CasePathable
+        enum Action: Equatable { }
         
         var body: some Reducer<State, Action> {
             EmptyReducer()

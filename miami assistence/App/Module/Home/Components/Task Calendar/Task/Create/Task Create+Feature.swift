@@ -10,7 +10,9 @@ import Foundation
 import SwiftUI
 
 extension TaskCreate {
-    struct Feature: Reducer {
+    @Reducer
+    struct Feature {
+        
         struct State: Equatable {
             @BindingState var focus: Field? = .taskName
             @BindingState var title: String
@@ -65,6 +67,7 @@ extension TaskCreate {
             }
         }
         
+        @CasePathable
         enum Action: BindableAction, Equatable, Sendable {
             case binding(BindingAction<State>)
             case createTaskTapped

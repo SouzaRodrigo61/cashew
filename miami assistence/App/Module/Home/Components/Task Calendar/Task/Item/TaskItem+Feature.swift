@@ -9,7 +9,11 @@ import ComposableArchitecture
 import Foundation
 
 extension TaskItem {
-    struct Feature: Reducer {
+    
+    @Reducer
+    struct Feature {
+        
+        @ObservableState
         struct State: Equatable, Identifiable {
             var id = UUID()
             var task: Task.Model
@@ -23,6 +27,7 @@ extension TaskItem {
             var isSelected: Bool = false
         }
         
+        @CasePathable
         enum Action: Equatable {
             case setCurrentlyDragged(Task.Model)
             case moveCurrentlyDragged(Int, Int)

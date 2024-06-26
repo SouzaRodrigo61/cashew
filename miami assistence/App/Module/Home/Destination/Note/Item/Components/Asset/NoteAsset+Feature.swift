@@ -9,7 +9,10 @@ import Foundation
 import ComposableArchitecture
 
 extension NoteAsset {
-    struct Feature: Reducer {
+    @Reducer
+    struct Feature {
+        
+        @ObservableState
         struct State: Equatable {
             var content: Note.Model.Item.Block.Asset
         }

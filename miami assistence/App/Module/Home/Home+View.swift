@@ -14,8 +14,8 @@ extension Home {
         
         var body: some SwiftUI.View {
             
-            NavigationStackStore(store.scope(state: \.destination, action: Feature.Action.destination)) {
-                TaskCalendar.View(store: store.scope(state: \.taskCalendar, action: Feature.Action.taskCalendar))
+            NavigationStackStore(store.scope(state: \.destination, action: \.destination)) {
+                TaskCalendar.View(store: store.scope(state: \.taskCalendar, action: \.taskCalendar))
                     .transition(.scale)
             } destination: {
                 switch $0 {
@@ -35,7 +35,7 @@ extension Home {
                     }
                 }
             }
-            .sheet(store: store.scope(state: \.$schedule, action: Feature.Action.schedule)) { store in
+            .sheet(store: store.scope(state: \.$schedule, action: \.schedule)) { store in
                 Schedule.View(store: store)
                     .presentationDetents([.medium])
             }

@@ -15,7 +15,7 @@ extension Onboarding {
         
         var body: some SwiftUI.View {
             NavigationStack {
-                NavigationStackStore(store.scope(state: \.path, action: Feature.Action.path)) {
+                NavigationStackStore(store.scope(state: \.path, action: \.path)) {
                     GeometryReader { geo in
                         VStack {
                             Spacer()

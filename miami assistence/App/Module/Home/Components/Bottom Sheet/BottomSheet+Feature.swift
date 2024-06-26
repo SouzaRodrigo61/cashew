@@ -9,11 +9,16 @@ import Foundation
 import ComposableArchitecture
 
 extension BottomSheet {
-    struct Feature: Reducer {
+    
+    @Reducer
+    struct Feature {
+        
+        @ObservableState
         struct State: Equatable {
             var collapse = false
         }
         
+        @CasePathable
         enum Action: Equatable {
             case changeHeightTapped
             case addButtonTapped

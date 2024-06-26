@@ -5,7 +5,6 @@
 //  Created by Rodrigo Souza on 12/10/23.
 //
 
-import FirebaseCore
 import Dependencies
 
 extension Manager {
@@ -16,7 +15,7 @@ extension Manager {
 
 extension Manager.Firebase: DependencyKey {
     public static let liveValue = Self(
-        configure: { FirebaseApp.configure() }
+        configure: {  }
     )
 }
 

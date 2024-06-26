@@ -9,7 +9,10 @@ import Foundation
 import ComposableArchitecture
 
 extension NoteText {
-    struct Feature: Reducer {
+    @Reducer
+    struct Feature {
+        
+        @ObservableState
         struct State: Equatable, Identifiable {
             var id = UUID()
             var content: Note.Model.Item.Block.Text

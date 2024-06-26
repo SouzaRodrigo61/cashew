@@ -9,16 +9,21 @@ import SwiftUI
 import ComposableArchitecture
 
 extension Home {
-    struct Feature: Reducer {
+    
+    @Reducer
+    struct Feature {
+        
+        @ObservableState
         struct State: Equatable {
             var taskCalendar: TaskCalendar.Feature.State
             
             var destination: StackState<Destination.State>
-            @PresentationState var schedule: Schedule.Feature.State?
+            @Presents var schedule: Schedule.Feature.State?
 
         }
         
-        enum Action: Equatable {
+        @CasePathable
+        enum Action {
             /// Components Stores
             case taskCalendar(TaskCalendar.Feature.Action)
             
@@ -48,7 +53,7 @@ extension Home {
         private func core(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
                 
-            case .taskCalendar(.task(.item(_, .contentTapped(let task)))):
+            case .taskCalendar(.task(.item(.element(id: _, action: .contentTapped(let task))))):
                 state.destination.append(.note(.init()))
                 state.taskCalendar.contentTask = task
                 

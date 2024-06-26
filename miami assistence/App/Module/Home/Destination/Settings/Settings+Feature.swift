@@ -8,7 +8,8 @@
 import ComposableArchitecture
 
 extension Settings {
-    struct Feature: Reducer {
+    @Reducer
+    struct Feature {
         struct State: Equatable {
         }
         

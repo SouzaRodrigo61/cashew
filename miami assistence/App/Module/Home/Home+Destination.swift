@@ -8,7 +8,11 @@
 import ComposableArchitecture
 
 extension Home {
-    struct Destination: Reducer {
+    @Reducer
+    struct Destination {
+        
+        @CasePathable
+        @dynamicMemberLookup
         enum State: Equatable {
             case search(Search.Feature.State)
             case settings(Settings.Feature.State)

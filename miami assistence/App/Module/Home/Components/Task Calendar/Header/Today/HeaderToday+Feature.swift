@@ -10,12 +10,15 @@ import ComposableArchitecture
 import Foundation
 
 extension HeaderToday {
-    struct Feature: Reducer {
+    @Reducer
+    struct Feature {
+        @ObservableState
         struct State: Equatable {
             var week: String = ""
             var weekCompleted: String = ""
         }
         
+        @CasePathable
         enum Action: Equatable {
             case buttonTapped
             case changeDay(Date)

@@ -43,24 +43,24 @@ extension Header {
                     VStack(spacing: spacing) {
                         
                         HStack(alignment: .center, spacing: 0) {
-                            IfLetStore(store.scope(state: \.today, action: Feature.Action.today)) {
+                            IfLetStore(store.scope(state: \.today, action: \.today)) {
                                 HeaderToday.View(store: $0)
                             }
                             .hSpacing(.leading)
                             
                             Spacer()
                             
-                            IfLetStore(store.scope(state: \.button, action: Feature.Action.button)) {
+                            IfLetStore(store.scope(state: \.button, action: \.button)) {
                                 HeaderButton.View(store: $0)
                             }
                         }
                         
-                        IfLetStore(store.scope(state: \.goal, action: Feature.Action.goal)) {
+                        IfLetStore(store.scope(state: \.goal, action: \.goal)) {
                             HeaderGoalProgress.View(store: $0)
                         }
                         .frame(height: goalProgressHeight - ((goalProgressHeight - 100) * progress), alignment: .top)
                         
-                        IfLetStore(store.scope(state: \.slider, action: Feature.Action.slider)) {
+                        IfLetStore(store.scope(state: \.slider, action: \.slider)) {
                             HeaderSlider.View(store: $0)
                         }
                         .contentShape(.rect)

@@ -17,7 +17,7 @@ extension Task {
         @State private var axisY: CGFloat = .nan
         
         var body: some SwiftUI.View {
-            IfLetStore(store.scope(state: \.isEmpty, action: Feature.Action.isEmpty)) {
+            IfLetStore(store.scope(state: \.isEmpty, action: \.isEmpty)) {
                 Empty.View(store: $0)
                     .padding(.horizontal, 8)
             } else: {
@@ -29,7 +29,7 @@ extension Task {
                         .padding(.bottom, 8)
                         
                     
-                    ForEachStore(store.scope(state: \.item, action: Feature.Action.item)) {
+                    ForEachStore(store.scope(state: \.item, action: \.item)) {
                         TaskItem.View(store: $0)
                     }
                 }

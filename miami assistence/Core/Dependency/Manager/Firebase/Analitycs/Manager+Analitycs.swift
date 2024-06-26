@@ -5,7 +5,6 @@
 //  Created by Rodrigo Souza on 12/10/23.
 //
 
-import FirebaseAnalytics
 import Dependencies
 
 extension Manager {
@@ -21,14 +20,16 @@ extension Manager {
 }
 
 extension Manager.Analitycs: DependencyKey {
-    public static let liveValue = Self(
-        logEvent: { Analytics.logEvent($0, parameters: $1) },
-        setUserId: { Analytics.setUserID($0) },
-        setUserProperty: { value, forName in
-          Analytics.setUserProperty(value, forName: forName)
-        },
-        setAnalyticsCollectionEnabled: { Analytics.setAnalyticsCollectionEnabled($0) }
-    )
+//    public static let liveValue = Self(
+//        logEvent: { Analytics.logEvent($0, parameters: $1) },
+//        setUserId: { Analytics.setUserID($0) },
+//        setUserProperty: { value, forName in
+//          Analytics.setUserProperty(value, forName: forName)
+//        },
+//        setAnalyticsCollectionEnabled: { Analytics.setAnalyticsCollectionEnabled($0) }
+//    )
+    
+    public static let liveValue = Self.noop
     
     public static let previewValue = Self.noop
     

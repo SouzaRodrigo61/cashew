@@ -8,10 +8,13 @@
 import ComposableArchitecture
 
 extension Login {
-    struct Feature: Reducer {
-        struct State: Equatable {
-        }
+    @Reducer
+    struct Feature {
         
+        @ObservableState
+        struct State: Equatable { }
+        
+        @CasePathable
         enum Action: Equatable {
         }
         

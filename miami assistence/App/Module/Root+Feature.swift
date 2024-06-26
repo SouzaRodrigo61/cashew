@@ -8,13 +8,17 @@
 import ComposableArchitecture
 
 extension Root {
-    struct Feature: Reducer {
+    @Reducer
+    struct Feature {
+        
+        @ObservableState
         enum State: Equatable {
             case home(Home.Feature.State)
             case onboarding(Onboarding.Feature.State)
         }
         
-        enum Action: Equatable {
+        @CasePathable
+        enum Action {
             case home(Home.Feature.Action)
             case onboarding(Onboarding.Feature.Action)
         }

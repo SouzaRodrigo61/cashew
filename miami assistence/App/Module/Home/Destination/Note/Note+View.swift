@@ -18,7 +18,7 @@ extension Note {
                     
                     Section {
                         VStack(alignment: .leading, spacing: 0) {
-                            ForEachStore(store.scope(state: \.item, action: Feature.Action.item)) {
+                            ForEachStore(store.scope(state: \.item, action: \.item)) {
                                 NoteItem.View(store: $0)
                             }
                         }

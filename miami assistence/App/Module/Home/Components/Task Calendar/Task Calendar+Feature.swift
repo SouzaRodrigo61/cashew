@@ -9,7 +9,11 @@ import Foundation
 import ComposableArchitecture
 
 extension TaskCalendar {
-    struct Feature: Reducer {
+    
+    @Reducer
+    struct Feature {
+        
+        @ObservableState
         struct State: Equatable {
             
             var bottomSheet: BottomSheet.Feature.State?
@@ -30,6 +34,7 @@ extension TaskCalendar {
             var currentDate: Date = .now
         }
         
+        @CasePathable
         enum Action: Equatable {
             case matcheAnimationRemoved
             case onAppear
@@ -205,7 +210,7 @@ extension TaskCalendar {
         private func managerData(into state: inout State, action: Action) -> Effect<Action> {
             switch action {
             
-            case let .task(.item(_, .deleteTask(task))):
+            case let .task(.item(.element(id: _, action: .deleteTask(task)))):
                 return .run { send in
                     try deleteData(task)
                     await send(.onAppear)

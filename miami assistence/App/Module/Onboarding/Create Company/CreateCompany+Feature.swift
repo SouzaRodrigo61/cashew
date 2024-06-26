@@ -8,10 +8,12 @@
 import ComposableArchitecture
 
 extension CreateCompany {
-    struct Feature: Reducer {
-        struct State: Equatable {
-        }
+    
+    @Reducer
+    struct Feature {
+        struct State: Equatable { }
         
+        @CasePathable
         enum Action: Equatable {
             case dismissTapped
             case buttonTapped

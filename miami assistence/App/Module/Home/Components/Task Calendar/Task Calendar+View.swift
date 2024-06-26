@@ -41,7 +41,7 @@ extension TaskCalendar {
                         }
                         .padding(.trailing, 16)
                     } else {
-                        IfLetStore(store.scope(state: \.taskCreate, action: Feature.Action.taskCreate)) {
+                        IfLetStore(store.scope(state: \.taskCreate, action: \.taskCreate)) {
                             TaskCreate.View(store: $0)
                         }
                         .background(.white)
@@ -62,20 +62,20 @@ extension TaskCalendar {
         func Home(_ safeArea: EdgeInsets) -> some SwiftUI.View {
             ScrollView(.vertical) {
                 VStack(spacing: 0) {
-                    IfLetStore(store.scope(state: \.header, action: Feature.Action.header)) {
+                    IfLetStore(store.scope(state: \.header, action: \.header)) {
                         Header.View(store: $0, safeArea: safeArea)
                     }
                     
                     VStack(spacing: 0) {
-                        IfLetStore(store.scope(state: \.task, action: Feature.Action.task)) {
+                        IfLetStore(store.scope(state: \.task, action: \.task)) {
                             Task.View(store: $0)
                         }
 
-                        IfLetStore(store.scope(state: \.info, action: Feature.Action.info)) {
+                        IfLetStore(store.scope(state: \.info, action: \.info)) {
                             TaskInfo.View(store: $0)
                         }
 
-                        IfLetStore(store.scope(state: \.inspiration, action: Feature.Action.inspiration)) {
+                        IfLetStore(store.scope(state: \.inspiration, action: \.inspiration)) {
                             TaskInspiration.View(store: $0)
                         }
                     }

@@ -14,13 +14,13 @@ extension NoteItem {
         
         var body: some SwiftUI.View {
             VStack {
-                IfLetStore(store.scope(state: \.text, action: Feature.Action.text)) {
+                IfLetStore(store.scope(state: \.text, action: \.text)) {
                     NoteText.View(store: $0)
                 }
-                IfLetStore(store.scope(state: \.asset, action: Feature.Action.asset)) {
+                IfLetStore(store.scope(state: \.asset, action: \.asset)) {
                     NoteAsset.View(store: $0)
                 }
-                IfLetStore(store.scope(state: \.divider, action: Feature.Action.divider)) {
+                IfLetStore(store.scope(state: \.divider, action: \.divider)) {
                     NoteDivider.View(store: $0)
                 }
             }

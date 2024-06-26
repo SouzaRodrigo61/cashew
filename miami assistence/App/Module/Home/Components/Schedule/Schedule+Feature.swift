@@ -7,13 +7,14 @@
 
 import ComposableArchitecture
 
-extension Schedule { 
-    struct Feature: Reducer {
-        struct State: Equatable {
-        }
+extension Schedule {
+    @Reducer
+    struct Feature {
+        @ObservableState
+        struct State: Equatable { }
         
-        enum Action: Equatable {
-        }
+        @CasePathable
+        enum Action: Equatable { }
         
         var body: some Reducer<State, Action> {
             EmptyReducer()

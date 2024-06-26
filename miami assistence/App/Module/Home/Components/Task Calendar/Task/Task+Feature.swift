@@ -10,14 +10,19 @@ import Foundation
 import SwiftUI
 
 extension Task {
-    struct Feature: Reducer {
+    
+    @Reducer
+    struct Feature {
+        
+        @ObservableState
         struct State: Equatable {
             var item: IdentifiedArrayOf<TaskItem.Feature.State> = []
             var isEmpty: Empty.Feature.State?
         }
         
+        @CasePathable
         enum Action: Equatable {
-            case item(TaskItem.Feature.State.ID, TaskItem.Feature.Action)
+            case item(IdentifiedActionOf<TaskItem.Feature>)
             case isEmpty(Empty.Feature.Action)
             
             case goToDetail(Task.Model)
